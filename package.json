@@ -7,19 +7,31 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/faker": "^4.1.9",
     "@types/jest": "^24.0.0",
+    "@types/lodash": "^4.14.149",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+<<<<<<< HEAD
+    "@types/styled-components": "^4.4.2",
+    "@types/wix-style-react": "^6.17.2",
+=======
     "bootstrap": "^4.4.1",
+>>>>>>> 66b311f0d5b791a11ad2751f5122e55e5daef3d5
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "lodash": "^4.17.15",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-calendar": "^2.19.2",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.1",
-    "typescript": "~3.7.2"
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2",
+    "styled-components": "^5.0.1",
+    "typescript": "~3.7.2",
+    "wix-style-react": "^7.39.1"
   },
   "scripts": {
     "start": "react-scripts start",
