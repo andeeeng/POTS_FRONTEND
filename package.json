@@ -13,12 +13,18 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+<<<<<<< HEAD
     "@types/styled-components": "^4.4.2",
     "@types/wix-style-react": "^6.17.2",
+=======
+    "bootstrap": "^4.4.1",
+>>>>>>> 66b311f0d5b791a11ad2751f5122e55e5daef3d5
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "lodash": "^4.17.15",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-calendar": "^2.19.2",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.1",
     "semantic-ui-css": "^2.4.1",
