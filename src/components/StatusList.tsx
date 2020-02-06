@@ -2,13 +2,13 @@ import React from "react";
 
 import styled from "styled-components";
 import StatusItem from "./StatusItem";
-import { Header } from "semantic-ui-react";
+import HeaderTitle from "../components/HeaderTitle";
 
 export default class StatusList extends React.Component {
   render() {
     return (
       <div style={{ marginLeft: 20, marginTop: 10 }}>
-        <Header size="huge">Today's Status</Header>
+        <HeaderTitle header="Today's Status" />
         <StatusItem
           OR="3"
           label="Orders Received"
