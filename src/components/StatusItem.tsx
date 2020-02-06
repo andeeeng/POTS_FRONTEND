@@ -1,24 +1,58 @@
 import React from "react";
-import { ListGroup, ListGroupItem, Badge } from "react-bootstrap";
+
+import "semantic-ui-css/semantic.min.css";
+import { Icon, Label, List, Grid, Table, Divider } from "semantic-ui-react";
+
+const yellow = ["yellow"];
+const pink = ["pink"];
+const red = ["red"];
 
 export interface IStatusItemProps {
-  number?: any;
-  statOption?: any;
+  OR?: any;
+  label?: any;
+  label2?: any;
+  label3?: any;
 }
 
-const StatusItem = (props: IStatusItemProps) => {
-  const { number, statOption } = props;
+const StatusItem = (props:IStatusItemProps ) => {
+  const {  OR, label, label2, label3} = props
   return (
-    <ListGroup>
-      <ListGroupItem>
-        <div>
-          <h2>
-            <Badge variant="secondary">{number}</Badge> {statOption}
-          </h2>
-        </div>
-      </ListGroupItem>
-    </ListGroup>
-  );
-};
+    <div>
+    {yellow.map(color => (
+      <Table.Row>
+        <Label color={yellow} size="big">
+          {OR}
+        </Label>
 
-export default StatusItem;
+        <text style={{ marginLeft: 10 }}>{label}</text>
+
+        <Divider section />
+      </Table.Row>
+    ))}
+    {yellow.map(color => (
+      <Table.Row>
+        <Label color={pink} size="big">
+          {OR}
+        </Label>
+
+        <text style={{ marginLeft: 10 }}>{label2}</text>
+
+        <Divider section />
+      </Table.Row>
+    ))}
+    {yellow.map(color => (
+      <Table.Row>
+        <Label color={red} size="big">
+          {OR}
+        </Label>
+
+        <text style={{ marginLeft: 10 }}>{label3}</text>
+
+        <Divider section />
+      </Table.Row>
+    ))}
+  </div>
+  )
+}
+
+export default StatusItem
