@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MenuList from "../components/MenuList";
+import MenuList from "../components/MenuItem";
 import AdminMenu from "../components/AdminMenu";
 import HeaderTitle from "../components/HeaderTitle";
 import UserInfo from "../components/UserInfo";

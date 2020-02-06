@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, ListGroup, ListGroupItem, Nav } from "react-bootstrap";
-import MenuList from "./MenuList";
+import MenuList from "./MenuItem";
 import HeaderTitle from "./HeaderTitle";
 
 export interface IAdminMenuProps {

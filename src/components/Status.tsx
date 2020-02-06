@@ -1,7 +1,5 @@
 import React from "react";
 import { Card, ListGroup, ListGroupItem, Nav } from "react-bootstrap";
-import MenuList from "./MenuList";
-import HeaderTitle from "./HeaderTitle";
 import StatusItem from "./StatusItem";
 
 export interface IStatusListProps {
