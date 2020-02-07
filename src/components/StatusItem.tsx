@@ -1,7 +1,7 @@
 import React from "react";
 
 import "semantic-ui-css/semantic.min.css";
-import { Icon, Label, List, Grid, Table, Divider } from "semantic-ui-react";
+import { Label, Table, Divider } from "semantic-ui-react";
 
 const yellow = ["yellow"];
 const pink = ["pink"];
@@ -14,45 +14,45 @@ export interface IStatusItemProps {
   label3?: any;
 }
 
-const StatusItem = (props:IStatusItemProps ) => {
-  const {  OR, label, label2, label3} = props
+const StatusItem = (props: IStatusItemProps) => {
+  const { OR, label, label2, label3 } = props;
   return (
     <div>
-    {yellow.map(color => (
-      <Table.Row>
-        <Label color={yellow} size="big">
-          {OR}
-        </Label>
+      {yellow.map(color => (
+        <Table.Row>
+          <Label color={yellow} size="big">
+            {OR}
+          </Label>
 
-        <text style={{ marginLeft: 10 }}>{label}</text>
+          <text style={{ marginLeft: 10 }}>{label}</text>
 
-        <Divider section />
-      </Table.Row>
-    ))}
-    {yellow.map(color => (
-      <Table.Row>
-        <Label color={pink} size="big">
-          {OR}
-        </Label>
+          <Divider section />
+        </Table.Row>
+      ))}
+      {yellow.map(color => (
+        <Table.Row>
+          <Label color={pink} size="big">
+            {OR}
+          </Label>
 
-        <text style={{ marginLeft: 10 }}>{label2}</text>
+          <text style={{ marginLeft: 10 }}>{label2}</text>
 
-        <Divider section />
-      </Table.Row>
-    ))}
-    {yellow.map(color => (
-      <Table.Row>
-        <Label color={red} size="big">
-          {OR}
-        </Label>
+          <Divider section />
+        </Table.Row>
+      ))}
+      {yellow.map(color => (
+        <Table.Row>
+          <Label color={red} size="big">
+            {OR}
+          </Label>
 
-        <text style={{ marginLeft: 10 }}>{label3}</text>
+          <text style={{ marginLeft: 10 }}>{label3}</text>
 
-        <Divider section />
-      </Table.Row>
-    ))}
-  </div>
-  )
-}
+          <Divider section />
+        </Table.Row>
+      ))}
+    </div>
+  );
+};
 
-export default StatusItem
+export default StatusItem;

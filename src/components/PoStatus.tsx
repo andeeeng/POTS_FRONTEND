@@ -8,7 +8,6 @@ export interface IPoStatusProps {
 }
 
 const PoStatus = (props: IPoStatusProps) => {
-  const { title } = props;
   return (
     <Card style={{ width: "28rem" }}>
       <ListGroup>

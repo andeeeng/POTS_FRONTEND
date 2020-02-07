@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem, Nav } from "react-bootstrap";
+import { Card, ListGroup, Nav } from "react-bootstrap";
 import MenuList from "./MenuItem";
-import HeaderTitle from "./HeaderTitle";
+import AppTitle from "./AppTitle";
 
 export interface IAdminMenuProps {
   title?: any;
@@ -12,7 +12,7 @@ const AdminMenu = (props: IAdminMenuProps) => {
   const { title, desc } = props;
   return (
     <Card style={{ width: "18rem" }}>
-      <HeaderTitle title={title} desc={desc} />
+      <AppTitle title={title} desc={desc} />
       <ListGroup>
         <Nav.Item>
           <Nav.Link href="">

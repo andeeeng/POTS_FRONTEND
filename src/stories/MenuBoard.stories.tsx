@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MenuList from "../components/MenuItem";
 import AdminMenu from "../components/AdminMenu";
-import HeaderTitle from "../components/HeaderTitle";
+import AppTitle from "../components/AppTitle";
 import UserInfo from "../components/UserInfo";
 import StatusItem from "../components/StatusItem";
 import StatusList from "../components/Status";
@@ -12,6 +12,7 @@ import PoStatus from "../components/PoStatus";
 import DashboardContent from "../components/DashboardContent";
 import DashboardScreen from "../components/DashboardScreen";
 
+
 export default {
   title: "DashboardScreen"
 };
@@ -19,7 +20,7 @@ export default {
 export const MenuDefault = () => <MenuList menuOption="My Dashboard" />;
 
 export const HeaderTitleDefault = () => (
-  <HeaderTitle title="POTS" desc="Purchase Order Tracking System" />
+  <AppTitle title="POTS" desc="Purchase Order Tracking System" />
 );
 
 export const MenuNavBarDefault = () => <AdminMenu />;
