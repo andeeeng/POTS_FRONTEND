@@ -4,29 +4,33 @@ import MenuList from "../components/MenuItem";
 import AdminMenu from "../components/AdminMenu";
 import AppTitle from "../components/AppTitle";
 import UserInfo from "../components/UserInfo";
-import StatusItem from "../components/StatusItem";
-import StatusList from "../components/Status";
 import DatePicker from "../components/Calendar";
 import PoItem from "../components/PoItem";
 import PoStatus from "../components/PoStatus";
 import DashboardContent from "../components/DashboardContent";
 import DashboardScreen from "../components/DashboardScreen";
-
+import { menu, statusReport, poList } from "../components/data/mockData";
+import StatusReportItem from "../components/StatusReportItem";
+import StatusReportList from "../components/Status";
 
 export default {
   title: "DashboardScreen"
 };
 
-export const MenuDefault = () => <MenuList menuOption="My Dashboard" />;
+export const MenuDefault = () => <MenuList menuItem={[menu[0]]} />;
 
 export const HeaderTitleDefault = () => (
   <AppTitle title="POTS" desc="Purchase Order Tracking System" />
 );
 
-export const MenuNavBarDefault = () => <AdminMenu />;
+export const MenuNavBarDefault = () => <MenuList menuItem={menu} />;
 
 export const MenuNavBarWithHeader = () => (
-  <AdminMenu title="POTS" desc="Purchase Order Tracking System" />
+  <AdminMenu
+    title="POTS"
+    desc="Purchase Order Tracking System"
+    menuItem={menu}
+  />
 );
 
 export const UserInfoDefault = () => (
@@ -34,22 +38,21 @@ export const UserInfoDefault = () => (
 );
 
 export const StatusItemDefault = () => (
-  <StatusItem number="3" statOption="Orders Received" />
+  <StatusReportItem status={[statusReport[0]]} />
 );
 
-export const StatusDefault = () => <StatusList title="Today’s Status" />;
+export const StatusDefault = () => (
+  <StatusReportList title="Today’s Status" status={statusReport} />
+);
 
 export const CalendarDefault = () => <DatePicker />;
 
-export const PoItemDefault = () => (
-  <PoItem
-    poNumber="OTN 20202121E565656"
-    poStatus="Delivered and is on now in the facility"
-  />
+export const PoItemDefault = () => <PoItem list={[poList[0]]} />;
+
+export const PoStatusDefault = () => <PoStatus list={poList} />;
+
+export const DashboardContentDefault = () => (
+  <DashboardContent status={statusReport} list={poList} />
 );
-
-export const PoStatusDefault = () => <PoStatus />;
-
-export const DashboardContentDefault = () => <DashboardContent />;
 
 export const DashboardScreenDefault = () => <DashboardScreen />;

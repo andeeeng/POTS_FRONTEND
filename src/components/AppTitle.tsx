@@ -11,7 +11,7 @@ const AppTitle = (props: IAppTitleProps) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
-        <Card.Title style={{ fontSize: 100 }}>{title}</Card.Title>
+        <Card.Title style={{ fontSize: 80 }}>{title}</Card.Title>
         <Card.Text>{desc}</Card.Text>
       </Card.Body>
     </Card>

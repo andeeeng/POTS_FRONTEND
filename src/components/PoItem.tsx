@@ -1,17 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 export interface IPoItemProps {
-  poStatus?: any;
-  poNumber?: any;
+  list?: any;
 }
 
 const PoItem = (props: IPoItemProps) => {
-  const { poStatus, poNumber } = props;
   return (
-    <div>
-      <h6>{poNumber}</h6>
-      <h6>Status: {poStatus}</h6>
-    </div>
+    <Fragment>
+      {props.list.map((ps: any) => (
+        <div>
+          <h6>{ps.poNumber}</h6>
+          <h6>Status: {ps.poStatus}</h6>
+        </div>
+      ))}
+    </Fragment>
   );
 };
 

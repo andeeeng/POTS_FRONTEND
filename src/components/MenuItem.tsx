@@ -1,16 +1,17 @@
-import React from "react";
-import { ListGroup, ListGroupItem } from "react-bootstrap";
+import React, { Fragment } from "react";
+import { ListGroupItem } from "react-bootstrap";
 
 export interface IMenuListProps {
-  menuOption?: any;
+  menuItem?: any;
 }
 
 const MenuList = (props: IMenuListProps) => {
-  const { menuOption } = props;
   return (
-    <ListGroup>
-      <ListGroupItem>{menuOption}</ListGroupItem>
-    </ListGroup>
+    <Fragment>
+      {props.menuItem.map((menu: any) => (
+        <ListGroupItem>{menu.menuOption}</ListGroupItem>
+      ))}
+    </Fragment>
   );
 };
 

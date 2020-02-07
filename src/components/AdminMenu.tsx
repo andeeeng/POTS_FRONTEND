@@ -6,27 +6,19 @@ import AppTitle from "./AppTitle";
 export interface IAdminMenuProps {
   title?: any;
   desc?: any;
+  menuItem?: any;
 }
 
 const AdminMenu = (props: IAdminMenuProps) => {
-  const { title, desc } = props;
+  const { title, desc, menuItem } = props;
+
   return (
     <Card style={{ width: "18rem" }}>
       <AppTitle title={title} desc={desc} />
       <ListGroup>
         <Nav.Item>
           <Nav.Link href="">
-            <MenuList menuOption="My Dashboard" />
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="">
-            <MenuList menuOption="My Orders" />
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="">
-            <MenuList menuOption="My Suppliers" />
+            <MenuList menuItem={menuItem} />
           </Nav.Link>
         </Nav.Item>
       </ListGroup>
