@@ -9,9 +9,17 @@ import PoItem from "../components/PoItem";
 import PoStatus from "../components/PoStatus";
 import DashboardContent from "../components/DashboardContent";
 import DashboardScreen from "../components/DashboardScreen";
-import { menu, statusReport, poList } from "../components/data/mockData";
+import {
+  menu,
+  statusReport,
+  poList,
+  hisList,
+  genDetailList
+} from "../data/mockData";
 import StatusReportItem from "../components/StatusReportItem";
 import StatusReportList from "../components/Status";
+import HistoryItem from "../components/HistoryItem";
+import GenDetails from "../components/GenDetails";
 
 export default {
   title: "DashboardScreen"
@@ -56,3 +64,15 @@ export const DashboardContentDefault = () => (
 );
 
 export const DashboardScreenDefault = () => <DashboardScreen />;
+
+export const HistoryReportDefault = () => (
+  <HistoryItem list={hisList} buttonTitle="View" />
+);
+
+export const GeneralDetailsDefault = () => (
+  <GenDetails
+    buttonTitle="Modify Supplier Detail"
+    list={genDetailList}
+    title="General Details"
+  />
+);

@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import AdminMenu from "./AdminMenu";
 import UserInfo from "./UserInfo";
 import DashboardContent from "./DashboardContent";
-import { menu, statusReport, poList } from "./data/mockData";
+import { menu, statusReport, poList } from "../data/mockData";
 
 const DashboardScreen = () => {
   return (

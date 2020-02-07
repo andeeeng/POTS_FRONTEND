@@ -63,3 +63,45 @@ export const poList = [
     poStatus: "Delivered and is on now in the facility"
   }
 ];
+
+export const hisList = [
+  {
+    id: 1,
+    hisItem: "Some History"
+  },
+  {
+    id: 2,
+    hisItem: "Some History"
+  },
+  {
+    id: 3,
+    hisItem: "Some History"
+  },
+  {
+    id: 4,
+    hisItem: "Some History"
+  },
+  {
+    id: 5,
+    hisItem: "Some History"
+  }
+];
+
+export const genDetailList = [
+  {
+    id: 1,
+    detail: "This is first details"
+  },
+  {
+    id: 2,
+    detail: "This is second details"
+  },
+  {
+    id: 3,
+    detail: "This is another details"
+  },
+  {
+    id: 4,
+    detail: "This some details"
+  }
+];
