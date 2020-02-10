@@ -4,8 +4,7 @@
 
 import React from "react";
 import { shallow } from "enzyme";
-import PoItem from "../components/PoItem";
-import StatusReportList from "../components/Status";
+import StatusReportItem from "../components/StatusReportItem";
 
 const props = {
   status: [
@@ -29,6 +28,6 @@ const props = {
 
 describe("Status Report Item", () => {
   test("renders correctly", () => {
-    expect(shallow(<StatusReportList {...props} />)).toMatchSnapshot();
+    expect(shallow(<StatusReportItem {...props} />)).toMatchSnapshot();
   });
 });
