@@ -4,15 +4,23 @@
 
 import React from "react";
 import { shallow } from "enzyme";
-// import ShallowRenderer from "react-test-renderer/shallow";
-
-// // Note: test renderer must be required after react-native.
-// import renderer from "react-test-renderer";
-
 import StatusItem from "../components/StatusItem";
 
 const props = {
-  title: "Title"
+  statuslist: [
+    {
+      OR: "3",
+      label: "Orders Received"
+    },
+    {
+      OR: "7",
+      label: "Released from supplier "
+    },
+    {
+      OR: "4",
+      label: "On-hold from supplier"
+    }
+  ]
 };
 
 describe(" Status Item", () => {

@@ -1,7 +1,5 @@
 import React from "react";
-
-import "semantic-ui-css/semantic.min.css";
-import { Icon, Label, List, Grid, Table, Divider } from "semantic-ui-react";
+import { Label, Table, Divider } from "semantic-ui-react";
 import StatusList from "../components/StatusList";
 
 const yellow = ["yellow", "pink", "red"];

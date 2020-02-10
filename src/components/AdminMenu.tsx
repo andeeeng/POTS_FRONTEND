@@ -1,32 +1,24 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem, Nav } from "react-bootstrap";
-import MenuList from "./MenuList";
-import HeaderTitle from "./HeaderTitle";
+import { Card, ListGroup, Nav } from "react-bootstrap";
+import MenuList from "./MenuItem";
+import AppTitle from "./AppTitle";
 
 export interface IAdminMenuProps {
   title?: any;
   desc?: any;
+  menuItem?: any;
 }
 
 const AdminMenu = (props: IAdminMenuProps) => {
-  const { title, desc } = props;
+  const { title, desc, menuItem } = props;
+
   return (
     <Card style={{ width: "18rem" }}>
-      <HeaderTitle title={title} desc={desc} />
+      <AppTitle title={title} desc={desc} />
       <ListGroup>
         <Nav.Item>
           <Nav.Link href="">
-            <MenuList menuOption="My Dashboard" />
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="">
-            <MenuList menuOption="My Orders" />
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="">
-            <MenuList menuOption="My Suppliers" />
+            <MenuList menuItem={menuItem} />
           </Nav.Link>
         </Nav.Item>
       </ListGroup>

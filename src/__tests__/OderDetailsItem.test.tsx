@@ -4,15 +4,27 @@
 
 import React from "react";
 import { shallow } from "enzyme";
-// import ShallowRenderer from "react-test-renderer/shallow";
-
-// // Note: test renderer must be required after react-native.
-// import renderer from "react-test-renderer";
 
 import OrderDetailsItem from "../components/OrderDetailsItem";
 
 const props = {
-  title: "Title"
+  order: [
+    {
+      title: "Some order item"
+    },
+    {
+      title: "Some order item"
+    },
+    {
+      title: "Some order item"
+    },
+    {
+      title: "Some order item"
+    },
+    {
+      title: "Some order item"
+    }
+  ]
 };
 
 describe("Order Details Item", () => {

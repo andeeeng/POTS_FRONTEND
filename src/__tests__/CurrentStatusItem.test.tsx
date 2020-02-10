@@ -12,7 +12,23 @@ import { shallow } from "enzyme";
 import CurrentStatusItem from "../components/CurrentStatusItem";
 
 const props = {
-  title: "Title"
+  status: [
+    {
+      currentstatus: "Current Status"
+    },
+    {
+      currentstatus: "Some Status"
+    },
+    {
+      currentstatus: "Some Status"
+    },
+    {
+      currentstatus: "Some Status"
+    },
+    {
+      currentstatus: "Some Status"
+    }
+  ]
 };
 
 describe("Current Status Item", () => {

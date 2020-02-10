@@ -1,23 +1,24 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem, Nav } from "react-bootstrap";
-import MenuList from "./MenuList";
-import HeaderTitle from "./HeaderTitle";
-import StatusItem from "./StatusItem";
+import { Card, ListGroup } from "react-bootstrap";
+import StatusReportItem from "./StatusReportItem";
 
-export interface IStatusListProps {
+export interface IStatusReportListProps {
   title?: any;
-  number?: any;
+  status?: any;
 }
 
-const StatusList = (props: IStatusListProps) => {
-  const { title } = props;
+const StatusReportList = (props: IStatusReportListProps) => {
+  const { title, status } = props;
   return (
     <Card style={{ width: "28rem" }}>
       <Card.Title>
         <h1>{title}</h1>
       </Card.Title>
+      <ListGroup>
+        <StatusReportItem status={status} />
+      </ListGroup>
     </Card>
   );
 };
 
-export default StatusList;
+export default StatusReportList;
