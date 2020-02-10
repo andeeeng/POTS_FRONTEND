@@ -7,10 +7,11 @@ import OrderDetailsItem from "../components/OrderDetailsItem";
 export interface IOrderDetailsProps {
   header?: any;
   order?: any;
+  title?: any;
 }
 
 const OrderDetails = (props: IOrderDetailsProps) => {
-  const { header, order } = props;
+  const { header, order, title } = props;
   return (
     <List relaxed>
       <HeaderTitle header="Order Details" />

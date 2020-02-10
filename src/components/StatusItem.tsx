@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import { Icon, Label, List, Grid, Table, Divider } from "semantic-ui-react";
 import StatusList from "../components/StatusList";
 
-const yellow = ["yellow"];
+const yellow = ["yellow", "pink", "red"];
 const pink = ["pink"];
 const red = ["red"];
 
@@ -16,16 +16,26 @@ export interface IStatusItemProps {
   number?: any;
   statOption?: any;
   statuslist?: any;
+  title?: any;
 }
 
 const StatusItem = (props: IStatusItemProps) => {
-  const { OR, label, status, label3, number, statOption, statuslist } = props;
+  const {
+    OR,
+    label,
+    status,
+    label3,
+    number,
+    statOption,
+    statuslist,
+    title
+  } = props;
   return (
     <div>
       <StatusList />
       {props.statuslist.map((list: any) => (
         <Table.Row>
-          <Label circular color="yellow" size="big" style={{ marginLeft: 20 }}>
+          <Label size="big" style={{ marginLeft: 20 }} color="green">
             {list.OR}
           </Label>
 

@@ -22,11 +22,11 @@ export const statuslist = [
     label: "Orders Received"
   },
   {
-    OR: "4",
-    label: "Orders Received"
+    OR: "7",
+    label: "Released from supplier "
   },
   {
-    OR: "5",
-    label: "Orders Received"
+    OR: "4",
+    label: "On-hold from supplier"
   }
 ];
