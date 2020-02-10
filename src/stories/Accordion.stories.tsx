@@ -1,10 +1,11 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { Button } from "@storybook/react/demo";
-import Search from "../components/Search";
+
+import AccordionComponent from "../components/Accordion";
 
 export default {
-  title: "Search"
+  title: "Accordion"
 };
 
-export const search = () => <Search />;
+export const Accordion = () => <AccordionComponent />;

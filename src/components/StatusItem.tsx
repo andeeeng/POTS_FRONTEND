@@ -1,52 +1,45 @@
 import React from "react";
 
 import "semantic-ui-css/semantic.min.css";
-import { Label, Table, Divider } from "semantic-ui-react";
+import { Icon, Label, List, Grid, Table, Divider } from "semantic-ui-react";
+import StatusList from "../components/StatusList";
 
-const yellow = ["yellow"];
+const yellow = ["yellow", "pink", "red"];
 const pink = ["pink"];
 const red = ["red"];
 
 export interface IStatusItemProps {
   OR?: any;
   label?: any;
-  label2?: any;
+  status?: any;
   label3?: any;
+  number?: any;
+  statOption?: any;
+  statuslist?: any;
+  title?: any;
 }
 
 const StatusItem = (props: IStatusItemProps) => {
-  const { OR, label, label2, label3 } = props;
+  const {
+    OR,
+    label,
+    status,
+    label3,
+    number,
+    statOption,
+    statuslist,
+    title
+  } = props;
   return (
     <div>
-      {yellow.map(color => (
+      <StatusList />
+      {props.statuslist.map((list: any) => (
         <Table.Row>
-          <Label color={yellow} size="big">
-            {OR}
+          <Label size="big" style={{ marginLeft: 20 }} color="green">
+            {list.OR}
           </Label>
 
-          <text style={{ marginLeft: 10 }}>{label}</text>
-
-          <Divider section />
-        </Table.Row>
-      ))}
-      {yellow.map(color => (
-        <Table.Row>
-          <Label color={pink} size="big">
-            {OR}
-          </Label>
-
-          <text style={{ marginLeft: 10 }}>{label2}</text>
-
-          <Divider section />
-        </Table.Row>
-      ))}
-      {yellow.map(color => (
-        <Table.Row>
-          <Label color={red} size="big">
-            {OR}
-          </Label>
-
-          <text style={{ marginLeft: 10 }}>{label3}</text>
+          <text style={{ marginLeft: 10 }}>{list.label}</text>
 
           <Divider section />
         </Table.Row>
