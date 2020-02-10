@@ -1,16 +1,12 @@
 import React from "react";
-
-import { Card, Feed, Label } from "semantic-ui-react";
+import { Card, Feed } from "semantic-ui-react";
 import CurrentStatus from "./CurrentStatus";
 
 export interface ICurrentStatusitemProps {
-  currentstatus?: any;
   status?: any;
-  title?: any;
 }
 
 const CurrentStatusItem = (props: ICurrentStatusitemProps) => {
-  const { currentstatus, status, title } = props;
   return (
     <Card style={{ maxHeight: 200, overflow: "auto" }}>
       <CurrentStatus />

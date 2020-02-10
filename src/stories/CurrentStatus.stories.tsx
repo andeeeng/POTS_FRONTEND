@@ -1,10 +1,8 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
-import { Button } from "@storybook/react/demo";
-
 import CurrentStatus from "../components/CurrentStatus";
 import CurrentStatusItem from "../components/CurrentStatusItem";
 import { status } from "../data/mockData";
+import "semantic-ui-css/semantic.min.css";
 
 export default {
   title: "Current Status"
