@@ -1,0 +1,35 @@
+/**
+ * @format
+ */
+
+import React from "react";
+import { shallow } from "enzyme";
+import PoItem from "../components/PoItem";
+import StatusReportList from "../components/Status";
+
+const props = {
+  title: "Today’s Status",
+  status: [
+    {
+      id: 1,
+      number: "3",
+      statOption: "Orders Received"
+    },
+    {
+      id: 2,
+      number: "7",
+      statOption: "Released from supplier"
+    },
+    {
+      id: 3,
+      number: "2",
+      statOption: "On-hold from supplier"
+    }
+  ]
+};
+
+describe("Status Report List", () => {
+  test("renders correctly", () => {
+    expect(shallow(<StatusReportList {...props} />)).toMatchSnapshot();
+  });
+});
