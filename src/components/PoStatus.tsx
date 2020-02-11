@@ -10,7 +10,7 @@ export interface IPoStatusProps {
 const PoStatus = (props: IPoStatusProps) => {
   const { list } = props;
   return (
-    <Card style={{ width: "28rem" }}>
+    <Card style={{ width: "22rem", maxHeight: 370, overflow: "auto" }}>
       <ListGroup>
         <Container>
           <Row className="justify-content-md-center">
