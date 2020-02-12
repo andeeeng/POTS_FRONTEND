@@ -61,6 +61,36 @@ export const poList = [
     id: 3,
     poNumber: "OTN 20202121E565656",
     poStatus: "Delivered and is on now in the facility"
+  },
+  {
+    id: 1,
+    poNumber: "OTN 20202121E565656",
+    poStatus: "Delivered and is on now in the facility"
+  },
+  {
+    id: 2,
+    poNumber: "OTN 20202121E565656",
+    poStatus: "Delivered and is on now in the facility"
+  },
+  {
+    id: 3,
+    poNumber: "OTN 20202121E565656",
+    poStatus: "Delivered and is on now in the facility"
+  },
+  {
+    id: 1,
+    poNumber: "OTN 20202121E565656",
+    poStatus: "Delivered and is on now in the facility"
+  },
+  {
+    id: 2,
+    poNumber: "OTN 20202121E565656",
+    poStatus: "Delivered and is on now in the facility"
+  },
+  {
+    id: 3,
+    poNumber: "OTN 20202121E565656",
+    poStatus: "Delivered and is on now in the facility"
   }
 ];
 
@@ -121,6 +151,18 @@ export const status = [
   },
   {
     currentstatus: "Some Status"
+  },
+  {
+    currentstatus: "Some Status"
+  },
+  {
+    currentstatus: "Some Status"
+  },
+  {
+    currentstatus: "Some Status"
+  },
+  {
+    currentstatus: "Some Status"
   }
 ];
 
@@ -136,5 +178,23 @@ export const statuslist = [
   {
     OR: "4",
     label: "On-hold from supplier"
+  }
+];
+
+export const order = [
+  {
+    title: "Some order item"
+  },
+  {
+    title: "Some order item"
+  },
+  {
+    title: "Some order item"
+  },
+  {
+    title: "Some order item"
+  },
+  {
+    title: "Some order item"
   }
 ];
