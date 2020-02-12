@@ -4,6 +4,9 @@
   text-align: center;
 }
 
+.date {
+  text-align: left;
+}
 
 .logo {
   background-size: contain;
