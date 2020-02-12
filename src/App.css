@@ -6,9 +6,13 @@
 
 
 .logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 90%;
+  height: 80px;
+  margin: 10px;
+  background-image: url("pots.jpg");
+  
 }
 .App-logo {
   height: 40vmin;
