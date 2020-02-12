@@ -8,7 +8,7 @@ export interface ICurrentStatusitemProps {
 
 const CurrentStatusItem = (props: ICurrentStatusitemProps) => {
   return (
-    <Card style={{ maxHeight: 370, overflow: "auto" }}>
+    <Card style={{ maxHeight: 200, overflow: "auto" }}>
       <CurrentStatus />
       {props.status.map((current: any) => (
         <Card.Content style={{ marginLeft: 10 }}>
