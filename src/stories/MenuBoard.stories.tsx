@@ -20,7 +20,6 @@ import StatusReportItem from "../components/StatusReportItem";
 import StatusReportList from "../components/Status";
 import HistoryItem from "../components/HistoryItem";
 import GenDetails from "../components/GenDetails";
-import AccordionContent from "../components/AccordionContent";
 
 export default {
   title: "DashboardScreen"
@@ -77,5 +76,3 @@ export const GeneralDetailsDefault = () => (
     title="General Details"
   />
 );
-
-export const AccordionContentDefault = () => <AccordionContent />;
