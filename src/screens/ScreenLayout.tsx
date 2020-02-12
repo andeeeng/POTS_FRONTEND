@@ -19,7 +19,11 @@ const App = (props: ILayout) => {
   return (
     <Layout>
       <Sider
+
+        theme="light"
+
         style={{ backgroundColor: "white" }}
+
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={broken => {
@@ -37,15 +41,12 @@ const App = (props: ILayout) => {
           onClick={e => handleClick(e.key, state, setState)}
         >
           <Menu.Item key="dashboard">
-            <Icon type="user" />
             <span className="nav-text">My Dashboard</span>
           </Menu.Item>
           <Menu.Item key="order">
-            <Icon type="video-camera" />
             <span className="nav-text">My Orders</span>
           </Menu.Item>
           <Menu.Item key="supplier">
-            <Icon type="upload" />
             <span className="nav-text">My Suppliers</span>
           </Menu.Item>
         </Menu>

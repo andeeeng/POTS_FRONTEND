@@ -15,6 +15,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/styled-components": "^4.4.2",
     "@types/wix-style-react": "^6.17.2",
+    "antd": "^3.26.9",
     "bootstrap": "^4.4.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
