@@ -19,7 +19,11 @@ const App = (props: ILayout) => {
   return (
     <Layout>
       <Sider
+
         theme="light"
+
+        style={{ backgroundColor: "white" }}
+
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={broken => {
@@ -48,7 +52,7 @@ const App = (props: ILayout) => {
         </Menu>
       </Sider>
       <Layout>
-        <Header style={{ background: "#fff", padding: 0 }}>
+        <Header style={{ background: "#fff", padding: 0, marginBottom: 20 }}>
           {HeaderContent}
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
@@ -57,7 +61,7 @@ const App = (props: ILayout) => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
+          Purchase Order Tracking System ©2020 Created by Fast Track
         </Footer>
       </Layout>
     </Layout>
