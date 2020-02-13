@@ -43,7 +43,8 @@
     "test:w": "jest --watch",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "scaffold": "mst-gql --format ts --roots Address,Supplier,SupplierStatus,Item,PurchaseOrder http://localhost:4000/graphql   "
   },
   "eslintConfig": {
     "extends": "react-app"
