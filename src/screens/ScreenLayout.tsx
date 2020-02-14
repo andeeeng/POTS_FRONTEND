@@ -10,6 +10,7 @@ export interface ILayout {
   SUPcontent?: any;
   HeaderContent?: any;
 }
+
 const App = (props: ILayout) => {
   const { DBcontent, POcontent, SUPcontent, HeaderContent } = props;
   const [state, setState] = useState({
@@ -19,11 +20,8 @@ const App = (props: ILayout) => {
   return (
     <Layout>
       <Sider
-
         theme="light"
-
         style={{ backgroundColor: "white" }}
-
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={broken => {
@@ -41,12 +39,16 @@ const App = (props: ILayout) => {
           onClick={e => handleClick(e.key, state, setState)}
         >
           <Menu.Item key="dashboard">
+            <Icon type="dashboard" style={{ fontSize: 30 }} />
+
             <span className="nav-text">My Dashboard</span>
           </Menu.Item>
           <Menu.Item key="order">
+            <Icon type="car" style={{ fontSize: 30 }} />
             <span className="nav-text">My Orders</span>
           </Menu.Item>
           <Menu.Item key="supplier">
+            <Icon type="code-sandbox" style={{ fontSize: 30 }} />
             <span className="nav-text">My Suppliers</span>
           </Menu.Item>
         </Menu>

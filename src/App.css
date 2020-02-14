@@ -1,3 +1,4 @@
+
 @import '~antd/dist/antd.css';
 
 .App {
@@ -5,7 +6,52 @@
 }
 
 
+.main {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.date {
+  text-align: left;
+}
+
+.Datetoday {
+  position: relative;
+  margin-top: -30px;
+}
+
+.Adminavatar {
+  position: relative;
+  margin-top: -70px;
+}
+
+.container-userinfo {
+  margin-left: 100px;
+  margin-top: -30px;
+}
+
+.container-dashboard {
+
+  background-color: peachpuff;
+}
+
+.truckdelivery {
+
+ position: absolute;
+  margin-left: 500px;
+  margin-top: -300px;
+  
+}
+
+.subcontainer-dashboard {
+  padding: 20px;
+}
+
 .logo {
+  display: flex;
   background-size: contain;
   background-repeat: no-repeat;
   width: 90%;
