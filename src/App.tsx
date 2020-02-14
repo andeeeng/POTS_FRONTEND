@@ -9,6 +9,7 @@ import DashboardContent from "./components/DashboardContent";
 import { statusReport, poList } from "./data/mockData";
 
 const App = () => {
+  console.log("TEST PUSH")
   return (
     <div className="main">
       <ScreenLayout
