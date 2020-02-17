@@ -9,13 +9,18 @@ import DashboardContent from "./components/DashboardContent";
 import { statusReport, poList } from "./data/mockData";
 
 const App = () => {
+  console.log("TEST PUSH")
   return (
-    <ScreenLayout
-      DBcontent={<DashboardContent status={statusReport} list={poList} />}
-      POcontent={<OrderScreen />}
-      SUPcontent={<SupplierScreen />}
-      HeaderContent={<UserInfo user="Mark Nabablit" date="February 5, 2020" />}
-    ></ScreenLayout>
+    <div className="main">
+      <ScreenLayout
+        DBcontent={<DashboardContent status={statusReport} list={poList} />}
+        POcontent={<OrderScreen />}
+        SUPcontent={<SupplierScreen />}
+        HeaderContent={
+          <UserInfo user="Mark Nabablit" date="February 5, 2020" />
+        }
+      ></ScreenLayout>
+    </div>
   );
 };
 
