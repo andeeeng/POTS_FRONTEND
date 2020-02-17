@@ -106,7 +106,11 @@ const DashboardContent = (props: IDashboardContentProps) => {
               </Text>
             </div>
           </div>
-
+          <div>
+            <Divider orientation="left" dashed={true}>
+              Recent Updates
+            </Divider>
+          </div>
           <div className="statuslist">
             <Card
               bordered={true}
