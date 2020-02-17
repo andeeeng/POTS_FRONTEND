@@ -30,7 +30,7 @@ const StatusItem = (props: IStatusItemProps) => {
   } = props;
   return (
     <div>
-      <text style={{ marginLeft: 50 }}>Here are updates on our goodies</text>
+      <text style={{ marginLeft: 20 }}>Here are updates on our goodies</text>
       <List>
         <List.Item>
           <Label
@@ -40,19 +40,19 @@ const StatusItem = (props: IStatusItemProps) => {
           >
             3
           </Label>
-          <text style={{ marginLeft: 10 }}>Orders Received</text>
+          <text style={{ marginLeft: 28 }}>Orders Received</text>
         </List.Item>
         <List.Item>
           <Label size="big" style={{ marginBottom: 10 }} color="green">
             20
           </Label>
-          <text style={{ marginLeft: 10 }}>Released from Supplier</text>
+          <text style={{ marginLeft: 20 }}>Released from Supplier</text>
         </List.Item>
         <List.Item>
-          <Label size="big" style={{}} color="brown">
+          <Label size="big" color="brown">
             10
           </Label>
-          <text style={{ marginLeft: 10 }}>Cancelled by Supplier</text>
+          <text style={{ marginLeft: 20 }}>Cancelled by Supplier</text>
         </List.Item>
       </List>
     </div>

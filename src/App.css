@@ -34,32 +34,64 @@
 }
 
 .container-dashboard {
-
   background-color: peachpuff;
+  width: 80%;
 }
 
 .truckdelivery {
-
  position: absolute;
-  margin-left: 500px;
-  margin-top: -300px;
-  
+  margin-left: 420px;
+  margin-top: -230px;
 }
 
+.parent {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+.statusdate{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 10px;
+  margin-right: 150px;
+}
 .subcontainer-dashboard {
   padding: 20px;
 }
+
+.box{
+  display: flex;
+}
+
+.status {
+ 
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 150px;
+}
+
+.status tr:nth-child(2n+0){
+  background-color: lightblue;
+}
+
+.status tr:nth-child(2n+1){
+  background-color: lightsalmon;
+}
+
 
 .logo {
   display: flex;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 90%;
+  width: 80%;
   height: 80px;
   margin: 10px;
   background-image: url("pots.jpg");
-  
+  margin-bottom: 50px;
+  margin-left: 20px;
 }
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -85,6 +117,8 @@
 .App-link {
   color: #61dafb;
 }
+
+
 
 @keyframes App-logo-spin {
   from {
