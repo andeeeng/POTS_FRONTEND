@@ -7,17 +7,25 @@ import OrderScreen from './components/OrderScreen';
 import SupplierScreen from './components/SupplierScreen';
 import DashboardContent from './components/DashboardContent';
 import { statusReport, poList } from './data/mockData';
+import { createHttpClient } from 'mst-gql';
+import { RootStore, StoreContext } from '../src/models';
+
+const rootStore = RootStore.create(undefined, {
+	gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
+});
 
 const App = () => {
 	console.log('TEST PUSH');
 	return (
 		<div className="main">
-			<ScreenLayout
-				DBcontent={<DashboardContent status={statusReport} list={poList} />}
-				POcontent={<OrderScreen />}
-				SUPcontent={<SupplierScreen />}
-				HeaderContent={<UserInfo user="Mark Nabablit" date="February 5, 2020" />}
-			></ScreenLayout>
+			<StoreContext.Provider value={rootStore}>
+				<ScreenLayout
+					DBcontent={<DashboardContent status={statusReport} list={poList} />}
+					POcontent={<OrderScreen />}
+					SUPcontent={<SupplierScreen />}
+					HeaderContent={<UserInfo user="Mark Nabablit" date="February 5, 2020" />}
+				></ScreenLayout>
+			</StoreContext.Provider>
 		</div>
 	);
 };
