@@ -33,12 +33,20 @@ export const RootStore = RootStoreBase.views(self => {
 		self.queryAllAddresss({});
 		self.queryAllSupplierStatus({});
 		self.queryAllItems({});
-		self.queryAllSuppliers({});
 	},
 	requestPurchaseOrders() {
 		return self.queryAllPurchaseOrders({});
 	},
 	requestSuppliers() {
 		return self.queryAllSuppliers({});
+	},
+	requestAddresses() {
+		return self.queryAllAddresss({});
+	},
+	requestSupplierStatuses() {
+		return self.queryAllSupplierStatus({});
+	},
+	requestItems() {
+		return self.queryAllItems({});
 	},
 }));
