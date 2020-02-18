@@ -4,22 +4,41 @@ import { RootStoreBase } from './RootStore.base';
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
 export const RootStore = RootStoreBase.views(self => {
-	console.log('GUMAGANA', self);
+	console.log('PURCHASE ORDERS', self.purchaseorders);
+	console.log('SUPPLIERS', self.suppliers);
+	console.log('ADDRESSES', self.addresss);
+	console.log('SUPPLIER STATUSES', self.supplierstatuss);
+	console.log('ITEMS', self.items);
 	return {
 		vPurchaseOrders() {
-			return { ...self.purchaseorders.values() };
+			return [self.purchaseorders.values()];
 		},
 		vSuppliers() {
-			return { ...self.suppliers.values() };
+			return [self.suppliers.values()];
 		},
 		vAddresses() {
-			return { ...self.addresss.values() };
+			return [self.addresss.values()];
 		},
 		vSupplierStatuses() {
-			return { ...self.supplierstatuss.values() };
+			return [self.supplierstatuss.values()];
 		},
 		vItems() {
-			return { ...self.items.values() };
+			return [self.items.values()];
 		},
 	};
-});
+}).actions(self => ({
+	afterCreate() {
+		self.queryAllPurchaseOrders({});
+		self.queryAllSuppliers({});
+		self.queryAllAddresss({});
+		self.queryAllSupplierStatus({});
+		self.queryAllItems({});
+		self.queryAllSuppliers({});
+	},
+	requestPurchaseOrders() {
+		return self.queryAllPurchaseOrders({});
+	},
+	requestSuppliers() {
+		return self.queryAllSuppliers({});
+	},
+}));
