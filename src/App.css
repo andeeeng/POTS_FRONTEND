@@ -1,82 +1,113 @@
-
 @import '~antd/dist/antd.css';
 
 .App {
   text-align: center;
 }
 
+.avatar{
+/* background-color: red; */
+padding: 10px;
+}
 
-.main {
+.statusItem{
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: space-between;
+  }
+
+.rows{
+ display: flex;
+ flex-flow: row wrap;
+
+}
+
+.statuslist{
+  background-color: #FBD38D;
+  padding: 30px
+}
+
+.parent{
+ /* background-color: red; */
+ margin: 10px;
+ padding: 30px;
+ height: 600px;
+ display: flex;
+ flex-flow: row wrap;
+ align-items: flex-start;
+ justify-content:  flex-start;
+}
+
+.content1{
+ /* background-color: blue; */
+ width: 800px;
+ margin: 5px;
+ flex: 1 1 auto;
+ display: flex;
+ flex-flow: column wrap;
+
+}
+
+.content2{
+  background-color: #4A5568;
+  margin: 5px;
+  height: 500px;
+  flex: 1 1 auto;
+  
+}
+
+
+.ant-divider-horizontal.ant-divider-with-text-left::before,
+.ant-divider-horizontal.ant-divider-with-text-left::after
+{
+   border-top: 1px solid black;
+}
+.status{
+  /* background-color: grey; */
+ margin: 5px;
+ flex: 1 1 auto;
+ display: flex;
+ flex-flow: column wrap;
+}
+
+.demo-infinite-container {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  padding: 8px 24px;
+  height: 300px;
+}
+
+.calendar{
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
+}
+.calendar1{
+  /* background-color: pink; */
+  margin: 5px;
+  flex: 1 1 auto;
+  width: 300;
+  border: "1px solid #d9d9d9";
+  border-radius: 4 ;
 }
 
-.date {
-  text-align: left;
+.list{
+  /* background-color: pink;
+  margin: 5px;
+  flex: 1 1 300;
+  width: 300;
+  border: "1px solid #d9d9d9";
+  border-radius: 4 ;
+  overflow: auto; */
+  margin: 5px;
+  /* background-color: pink; */
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: 330px;
+  flex: 1 1 auto;
 }
 
-.Datetoday {
-  position: relative;
-  margin-top: -30px;
-}
 
-.Adminavatar {
-  position: relative;
-  margin-top: -70px;
-}
-
-.container-userinfo {
-  margin-left: 100px;
-  margin-top: -30px;
-}
-
-.container-dashboard {
-  background-color: peachpuff;
-  width: 80%;
-}
-
-.truckdelivery {
- position: absolute;
-  margin-left: 420px;
-  margin-top: -230px;
-}
-
-.parent {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-}
-.statusdate{
-  display: flex;
-  flex-direction: row-reverse;
-  margin-bottom: 10px;
-  margin-right: 150px;
-}
-.subcontainer-dashboard {
-  padding: 20px;
-}
-
-.box{
-  display: flex;
-}
-
-.status {
- 
-  display: flex;
-  flex-direction: row-reverse;
-  margin-right: 150px;
-}
-
-.status tr:nth-child(2n+0){
-  background-color: lightblue;
-}
-
-.status tr:nth-child(2n+1){
-  background-color: lightsalmon;
-}
 
 
 .logo {
@@ -90,7 +121,6 @@
   margin-bottom: 50px;
   margin-left: 20px;
 }
-
 
 .App-logo {
   height: 40vmin;
