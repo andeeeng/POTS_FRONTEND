@@ -91,10 +91,12 @@ padding: 10px;
 }
 
 .content2{
-  background-color: #4A5568;
+  background-color: silver;
   margin: 5px;
+  padding: 5px;
   height: 500px;
   flex: 1 1 auto;
+
   
 }
 
