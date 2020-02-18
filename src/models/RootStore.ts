@@ -1,5 +1,6 @@
 import { Instance } from 'mobx-state-tree';
 import { RootStoreBase } from './RootStore.base';
+import { PURCHASEORDER_FRAGMENT } from '../helpers';
 
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
@@ -28,25 +29,25 @@ export const RootStore = RootStoreBase.views(self => {
 	};
 }).actions(self => ({
 	afterCreate() {
-		self.queryAllPurchaseOrders({});
-		self.queryAllSuppliers({});
-		self.queryAllAddresss({});
-		self.queryAllSupplierStatus({});
-		self.queryAllItems({});
+		self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT);
+		// self.queryAllSuppliers({});
+		// self.queryAllAddresss({});
+		// self.queryAllSupplierStatus({});
+		// self.queryAllItems({});
 	},
 	requestPurchaseOrders() {
-		return self.queryAllPurchaseOrders({});
+		return self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT);
 	},
-	requestSuppliers() {
-		return self.queryAllSuppliers({});
-	},
-	requestAddresses() {
-		return self.queryAllAddresss({});
-	},
-	requestSupplierStatuses() {
-		return self.queryAllSupplierStatus({});
-	},
-	requestItems() {
-		return self.queryAllItems({});
-	},
+	// requestSuppliers() {
+	// 	return self.queryAllSuppliers({});
+	// },
+	// requestAddresses() {
+	// 	return self.queryAllAddresss({});
+	// },
+	// requestSupplierStatuses() {
+	// 	return self.queryAllSupplierStatus({});
+	// },
+	// requestItems() {
+	// 	return self.queryAllItems({});
+	// },
 }));
