@@ -120,6 +120,25 @@ padding: 10px;
   background-image: url("pots.jpg");
   margin-bottom: 50px;
   margin-left: 20px;
+  
+}
+
+.truck {
+  display: flex;
+  flex: 1 1 auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180%;
+  height: 100%;
+  margin-top: -55px;
+  background-image: url("truck.png");
+  margin-left: 450px;
+  position: absolute;
+  overflow: auto;
+  white-space: nowrap;
+  text-align: center;
+  line-height:0;       /* make bottom padding same as top padding by removing line-height */
+  vertical-align:middle;
 }
 
 .App-logo {
