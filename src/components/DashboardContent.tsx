@@ -13,6 +13,7 @@ export interface IDashboardContentProps {
 
 const DashboardContent = (props: IDashboardContentProps) => {
   const { status, list } = props;
+  console.log("List", list.length);
   const { Title, Text } = Typography;
   const data = [
     {
@@ -185,15 +186,19 @@ const DashboardContent = (props: IDashboardContentProps) => {
             >
               <List
                 itemLayout="horizontal"
-                dataSource={data}
-                renderItem={item => (
+                dataSource={list}
+                renderItem={(item: any) => (
                   <List.Item>
                     <List.Item.Meta
                       avatar={
                         <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                       }
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                      title={
+                        <a href="https://ant.design">
+                          {item.id} {"ETO RIN D KU ALAM KAYA ID NLNG"}
+                        </a>
+                      }
+                      description="IDK WTH IS THIS SO MAP NYU NLNG"
                     />
                   </List.Item>
                 )}
