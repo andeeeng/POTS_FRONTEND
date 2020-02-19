@@ -36,10 +36,14 @@ padding: 10px;
  align-items: flex-start;
  justify-content:  flex-start;
 }
-
+.tableTitledesc{
+  display:flex;
+  flex-flow: row wrap;
+}
 .panel{
   display: flex;
   flex-flow: row wrap;
+  
 }
 
 .orderitemtable{
