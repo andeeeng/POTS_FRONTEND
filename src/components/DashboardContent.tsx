@@ -3,8 +3,18 @@ import { Container, Col, Row } from "react-bootstrap";
 import DatePicker from "./Calendar";
 import PoStatus from "./PoStatus";
 import StatusReportList from "./Status";
-import { Calendar, List, Avatar, Typography, Card, Divider } from "antd";
+import {
+  Calendar,
+  List,
+  Avatar,
+  Typography,
+  Card,
+  Divider,
+  Button
+} from "antd";
 import InfiniteScroll from "react-infinite-scroller";
+import StatusItem from "./StatusItem";
+import { statusReport, poList } from "../data/mockData";
 
 export interface IDashboardContentProps {
   status?: any;
@@ -16,55 +26,25 @@ const DashboardContent = (props: IDashboardContentProps) => {
   const { Title, Text } = Typography;
   const data = [
     {
-      title: "Ant Design Title 1"
+      title: "Order # 321223353"
     },
     {
-      title: "Ant Design Title 2"
+      title: "Order # 321223353"
     },
     {
-      title: "Ant Design Title 3"
+      title: "Order # 321223353"
     },
     {
-      title: "Ant Design Title 1"
+      title: "Order # 321223353"
     },
     {
-      title: "Ant Design Title 2"
+      title: "Order # 321223353"
     },
     {
-      title: "Ant Design Title 3"
+      title: "Order # 321223353"
     },
     {
-      title: "Ant Design Title 1"
-    },
-    {
-      title: "Ant Design Title 2"
-    },
-    {
-      title: "Ant Design Title 3"
-    },
-    {
-      title: "Ant Design Title 1"
-    },
-    {
-      title: "Ant Design Title 2"
-    },
-    {
-      title: "Ant Design Title 3"
-    },
-    {
-      title: "Ant Design Title 4"
-    },
-    {
-      title: "Ant Design Title 1"
-    },
-    {
-      title: "Ant Design Title 2"
-    },
-    {
-      title: "Ant Design Title 3"
-    },
-    {
-      title: "Ant Design Title 4"
+      title: "Order # 321223353"
     }
   ];
 
@@ -111,6 +91,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
               Recent Updates
             </Divider>
           </div>
+
           <div className="statuslist">
             <Card
               bordered={true}
@@ -123,41 +104,11 @@ const DashboardContent = (props: IDashboardContentProps) => {
                 backgroundColor: "Transparent"
               }}
             >
-              <div style={{ paddingBottom: 20, paddingTop: 0, marginTop: 0 }}>
-                <Text style={{ fontSize: 20 }}>
-                  Here are the updates on our Goodies!
-                </Text>
-              </div>
-
+              <text style={{ marginLeft: 20 }}>
+                Here are updates on our goodies
+              </text>
               <div className="statusItem">
-                <div>
-                  <Text strong style={{ fontSize: 20, color: "#4299E1" }}>
-                    5
-                  </Text>
-                </div>
-                <div>
-                  <Text style={{ fontSize: 20 }}>Orders Received</Text>
-                </div>
-              </div>
-              <div className="statusItem">
-                <div>
-                  <Text strong style={{ fontSize: 20, color: "#68D391" }}>
-                    20
-                  </Text>
-                </div>
-                <div>
-                  <Text style={{ fontSize: 20 }}>Released from Supplier</Text>
-                </div>
-              </div>
-              <div className="statusItem">
-                <div>
-                  <Text strong style={{ fontSize: 20, color: "#9C4221" }}>
-                    10
-                  </Text>
-                </div>
-                <div>
-                  <Text style={{ fontSize: 20 }}>Cancelled by Supplier</Text>
-                </div>
+                <StatusItem status={statusReport} />
               </div>
             </Card>
           </div>
@@ -189,12 +140,13 @@ const DashboardContent = (props: IDashboardContentProps) => {
                 renderItem={item => (
                   <List.Item>
                     <List.Item.Meta
-                      avatar={
-                        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                      }
                       title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                      description="Status: Some status"
                     />
+
+                    <List.Item>
+                      <Button type="primary">View Order</Button>
+                    </List.Item>
                   </List.Item>
                 )}
               />
@@ -202,6 +154,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
           </div>
         </div>
       </div>
+      <div className="truck"></div>
       <div className="content2">WIDGETS HERE</div>
     </Fragment>
   );
