@@ -10,6 +10,20 @@ const OrderScreen = () => {
     sortby: "date",
     POdata: POdata
   });
+  const sorts = [
+    {
+      value: "date",
+      desc: "Date"
+    },
+    {
+      value: "supp",
+      desc: "Supplier"
+    },
+    {
+      value: "status",
+      desc: "Status"
+    }
+  ];
   return (
     <div className="content1orders">
       <div>
@@ -26,7 +40,7 @@ const OrderScreen = () => {
           />
         </div>
         <div className="sort">
-          <SortBy state={state} setState={setState}></SortBy>
+          <SortBy state={state} setState={setState} sorts={sorts}></SortBy>
         </div>
       </div>
       <div className="masterlist">

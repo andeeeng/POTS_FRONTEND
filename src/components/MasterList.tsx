@@ -1,15 +1,17 @@
 import React, { Fragment } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { Table, Collapse, Timeline, Card, Tag } from "antd";
+import { Table, Collapse, Timeline, Card, Tag, Typography } from "antd";
 const { Panel } = Collapse;
+const { Text, Title } = Typography;
 
-export interface ISortyBy {
+export interface IMasterList {
   state: any;
   setState: any;
 }
 
-const MasterList = (props: ISortyBy) => {
+const MasterList = (props: IMasterList) => {
   const { state, setState } = props;
+
   const columns = [
     {
       title: "Item No.",
@@ -22,7 +24,7 @@ const MasterList = (props: ISortyBy) => {
       key: "desc"
     },
     {
-      title: "Qunatity",
+      title: "Quantity",
       dataIndex: "qty",
       key: "qty"
     },
@@ -30,6 +32,16 @@ const MasterList = (props: ISortyBy) => {
       title: "Unit",
       dataIndex: "uom",
       key: "uom"
+    },
+    {
+      title: "Unit Price",
+      dataIndex: "price",
+      key: "price"
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount"
     }
   ];
 
@@ -57,6 +69,25 @@ const MasterList = (props: ISortyBy) => {
                     useWindow={false}
                   >
                     <Table
+                      title={() => {
+                        return (
+                          <div>
+                            <Title level={4}> Order Details</Title>
+                            <div className="tableTitledesc">
+                              <div>
+                                <Text>Address: </Text>
+                                <br></br>
+                                <Text>Deliver To: </Text>
+                              </div>
+                              <div>
+                                <Text>{data.supplier.address}</Text>
+                                <br></br>
+                                <Text>{data.deliverTo}</Text>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      }}
                       columns={columns}
                       dataSource={data.items}
                       pagination={false}

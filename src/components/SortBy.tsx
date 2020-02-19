@@ -7,10 +7,11 @@ const { Option } = Select;
 export interface ISortyBy {
   state: any;
   setState: any;
+  sorts: any;
 }
 
 const SortBy = (props: ISortyBy) => {
-  const { state, setState } = props;
+  const { state, setState, sorts } = props;
   const handleChange = (value: any, state: any, setState: any) => {
     setState({
       ...state,
@@ -24,16 +25,16 @@ const SortBy = (props: ISortyBy) => {
       </div>
       <div>
         <Select
-          defaultValue={"date"}
+          defaultValue={"status"}
           value={state.sortby}
           style={{ width: 200 }}
           onChange={(value: any) => {
             handleChange(value, state, setState);
           }}
         >
-          <Option value="date">Date</Option>
-          <Option value="status">Status</Option>
-          <Option value="supplier">Supplier</Option>
+          {sorts.map((items: any) => (
+            <Option value={items.value}>{items.desc}</Option>
+          ))}
         </Select>
       </div>
     </Fragment>

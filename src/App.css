@@ -36,7 +36,10 @@ padding: 10px;
  align-items: flex-start;
  justify-content:  flex-start;
 }
-
+.tableTitledesc{
+  display:flex;
+  flex-flow: row wrap;
+}
 .panel{
   display: flex;
   flex-flow: row wrap;
@@ -58,7 +61,7 @@ padding: 10px;
   overflow: auto;
   padding: 8px 24px;
   height: 330px;
-  flex: 10 1 auto;
+  flex: 1 1 auto;
 }
 
 .history{

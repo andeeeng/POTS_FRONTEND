@@ -1,15 +1,27 @@
 import React, { Fragment, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import SortBy from "../components/SortBy";
-import MasterList from "../components/MasterList";
+import SupplierList from "../components/SupplierList";
 import { POdata } from "../data/MasterListMock";
 import { Divider, Input } from "antd";
 const { Search } = Input;
 const OrderScreen = () => {
   const [state, setState] = useState({
-    sortby: "date",
+    sortby: "name",
     POdata: POdata
   });
+
+  const sorts = [
+    {
+      value: "name",
+      desc: "Name"
+    },
+
+    {
+      value: "status",
+      desc: "Status"
+    }
+  ];
   return (
     <div className="content1orders">
       <div>
@@ -26,11 +38,11 @@ const OrderScreen = () => {
           />
         </div>
         <div className="sort">
-          <SortBy state={state} setState={setState}></SortBy>
+          <SortBy state={state} setState={setState} sorts={sorts}></SortBy>
         </div>
       </div>
       <div className="masterlist">
-        <MasterList state={state} setState={setState}></MasterList>
+        <SupplierList state={state} setState={setState}></SupplierList>
       </div>
     </div>
   );

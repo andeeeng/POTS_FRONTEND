@@ -30,13 +30,14 @@ const StatusItem = (props: IStatusItemProps) => {
   } = props;
   return (
     <Fragment>
-      {props.status.map((stat: any) => (
+      {status.map((stat: any) => (
         <div>
+          {console.log(stat, "VALUE")}
           <List.Item>
             <Label
               size="big"
               style={{ marginBottom: 10, marginTop: 20 }}
-              color="blue"
+              color={stat.color}
             >
               {stat.number}
             </Label>
