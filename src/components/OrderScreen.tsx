@@ -11,31 +11,43 @@ import {
   Card,
   Tag
 } from "antd";
+import { poList } from "../data/mockData";
 const { Title, Text } = Typography;
 const { Search } = Input;
 const { Option } = Select;
 const { Panel } = Collapse;
-const OrderScreen = () => {
+
+const OrderScreen = (props: any) => {
   const columns = [
     {
       title: "Item No.",
-      dataIndex: "itemno",
-      key: "itemno"
+      dataIndex: "itemNo",
+      key: "itemNo"
     },
     {
       title: "Description",
-      dataIndex: "desc",
-      key: "desc"
+      dataIndex: "description",
+      key: "description"
     },
     {
       title: "Qunatity",
-      dataIndex: "qty",
-      key: "qty"
+      dataIndex: "quantity",
+      key: "quantity"
     },
     {
       title: "Unit",
       dataIndex: "uom",
       key: "uom"
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price"
+    },
+    {
+      title: "Currency",
+      dataIndex: "currency",
+      key: "currency"
     }
   ];
 
@@ -143,61 +155,55 @@ const OrderScreen = () => {
       </div>
       <div className="masterlist">
         <Collapse
-          defaultActiveKey={["1"]}
+          defaultActiveKey={["0"]}
           // onChange={callback}
           // expandIconPosition={expandIconPosition}
         >
-          <Panel
-            header="OTN 0000099999 by Air Supplier"
-            key="1"
-            extra={<Tag color="green">Current Status</Tag>}
-          >
-            <div className="panel">
-              <div className="orderitemtable">
-                <InfiniteScroll
-                  initialLoad={false}
-                  pageStart={0}
-                  loadMore={() => console.log("LOAD MORE")}
-                  // hasMore={!this.state.loading && this.state.hasMore}
-                  useWindow={false}
-                >
-                  <Table
-                    columns={columns}
-                    dataSource={data}
-                    pagination={false}
-                  />
-                </InfiniteScroll>
-              </div>
-              <div className="history">
-                <Card
-                  title="Status History"
-                  bordered={true}
-                  // style={{ width: au }}
-                >
-                  <Timeline>
-                    <Timeline.Item>On The Way</Timeline.Item>
-                    <Timeline.Item>Loaded in truck</Timeline.Item>
-                    <Timeline.Item>Items Packed</Timeline.Item>
-                    <Timeline.Item>Item Arrived on Plant</Timeline.Item>
-                  </Timeline>
-                </Card>
-              </div>
-            </div>
-          </Panel>
-          <Panel
-            header="OTN 0000099999 by Air Supplier 2"
-            key="2"
-            extra={<Tag color="green">Current Status</Tag>}
-          >
-            <div>text</div>
-          </Panel>
-          <Panel
-            header="OTN 0000099999 by Air Supplier 3"
-            key="3"
-            extra={<Tag color="green">Current Status</Tag>}
-          >
-            <div>text</div>
-          </Panel>
+          {props.po.map((p: any, i: any) => {
+            return (
+              <Panel
+                header={
+                  <Text>
+                    {p.id} {"BY"} {p.supplier.name}
+                  </Text>
+                }
+                key={i}
+                extra={<Tag color="green">Current Status</Tag>}
+              >
+                <div className="panel">
+                  <div className="orderitemtable">
+                    <InfiniteScroll
+                      initialLoad={false}
+                      pageStart={0}
+                      loadMore={() => console.log("LOAD MORE")}
+                      // hasMore={!this.state.loading && this.state.hasMore}
+                      useWindow={false}
+                    >
+                      <Table
+                        columns={columns}
+                        dataSource={p.items}
+                        pagination={false}
+                      />
+                    </InfiniteScroll>
+                  </div>
+                  <div className="history">
+                    <Card
+                      title="Status History"
+                      bordered={true}
+                      // style={{ width: au }}
+                    >
+                      <Timeline>
+                        <Timeline.Item>On The Way</Timeline.Item>
+                        <Timeline.Item>Loaded in truck</Timeline.Item>
+                        <Timeline.Item>Items Packed</Timeline.Item>
+                        <Timeline.Item>Item Arrived on Plant</Timeline.Item>
+                      </Timeline>
+                    </Card>
+                  </div>
+                </div>
+              </Panel>
+            );
+          })}
         </Collapse>
       </div>
     </div>
