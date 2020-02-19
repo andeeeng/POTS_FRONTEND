@@ -12784,6 +12784,11 @@ react-bootstrap@^1.0.0-beta.16:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
+react-border-wrapper@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-border-wrapper/-/react-border-wrapper-1.0.3.tgz#6e8b7eb2b30712634884db2e643ed978472ce8c1"
+  integrity sha512-S3vcsT+SOfNsp5uBivgsoHl4EOm9GMsqYTbAJyQWe1hKstpTuY9lh1YaU2pjJp1j/VScImaYLBYaYuMpiqXIvw==
+
 react-calendar@^2.19.2:
   version "2.19.2"
   resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-2.19.2.tgz#496e78eb11a00aee1ae6b5d02d221ed1ca2db952"
