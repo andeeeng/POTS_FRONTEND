@@ -36,10 +36,14 @@ padding: 10px;
  align-items: flex-start;
  justify-content:  flex-start;
 }
-
+.tableTitledesc{
+  display:flex;
+  flex-flow: row wrap;
+}
 .panel{
   display: flex;
   flex-flow: row wrap;
+  
 }
 
 .orderitemtable{
@@ -91,10 +95,12 @@ padding: 10px;
 }
 
 .content2{
-  background-color: #4A5568;
+  background-color: silver;
   margin: 5px;
+  padding: 5px;
   height: 500px;
   flex: 1 1 auto;
+
   
 }
 
@@ -195,10 +201,26 @@ padding: 10px;
   display: flex;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 90%;
+  width: 80%;
   height: 80px;
   margin: 10px;
   background-image: url("pots.jpg");
+  margin-bottom: 50px;
+  margin-left: 20px;
+  
+}
+
+.truck {
+  display: flex;
+  flex: 1 1 auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180%;
+  height: 100%;
+  margin-top: -55px;
+  background-image: url("truck.png");
+  margin-left: 450px;
+  position: absolute;
   
 }
 
@@ -227,6 +249,8 @@ padding: 10px;
 .App-link {
   color: #61dafb;
 }
+
+
 
 @keyframes App-logo-spin {
   from {
