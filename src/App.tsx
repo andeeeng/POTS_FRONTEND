@@ -8,8 +8,16 @@ import SupplierScreen from './components/SupplierScreen';
 import DashboardContent from './components/DashboardContent';
 import { statusReport, poList } from './data/mockData';
 
+//mst
+import { createHttpClient } from 'mst-gql';
+import { RootStore, StoreContext } from '../src/models';
+import { observer } from 'mobx-react';
+const rootStore = RootStore.create(undefined, {
+	gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
+});
+
 const App = () => {
-	console.log('TEST PUSH');
+	console.log('PO', rootStore.vPurchaseOrders());
 	return (
 		<div className="main">
 			<ScreenLayout
