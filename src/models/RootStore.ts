@@ -5,14 +5,10 @@ import { PURCHASEORDER_FRAGMENT } from '../helpers'
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
 export const RootStore = RootStoreBase.views(self => {
-  console.log('PURCHASE ORDERS', self.purchaseorders)
-  console.log('SUPPLIERS', self.suppliers)
-  console.log('ADDRESSES', self.addresss)
-  console.log('SUPPLIER STATUSES', self.supplierstatuss)
-  console.log('ITEMS', self.items)
   return {
     vPurchaseOrders() {
-      return [self.purchaseorders.values()]
+      const po: any = self.purchaseorders.values()
+      return [...po]
     },
     vSuppliers() {
       return [self.suppliers.values()]
@@ -36,7 +32,10 @@ export const RootStore = RootStoreBase.views(self => {
     // self.queryAllItems({});
   },
   requestPurchaseOrders() {
-    return self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
+    const poq = self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
+
+    return poq
+    // return self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
   },
   // requestSuppliers() {
   // 	return self.queryAllSuppliers({});

@@ -19,11 +19,12 @@ const rootStore = RootStore.create(undefined, {
 //rawr
 const App = () => {
   console.log('PO', rootStore.vPurchaseOrders())
+  console.log('POQ', rootStore.requestPurchaseOrders())
   return (
     <div className="main">
       <ScreenLayout
         DBcontent={<DashboardContent status={statusReport} list={poList} />}
-        POcontent={<OrderScreen />}
+        POcontent={<OrderScreen po={rootStore.vPurchaseOrders()} />}
         SUPcontent={<SupplierScreen />}
         HeaderContent={
           <UserInfo user="Mark Nabablit" date="February 5, 2020" />
