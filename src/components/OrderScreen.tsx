@@ -6,15 +6,17 @@ import { POdata } from '../data/MasterListMock'
 import { Divider, Input } from 'antd'
 const { Search } = Input
 
-interface IOrderScrenProps {
+export interface IOrderScreenProps {
   po?: any
 }
 
-const OrderScreen = (props: IOrderScrenProps) => {
+const OrderScreen = (props: IOrderScreenProps) => {
   const [state, setState] = useState({
     sortby: 'date',
     POdata: props.po,
   })
+
+  console.log('Props', props.po)
   const sorts = [
     {
       value: 'date',

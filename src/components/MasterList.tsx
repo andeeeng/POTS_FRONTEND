@@ -33,16 +33,6 @@ const MasterList = (props: IMasterList) => {
       dataIndex: 'uom',
       key: 'uom',
     },
-    {
-      title: 'Price',
-      dataIndex: 'price',
-      key: 'price',
-    },
-    {
-      title: 'Currency',
-      dataIndex: 'currency',
-      key: 'currency',
-    },
   ]
 
   return (
@@ -73,14 +63,20 @@ const MasterList = (props: IMasterList) => {
                             <Title level={4}> Order Details</Title>
                             <div className="tableTitledesc">
                               <div>
-                                <Text>Address: </Text>
+                                <Text>Address:</Text>
                                 <br></br>
-                                <Text>Deliver To: </Text>
+                                {/* <Text>Deliver To: </Text> */}
                               </div>
                               <div>
-                                <Text>{data.supplier.address}</Text>
+                                <Text>
+                                  {data.supplier.address.building_name}{' '}
+                                  {data.supplier.address.street}{' '}
+                                  {data.supplier.address.city}{' '}
+                                  {data.supplier.address.state}{' '}
+                                  {data.supplier.address.zip_code}{' '}
+                                </Text>
                                 <br></br>
-                                <Text>{data.deliverTo}</Text>
+                                {/* <Text>{data.deliverTo}</Text> */}
                               </div>
                             </div>
                           </div>

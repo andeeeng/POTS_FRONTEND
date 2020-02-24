@@ -23,7 +23,12 @@ const App = () => {
   return (
     <div className="main">
       <ScreenLayout
-        DBcontent={<DashboardContent status={statusReport} list={poList} />}
+        DBcontent={
+          <DashboardContent
+            status={statusReport}
+            list={rootStore.vPurchaseOrders()}
+          />
+        }
         POcontent={<OrderScreen po={rootStore.vPurchaseOrders()} />}
         SUPcontent={<SupplierScreen />}
         HeaderContent={
@@ -33,4 +38,4 @@ const App = () => {
   )
 }
 
-export default App
+export default observer(App)

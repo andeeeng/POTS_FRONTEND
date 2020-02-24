@@ -1,56 +1,49 @@
-import React, { Fragment } from "react";
-import { Container, Col, Row } from "react-bootstrap";
-import DatePicker from "./Calendar";
-import PoStatus from "./PoStatus";
-import StatusReportList from "./Status";
-import {
-  Calendar,
-  List,
-  Avatar,
-  Typography,
-  Card,
-  Divider,
-  Button
-} from "antd";
-import InfiniteScroll from "react-infinite-scroller";
-import StatusItem from "./StatusItem";
-import { statusReport, poList } from "../data/mockData";
+import React, { Fragment } from 'react'
+import { Container, Col, Row } from 'react-bootstrap'
+import DatePicker from './Calendar'
+import PoStatus from './PoStatus'
+import StatusReportList from './Status'
+import { Calendar, List, Avatar, Typography, Card, Divider, Button } from 'antd'
+import InfiniteScroll from 'react-infinite-scroller'
+import StatusItem from './StatusItem'
+import { statusReport, poList } from '../data/mockData'
 
 export interface IDashboardContentProps {
-  status?: any;
-  list?: any;
+  status?: any
+  list?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
-  const { status, list } = props;
-  const { Title, Text } = Typography;
-  const data = [
-    {
-      title: "Order # 321223353"
-    },
-    {
-      title: "Order # 321223353"
-    },
-    {
-      title: "Order # 321223353"
-    },
-    {
-      title: "Order # 321223353"
-    },
-    {
-      title: "Order # 321223353"
-    },
-    {
-      title: "Order # 321223353"
-    },
-    {
-      title: "Order # 321223353"
-    }
-  ];
+  const { status, list } = props
+  const { Title, Text } = Typography
+  console.log('AFEGSRHDTJFUGLHI', list)
+  // const data = [
+  //   {
+  //     title: 'Order # 321223353',
+  //   },
+  //   {
+  //     title: 'Order # 321223353',
+  //   },
+  //   {
+  //     title: 'Order # 321223353',
+  //   },
+  //   {
+  //     title: 'Order # 321223353',
+  //   },
+  //   {
+  //     title: 'Order # 321223353',
+  //   },
+  //   {
+  //     title: 'Order # 321223353',
+  //   },
+  //   {
+  //     title: 'Order # 321223353',
+  //   },
+  // ]
 
   const load = () => {
-    return console.log("LOAD");
-  };
+    return console.log('LOAD')
+  }
   return (
     <Fragment>
       <div className="content1">
@@ -62,17 +55,16 @@ const DashboardContent = (props: IDashboardContentProps) => {
                   size={100}
                   icon="user"
                   style={{
-                    backgroundColor: "#3182CE",
-                    color: "#63B3ED",
-                    marginRight: "10px"
+                    backgroundColor: '#3182CE',
+                    color: '#63B3ED',
+                    marginRight: '10px',
                   }}
                 />
               </div>
               <div>
                 <Title
                   level={2}
-                  style={{ margin: 0, paddingTop: "5px", color: "#3182CE" }}
-                >
+                  style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
                   Welcome Back, Admin!
                 </Title>
                 <Text>Tour last log-in was:</Text>
@@ -81,7 +73,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
               </div>
             </div>
             <div>
-              <Text style={{ float: "right" }}>
+              <Text style={{ float: 'right' }}>
                 Today is 02/30/2020 0839 +GST
               </Text>
             </div>
@@ -99,11 +91,10 @@ const DashboardContent = (props: IDashboardContentProps) => {
                 padding: 10,
                 paddingTop: 5,
                 width: 300,
-                borderColor: "#805AD5",
+                borderColor: '#805AD5',
                 borderWidth: 1.5,
-                backgroundColor: "Transparent"
-              }}
-            >
+                backgroundColor: 'Transparent',
+              }}>
               <text style={{ marginLeft: 20 }}>
                 Here are updates on our goodies
               </text>
@@ -123,25 +114,26 @@ const DashboardContent = (props: IDashboardContentProps) => {
           <div className="calendar1">
             <Calendar
               fullscreen={false}
-              onPanelChange={value => console.log(value, "MODE")}
+              onPanelChange={value => console.log(value, 'MODE')}
             />
           </div>
           <div className="list">
             <InfiniteScroll
               initialLoad={false}
               pageStart={0}
-              loadMore={() => console.log("LOAD MORE")}
+              loadMore={() => console.log('LOAD MORE')}
               // hasMore={!this.state.loading && this.state.hasMore}
-              useWindow={false}
-            >
+              useWindow={false}>
               <List
                 itemLayout="horizontal"
-                dataSource={data}
-                renderItem={item => (
+                dataSource={list}
+                renderItem={(item: any) => (
                   <List.Item>
                     <List.Item.Meta
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Status: Some status"
+                      title={
+                        <a href="https://ant.design">{item.supplier.name}</a>
+                      }
+                      description={item.id}
                     />
 
                     <List.Item>
@@ -157,7 +149,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
       <div className="truck"></div>
       <div className="content2">WIDGETS HERE</div>
     </Fragment>
-  );
-};
+  )
+}
 
-export default DashboardContent;
+export default DashboardContent
