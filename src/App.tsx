@@ -30,7 +30,7 @@ const App = () => {
           />
         }
         POcontent={<OrderScreen po={rootStore.vPurchaseOrders()} />}
-        SUPcontent={<SupplierScreen />}
+        SUPcontent={<SupplierScreen po={rootStore.vPurchaseOrders()} />}
         HeaderContent={
           <UserInfo user="Mark Nabablit" date="February 5, 2020" />
         }></ScreenLayout>

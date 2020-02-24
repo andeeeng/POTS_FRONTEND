@@ -5,10 +5,15 @@ import SupplierList from '../components/SupplierList'
 import { POdata } from '../data/MasterListMock'
 import { Divider, Input } from 'antd'
 const { Search } = Input
-const OrderScreen = () => {
+
+export interface ISupplierScreenProps {
+  po?: any
+}
+
+const OrderScreen = (props: ISupplierScreenProps) => {
   const [state, setState] = useState({
     sortby: 'name',
-    POdata: POdata,
+    POdata: props.po,
   })
 
   const sorts = [
