@@ -75,15 +75,15 @@ const SupplierList = (props: ISortyBy) => {
                       <Descriptions.Item label="Supplier" span={3}>
                         {data.supplier.name}
                       </Descriptions.Item>
-                      {/* <Descriptions.Item label="Contact Person" span={2}>
-                        Rodrigo Roa Duterte
-                      </Descriptions.Item> */}
-                      {/* <Descriptions.Item label="Contact Number" span={2}>
+                      <Descriptions.Item label="Contact Person" span={2}>
+                        Chester Bennington
+                      </Descriptions.Item>
+                      <Descriptions.Item label="Contact Number" span={2}>
                         Tel: 728-85-23/ Fax: 12334-232-1
-                      </Descriptions.Item> */}
-                      {/* <Descriptions.Item label="TIN" span={3}>
+                      </Descriptions.Item>
+                      <Descriptions.Item label="TIN" span={3}>
                         000-123-123-0000
-                      </Descriptions.Item> */}
+                      </Descriptions.Item>
 
                       <Descriptions.Item label="Address">
                         {data.supplier.address.building_name}{' '}
