@@ -24,7 +24,7 @@ const MasterList = (props: IMasterList) => {
       key: 'description',
     },
     {
-      title: 'Qunatity',
+      title: 'Quantity',
       dataIndex: 'quantity',
       key: 'quantity',
     },
