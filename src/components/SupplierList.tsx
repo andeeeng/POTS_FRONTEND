@@ -77,7 +77,7 @@ const SupplierList = (props: ISortyBy) => {
                         PAINT SUPPLIER CORPORATION
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Person" span={2}>
-                        Rodrigo Roa Duterte
+                        Juan Dela Cruz
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Number" span={2}>
                         Tel: 728-85-23/ Fax: 12334-232-1
