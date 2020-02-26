@@ -63,7 +63,7 @@ const MasterList = (props: IMasterList) => {
                             <Title level={4}> Order Details</Title>
                             <div className="tableTitledesc">
                               <div>
-                                <Text>Address:</Text>
+                                <Text>Address: </Text>
                                 <br></br>
                                 {/* <Text>Deliver To: </Text> */}
                               </div>
