@@ -1,54 +1,44 @@
-import React, { Fragment } from "react";
-import InfiniteScroll from "react-infinite-scroller";
-import { Table, Collapse, Timeline, Card, Tag, Typography } from "antd";
-const { Panel } = Collapse;
-const { Text, Title } = Typography;
+import React, { Fragment } from 'react'
+import InfiniteScroll from 'react-infinite-scroller'
+import { Table, Collapse, Timeline, Card, Tag, Typography } from 'antd'
+const { Panel } = Collapse
+const { Text, Title } = Typography
 
 export interface IMasterList {
-  state: any;
-  setState: any;
+  state: any
+  setState: any
 }
 
 const MasterList = (props: IMasterList) => {
-  const { state, setState } = props;
+  const { state, setState } = props
 
   const columns = [
     {
-      title: "Item No.",
-      dataIndex: "itemno",
-      key: "itemno"
+      title: 'Item No.',
+      dataIndex: 'itemNo',
+      key: 'itemNo',
     },
     {
-      title: "Description",
-      dataIndex: "desc",
-      key: "desc"
+      title: 'Description',
+      dataIndex: 'description',
+      key: 'description',
     },
     {
-      title: "Quantity",
-      dataIndex: "qty",
-      key: "qty"
+      title: 'Quantity',
+      dataIndex: 'quantity',
+      key: 'quantity',
     },
     {
-      title: "Unit",
-      dataIndex: "uom",
-      key: "uom"
+      title: 'Unit',
+      dataIndex: 'uom',
+      key: 'uom',
     },
-    {
-      title: "Unit Price",
-      dataIndex: "price",
-      key: "price"
-    },
-    {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount"
-    }
-  ];
+  ]
 
   return (
     <Fragment>
       <Collapse
-        defaultActiveKey={["0"]}
+        defaultActiveKey={['0']}
         // onChange={callback}
         // expandIconPosition={expandIconPosition}
       >
@@ -57,17 +47,15 @@ const MasterList = (props: IMasterList) => {
             <Panel
               header={`OTN ${data.id} by  ${data.supplier.name}`}
               key={index}
-              extra={<Tag color={data.color}>{data.status}</Tag>}
-            >
+              extra={<Tag color={data.color}>{data.status}</Tag>}>
               <div className="panel">
                 <div className="orderitemtable">
                   <InfiniteScroll
                     initialLoad={false}
                     pageStart={0}
-                    loadMore={() => console.log("LOAD MORE")}
+                    loadMore={() => console.log('LOAD MORE')}
                     // hasMore={!this.state.loading && this.state.hasMore}
-                    useWindow={false}
-                  >
+                    useWindow={false}>
                     <Table
                       title={() => {
                         return (
@@ -77,16 +65,22 @@ const MasterList = (props: IMasterList) => {
                               <div>
                                 <Text>Address: </Text>
                                 <br></br>
-                                <Text>Deliver To: </Text>
+                                {/* <Text>Deliver To: </Text> */}
                               </div>
                               <div>
-                                <Text>{data.supplier.address}</Text>
+                                <Text>
+                                  {data.supplier.address.building_name}{' '}
+                                  {data.supplier.address.street}{' '}
+                                  {data.supplier.address.city}{' '}
+                                  {data.supplier.address.state}{' '}
+                                  {data.supplier.address.zip_code}{' '}
+                                </Text>
                                 <br></br>
-                                <Text>{data.deliverTo}</Text>
+                                {/* <Text>{data.deliverTo}</Text> */}
                               </div>
                             </div>
                           </div>
-                        );
+                        )
                       }}
                       columns={columns}
                       dataSource={data.items}
@@ -98,15 +92,13 @@ const MasterList = (props: IMasterList) => {
                   <Card
                     title="Status History"
                     bordered={true}
-                    bodyStyle={{ width: 300, height: 270, overflow: "auto" }}
-                  >
+                    bodyStyle={{ width: 300, height: 270, overflow: 'auto' }}>
                     <InfiniteScroll
                       initialLoad={false}
                       pageStart={0}
-                      loadMore={() => console.log("LOAD MORE")}
+                      loadMore={() => console.log('LOAD MORE')}
                       // hasMore={!this.state.loading && this.state.hasMore}
-                      useWindow={false}
-                    >
+                      useWindow={false}>
                       <Timeline>
                         <Timeline.Item>On The Way</Timeline.Item>
                         <Timeline.Item>Loaded in truck</Timeline.Item>
@@ -124,11 +116,11 @@ const MasterList = (props: IMasterList) => {
                 </div>
               </div>
             </Panel>
-          );
+          )
         })}
       </Collapse>
     </Fragment>
-  );
-};
+  )
+}
 
-export default MasterList;
+export default MasterList
