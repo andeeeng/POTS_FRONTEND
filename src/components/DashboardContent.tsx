@@ -1,8 +1,4 @@
-import React, { Fragment, useState } from "react";
-import { Container, Col, Row } from "react-bootstrap";
-import DatePicker from "./Calendar";
-import PoStatus from "./PoStatus";
-import StatusReportList from "./Status";
+import React, { Fragment, useState } from 'react'
 import {
   Calendar,
   List,
@@ -11,84 +7,85 @@ import {
   Card,
   Divider,
   Button,
-  Drawer
-} from "antd";
-import moment from "moment";
-import InfiniteScroll from "react-infinite-scroller";
-import StatusItem from "./StatusItem";
-import { statusReport, poList } from "../data/mockData";
-
+  Drawer,
+} from 'antd'
+import moment from 'moment'
+import InfiniteScroll from 'react-infinite-scroller'
+import StatusItem from './StatusItem'
+import { statusReport, poList } from '../data/mockData'
+import PoStatus from './PoStatus'
+import StatusReportList from './Status'
 export interface IDashboardContentProps {
-  status?: any;
-  list?: any;
+  status?: any
+  list?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
-  const format = "YYYY-MM-DD";
-  const { status, list } = props;
+  const format = 'YYYY-MM-DD'
+  const { status, list } = props
   const [state, setState] = useState({
     visible: false,
-    selectedDate: moment().format(format)
-  });
-  const { Title, Text } = Typography;
+    selectedDate: moment().format(format),
+  })
+  const { Title, Text } = Typography
   const data = [
     {
-      title: "ORDER NUMBER 1",
-      date: "2020-02-23"
+      title: 'ORDER NUMBER 1',
+      date: '2020-02-23',
     },
 
     {
-      title: "ORDER NUMBER 2",
-      date: "2020-02-20"
+      title: 'ORDER NUMBER 2',
+      date: '2020-02-20',
     },
     {
-      title: "ORDER NUMBER 3",
-      date: "2020-02-20"
+      title: 'ORDER NUMBER 3',
+      date: '2020-02-20',
     },
     {
-      title: "ORDER NUMBER 4",
-      date: "2020-02-20"
+      title: 'ORDER NUMBER 4',
+      date: '2020-02-20',
     },
     {
-      title: "ORDER NUMBER 5",
-      date: "2020-02-19"
+      title: 'ORDER NUMBER 5',
+      date: '2020-02-19',
     },
     {
-      title: "ORDER NUMBER 6",
-      date: "2020-02-21"
+      title: 'ORDER NUMBER 6',
+      date: '2020-02-21',
     },
     {
-      title: "ORDER NUMBER 7",
-      date: "2020-02-21"
-    }
-  ];
+      title: 'ORDER NUMBER 7',
+      date: '2020-02-21',
+    },
+  ]
 
-  const filterbydate = data.filter(x => x.date == state.selectedDate);
+  const filterbydate = data.filter(x => x.date == state.selectedDate)
 
   const onChange = (value: any) => {
     setState({
       ...state,
-      selectedDate: value.format(format)
-    });
-  };
+      selectedDate: value.format(format),
+    })
+  }
 
   const showDrawer = () => {
     setState({
       ...state,
-      visible: true
-    });
-  };
+      visible: true,
+    })
+  }
 
   const onClose = () => {
     setState({
       ...state,
-      visible: false
-    });
-  };
+      visible: false,
+    })
+  }
 
   const load = () => {
-    return console.log("LOAD");
-  };
+    return console.log('LOAD')
+  }
   return (
     <Fragment>
       <div className="content1">
@@ -100,17 +97,16 @@ const DashboardContent = (props: IDashboardContentProps) => {
                   size={100}
                   icon="user"
                   style={{
-                    backgroundColor: "#3182CE",
-                    color: "#63B3ED",
-                    marginRight: "10px"
+                    backgroundColor: '#3182CE',
+                    color: '#63B3ED',
+                    marginRight: '10px',
                   }}
                 />
               </div>
               <div>
                 <Title
                   level={2}
-                  style={{ margin: 0, paddingTop: "5px", color: "#3182CE" }}
-                >
+                  style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
                   Welcome Back, Admin!
                 </Title>
                 <Text>Tour last log-in was:</Text>
@@ -119,7 +115,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
               </div>
             </div>
             <div>
-              <Text style={{ float: "right" }}>
+              <Text style={{ float: 'right' }}>
                 Today is 02/30/2020 0839 +GST
               </Text>
             </div>
@@ -137,11 +133,10 @@ const DashboardContent = (props: IDashboardContentProps) => {
                 padding: 10,
                 paddingTop: 5,
                 width: 300,
-                borderColor: "#805AD5",
+                borderColor: '#805AD5',
                 borderWidth: 1.5,
-                backgroundColor: "Transparent"
-              }}
-            >
+                backgroundColor: 'Transparent',
+              }}>
               <text style={{ marginLeft: 20 }}>
                 Here are updates on our goodies
               </text>
@@ -169,10 +164,9 @@ const DashboardContent = (props: IDashboardContentProps) => {
             <InfiniteScroll
               initialLoad={false}
               pageStart={0}
-              loadMore={() => console.log("LOAD MORE")}
+              loadMore={() => console.log('LOAD MORE')}
               // hasMore={!this.state.loading && this.state.hasMore}
-              useWindow={false}
-            >
+              useWindow={false}>
               <List
                 itemLayout="horizontal"
                 dataSource={filterbydate}
@@ -183,7 +177,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
                       description={
                         <div>
                           <Text>
-                            {moment(item.date).format("MMMM D, YYYY")}
+                            {moment(item.date).format('MMMM D, YYYY')}
                           </Text>
                         </div>
                       }
@@ -209,14 +203,13 @@ const DashboardContent = (props: IDashboardContentProps) => {
         placement="right"
         closable={false}
         onClose={onClose}
-        visible={state.visible}
-      >
+        visible={state.visible}>
         <p>Some Purchase Order Details...</p>
         <p>Some Purchase Order Details...</p>
         <p>Some Purchase Order Details...</p>
       </Drawer>
     </Fragment>
-  );
-};
+  )
+}
 
-export default DashboardContent;
+export default DashboardContent
