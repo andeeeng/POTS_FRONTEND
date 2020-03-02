@@ -34,7 +34,7 @@ const MasterList = (props: IMasterList) => {
       key: 'uom',
     },
   ]
-
+  console.log(state, 'LAMAN NG STATE')
   return (
     <Fragment>
       <Collapse

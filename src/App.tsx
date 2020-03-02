@@ -15,7 +15,7 @@ import { observer } from 'mobx-react'
 const rootStore = RootStore.create(undefined, {
   gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
 })
-
+console.log(rootStore, 'ROOTSTORE')
 //rawr
 const App = () => {
   console.log('PO', rootStore.vPurchaseOrders())

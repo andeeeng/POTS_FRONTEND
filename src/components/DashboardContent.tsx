@@ -1,45 +1,87 @@
-import React, { Fragment } from 'react'
-import { Container, Col, Row } from 'react-bootstrap'
-import DatePicker from './Calendar'
-import PoStatus from './PoStatus'
-import StatusReportList from './Status'
-import { Calendar, List, Avatar, Typography, Card, Divider, Button } from 'antd'
+import React, { Fragment, useState } from 'react'
+import {
+  Calendar,
+  List,
+  Avatar,
+  Typography,
+  Card,
+  Divider,
+  Button,
+  Drawer,
+} from 'antd'
+import moment from 'moment'
 import InfiniteScroll from 'react-infinite-scroller'
 import StatusItem from './StatusItem'
 import { statusReport, poList } from '../data/mockData'
-
+import PoStatus from './PoStatus'
+import StatusReportList from './Status'
 export interface IDashboardContentProps {
   status?: any
   list?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
+  const format = 'YYYY-MM-DD'
   const { status, list } = props
+  const [state, setState] = useState({
+    visible: false,
+    selectedDate: moment().format(format),
+  })
   const { Title, Text } = Typography
-  console.log('AFEGSRHDTJFUGLHI', list)
-  // const data = [
-  //   {
-  //     title: 'Order # 321223353',
-  //   },
-  //   {
-  //     title: 'Order # 321223353',
-  //   },
-  //   {
-  //     title: 'Order # 321223353',
-  //   },
-  //   {
-  //     title: 'Order # 321223353',
-  //   },
-  //   {
-  //     title: 'Order # 321223353',
-  //   },
-  //   {
-  //     title: 'Order # 321223353',
-  //   },
-  //   {
-  //     title: 'Order # 321223353',
-  //   },
-  // ]
+  const data = [
+    {
+      title: 'ORDER NUMBER 1',
+      date: '2020-02-23',
+    },
+
+    {
+      title: 'ORDER NUMBER 2',
+      date: '2020-02-20',
+    },
+    {
+      title: 'ORDER NUMBER 3',
+      date: '2020-02-20',
+    },
+    {
+      title: 'ORDER NUMBER 4',
+      date: '2020-02-20',
+    },
+    {
+      title: 'ORDER NUMBER 5',
+      date: '2020-02-19',
+    },
+    {
+      title: 'ORDER NUMBER 6',
+      date: '2020-02-21',
+    },
+    {
+      title: 'ORDER NUMBER 7',
+      date: '2020-02-21',
+    },
+  ]
+
+  const filterbydate = data.filter(x => x.date == state.selectedDate)
+
+  const onChange = (value: any) => {
+    setState({
+      ...state,
+      selectedDate: value.format(format),
+    })
+  }
+
+  const showDrawer = () => {
+    setState({
+      ...state,
+      visible: true,
+    })
+  }
+
+  const onClose = () => {
+    setState({
+      ...state,
+      visible: false,
+    })
+  }
 
   const load = () => {
     return console.log('LOAD')
@@ -114,7 +156,8 @@ const DashboardContent = (props: IDashboardContentProps) => {
           <div className="calendar1">
             <Calendar
               fullscreen={false}
-              onPanelChange={value => console.log(value, 'MODE')}
+              onChange={onChange}
+              // onPanelChange={value => console.log(value?._i, "VALUE")}
             />
           </div>
           <div className="list">
@@ -126,18 +169,24 @@ const DashboardContent = (props: IDashboardContentProps) => {
               useWindow={false}>
               <List
                 itemLayout="horizontal"
-                dataSource={list}
-                renderItem={(item: any) => (
+                dataSource={filterbydate}
+                renderItem={item => (
                   <List.Item>
                     <List.Item.Meta
-                      title={
-                        <a href="https://ant.design">{item.supplier.name}</a>
+                      title={<a href="https://ant.design">{item.title}</a>}
+                      description={
+                        <div>
+                          <Text>
+                            {moment(item.date).format('MMMM D, YYYY')}
+                          </Text>
+                        </div>
                       }
-                      description={item.id}
                     />
 
                     <List.Item>
-                      <Button type="primary">View Order</Button>
+                      <Button type="primary" onClick={showDrawer}>
+                        View Order
+                      </Button>
                     </List.Item>
                   </List.Item>
                 )}
@@ -148,6 +197,17 @@ const DashboardContent = (props: IDashboardContentProps) => {
       </div>
       <div className="truck"></div>
       <div className="content2">WIDGETS HERE</div>
+      <Drawer
+        title="Purchase Order Details"
+        width={640}
+        placement="right"
+        closable={false}
+        onClose={onClose}
+        visible={state.visible}>
+        <p>Some Purchase Order Details...</p>
+        <p>Some Purchase Order Details...</p>
+        <p>Some Purchase Order Details...</p>
+      </Drawer>
     </Fragment>
   )
 }
