@@ -4,6 +4,7 @@ import SortBy from '../components/SortBy'
 import MasterList from '../components/MasterList'
 import { POdata } from '../data/MasterListMock'
 import { Divider, Input } from 'antd'
+import { observer } from 'mobx-react'
 const { Search } = Input
 
 export interface IOrderScreenProps {
@@ -57,4 +58,4 @@ const OrderScreen = (props: IOrderScreenProps) => {
   )
 }
 
-export default OrderScreen
+export default observer(OrderScreen)
