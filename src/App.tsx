@@ -7,7 +7,7 @@ import OrderScreen from './components/OrderScreen'
 import SupplierScreen from './components/SupplierScreen'
 import DashboardContent from './components/DashboardContent'
 import { statusReport, poList } from './data/mockData'
-
+import { useQuery } from '../src/models/reactUtils'
 //mst
 import { createHttpClient } from 'mst-gql'
 import { RootStore, StoreContext } from '../src/models'
@@ -18,6 +18,8 @@ const rootStore = RootStore.create(undefined, {
 console.log(rootStore, 'ROOTSTORE')
 //rawr
 const App = () => {
+  // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
+  rootStore.queryAllPurchaseOrders()
   console.log('PO', rootStore.vPurchaseOrders())
   console.log('POQ', rootStore.requestPurchaseOrders())
   return (
