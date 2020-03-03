@@ -24,7 +24,7 @@ export const SupplierModelBase = withTypedRefs<Refs>()(ModelBase
   .props({
     __typename: types.optional(types.literal("Supplier"), "Supplier"),
     id: types.identifier,
-    externalID: types.union(types.undefined, types.string),
+    supplierNo: types.union(types.undefined, types.string),
     name: types.union(types.undefined, types.string),
     address: types.union(types.undefined, MSTGQLRef(types.late((): any => AddressModel))),
   })
@@ -36,7 +36,7 @@ export const SupplierModelBase = withTypedRefs<Refs>()(ModelBase
 
 export class SupplierModelSelector extends QueryBuilder {
   get id() { return this.__attr(`id`) }
-  get externalID() { return this.__attr(`externalID`) }
+  get supplierNo() { return this.__attr(`supplierNo`) }
   get name() { return this.__attr(`name`) }
   address(builder?: string | AddressModelSelector | ((selector: AddressModelSelector) => AddressModelSelector)) { return this.__child(`address`, AddressModelSelector, builder) }
 }
@@ -44,4 +44,4 @@ export function selectFromSupplier() {
   return new SupplierModelSelector()
 }
 
-export const supplierModelPrimitives = selectFromSupplier().externalID.name
+export const supplierModelPrimitives = selectFromSupplier().supplierNo.name
