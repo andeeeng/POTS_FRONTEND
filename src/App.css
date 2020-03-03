@@ -21,6 +21,18 @@ padding: 10px;
 
 }
 
+
+.banner{
+  background-image: url(./davies-main-banner.jpg);
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+ 
+    
+  
+  
+}
+
 .statuslist{
   background-color: #FBD38D;
   padding: 30px
@@ -233,6 +245,18 @@ padding: 10px;
   margin-bottom: 50px;
   margin-left: 20px;
   
+}
+
+.logo-login {
+  display: flex;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 200px;
+  margin: 10px;
+  background-image: url("davies.png");
+
+  margin-left: 45px;
 }
 
 .truck {

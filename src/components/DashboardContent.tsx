@@ -1,87 +1,44 @@
-import React, { Fragment, useState } from 'react'
-import {
-  Calendar,
-  List,
-  Avatar,
-  Typography,
-  Card,
-  Divider,
-  Button,
-  Drawer,
-} from 'antd'
-import moment from 'moment'
+import React, { Fragment } from 'react'
+import { Container, Col, Row } from 'react-bootstrap'
+import DatePicker from './Calendar'
+import PoStatus from './PoStatus'
+import StatusReportList from './Status'
+import { Calendar, List, Avatar, Typography, Card, Divider, Button } from 'antd'
 import InfiniteScroll from 'react-infinite-scroller'
 import StatusItem from './StatusItem'
 import { statusReport, poList } from '../data/mockData'
-import PoStatus from './PoStatus'
-import StatusReportList from './Status'
+
 export interface IDashboardContentProps {
   status?: any
   list?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
-  const format = 'YYYY-MM-DD'
   const { status, list } = props
-  const [state, setState] = useState({
-    visible: false,
-    selectedDate: moment().format(format),
-  })
   const { Title, Text } = Typography
   const data = [
     {
-      title: 'ORDER NUMBER 1',
-      date: '2020-02-23',
-    },
-
-    {
-      title: 'ORDER NUMBER 2',
-      date: '2020-02-20',
+      title: 'Order # 321223353',
     },
     {
-      title: 'ORDER NUMBER 3',
-      date: '2020-02-20',
+      title: 'Order # 321223353',
     },
     {
-      title: 'ORDER NUMBER 4',
-      date: '2020-02-20',
+      title: 'Order # 321223353',
     },
     {
-      title: 'ORDER NUMBER 5',
-      date: '2020-02-19',
+      title: 'Order # 321223353',
     },
     {
-      title: 'ORDER NUMBER 6',
-      date: '2020-02-21',
+      title: 'Order # 321223353',
     },
     {
-      title: 'ORDER NUMBER 7',
-      date: '2020-02-21',
+      title: 'Order # 321223353',
+    },
+    {
+      title: 'Order # 321223353',
     },
   ]
-
-  const filterbydate = data.filter(x => x.date == state.selectedDate)
-
-  const onChange = (value: any) => {
-    setState({
-      ...state,
-      selectedDate: value.format(format),
-    })
-  }
-
-  const showDrawer = () => {
-    setState({
-      ...state,
-      visible: true,
-    })
-  }
-
-  const onClose = () => {
-    setState({
-      ...state,
-      visible: false,
-    })
-  }
 
   const load = () => {
     return console.log('LOAD')
@@ -126,25 +83,41 @@ const DashboardContent = (props: IDashboardContentProps) => {
             </Divider>
           </div>
 
-          <div className="statuslist">
+          <div className="banner">
             <Card
-              bordered={true}
               style={{
-                padding: 10,
-                paddingTop: 5,
                 width: 300,
-                borderColor: '#805AD5',
-                borderWidth: 1.5,
-                backgroundColor: 'Transparent',
+                borderColor: 'white',
+                marginRight: 100,
               }}>
-              <text style={{ marginLeft: 20 }}>
-                Here are updates on our goodies
-              </text>
-              <div className="statusItem">
-                <StatusItem status={statusReport} />
+              <div style={{}}>
+                <text style={{ marginLeft: 0 }}>
+                  Here are updates on our goodies
+                </text>
+                <div className="statusItem">
+                  <StatusItem status={statusReport} />
+                </div>
               </div>
             </Card>
           </div>
+          {/* <div className="statuslist">
+            <Card
+              style={{
+                width: 300,
+                borderColor: "white",
+                marginRight: 100
+              }}
+            >
+              <div style={{}}>
+                <text style={{ marginLeft: 0 }}>
+                  Here are updates on our goodies
+                </text>
+                <div className="statusItem">
+                  <StatusItem status={statusReport} />
+                </div>
+              </div>
+            </Card>
+          </div> */}
         </div>
         <div>
           <Divider orientation="left" dashed={true}>
@@ -156,8 +129,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
           <div className="calendar1">
             <Calendar
               fullscreen={false}
-              onChange={onChange}
-              // onPanelChange={value => console.log(value?._i, "VALUE")}
+              onPanelChange={value => console.log(value, 'MODE')}
             />
           </div>
           <div className="list">
@@ -169,24 +141,16 @@ const DashboardContent = (props: IDashboardContentProps) => {
               useWindow={false}>
               <List
                 itemLayout="horizontal"
-                dataSource={filterbydate}
+                dataSource={data}
                 renderItem={item => (
                   <List.Item>
                     <List.Item.Meta
                       title={<a href="https://ant.design">{item.title}</a>}
-                      description={
-                        <div>
-                          <Text>
-                            {moment(item.date).format('MMMM D, YYYY')}
-                          </Text>
-                        </div>
-                      }
+                      description="Status: Some status"
                     />
 
                     <List.Item>
-                      <Button type="primary" onClick={showDrawer}>
-                        View Order
-                      </Button>
+                      <Button type="primary">View Order</Button>
                     </List.Item>
                   </List.Item>
                 )}
@@ -195,19 +159,9 @@ const DashboardContent = (props: IDashboardContentProps) => {
           </div>
         </div>
       </div>
-      <div className="truck"></div>
+
+      {/* <div className="truck"></div> */}
       <div className="content2">WIDGETS HERE</div>
-      <Drawer
-        title="Purchase Order Details"
-        width={640}
-        placement="right"
-        closable={false}
-        onClose={onClose}
-        visible={state.visible}>
-        <p>Some Purchase Order Details...</p>
-        <p>Some Purchase Order Details...</p>
-        <p>Some Purchase Order Details...</p>
-      </Drawer>
     </Fragment>
   )
 }
