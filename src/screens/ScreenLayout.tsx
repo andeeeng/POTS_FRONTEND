@@ -8,6 +8,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import { Input, Card, Alert, Button } from "antd";
 
 const { Header, Content, Footer, Sider } = Layout;
 export interface ILayout {
@@ -28,6 +29,11 @@ const App = (props: ILayout) => {
     {
       path: "/",
       exact: true,
+      main: () => <Login state={state} setState={setState}></Login>
+    },
+    {
+      path: "/Dash",
+      exact: true,
       main: () => DBcontent
     },
     {
@@ -45,38 +51,41 @@ const App = (props: ILayout) => {
   return (
     <Router>
       <Layout>
-        <Sider
-          style={{ backgroundColor: "white" }}
-          breakpoint="lg"
-          collapsedWidth="0"
-          onBreakpoint={broken => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
-        >
-          <div className="logo" />
-          <Menu
-            theme="light"
-            mode="inline"
-            defaultSelectedKeys={["dashboard"]}
-            onClick={e => handleClick(e.key, state, setState)}
+        {state.path != "/" && (
+          <Sider
+            style={{ backgroundColor: "white" }}
+            breakpoint="lg"
+            collapsedWidth="0"
+            onBreakpoint={broken => {
+              console.log(broken);
+            }}
+            onCollapse={(collapsed, type) => {
+              console.log(collapsed, type);
+            }}
           >
-            <Menu.Item key="dashboard">
-              <Icon type="dashboard" />
-              <span className="nav-text">My Dashboard</span>
-            </Menu.Item>
-            <Menu.Item key="order">
-              <Icon type="shopping-cart" />
-              <span className="nav-text">My Orders</span>
-            </Menu.Item>
-            <Menu.Item key="supplier">
-              <Icon type="car" />
-              <span className="nav-text">My Suppliers</span>
-            </Menu.Item>
-          </Menu>
-        </Sider>
+            <div className="logo" />
+
+            <Menu
+              theme="light"
+              mode="inline"
+              defaultSelectedKeys={["dashboard"]}
+              onClick={e => handleClick(e.key, state, setState)}
+            >
+              <Menu.Item key="dashboard">
+                <Icon type="dashboard" />
+                <span className="nav-text">My Dashboard</span>
+              </Menu.Item>
+              <Menu.Item key="order">
+                <Icon type="shopping-cart" />
+                <span className="nav-text">My Orders</span>
+              </Menu.Item>
+              <Menu.Item key="supplier">
+                <Icon type="car" />
+                <span className="nav-text">My Suppliers</span>
+              </Menu.Item>
+            </Menu>
+          </Sider>
+        )}
         <Layout>
           {/* <Header style={{ background: "#fff", padding: 0, marginBottom: 20 }}>
           {HeaderContent}
@@ -84,7 +93,7 @@ const App = (props: ILayout) => {
           <Content
             style={{
               display: "flex",
-              backgroundColor: "#E2E8F0",
+              backgroundColor: "white",
               padding: "30px",
               flexFlow: "row wrap",
               alignItems: "flex-start",
@@ -107,6 +116,91 @@ const App = (props: ILayout) => {
         </Layout>
       </Layout>
     </Router>
+  );
+};
+
+const Login = (props: any) => {
+  return (
+    <div style={{ backgroundColor: "white", marginLeft: "500px" }}>
+      <div className="logo-login"></div>
+      <div
+        style={{
+          padding: "30px",
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex"
+        }}
+      >
+        <div>
+          <Card
+            bordered={false}
+            style={{
+              width: 300,
+              backgroundColor: "#3d00bc",
+              borderRadius: 20
+            }}
+          >
+            <div>
+              <Input
+                placeholder="input username"
+                name={"username"}
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+              />
+            </div>
+            <br />
+            <br />
+            <div>
+              <Input.Password
+                name={"password"}
+                prefix={
+                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                placeholder="input password"
+              />
+            </div>
+
+            <br />
+            <div>
+              <Button type="link" style={{ color: "white" }}>
+                Forgot your password?
+              </Button>
+            </div>
+
+            <br />
+
+            <div
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex"
+              }}
+            >
+              {/* <Button
+              style={{ color: "white" }}
+              endIcon={
+                <Icon
+                  type="login"
+                  style={{ color: "white", marginLeft: 10, fontSize: 20 }}
+                />
+              }
+            >
+              Login
+            </Button> */}
+
+              <Button
+                onClick={() =>
+                  props.setState({ ...props.state, path: "/Dash" })
+                }
+              >
+                Login
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
   );
 };
 

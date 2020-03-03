@@ -21,9 +21,21 @@ padding: 10px;
 
 }
 
+.banner{
+  background-image: url(./davies-main-banner.jpg);
+  background-position:  top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 400px;
+ 
+    
+  
+  
+}
+
 .statuslist{
-  background-color: #FBD38D;
-  padding: 30px
+  background-color:white;
+  
 }
 
 .parent{
@@ -201,15 +213,30 @@ padding: 10px;
   display: flex;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 80%;
-  height: 80px;
-  margin: 10px;
-  background-image: url("pots.jpg");
+  width: 100%;
+  height: 150px;
+  margin: 0px;
+  background-image: url("davies.png");
   margin-bottom: 50px;
-  margin-left: 20px;
+  margin-left: 0px;
   
 }
+.container {  
 
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-login {
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 200px;
+  margin-left: 50px;
+  background-image: url("davies.png");
+  
+}
 .truck {
   display: flex;
   flex: 1 1 auto;
@@ -217,9 +244,9 @@ padding: 10px;
   background-repeat: no-repeat;
   width: 180%;
   height: 100%;
-  margin-top: -55px;
+  margin-top: -50px;
   background-image: url("truck.png");
-  margin-left: 450px;
+  margin-left: 400px;
   position: absolute;
   
 }

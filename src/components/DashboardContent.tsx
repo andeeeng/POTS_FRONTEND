@@ -92,26 +92,42 @@ const DashboardContent = (props: IDashboardContentProps) => {
             </Divider>
           </div>
 
-          <div className="statuslist">
+          <div className="banner">
             <Card
-              bordered={true}
               style={{
-                padding: 10,
-                paddingTop: 5,
                 width: 300,
-                borderColor: "#805AD5",
-                borderWidth: 1.5,
-                backgroundColor: "Transparent"
+                borderColor: "white",
+                marginRight: 100
               }}
             >
-              <text style={{ marginLeft: 20 }}>
-                Here are updates on our goodies
-              </text>
-              <div className="statusItem">
-                <StatusItem status={statusReport} />
+              <div style={{}}>
+                <text style={{ marginLeft: 0 }}>
+                  Here are updates on our goodies
+                </text>
+                <div className="statusItem">
+                  <StatusItem status={statusReport} />
+                </div>
               </div>
             </Card>
           </div>
+          {/* <div className="statuslist">
+            <Card
+              style={{
+                width: 300,
+                borderColor: "white",
+                marginRight: 100
+              }}
+            >
+              <div style={{}}>
+                <text style={{ marginLeft: 0 }}>
+                  Here are updates on our goodies
+                </text>
+                <div className="statusItem">
+                  <StatusItem status={statusReport} />
+                </div>
+              </div>
+            </Card>
+          </div> */}
         </div>
         <div>
           <Divider orientation="left" dashed={true}>
@@ -154,7 +170,8 @@ const DashboardContent = (props: IDashboardContentProps) => {
           </div>
         </div>
       </div>
-      <div className="truck"></div>
+
+      {/* <div className="truck"></div> */}
       <div className="content2">WIDGETS HERE</div>
     </Fragment>
   );
