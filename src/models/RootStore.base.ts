@@ -15,12 +15,14 @@ import { SupplierStatusModel, SupplierStatusModelType } from "./SupplierStatusMo
 import { supplierStatusModelPrimitives, SupplierStatusModelSelector } from "./SupplierStatusModel.base"
 import { ItemModel, ItemModelType } from "./ItemModel"
 import { itemModelPrimitives, ItemModelSelector } from "./ItemModel.base"
+import { ScheduleLineModel, ScheduleLineModelType } from "./ScheduleLineModel"
+import { scheduleLineModelPrimitives, ScheduleLineModelSelector } from "./ScheduleLineModel.base"
 import { PurchaseOrderModel, PurchaseOrderModelType } from "./PurchaseOrderModel"
 import { purchaseOrderModelPrimitives, PurchaseOrderModelSelector } from "./PurchaseOrderModel.base"
 
 
 export type SupplierInput = {
-  externalID: string
+  supplierNo: string
   name: string
   address: AddressInput
 }
@@ -33,49 +35,79 @@ export type AddressInput = {
 }
 export type UpdateSupplierInput = {
   id: string
-  externalID?: string
+  supplierNo: string
   name: string
 }
 export type SupplierStatusInput = {
   status: string
-  dateCreated: string
 }
 export type UpdateSupplierStatusInput = {
   id: string
   status: string
-  dateCreated: string
 }
 export type ItemInput = {
   itemNo: string
+  productId: string
   description: string
   quantity: number
   uom: string
-  price: number
+  unitPrice: number
+  totalAmount: number
+  discount?: number
+  deliveryAddress: AddressInput
   currency: string
+  dateUpdated?: string
+  timeUpdated?: string
 }
 export type UpdateItemInput = {
   id: string
-  itemNo: string
-  description: string
+  itemNo?: string
+  productId?: string
+  description?: string
+  quantity?: number
+  uom?: string
+  unitPrice?: number
+  totalAmount?: number
+  discount?: number
+  supplierStatusItem?: string
+  scheduleLine?: ScheduleLineInput
+  currency?: string
+  dateUpdated?: string
+  timeUpdated?: string
+}
+export type ScheduleLineInput = {
   quantity: number
   uom: string
-  price: number
-  currency: string
+  unitPrice: number
+  totalAmount: number
+  deliveryDateAndTime: string
 }
 export type PurchaseOrderInput = {
-  externalID: string
-  status: string
-  supplierStatus?: SupplierStatusInput[]
+  purchaseOrderNo: string
+  shipmentNo: string
+  adminStatus?: string
+  supplierStatusHeader?: string
+  vendorAddress: AddressInput
+  documentDate?: string
   supplier: SupplierInput
   items: ItemInput[]
 }
 export type UpdatePurchaseOrderInput = {
   id: string
-  externalID: string
-  status: string
-  supplierStatus?: UpdateSupplierStatusInput[]
-  supplier: UpdateSupplierInput
-  items?: UpdateItemInput[]
+  purchaseOrderNo?: string
+  shipmentNo?: string
+  adminStatus?: string
+  supplierStatusHeader?: string
+  documentDate?: string
+}
+export type UpdateScheduleLineInput = {
+  id: string
+  quantity?: number
+  uom?: string
+  unitPrice?: number
+  totalAmount?: number
+  deliveryDateAndTime?: string
+  deliveryStatus?: SupplierStatusInput
 }
 /* The TypeScript type that explicits the refs to other models in order to prevent a circular refs issue */
 type Refs = {
@@ -91,7 +123,7 @@ type Refs = {
 */
 export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
   .named("RootStore")
-  .extend(configureStoreMixin([['User', () => UserModel], ['Address', () => AddressModel], ['Supplier', () => SupplierModel], ['SupplierStatus', () => SupplierStatusModel], ['Item', () => ItemModel], ['PurchaseOrder', () => PurchaseOrderModel]], ['Address', 'Supplier', 'SupplierStatus', 'Item', 'PurchaseOrder']))
+  .extend(configureStoreMixin([['User', () => UserModel], ['Address', () => AddressModel], ['Supplier', () => SupplierModel], ['SupplierStatus', () => SupplierStatusModel], ['Item', () => ItemModel], ['ScheduleLine', () => ScheduleLineModel], ['PurchaseOrder', () => PurchaseOrderModel]], ['Address', 'Supplier', 'SupplierStatus', 'Item', 'PurchaseOrder']))
   .props({
     addresss: types.optional(types.map(types.late((): any => AddressModel)), {}),
     suppliers: types.optional(types.map(types.late((): any => SupplierModel)), {}),
@@ -158,6 +190,16 @@ export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
     queryAllPurchaseOrders(variables?: {  }, resultSelector: string | ((qb: PurchaseOrderModelSelector) => PurchaseOrderModelSelector) = purchaseOrderModelPrimitives.toString(), options: QueryOptions = {}) {
       return self.query<{ allPurchaseOrders: PurchaseOrderModelType[]}>(`query allPurchaseOrders { allPurchaseOrders {
         ${typeof resultSelector === "function" ? resultSelector(new PurchaseOrderModelSelector()).toString() : resultSelector}
+      } }`, variables, options)
+    },
+    queryScheduleLine(variables: { id?: string }, resultSelector: string | ((qb: ScheduleLineModelSelector) => ScheduleLineModelSelector) = scheduleLineModelPrimitives.toString(), options: QueryOptions = {}) {
+      return self.query<{ scheduleLine: ScheduleLineModelType}>(`query scheduleLine($id: String) { scheduleLine(id: $id) {
+        ${typeof resultSelector === "function" ? resultSelector(new ScheduleLineModelSelector()).toString() : resultSelector}
+      } }`, variables, options)
+    },
+    queryAllScheduleLines(variables?: {  }, resultSelector: string | ((qb: ScheduleLineModelSelector) => ScheduleLineModelSelector) = scheduleLineModelPrimitives.toString(), options: QueryOptions = {}) {
+      return self.query<{ allScheduleLines: ScheduleLineModelType[]}>(`query allScheduleLines { allScheduleLines {
+        ${typeof resultSelector === "function" ? resultSelector(new ScheduleLineModelSelector()).toString() : resultSelector}
       } }`, variables, options)
     },
     mutateCreateUser(variables: { name?: string }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), optimisticUpdate?: () => void) {
@@ -233,6 +275,21 @@ export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
     mutateUpdatePurchaseOrder(variables: { purchaseOrder?: UpdatePurchaseOrderInput }, resultSelector: string | ((qb: PurchaseOrderModelSelector) => PurchaseOrderModelSelector) = purchaseOrderModelPrimitives.toString(), optimisticUpdate?: () => void) {
       return self.mutate<{ updatePurchaseOrder: PurchaseOrderModelType}>(`mutation updatePurchaseOrder($purchaseOrder: UpdatePurchaseOrderInput) { updatePurchaseOrder(purchaseOrder: $purchaseOrder) {
         ${typeof resultSelector === "function" ? resultSelector(new PurchaseOrderModelSelector()).toString() : resultSelector}
+      } }`, variables, optimisticUpdate)
+    },
+    mutateCreateScheduleLine(variables: { scheduleLine: ScheduleLineInput }, resultSelector: string | ((qb: ScheduleLineModelSelector) => ScheduleLineModelSelector) = scheduleLineModelPrimitives.toString(), optimisticUpdate?: () => void) {
+      return self.mutate<{ createScheduleLine: ScheduleLineModelType}>(`mutation createScheduleLine($scheduleLine: ScheduleLineInput!) { createScheduleLine(scheduleLine: $scheduleLine) {
+        ${typeof resultSelector === "function" ? resultSelector(new ScheduleLineModelSelector()).toString() : resultSelector}
+      } }`, variables, optimisticUpdate)
+    },
+    mutateUpdateScheduleLine(variables: { scheduleLine: UpdateScheduleLineInput }, resultSelector: string | ((qb: ScheduleLineModelSelector) => ScheduleLineModelSelector) = scheduleLineModelPrimitives.toString(), optimisticUpdate?: () => void) {
+      return self.mutate<{ updateScheduleLine: ScheduleLineModelType}>(`mutation updateScheduleLine($scheduleLine: UpdateScheduleLineInput!) { updateScheduleLine(scheduleLine: $scheduleLine) {
+        ${typeof resultSelector === "function" ? resultSelector(new ScheduleLineModelSelector()).toString() : resultSelector}
+      } }`, variables, optimisticUpdate)
+    },
+    mutateDeleteScheduleLine(variables: { id: string }, resultSelector: string | ((qb: ScheduleLineModelSelector) => ScheduleLineModelSelector) = scheduleLineModelPrimitives.toString(), optimisticUpdate?: () => void) {
+      return self.mutate<{ deleteScheduleLine: ScheduleLineModelType}>(`mutation deleteScheduleLine($id: ID!) { deleteScheduleLine(id: $id) {
+        ${typeof resultSelector === "function" ? resultSelector(new ScheduleLineModelSelector()).toString() : resultSelector}
       } }`, variables, optimisticUpdate)
     },
   })))

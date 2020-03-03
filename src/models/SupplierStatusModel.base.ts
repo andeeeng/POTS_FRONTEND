@@ -19,6 +19,7 @@ export const SupplierStatusModelBase = ModelBase
     id: types.identifier,
     status: types.union(types.undefined, types.string),
     dateCreated: types.union(types.undefined, types.string),
+    timeCreated: types.union(types.undefined, types.string),
   })
   .views(self => ({
     get store() {
@@ -30,9 +31,10 @@ export class SupplierStatusModelSelector extends QueryBuilder {
   get id() { return this.__attr(`id`) }
   get status() { return this.__attr(`status`) }
   get dateCreated() { return this.__attr(`dateCreated`) }
+  get timeCreated() { return this.__attr(`timeCreated`) }
 }
 export function selectFromSupplierStatus() {
   return new SupplierStatusModelSelector()
 }
 
-export const supplierStatusModelPrimitives = selectFromSupplierStatus().status.dateCreated
+export const supplierStatusModelPrimitives = selectFromSupplierStatus().status.dateCreated.timeCreated
