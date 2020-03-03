@@ -56,21 +56,9 @@ const Login = (props: any) => {
                 alignItems: 'center',
                 display: 'flex',
               }}>
-              {/* <Button
-                style={{ color: "white" }}
-                endIcon={
-                  <Icon
-                    type="login"
-                    style={{ color: "white", marginLeft: 10, fontSize: 20 }}
-                  />
-                }
-              >
-                Login
-              </Button> */}
-
               <Button
                 onClick={() =>
-                  props.setState({ ...props.state, path: '/Dash' })
+                  props.setState({ ...props.state, path: '/DashBoard' })
                 }>
                 Login
               </Button>
