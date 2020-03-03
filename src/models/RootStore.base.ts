@@ -21,6 +21,17 @@ import { PurchaseOrderModel, PurchaseOrderModelType } from "./PurchaseOrderModel
 import { purchaseOrderModelPrimitives, PurchaseOrderModelSelector } from "./PurchaseOrderModel.base"
 
 
+export type UserInput = {
+  userName: string
+  password: string
+  userLevel: string
+}
+export type UpdateUserInput = {
+  id: string
+  userName: string
+  password: string
+  userLevel: string
+}
 export type SupplierInput = {
   supplierNo: string
   name: string
@@ -99,6 +110,8 @@ export type UpdatePurchaseOrderInput = {
   adminStatus?: string
   supplierStatusHeader?: string
   documentDate?: string
+  supplier?: UpdateSupplierInput
+  items?: UpdateItemInput[]
 }
 export type UpdateScheduleLineInput = {
   id: string
@@ -115,7 +128,8 @@ type Refs = {
   suppliers: ObservableMap<string, SupplierModelType>,
   supplierstatuss: ObservableMap<string, SupplierStatusModelType>,
   items: ObservableMap<string, ItemModelType>,
-  purchaseorders: ObservableMap<string, PurchaseOrderModelType>
+  purchaseorders: ObservableMap<string, PurchaseOrderModelType>,
+  users: ObservableMap<string, UserModelType>
 }
 
 /**
@@ -123,13 +137,14 @@ type Refs = {
 */
 export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
   .named("RootStore")
-  .extend(configureStoreMixin([['User', () => UserModel], ['Address', () => AddressModel], ['Supplier', () => SupplierModel], ['SupplierStatus', () => SupplierStatusModel], ['Item', () => ItemModel], ['ScheduleLine', () => ScheduleLineModel], ['PurchaseOrder', () => PurchaseOrderModel]], ['Address', 'Supplier', 'SupplierStatus', 'Item', 'PurchaseOrder']))
+  .extend(configureStoreMixin([['User', () => UserModel], ['Address', () => AddressModel], ['Supplier', () => SupplierModel], ['SupplierStatus', () => SupplierStatusModel], ['Item', () => ItemModel], ['ScheduleLine', () => ScheduleLineModel], ['PurchaseOrder', () => PurchaseOrderModel]], ['Address', 'Supplier', 'SupplierStatus', 'Item', 'PurchaseOrder', 'User']))
   .props({
     addresss: types.optional(types.map(types.late((): any => AddressModel)), {}),
     suppliers: types.optional(types.map(types.late((): any => SupplierModel)), {}),
     supplierstatuss: types.optional(types.map(types.late((): any => SupplierStatusModel)), {}),
     items: types.optional(types.map(types.late((): any => ItemModel)), {}),
-    purchaseorders: types.optional(types.map(types.late((): any => PurchaseOrderModel)), {})
+    purchaseorders: types.optional(types.map(types.late((): any => PurchaseOrderModel)), {}),
+    users: types.optional(types.map(types.late((): any => UserModel)), {})
   })
   .actions(self => ({
     queryUser(variables: { id?: string }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), options: QueryOptions = {}) {
@@ -202,18 +217,18 @@ export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
         ${typeof resultSelector === "function" ? resultSelector(new ScheduleLineModelSelector()).toString() : resultSelector}
       } }`, variables, options)
     },
-    mutateCreateUser(variables: { name?: string }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), optimisticUpdate?: () => void) {
-      return self.mutate<{ createUser: UserModelType}>(`mutation createUser($name: String) { createUser(name: $name) {
+    mutateCreateUser(variables: { user: UserInput }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), optimisticUpdate?: () => void) {
+      return self.mutate<{ createUser: UserModelType}>(`mutation createUser($user: UserInput!) { createUser(user: $user) {
         ${typeof resultSelector === "function" ? resultSelector(new UserModelSelector()).toString() : resultSelector}
       } }`, variables, optimisticUpdate)
     },
-    mutateUpdateUser(variables: { id?: string, name?: string }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), optimisticUpdate?: () => void) {
-      return self.mutate<{ updateUser: UserModelType}>(`mutation updateUser($id: String, $name: String) { updateUser(id: $id, name: $name) {
+    mutateUpdateUser(variables: { user?: UpdateUserInput }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), optimisticUpdate?: () => void) {
+      return self.mutate<{ updateUser: UserModelType}>(`mutation updateUser($user: UpdateUserInput) { updateUser(user: $user) {
         ${typeof resultSelector === "function" ? resultSelector(new UserModelSelector()).toString() : resultSelector}
       } }`, variables, optimisticUpdate)
     },
     mutateDeleteUser(variables: { id?: string }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), optimisticUpdate?: () => void) {
-      return self.mutate<{ deleteUser: UserModelType}>(`mutation deleteUser($id: String) { deleteUser(id: $id) {
+      return self.mutate<{ deleteUser: UserModelType}>(`mutation deleteUser($id: ID) { deleteUser(id: $id) {
         ${typeof resultSelector === "function" ? resultSelector(new UserModelSelector()).toString() : resultSelector}
       } }`, variables, optimisticUpdate)
     },

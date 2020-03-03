@@ -1,4 +1,7 @@
 import { selectFromPurchaseOrder } from '../models/PurchaseOrderModel'
+import { selectFromUser } from '../models/UserModel'
+
+export const USER_FRAGMENT = selectFromUser().userName.password.userLevel
 
 export const PURCHASEORDER_FRAGMENT = selectFromPurchaseOrder()
   //purchaseOrder
