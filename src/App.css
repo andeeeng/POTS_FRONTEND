@@ -238,12 +238,12 @@ padding: 10px;
   display: flex;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 80%;
-  height: 80px;
+  width: 105%;
+  height: 180px;
   margin: 10px;
-  background-image: url("pots.jpg");
-  margin-bottom: 50px;
-  margin-left: 20px;
+  background-image: url("davies.png");
+  
+  margin-left: 5px;
   
 }
 
