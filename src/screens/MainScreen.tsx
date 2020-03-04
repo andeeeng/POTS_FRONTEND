@@ -32,7 +32,7 @@ const Main = (props: IProps) => {
     },
   ]
   return (
-    <div className="main">
+    <div>
       <Router>
         <Redirect push to={state.path}></Redirect>
         {routes.map(route => (
