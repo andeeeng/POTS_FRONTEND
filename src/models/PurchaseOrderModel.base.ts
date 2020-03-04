@@ -38,6 +38,7 @@ export const PurchaseOrderModelBase = withTypedRefs<Refs>()(ModelBase
     vendorAddress: types.union(types.undefined, MSTGQLRef(types.late((): any => AddressModel))),
     supplier: types.union(types.undefined, MSTGQLRef(types.late((): any => SupplierModel))),
     documentDate: types.union(types.undefined, types.null, types.string),
+    postingDate: types.union(types.undefined, types.null, types.string),
     items: types.union(types.undefined, types.null, types.array(MSTGQLRef(types.late((): any => ItemModel)))),
   })
   .views(self => ({
@@ -53,6 +54,7 @@ export class PurchaseOrderModelSelector extends QueryBuilder {
   get adminStatus() { return this.__attr(`adminStatus`) }
   get supplierStatusHeader() { return this.__attr(`supplierStatusHeader`) }
   get documentDate() { return this.__attr(`documentDate`) }
+  get postingDate() { return this.__attr(`postingDate`) }
   vendorAddress(builder?: string | AddressModelSelector | ((selector: AddressModelSelector) => AddressModelSelector)) { return this.__child(`vendorAddress`, AddressModelSelector, builder) }
   supplier(builder?: string | SupplierModelSelector | ((selector: SupplierModelSelector) => SupplierModelSelector)) { return this.__child(`supplier`, SupplierModelSelector, builder) }
   items(builder?: string | ItemModelSelector | ((selector: ItemModelSelector) => ItemModelSelector)) { return this.__child(`items`, ItemModelSelector, builder) }
@@ -61,4 +63,4 @@ export function selectFromPurchaseOrder() {
   return new PurchaseOrderModelSelector()
 }
 
-export const purchaseOrderModelPrimitives = selectFromPurchaseOrder().purchaseOrderNo.shipmentNo.adminStatus.supplierStatusHeader.documentDate
+export const purchaseOrderModelPrimitives = selectFromPurchaseOrder().purchaseOrderNo.shipmentNo.adminStatus.supplierStatusHeader.documentDate.postingDate
