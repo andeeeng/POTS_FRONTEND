@@ -65,10 +65,20 @@ export type ItemInput = {
   unitPrice: number
   totalAmount: number
   discount?: number
+  supplierStatusItem?: string
   deliveryAddress: AddressInput
+  scheduleLine: ScheduleLineInput[]
   currency: string
   dateUpdated?: string
   timeUpdated?: string
+}
+export type ScheduleLineInput = {
+  quantity: number
+  uom: string
+  unitPrice: number
+  totalAmount: number
+  deliveryDateAndTime: string
+  deliveryStatus?: SupplierStatusInput
 }
 export type UpdateItemInput = {
   id: string
@@ -81,17 +91,10 @@ export type UpdateItemInput = {
   totalAmount?: number
   discount?: number
   supplierStatusItem?: string
-  scheduleLine?: ScheduleLineInput
+  scheduleLine?: ScheduleLineInput[]
   currency?: string
   dateUpdated?: string
   timeUpdated?: string
-}
-export type ScheduleLineInput = {
-  quantity: number
-  uom: string
-  unitPrice: number
-  totalAmount: number
-  deliveryDateAndTime: string
 }
 export type PurchaseOrderInput = {
   purchaseOrderNo: string
@@ -100,6 +103,7 @@ export type PurchaseOrderInput = {
   supplierStatusHeader?: string
   vendorAddress: AddressInput
   documentDate?: string
+  postingDate?: string
   supplier: SupplierInput
   items: ItemInput[]
 }
@@ -110,6 +114,7 @@ export type UpdatePurchaseOrderInput = {
   adminStatus?: string
   supplierStatusHeader?: string
   documentDate?: string
+  postingDate?: string
   supplier?: UpdateSupplierInput
   items?: UpdateItemInput[]
 }

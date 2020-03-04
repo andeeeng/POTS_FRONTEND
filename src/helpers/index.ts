@@ -5,7 +5,7 @@ export const USER_FRAGMENT = selectFromUser().userName.password.userLevel
 
 export const PURCHASEORDER_FRAGMENT = selectFromPurchaseOrder()
   //purchaseOrder
-  .purchaseOrderNo.shipmentNo.adminStatus.supplierStatusHeader.documentDate.vendorAddress(
+  .purchaseOrderNo.shipmentNo.adminStatus.supplierStatusHeader.postingDate.documentDate.vendorAddress(
     address => address.building_name.city.state.street.zip_code,
   )
   //supplier
