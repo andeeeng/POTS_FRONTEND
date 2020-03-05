@@ -8,13 +8,14 @@ import {
   Divider,
   Button,
   Drawer,
+  Icon,
+  Input,
 } from 'antd'
 import moment from 'moment'
 import InfiniteScroll from 'react-infinite-scroller'
 import StatusItem from './StatusItem'
 import { statusReport, poList } from '../data/mockData'
-import PoStatus from './PoStatus'
-import StatusReportList from './Status'
+
 export interface IDashboardContentProps {
   status?: any
   list?: any
@@ -94,39 +95,31 @@ const DashboardContent = (props: IDashboardContentProps) => {
             <div className="rows">
               <div>
                 <Avatar
-                  size={100}
+                  size={60}
                   icon="user"
                   style={{
                     backgroundColor: '#3182CE',
-                    color: '#63B3ED',
+                    color: 'white',
                     marginRight: '10px',
                   }}
                 />
               </div>
-              <div>
-                <Title
-                  level={2}
-                  style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
-                  Welcome Back, Admin!
-                </Title>
-                <Text>Tour last log-in was:</Text>
-                <br></br>
-                <Text>January 12, 2020 14:33 GST</Text>
-              </div>
-            </div>
-            <div>
-              <Text style={{ float: 'right' }}>
-                Today is 02/30/2020 0839 +GST
-              </Text>
             </div>
           </div>
-          <div>
-            <Divider orientation="left" dashed={true}>
-              Recent Updates
-            </Divider>
-          </div>
-
           <div className="banner">
+            <div style={{ marginLeft: 20 }}>
+              <Title
+                level={4}
+                style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
+                Welcome Back, Admin!
+              </Title>
+              <Text>Tour last log-in was:</Text>
+              <br></br>
+              <Text>January 12, 2020 14:33 GST</Text>
+              <br /> <br />
+              <Text>Today is 02/30/2020 0839 +GST</Text>
+            </div>
+
             <Card
               style={{
                 width: 300,
@@ -192,7 +185,44 @@ const DashboardContent = (props: IDashboardContentProps) => {
         </div>
       </div>
       {/* <div className="truck"></div> */}
-      <div className="content2">WIDGETS HERE</div>
+      <div>
+        <div className="content2">
+          <h5>To-Do List</h5>
+          <Text>
+            {'\u25A0'} Remind supplier to update <br />
+            delivery status via phone call
+          </Text>
+          <br />
+          <Text>
+            {'\u25A0'} Create a presentation of <br />
+            weekly delivery status
+          </Text>
+          <br />
+          <Text delete>
+            {'\u25A0'} Send email to partners <br />
+          </Text>
+          <br />
+        </div>
+        <div className="content3">
+          <h5>Reminders</h5>
+          <Text>
+            {'\u25A0'} Meeting with OPs 10am,
+            <br />
+            March 3, 2020
+          </Text>
+          <br />
+          <Text>
+            {'\u25A0'} Innaguration of new ware- <br />
+            house facility, March 10, 2020
+          </Text>
+        </div>
+        <div className="content4">
+          <Button type="link" icon="plus">
+            <Text> Add widget</Text>
+          </Button>
+        </div>
+      </div>
+
       <Drawer
         title="Purchase Order Details"
         width={640}
