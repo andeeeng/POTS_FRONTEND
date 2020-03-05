@@ -71,7 +71,6 @@ padding: 10px;
 }
 
 .orderitemtable{
-  position: relative;
   /* background-color: pink;
   margin: 5px;
   flex: 1 1 300;
@@ -86,15 +85,16 @@ padding: 10px;
   overflow: auto;
   padding: 8px 24px;
   height: 330px;
-  flex: 1 1 auto;
+  flex: 0 0 860px;
 }
+
 
 .history{
   /* background-color: pink; */
   margin: 5px;
   display: flex;
   flex: 1 1 auto;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   /* width: 300; */
   border: "1px solid #d9d9d9";
   border-radius: 4 ;
@@ -143,6 +143,14 @@ padding: 10px;
  flex-flow: column wrap;
 }
 
+.history1{
+  /* background-color: grey; */
+ margin: 5px;
+ flex: 1 1 auto;
+ display: flex;
+ flex-flow: column wrap;
+}
+
 
 
 .masterlist{
@@ -164,6 +172,12 @@ padding: 10px;
   display: flex;
   flex-flow: row wrap;
 }
+.history2{
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: row wrap;
+}
+
 
 .calendar{
   display: flex;
