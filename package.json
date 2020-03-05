@@ -50,7 +50,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "scaffold": "mst-gql --format ts --roots Address,Supplier,SupplierStatus,Item,PurchaseOrder,User http://localhost:4000/graphql   "
+    "scaffold": "mst-gql --format ts --roots Address,Supplier,SupplierStatus,Item,PurchaseOrder,User,ScheduleLine http://localhost:4000/graphql   "
   },
   "eslintConfig": {
     "extends": "react-app"

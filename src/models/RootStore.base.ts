@@ -140,7 +140,8 @@ type Refs = {
   supplierstatuss: ObservableMap<string, SupplierStatusModelType>,
   items: ObservableMap<string, ItemModelType>,
   purchaseorders: ObservableMap<string, PurchaseOrderModelType>,
-  users: ObservableMap<string, UserModelType>
+  users: ObservableMap<string, UserModelType>,
+  schedulelines: ObservableMap<string, ScheduleLineModelType>
 }
 
 /**
@@ -148,14 +149,15 @@ type Refs = {
 */
 export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
   .named("RootStore")
-  .extend(configureStoreMixin([['User', () => UserModel], ['Address', () => AddressModel], ['Supplier', () => SupplierModel], ['SupplierStatus', () => SupplierStatusModel], ['Item', () => ItemModel], ['ScheduleLine', () => ScheduleLineModel], ['PurchaseOrder', () => PurchaseOrderModel]], ['Address', 'Supplier', 'SupplierStatus', 'Item', 'PurchaseOrder', 'User']))
+  .extend(configureStoreMixin([['User', () => UserModel], ['Address', () => AddressModel], ['Supplier', () => SupplierModel], ['SupplierStatus', () => SupplierStatusModel], ['Item', () => ItemModel], ['ScheduleLine', () => ScheduleLineModel], ['PurchaseOrder', () => PurchaseOrderModel]], ['Address', 'Supplier', 'SupplierStatus', 'Item', 'PurchaseOrder', 'User', 'ScheduleLine']))
   .props({
     addresss: types.optional(types.map(types.late((): any => AddressModel)), {}),
     suppliers: types.optional(types.map(types.late((): any => SupplierModel)), {}),
     supplierstatuss: types.optional(types.map(types.late((): any => SupplierStatusModel)), {}),
     items: types.optional(types.map(types.late((): any => ItemModel)), {}),
     purchaseorders: types.optional(types.map(types.late((): any => PurchaseOrderModel)), {}),
-    users: types.optional(types.map(types.late((): any => UserModel)), {})
+    users: types.optional(types.map(types.late((): any => UserModel)), {}),
+    schedulelines: types.optional(types.map(types.late((): any => ScheduleLineModel)), {})
   })
   .actions(self => ({
     queryUser(variables: { id?: string }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), options: QueryOptions = {}) {
