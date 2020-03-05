@@ -56,7 +56,7 @@ const SupplierList = (props: ISortyBy) => {
         {state.POdata.map((data: any, index: any) => {
           return (
             <Panel
-              header={`${data.supplier.name}`}
+              header={`${data.supplier.supplierName}`}
               key={index}
               //   extra={<Tag color={data.color}>{data.status}</Tag>}
             >
@@ -73,16 +73,16 @@ const SupplierList = (props: ISortyBy) => {
                       bordered
                       style={{ width: 700 }}>
                       <Descriptions.Item label="Supplier" span={3}>
-                        {data.supplier.name}
+                        {data.supplier.supplierName}
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Person" span={2}>
-                        Chester Bennington
+                        {data.supplier.contactPerson}
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Number" span={2}>
-                        Tel: 728-85-23/ Fax: 12334-232-1
+                        {data.supplier.contactNumber}
                       </Descriptions.Item>
                       <Descriptions.Item label="TIN" span={3}>
-                        000-123-123-0000
+                        {data.supplier.tin}
                       </Descriptions.Item>
 
                       <Descriptions.Item label="Address">

@@ -47,7 +47,7 @@ const MasterList = (props: IMasterList) => {
         {state.POdata.map((data: any, index: any) => {
           return (
             <Panel
-              header={`OTN ${data.id} by  ${data.supplier.name}`}
+              header={`OTN ${data.id} by  ${data.supplier.supplierName}`}
               key={index}
               extra={<Tag color={data.color}>{data.status}</Tag>}>
               <div className="panel">
