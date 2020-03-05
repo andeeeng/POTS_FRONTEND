@@ -46,6 +46,29 @@ const SupplierList = (props: ISortyBy) => {
     },
   ]
 
+  const distinctSupp = []
+  const map = new Map()
+  for (const item of state.POdata) {
+    if (!map.has(item.supplier.supplierNo)) {
+      map.set(item.supplier.supplierNo, true) // set any value to Map
+      distinctSupp.push({
+        id: item.supplier.id,
+        suppNo: item.supplier.supplierNo,
+        name: item.supplier.name,
+        address:
+          item.supplier.address.building_name +
+          ' ' +
+          item.supplier.address.street +
+          ',' +
+          item.supplier.address.city +
+          ' ' +
+          item.supplier.address.state +
+          ' ' +
+          item.supplier.address.zip_code,
+      })
+    }
+  }
+
   return (
     <Fragment>
       <Collapse
@@ -53,10 +76,10 @@ const SupplierList = (props: ISortyBy) => {
         // onChange={callback}
         // expandIconPosition={expandIconPosition}
       >
-        {state.POdata.map((data: any, index: any) => {
+        {distinctSupp.map((data: any, index: any) => {
           return (
             <Panel
-              header={`${data.supplier.name}`}
+              header={`${data.name}`}
               key={index}
               //   extra={<Tag color={data.color}>{data.status}</Tag>}
             >
@@ -73,7 +96,7 @@ const SupplierList = (props: ISortyBy) => {
                       bordered
                       style={{ width: 700 }}>
                       <Descriptions.Item label="Supplier" span={3}>
-                        {data.supplier.name}
+                        {data.name}
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Person" span={2}>
                         Chester Bennington
@@ -86,12 +109,7 @@ const SupplierList = (props: ISortyBy) => {
                       </Descriptions.Item>
 
                       <Descriptions.Item label="Address">
-                        {data.supplier.address.building_name}{' '}
-                        {data.supplier.address.street}{' '}
-                        {data.supplier.address.city}{' '}
-                        {data.supplier.address.zip_code} <br />
-                        {data.supplier.address.city}{' '}
-                        {data.supplier.address.state}{' '}
+                        {data.address}
                       </Descriptions.Item>
                     </Descriptions>
                   </InfiniteScroll>
