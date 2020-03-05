@@ -49,7 +49,7 @@ const Login = (props: any) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   display: 'flex',
-                  marginTop: 80,
+                  marginTop: 70,
                 }}>
                 <Button
                   onClick={() =>

@@ -244,7 +244,7 @@ const MasterList = (props: IMasterList) => {
 
           return (
             <Panel
-              header={`PO# ${data.purchaseOrderNo} by  ${data.supplier.name}`}
+              header={`PO# ${data.purchaseOrderNo} by  ${data.supplier.supplierName}`}
               key={index}
               extra={<Tag color={data.color}>{data.adminStatus}</Tag>}>
               <div className="panel">
