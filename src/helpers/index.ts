@@ -1,7 +1,14 @@
 import { selectFromPurchaseOrder } from '../models/PurchaseOrderModel'
 import { selectFromUser } from '../models/UserModel'
+import { selectFromScheduleLine } from '../models/ScheduleLineModel'
 
-export const USER_FRAGMENT = selectFromUser().userName.password.userLevel
+export const USER_FRAGMENT = selectFromUser().userName.password.userLevel.toString()
+
+export const SCHEDULELINE_FRAGMENT = selectFromScheduleLine()
+  .quantity.unitPrice.totalAmount.uom.deliveryDateAndTime.deliveryStatus(
+    supplierStatus => supplierStatus.status.timeCreated.dateCreated,
+  )
+  .toString()
 
 export const PURCHASEORDER_FRAGMENT = selectFromPurchaseOrder()
   //purchaseOrder
