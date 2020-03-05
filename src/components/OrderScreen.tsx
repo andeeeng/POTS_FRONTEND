@@ -1,25 +1,52 @@
-import React, { Fragment } from "react";
-import HeaderTitle from "./HeaderTitle";
-import { Col, Row } from "react-bootstrap";
-import Search from "../components/Search";
-import InputText from "./InputText";
-import AccordionComponent from "./Accordion";
-
+import React, { Fragment, useState } from "react";
+import InfiniteScroll from "react-infinite-scroller";
+import SortBy from "../components/SortBy";
+import MasterList from "../components/MasterList";
+import { POdata } from "../data/MasterListMock";
+import { Divider, Input } from "antd";
+const { Search } = Input;
 const OrderScreen = () => {
+  const [state, setState] = useState({
+    sortby: "date",
+    POdata: POdata
+  });
+  const sorts = [
+    {
+      value: "date",
+      desc: "Date"
+    },
+    {
+      value: "supp",
+      desc: "Supplier"
+    },
+    {
+      value: "status",
+      desc: "Status"
+    }
+  ];
   return (
-    <Fragment>
-      <HeaderTitle header="Master List" />
-      <Col>
-        <Row>
-          <Search />
-          <InputText type="text" title="Date" label="Sort By:" />
-        </Row>
-      </Col>
-
-      <Col>
-        <AccordionComponent />
-      </Col>
-    </Fragment>
+    <div className="content1orders">
+      <div>
+        <Divider orientation="left" dashed={true}>
+          Masterlist
+        </Divider>
+      </div>
+      <div className="searchandsort">
+        <div className="search">
+          <Search
+            placeholder="input search text"
+            onSearch={value => console.log(value)}
+            enterButton
+          />
+        </div>
+        <div className="sort">
+          <SortBy state={state} setState={setState} sorts={sorts}></SortBy>
+        </div>
+      </div>
+      <div className="masterlist">
+        <MasterList state={state} setState={setState}></MasterList>
+      </div>
+    </div>
   );
 };
 

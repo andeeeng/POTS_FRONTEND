@@ -14,6 +14,6 @@ a,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.ant-layout-content {
+.ant-layout .ant-layout-content {
   background-color: #f2f2f2;
 }
