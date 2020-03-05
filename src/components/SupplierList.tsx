@@ -46,6 +46,32 @@ const SupplierList = (props: ISortyBy) => {
     },
   ]
 
+  const distinctSupp = []
+  const map = new Map()
+  for (const item of state.POdata) {
+    if (!map.has(item.supplier.supplierNo)) {
+      map.set(item.supplier.supplierNo, true) // set any value to Map
+      distinctSupp.push({
+        id: item.supplier.id,
+        supplierNo: item.supplier.supplierNo,
+        contactNo: item.supplier.contactNumber,
+        tin: item.supplier.tin,
+        contactPerson: item.supplier.contactPerson,
+        supplierName: item.supplier.supplierName,
+        address:
+          item.supplier.address.building_name +
+          ' ' +
+          item.supplier.address.street +
+          ',' +
+          item.supplier.address.city +
+          ' ' +
+          item.supplier.address.state +
+          ' ' +
+          item.supplier.address.zip_code,
+      })
+    }
+  }
+
   return (
     <Fragment>
       <Collapse
@@ -53,10 +79,10 @@ const SupplierList = (props: ISortyBy) => {
         // onChange={callback}
         // expandIconPosition={expandIconPosition}
       >
-        {state.POdata.map((data: any, index: any) => {
+        {distinctSupp.map((data: any, index: any) => {
           return (
             <Panel
-              header={`${data.supplier.supplierName}`}
+              header={`${data.supplierName}`}
               key={index}
               //   extra={<Tag color={data.color}>{data.status}</Tag>}
             >
@@ -73,25 +99,20 @@ const SupplierList = (props: ISortyBy) => {
                       bordered
                       style={{ width: 700 }}>
                       <Descriptions.Item label="Supplier" span={3}>
-                        {data.supplier.supplierName}
+                        {data.supplierName}
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Person" span={2}>
-                        {data.supplier.contactPerson}
+                        {data.contactPerson}
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Number" span={2}>
-                        {data.supplier.contactNumber}
+                        {data.contactNo}
                       </Descriptions.Item>
                       <Descriptions.Item label="TIN" span={3}>
-                        {data.supplier.tin}
+                        {data.tin}
                       </Descriptions.Item>
 
                       <Descriptions.Item label="Address">
-                        {data.supplier.address.building_name}{' '}
-                        {data.supplier.address.street}{' '}
-                        {data.supplier.address.city}{' '}
-                        {data.supplier.address.zip_code} <br />
-                        {data.supplier.address.city}{' '}
-                        {data.supplier.address.state}{' '}
+                        {data.address}
                       </Descriptions.Item>
                     </Descriptions>
                   </InfiniteScroll>

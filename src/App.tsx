@@ -31,7 +31,7 @@ const App = () => {
     path: '/',
   })
   rootStore.queryAllPurchaseOrders()
-
+  console.log(rootStore.vPurchaseOrders(), 'PO')
   return (
     <MainScreen
       DBScreen={
