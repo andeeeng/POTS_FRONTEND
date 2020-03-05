@@ -82,7 +82,7 @@ const App = (props: ILayout) => {
           <Content
             style={{
               display: 'flex',
-              backgroundColor: '#E2E8F0',
+              backgroundColor: 'white',
               padding: '30px',
               flexFlow: 'row wrap',
               alignItems: 'flex-start',
