@@ -10,7 +10,7 @@ export const PURCHASEORDER_FRAGMENT = selectFromPurchaseOrder()
   )
   //supplier
   .supplier(supplier =>
-    supplier.supplierNo.name.address(
+    supplier.supplierNo.supplierName.contactNumber.contactPerson.tin.address(
       address => address.building_name.city.state.street.zip_code,
     ),
   )

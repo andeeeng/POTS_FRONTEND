@@ -25,8 +25,11 @@ export const SupplierModelBase = withTypedRefs<Refs>()(ModelBase
     __typename: types.optional(types.literal("Supplier"), "Supplier"),
     id: types.identifier,
     supplierNo: types.union(types.undefined, types.string),
-    name: types.union(types.undefined, types.string),
+    supplierName: types.union(types.undefined, types.string),
     address: types.union(types.undefined, MSTGQLRef(types.late((): any => AddressModel))),
+    tin: types.union(types.undefined, types.string),
+    contactNumber: types.union(types.undefined, types.string),
+    contactPerson: types.union(types.undefined, types.string),
   })
   .views(self => ({
     get store() {
@@ -37,11 +40,14 @@ export const SupplierModelBase = withTypedRefs<Refs>()(ModelBase
 export class SupplierModelSelector extends QueryBuilder {
   get id() { return this.__attr(`id`) }
   get supplierNo() { return this.__attr(`supplierNo`) }
-  get name() { return this.__attr(`name`) }
+  get supplierName() { return this.__attr(`supplierName`) }
+  get tin() { return this.__attr(`tin`) }
+  get contactNumber() { return this.__attr(`contactNumber`) }
+  get contactPerson() { return this.__attr(`contactPerson`) }
   address(builder?: string | AddressModelSelector | ((selector: AddressModelSelector) => AddressModelSelector)) { return this.__child(`address`, AddressModelSelector, builder) }
 }
 export function selectFromSupplier() {
   return new SupplierModelSelector()
 }
 
-export const supplierModelPrimitives = selectFromSupplier().supplierNo.name
+export const supplierModelPrimitives = selectFromSupplier().supplierNo.supplierName.tin.contactNumber.contactPerson

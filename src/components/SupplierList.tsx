@@ -53,8 +53,11 @@ const SupplierList = (props: ISortyBy) => {
       map.set(item.supplier.supplierNo, true) // set any value to Map
       distinctSupp.push({
         id: item.supplier.id,
-        suppNo: item.supplier.supplierNo,
-        name: item.supplier.name,
+        supplierNo: item.supplier.supplierNo,
+        contactNo: item.supplier.contactNumber,
+        tin: item.supplier.tin,
+        contactPerson: item.supplier.contactPerson,
+        supplierName: item.supplier.supplierName,
         address:
           item.supplier.address.building_name +
           ' ' +
@@ -79,7 +82,7 @@ const SupplierList = (props: ISortyBy) => {
         {distinctSupp.map((data: any, index: any) => {
           return (
             <Panel
-              header={`${data.name}`}
+              header={`${data.supplierName}`}
               key={index}
               //   extra={<Tag color={data.color}>{data.status}</Tag>}
             >
@@ -96,16 +99,16 @@ const SupplierList = (props: ISortyBy) => {
                       bordered
                       style={{ width: 700 }}>
                       <Descriptions.Item label="Supplier" span={3}>
-                        {data.name}
+                        {data.supplierName}
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Person" span={2}>
-                        Chester Bennington
+                        {data.contactPerson}
                       </Descriptions.Item>
                       <Descriptions.Item label="Contact Number" span={2}>
-                        Tel: 728-85-23/ Fax: 12334-232-1
+                        {data.contactNo}
                       </Descriptions.Item>
                       <Descriptions.Item label="TIN" span={3}>
-                        000-123-123-0000
+                        {data.tin}
                       </Descriptions.Item>
 
                       <Descriptions.Item label="Address">

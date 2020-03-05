@@ -34,8 +34,11 @@ export type UpdateUserInput = {
 }
 export type SupplierInput = {
   supplierNo: string
-  name: string
+  supplierName: string
   address: AddressInput
+  tin: string
+  contactNumber: string
+  contactPerson: string
 }
 export type AddressInput = {
   building_name: string
@@ -46,8 +49,11 @@ export type AddressInput = {
 }
 export type UpdateSupplierInput = {
   id: string
-  supplierNo: string
-  name: string
+  supplierNo?: string
+  supplierName?: string
+  tin?: string
+  contactNumber?: string
+  contactPerson?: string
 }
 export type SupplierStatusInput = {
   status: string
@@ -78,7 +84,7 @@ export type ScheduleLineInput = {
   unitPrice: number
   totalAmount: number
   deliveryDateAndTime: string
-  deliveryStatus?: SupplierStatusInput
+  deliveryStatus?: SupplierStatusInput[]
 }
 export type UpdateItemInput = {
   id: string
@@ -125,7 +131,7 @@ export type UpdateScheduleLineInput = {
   unitPrice?: number
   totalAmount?: number
   deliveryDateAndTime?: string
-  deliveryStatus?: SupplierStatusInput
+  deliveryStatus?: SupplierStatusInput[]
 }
 /* The TypeScript type that explicits the refs to other models in order to prevent a circular refs issue */
 type Refs = {
