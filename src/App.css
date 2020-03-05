@@ -120,14 +120,37 @@ padding: 10px;
 }
 
 .content2{
-  background-color: silver;
+  background-color: #e5eae9;
   margin: 5px;
-  padding: 5px;
-  height: 500px;
+  padding: 10px;
+  height: auto;
   flex: 1 1 auto;
 
   
 }
+
+
+.content3{
+  background-color: #daf3f0;
+  margin: 5px;
+  padding: 10px;
+  height: auto;
+  flex: 1 1 auto;
+margin-top: 20px;
+  
+}
+
+
+.content4{
+  background-color: #f4f4f5;
+  margin: 5px;
+  padding: 5px;
+  height: auto;
+  flex: 1 1 auto;
+margin-top: 20px;
+  
+}
+
 
 
 .ant-divider-horizontal.ant-divider-with-text-left::before,
