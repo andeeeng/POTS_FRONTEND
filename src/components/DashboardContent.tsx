@@ -59,8 +59,12 @@ const DashboardContent = (props: IDashboardContentProps) => {
       date: '2020-02-21',
     },
   ]
-
-  const filterbydate = data.filter(x => x.date == state.selectedDate)
+  console.log(list, 'ARRAYLIST')
+  const filterbydate = list.filter(
+    (x: any) =>
+      moment(x.documentDate).format('MMMM D, YYYY') ==
+      moment(state.selectedDate).format('MMMM D, YYYY'),
+  )
 
   const onChange = (value: any) => {
     setState({
@@ -166,14 +170,15 @@ const DashboardContent = (props: IDashboardContentProps) => {
               <List
                 itemLayout="horizontal"
                 dataSource={filterbydate}
-                renderItem={item => (
+                renderItem={(item: any) => (
                   <List.Item>
                     <List.Item.Meta
-                      title={<a href="https://ant.design">{item.title}</a>}
+                      title={<a> PO# {item.purchaseOrderNo}</a>}
                       description={
                         <div>
                           <Text>
-                            {moment(item.date).format('MMMM D, YYYY')}
+                            Document Date:{' '}
+                            {moment(item.documentDate).format('MMMM D, YYYY')}
                           </Text>
                         </div>
                       }
