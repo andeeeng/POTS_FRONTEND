@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import {
+  Button,
   Table,
   Collapse,
   Timeline,
@@ -8,13 +9,14 @@ import {
   Tag,
   Typography,
   Tabs,
+  Select,
   Empty,
 } from 'antd'
 import { observer } from 'mobx-react'
 const { Panel } = Collapse
 const { Text, Title } = Typography
 const { TabPane } = Tabs
-
+const { Option } = Select
 export interface IMasterList {
   state: any
   setState: any
@@ -24,7 +26,24 @@ const MasterList = (props: IMasterList) => {
   const { state, setState } = props
   const [row, setRow] = useState({
     selectedSchedID: '',
+    tabkey: '1',
+    status: 'Ready to Ship',
   })
+
+  const status = [
+    {
+      value: '1',
+      desc: 'Ready to Ship',
+    },
+    {
+      value: '2',
+      desc: 'Delivered',
+    },
+    {
+      value: '3',
+      desc: 'On the Logistics Facility',
+    },
+  ]
 
   const item_columns = [
     {
@@ -116,6 +135,75 @@ const MasterList = (props: IMasterList) => {
   ]
   console.log(state, 'LAMAN NG STATE')
 
+  const handleChange = (value: any, state: any, setState: any) => {
+    setState({
+      ...state,
+      sortby: value,
+    })
+  }
+
+  const renderHistoryPanel = (activekey: any, data: any) => {
+    return (
+      <div className="history">
+        <div className="history1">
+          <Card
+            title="Status History"
+            bordered={true}
+            bodyStyle={{ width: 300, height: 270, overflow: 'auto' }}>
+            <InfiniteScroll
+              initialLoad={false}
+              pageStart={0}
+              loadMore={() => console.log('LOAD MORE')}
+              // hasMore={!this.state.loading && this.state.hasMore}
+              useWindow={false}>
+              <Timeline mode="left">
+                {data.map((data: any, index: any) => {
+                  console.log(row.selectedSchedID, 'LENGHT')
+
+                  if (data.delvStatus.length != 0) {
+                    return data.delvStatus.map((sched: any) => {
+                      return (
+                        <Timeline.Item>
+                          {sched.status} {sched.dateCreated} {sched.timeCreated}
+                        </Timeline.Item>
+                      )
+                    })
+                  } else {
+                    return (
+                      // <Timeline.Item color="red">
+                      //   NO STATUS UPDATE
+                      // </Timeline.Item>
+                      <Empty></Empty>
+                    )
+                  }
+                })}
+              </Timeline>
+            </InfiniteScroll>
+          </Card>
+        </div>
+
+        <div className="history2">
+          <div style={{ marginTop: '5px', marginRight: '2px' }}>
+            <Select
+              defaultValue={'status'}
+              value={row.status}
+              style={{ width: 200 }}
+              onChange={(value: any) => {
+                handleChange(value, row, setRow)
+              }}>
+              {status.map((items: any) => (
+                <Option value={items.value}>{items.desc}</Option>
+              ))}
+            </Select>
+          </div>
+          <div style={{ marginTop: '5px' }}>
+            <Button type="primary">Update Status</Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Fragment>
       <Collapse
@@ -161,7 +249,9 @@ const MasterList = (props: IMasterList) => {
               extra={<Tag color={data.color}>{data.adminStatus}</Tag>}>
               <div className="panel">
                 <div className="orderitemtable">
-                  <Tabs type="card">
+                  <Tabs
+                    type="card"
+                    onChange={key => setRow({ ...row, tabkey: key })}>
                     <TabPane tab="Item Details" key="1">
                       <div style={{ marginBottom: '10px' }}>
                         <Title level={4}> Order Details</Title>
@@ -237,41 +327,7 @@ const MasterList = (props: IMasterList) => {
                     </TabPane>
                   </Tabs>
                 </div>
-                <div className="history">
-                  <Card
-                    title="Status History"
-                    bordered={true}
-                    bodyStyle={{ width: 300, height: 270, overflow: 'auto' }}>
-                    <InfiniteScroll
-                      initialLoad={false}
-                      pageStart={0}
-                      loadMore={() => console.log('LOAD MORE')}
-                      // hasMore={!this.state.loading && this.state.hasMore}
-                      useWindow={false}>
-                      <Timeline mode="left">
-                        {schedById.map((data: any, index: any) => {
-                          if (data.delvStatus) {
-                            return data.delvStatus.map((sched: any) => {
-                              return (
-                                <Timeline.Item>
-                                  {sched.status} {sched.dateCreated}{' '}
-                                  {sched.timeCreated}
-                                </Timeline.Item>
-                              )
-                            })
-                          } else {
-                            return (
-                              <Timeline.Item color="red">
-                                NO STATUS UPDATE
-                              </Timeline.Item>
-                              // <Empty></Empty>
-                            )
-                          }
-                        })}
-                      </Timeline>
-                    </InfiniteScroll>
-                  </Card>
-                </div>
+                {renderHistoryPanel(row.tabkey, schedById)}
               </div>
             </Panel>
           )
