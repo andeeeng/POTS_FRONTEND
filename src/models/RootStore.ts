@@ -20,6 +20,13 @@ export const RootStore = RootStoreBase.views(self => {
     self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
     self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
   },
+  updateStatus(scheduleLine: any) {
+    console.log(scheduleLine, 'HERE THERE')
+    return self.mutateUpdateScheduleLine(
+      { scheduleLine: scheduleLine },
+      SCHEDULELINE_FRAGMENT,
+    )
+  },
   requestPurchaseOrders() {
     const poq = self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
 

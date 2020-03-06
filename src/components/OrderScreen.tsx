@@ -9,15 +9,16 @@ const { Search } = Input
 
 export interface IOrderScreenProps {
   po?: any
+  updateStatus?: any
 }
 
 const OrderScreen = (props: IOrderScreenProps) => {
+  const { updateStatus, po } = props
   const [state, setState] = useState({
     sortby: 'date',
-    POdata: props.po,
+    POdata: po,
   })
 
-  console.log('Props', props.po)
   const sorts = [
     {
       value: 'date',
@@ -52,7 +53,10 @@ const OrderScreen = (props: IOrderScreenProps) => {
         </div>
       </div>
       <div className="masterlist">
-        <MasterList state={state} setState={setState}></MasterList>
+        <MasterList
+          state={state}
+          setState={setState}
+          updateStatus={updateStatus}></MasterList>
       </div>
     </div>
   )
