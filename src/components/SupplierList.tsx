@@ -10,6 +10,8 @@ import {
   Descriptions,
   Button,
 } from 'antd'
+import moment from 'moment'
+
 const { Panel } = Collapse
 const { Text, Title } = Typography
 
@@ -23,31 +25,13 @@ export interface ISortyBy {
 const SupplierList = (props: ISortyBy) => {
   const { state, setState, filtredPO } = props
 
-  const data2 = [
-    {
-      title: 'Order # 321223353',
-    },
-    {
-      title: 'Order # 321223353',
-    },
-    {
-      title: 'Order # 321223353',
-    },
-    {
-      title: 'Order # 321223353',
-    },
-    {
-      title: 'Order # 321223353',
-    },
-    {
-      title: 'Order # 321223353',
-    },
-    {
-      title: 'Order # 321223353',
-    },
-  ]
-  let data: Array<any> = []
+  const filterbysupplier = (po: any, supplierno: any) => {
+    console.log(po, 'POTANGINA')
+    const filterpo = po.filter((x: any) => x.supplier.supplierNo == supplierno)
 
+    return filterpo
+  }
+  let data: Array<any> = []
   if (state.search) {
     data = filtredPO
   } else {
@@ -78,15 +62,16 @@ const SupplierList = (props: ISortyBy) => {
       })
     }
   }
-
+  let selectedSupplier = ''
   return (
     <Fragment>
       <Collapse
         defaultActiveKey={['0']}
-        // onChange={callback}
         // expandIconPosition={expandIconPosition}
       >
         {distinctSupp.map((data: any, index: any) => {
+          selectedSupplier = data.supplierNo
+          console.log(selectedSupplier, 'SELECTED SUPP')
           return (
             <Panel
               header={`${data.supplierName}`}
@@ -141,14 +126,24 @@ const SupplierList = (props: ISortyBy) => {
                       useWindow={false}>
                       <List
                         itemLayout="horizontal"
-                        dataSource={data2}
-                        renderItem={item => (
+                        dataSource={filterbysupplier(
+                          state.POdata,
+                          selectedSupplier,
+                        )}
+                        renderItem={(item: any) => (
                           <List.Item>
                             <List.Item.Meta
-                              title={
-                                <a href="https://ant.design">{item.title}</a>
+                              title={<a> PO# {item.purchaseOrderNo}</a>}
+                              description={
+                                <div>
+                                  <Text>
+                                    Document Date:
+                                    {moment(item.documentDate).format(
+                                      'MMMM D, YYYY',
+                                    )}
+                                  </Text>
+                                </div>
                               }
-                              description="Status: Some status"
                             />
 
                             <List.Item>

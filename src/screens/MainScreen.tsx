@@ -10,6 +10,7 @@ import { observer } from 'mobx-react'
 
 export interface IProps {
   loginScreen?: any
+  logoutScreen?: any
   DBScreen?: any
   store?: any
   state?: any
@@ -18,7 +19,7 @@ export interface IProps {
 
 const Main = (props: IProps) => {
   // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
-  const { state, loginScreen, DBScreen, store, setState } = props
+  const { state, loginScreen, DBScreen, store, setState, logoutScreen } = props
   const routes = [
     {
       path: '/',
