@@ -19,10 +19,11 @@ export interface ISortyBy {
   state: any
   setState: any
   po?: any
+  filtredPO?: any
 }
 
 const SupplierList = (props: ISortyBy) => {
-  const { state, setState } = props
+  const { state, setState, filtredPO } = props
 
   const filterbysupplier = (po: any, supplierno: any) => {
     console.log(po, 'POTANGINA')
@@ -30,10 +31,15 @@ const SupplierList = (props: ISortyBy) => {
 
     return filterpo
   }
-
+  let data: Array<any> = []
+  if (state.search) {
+    data = filtredPO
+  } else {
+    data = state.POdata
+  }
   const distinctSupp = []
   const map = new Map()
-  for (const item of state.POdata) {
+  for (const item of data) {
     if (!map.has(item.supplier.supplierNo)) {
       map.set(item.supplier.supplierNo, true) // set any value to Map
       distinctSupp.push({
