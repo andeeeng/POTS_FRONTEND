@@ -3,7 +3,7 @@ import { Card, Input, Icon, Button } from 'antd'
 
 const Login = (props: any) => {
   return (
-    <div style={{ backgroundColor: 'white', marginLeft: '500px' }}>
+    <div style={{ backgroundColor: 'white', marginLeft: '600px' }}>
       <div className="logo-login"></div>
       <div
         style={{
