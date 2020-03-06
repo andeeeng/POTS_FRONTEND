@@ -8,7 +8,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
-
+import { observer } from 'mobx-react'
 const { Header, Content, Footer, Sider } = Layout
 export interface ILayout {
   DBcontent?: any
@@ -20,10 +20,10 @@ export interface ILayout {
 const App = (props: ILayout) => {
   const { DBcontent, POcontent, SUPcontent, HeaderContent } = props
   const [state, setState] = useState({
-    currentKey: 'order',
+    currentKey: 'dashboard',
     path: '/DashBoard',
   })
-
+  console.log(state, 'CURRENT KEY')
   const routes = [
     {
       path: '/DashBoard',
@@ -59,7 +59,8 @@ const App = (props: ILayout) => {
           <Menu
             theme="light"
             mode="inline"
-            defaultSelectedKeys={['dashboard']}
+            selectedKeys={[state.currentKey]}
+            // defaultSelectedKeys={['dashboard']}
             onClick={e => handleClick(e.key, state, setState)}>
             <Menu.Item key="dashboard">
               <Icon type="dashboard" />

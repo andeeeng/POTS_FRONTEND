@@ -27,10 +27,17 @@ const rootStore = RootStore.create(undefined, {
 const App = () => {
   // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
 
+  const { setQuery, store, error, data, loading } = useQuery()
   const [state, setState] = useState({
     path: '/',
+    currentKey: 'dashboard',
   })
-  rootStore.queryAllPurchaseOrders()
+
+  const updateStatus = (scheduleline: any) => {
+    console.log(error, 'ERROR')
+    setQuery(rootStore.updateStatus(scheduleline))
+  }
+  // rootStore.queryAllPurchaseOrders()
   console.log(rootStore.vPurchaseOrders(), 'PO')
   return (
     <MainScreen
@@ -44,7 +51,12 @@ const App = () => {
               setStatelogout={setState}
             />
           }
-          POcontent={<OrderScreen po={rootStore.vPurchaseOrders()} />}
+          POcontent={
+            <OrderScreen
+              po={rootStore.vPurchaseOrders()}
+              updateStatus={updateStatus}
+            />
+          }
           SUPcontent={<SupplierScreen po={rootStore.vPurchaseOrders()} />}
           HeaderContent={
             <UserInfo user="Mark Nabablit" date="February 5, 2020" />
