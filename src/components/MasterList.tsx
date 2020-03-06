@@ -20,10 +20,11 @@ const { Option } = Select
 export interface IMasterList {
   state: any
   setState: any
+  updateStatus?: any
 }
 
 const MasterList = (props: IMasterList) => {
-  const { state, setState } = props
+  const { state, setState, updateStatus } = props
   const [row, setRow] = useState({
     selectedSchedID: '',
     tabkey: '1',
@@ -136,12 +137,29 @@ const MasterList = (props: IMasterList) => {
   console.log(state, 'LAMAN NG STATE')
 
   const handleChange = (value: any, state: any, setState: any) => {
+    const status = (key: any) => {
+      switch (key) {
+        case '1':
+          return 'Ready to Ship'
+        case '3':
+          return 'On the Logistics Facility'
+        case '2':
+          return 'Delivered'
+        default:
+          break
+      }
+    }
     setState({
       ...state,
-      sortby: value,
+      status: status(value),
     })
   }
-
+  const linesched = {
+    id: row.selectedSchedID,
+    deliveryStatus: {
+      status: row.status,
+    },
+  }
   const renderHistoryPanel = (activekey: any, data: any) => {
     return (
       <div className="history">
@@ -181,7 +199,6 @@ const MasterList = (props: IMasterList) => {
             </InfiniteScroll>
           </Card>
         </div>
-
         <div className="history2">
           <div style={{ marginTop: '5px', marginRight: '2px' }}>
             <Select
@@ -197,7 +214,13 @@ const MasterList = (props: IMasterList) => {
             </Select>
           </div>
           <div style={{ marginTop: '5px' }}>
-            <Button type="primary">Update Status</Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                updateStatus(linesched)
+              }}>
+              Update Status
+            </Button>
           </div>
         </div>
       </div>
@@ -309,12 +332,12 @@ const MasterList = (props: IMasterList) => {
                         <Table
                           onRow={(record, rowIndex) => {
                             return {
-                              onClick: event => {}, // click row
+                              onClick: event => {
+                                setRow({ ...row, selectedSchedID: record.id })
+                              }, // click row
                               onDoubleClick: event => {}, // double click row
                               onContextMenu: event => {}, // right button click row
-                              onMouseEnter: event => {
-                                setRow({ ...row, selectedSchedID: record.id })
-                              }, // mouse enter row
+                              onMouseEnter: event => {}, // mouse enter row
                               onMouseLeave: event => {}, // mouse leave row
                             }
                           }}
