@@ -15,13 +15,18 @@ import moment from 'moment'
 import InfiniteScroll from 'react-infinite-scroller'
 import StatusItem from './StatusItem'
 import { statusReport, poList } from '../data/mockData'
+import { Segment } from 'semantic-ui-react'
 
 export interface IDashboardContentProps {
   status?: any
   list?: any
+  setStatelogout?: any
+  statelogout?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
+  const { setStatelogout, statelogout } = props
+
   const format = 'YYYY-MM-DD'
   const { status, list } = props
   const [state, setState] = useState({
@@ -170,7 +175,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
                       description={
                         <div>
                           <Text>
-                            Document Date:{' '}
+                            Document Date:
                             {moment(item.documentDate).format('MMMM D, YYYY')}
                           </Text>
                         </div>
@@ -191,6 +196,13 @@ const DashboardContent = (props: IDashboardContentProps) => {
       </div>
       {/* <div className="truck"></div> */}
       <div>
+        <div style={{ marginLeft: 150, marginTop: -20, marginBottom: 50 }}>
+          <Button
+            type="link"
+            onClick={() => setStatelogout({ ...statelogout, path: '/' })}>
+            Logout
+          </Button>
+        </div>
         <div className="content2">
           <h5>To-Do List</h5>
           <Text>

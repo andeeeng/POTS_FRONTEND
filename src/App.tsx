@@ -40,6 +40,8 @@ const App = () => {
             <DashboardContent
               status={statusReport}
               list={rootStore.vPurchaseOrders()}
+              statelogout={state}
+              setStatelogout={setState}
             />
           }
           POcontent={<OrderScreen po={rootStore.vPurchaseOrders()} />}
