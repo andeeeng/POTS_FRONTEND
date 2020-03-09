@@ -60,7 +60,7 @@ const Login = (props: any) => {
               </div>
             </div>
           </div>
-          <Card
+          {/* <Card
             bordered={false}
             style={{
               width: 300,
@@ -110,7 +110,7 @@ const Login = (props: any) => {
                 Login
               </Button>
             </div>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </div>

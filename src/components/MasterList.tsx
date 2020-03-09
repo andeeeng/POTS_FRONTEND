@@ -23,10 +23,18 @@ export interface IMasterList {
   updateStatus?: any
   tabState?: any
   tabSetState?: any
+  filterPO?: any
 }
 
 const MasterList = (props: IMasterList) => {
-  const { state, setState, updateStatus, tabState, tabSetState } = props
+  const {
+    state,
+    setState,
+    updateStatus,
+    tabState,
+    tabSetState,
+    filterPO,
+  } = props
 
   const status = [
     {
@@ -264,13 +272,21 @@ const MasterList = (props: IMasterList) => {
       return '#87d068'
     }
   }
+
+  console.log(filterPO, 'FILTERED')
+  let data: Array<any> = []
+  if (state.search) {
+    data = filterPO
+  } else {
+    data = state.POdata
+  }
   return (
     <Fragment>
       <Collapse
         defaultActiveKey={[tabState.collapseKey]}
         activeKey={tabState.collapseKey}
         onChange={callback}>
-        {state.POdata.map((data: any, index: any) => {
+        {data.map((data: any, index: any) => {
           let schedarray: Array<any> = []
           data.items.map((item: any) => {
             const delv_address =

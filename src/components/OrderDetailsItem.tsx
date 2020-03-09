@@ -1,8 +1,8 @@
-import React from "react";
-import { List, Card } from "semantic-ui-react";
-import OrderDetails from "./OrderDetails";
+import React from 'react'
+import { List, Card } from 'semantic-ui-react'
+import OrderDetails from './OrderDetails'
 export interface IOrderDetailsItemProps {
-  order?: any;
+  order?: any
 }
 
 const OrderDetailsItem = (props: IOrderDetailsItemProps) => {
@@ -17,7 +17,7 @@ const OrderDetailsItem = (props: IOrderDetailsItemProps) => {
         </Card.Group>
       ))}
     </List>
-  );
-};
+  )
+}
 
-export default OrderDetailsItem;
+export default OrderDetailsItem
