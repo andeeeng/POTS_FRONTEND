@@ -84,8 +84,30 @@ const MasterList = (props: IMasterList) => {
       dataIndex: 'totalAmount',
       key: 'totalAmount',
     },
+    {
+      title: 'Status',
+      key: 'supplierStatusItem',
+      dataIndex: 'supplierStatusItem',
+      render: (item: any) => (
+        <span>
+          <Tag color={itemStatusColor(item)}>{item.toUpperCase()}</Tag>
+        </span>
+      ),
+    },
   ]
-
+  const itemStatusColor = (status: any) => {
+    console.log(status, 'COLOR')
+    switch (status) {
+      case 'On-going':
+        return 'orange'
+      case 'Complete':
+        return 'green'
+      case 'Not Started':
+        return 'red'
+      default:
+        break
+    }
+  }
   const sched_columns = [
     {
       title: 'Delivery Schedule',
@@ -188,53 +210,66 @@ const MasterList = (props: IMasterList) => {
     }
   }
   const renderHistoryPanel = (activekey: any, data: any) => {
-    return (
-      <div className="history">
-        <div className="history1">
-          <Card
-            title="Status History"
-            bordered={true}
-            bodyStyle={{ width: 300, height: 270, overflow: 'auto' }}>
-            <InfiniteScroll
-              initialLoad={false}
-              pageStart={0}
-              loadMore={() => console.log('LOAD MORE')}
-              // hasMore={!this.state.loading && this.state.hasMore}
-              useWindow={false}>
-              <Timeline mode="left">
-                {data.map((data: any, index: any) => {
-                  if (data.delvStatus.length != 0) {
-                    return data.delvStatus.map((sched: any) => {
+    if (activekey == 'sched') {
+      return (
+        <div className="history">
+          <div className="history1">
+            <Card
+              title="Status History"
+              bordered={true}
+              bodyStyle={{ width: 300, height: 270, overflow: 'auto' }}>
+              <InfiniteScroll
+                initialLoad={false}
+                pageStart={0}
+                loadMore={() => console.log('LOAD MORE')}
+                // hasMore={!this.state.loading && this.state.hasMore}
+                useWindow={false}>
+                <Timeline mode="left">
+                  {data.map((data: any, index: any) => {
+                    if (data.delvStatus.length != 0) {
+                      return data.delvStatus.map((sched: any) => {
+                        return (
+                          <Timeline.Item>
+                            {sched.status} {sched.dateCreated}{' '}
+                            {sched.timeCreated}
+                          </Timeline.Item>
+                        )
+                      })
+                    } else {
                       return (
-                        <Timeline.Item>
-                          {sched.status} {sched.dateCreated} {sched.timeCreated}
-                        </Timeline.Item>
+                        // <Timeline.Item color="red">
+                        //   NO STATUS UPDATE
+                        // </Timeline.Item>
+                        <Empty></Empty>
                       )
-                    })
-                  } else {
-                    return (
-                      // <Timeline.Item color="red">
-                      //   NO STATUS UPDATE
-                      // </Timeline.Item>
-                      <Empty></Empty>
-                    )
-                  }
-                })}
-              </Timeline>
-            </InfiniteScroll>
-          </Card>
+                    }
+                  })}
+                </Timeline>
+              </InfiniteScroll>
+            </Card>
+          </div>
+          {renderUpdateStatus(activekey)}
         </div>
-        {renderUpdateStatus(activekey)}
-      </div>
-    )
+      )
+    }
   }
-
+  const callback = (key: any) => {
+    tabSetState({ ...tabState, collapseKey: key })
+  }
+  const statusColor = (status: any) => {
+    if (status == 'Closed') {
+      return '#f50'
+    }
+    if (status == 'Open') {
+      return '#87d068'
+    }
+  }
   return (
     <Fragment>
       <Collapse
-        defaultActiveKey={['0']}
-        // expandIconPosition={expandIconPosition}
-      >
+        defaultActiveKey={[tabState.collapseKey]}
+        activeKey={tabState.collapseKey}
+        onChange={callback}>
         {state.POdata.map((data: any, index: any) => {
           let schedarray: Array<any> = []
           data.items.map((item: any) => {
@@ -268,15 +303,27 @@ const MasterList = (props: IMasterList) => {
           const schedById = schedarray.filter(
             x => x.id == tabState.selectedSchedID,
           )
+          const changewidth = (key: any) => {
+            switch (key) {
+              case 'item':
+                return 'orderitemtablemax'
 
+              default:
+                return 'orderitemtable'
+            }
+          }
           return (
             <Panel
               header={`PO# ${data.purchaseOrderNo} by  ${data.supplier.supplierName}`}
               key={index}
-              extra={<Tag color={data.color}>{data.adminStatus}</Tag>}>
+              extra={
+                <Tag color={statusColor(data.adminStatus)}>
+                  {data.adminStatus}
+                </Tag>
+              }>
               <div className="panel">
                 {/* {console.log(state.tabkey, 'TABKEYKEY')} */}
-                <div className="orderitemtable">
+                <div className={changewidth(tabState.tabkey)}>
                   <Tabs
                     activeKey={tabState.tabkey}
                     defaultActiveKey={tabState.tabkey}

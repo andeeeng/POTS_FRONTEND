@@ -33,6 +33,7 @@ const App = () => {
     currentKey: 'dashboard',
     selectedSchedID: '',
     tabkey: 'item',
+    collapseKey: ['0'],
   })
   const routes = [
     {
