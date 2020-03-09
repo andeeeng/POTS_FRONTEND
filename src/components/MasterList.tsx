@@ -21,15 +21,12 @@ export interface IMasterList {
   state: any
   setState: any
   updateStatus?: any
+  tabState?: any
+  tabSetState?: any
 }
 
 const MasterList = (props: IMasterList) => {
-  const { state, setState, updateStatus } = props
-  const [row, setRow] = useState({
-    selectedSchedID: '',
-    tabkey: '1',
-    status: 'Ready to Ship',
-  })
+  const { state, setState, updateStatus, tabState, tabSetState } = props
 
   const status = [
     {
@@ -155,10 +152,40 @@ const MasterList = (props: IMasterList) => {
     })
   }
   const linesched = {
-    id: row.selectedSchedID,
+    id: tabState.selectedSchedID,
     deliveryStatus: {
-      status: row.status,
+      status: state.status,
     },
+  }
+  const renderUpdateStatus = (key: any) => {
+    if (key == 'sched') {
+      return (
+        <div className="history2">
+          <div style={{ marginTop: '5px', marginRight: '2px' }}>
+            <Select
+              defaultValue={'status'}
+              value={state.status}
+              style={{ width: 200 }}
+              onChange={(value: any) => {
+                handleChange(value, state, setState)
+              }}>
+              {status.map((items: any) => (
+                <Option value={items.value}>{items.desc}</Option>
+              ))}
+            </Select>
+          </div>
+          <div style={{ marginTop: '5px' }}>
+            <Button
+              type="primary"
+              onClick={() => {
+                updateStatus(linesched)
+              }}>
+              Update Status
+            </Button>
+          </div>
+        </div>
+      )
+    }
   }
   const renderHistoryPanel = (activekey: any, data: any) => {
     return (
@@ -176,8 +203,6 @@ const MasterList = (props: IMasterList) => {
               useWindow={false}>
               <Timeline mode="left">
                 {data.map((data: any, index: any) => {
-                  console.log(row.selectedSchedID, 'LENGHT')
-
                   if (data.delvStatus.length != 0) {
                     return data.delvStatus.map((sched: any) => {
                       return (
@@ -199,30 +224,7 @@ const MasterList = (props: IMasterList) => {
             </InfiniteScroll>
           </Card>
         </div>
-        <div className="history2">
-          <div style={{ marginTop: '5px', marginRight: '2px' }}>
-            <Select
-              defaultValue={'status'}
-              value={row.status}
-              style={{ width: 200 }}
-              onChange={(value: any) => {
-                handleChange(value, row, setRow)
-              }}>
-              {status.map((items: any) => (
-                <Option value={items.value}>{items.desc}</Option>
-              ))}
-            </Select>
-          </div>
-          <div style={{ marginTop: '5px' }}>
-            <Button
-              type="primary"
-              onClick={() => {
-                updateStatus(linesched)
-              }}>
-              Update Status
-            </Button>
-          </div>
-        </div>
+        {renderUpdateStatus(activekey)}
       </div>
     )
   }
@@ -263,7 +265,9 @@ const MasterList = (props: IMasterList) => {
             })
           })
 
-          const schedById = schedarray.filter(x => x.id == row.selectedSchedID)
+          const schedById = schedarray.filter(
+            x => x.id == tabState.selectedSchedID,
+          )
 
           return (
             <Panel
@@ -271,11 +275,14 @@ const MasterList = (props: IMasterList) => {
               key={index}
               extra={<Tag color={data.color}>{data.adminStatus}</Tag>}>
               <div className="panel">
+                {/* {console.log(state.tabkey, 'TABKEYKEY')} */}
                 <div className="orderitemtable">
                   <Tabs
+                    activeKey={tabState.tabkey}
+                    defaultActiveKey={tabState.tabkey}
                     type="card"
-                    onChange={key => setRow({ ...row, tabkey: key })}>
-                    <TabPane tab="Item Details" key="1">
+                    onChange={key => tabSetState({ ...tabState, tabkey: key })}>
+                    <TabPane tab="Item Details" key="item">
                       <div style={{ marginBottom: '10px' }}>
                         <Title level={4}> Order Details</Title>
                         <div className="tableTitledesc">
@@ -322,7 +329,7 @@ const MasterList = (props: IMasterList) => {
                         />
                       </InfiniteScroll>
                     </TabPane>
-                    <TabPane tab="Delivery Schedule" key="2">
+                    <TabPane tab="Delivery Schedule" key="sched">
                       <InfiniteScroll
                         initialLoad={false}
                         pageStart={0}
@@ -333,7 +340,10 @@ const MasterList = (props: IMasterList) => {
                           onRow={(record, rowIndex) => {
                             return {
                               onClick: event => {
-                                setRow({ ...row, selectedSchedID: record.id })
+                                tabSetState({
+                                  ...tabState,
+                                  selectedSchedID: record.id,
+                                })
                               }, // click row
                               onDoubleClick: event => {}, // double click row
                               onContextMenu: event => {}, // right button click row
@@ -350,7 +360,7 @@ const MasterList = (props: IMasterList) => {
                     </TabPane>
                   </Tabs>
                 </div>
-                {renderHistoryPanel(row.tabkey, schedById)}
+                {renderHistoryPanel(tabState.tabkey, schedById)}
               </div>
             </Panel>
           )
