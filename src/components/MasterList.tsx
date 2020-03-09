@@ -21,10 +21,12 @@ export interface IMasterList {
   state: any
   setState: any
   updateStatus?: any
+  filterPO?: any
 }
 
 const MasterList = (props: IMasterList) => {
-  const { state, setState, updateStatus } = props
+  const { state, setState, updateStatus, filterPO } = props
+
   const [row, setRow] = useState({
     selectedSchedID: '',
     tabkey: '1',
@@ -227,13 +229,21 @@ const MasterList = (props: IMasterList) => {
     )
   }
 
+  console.log(filterPO, 'FILTERED')
+  let data: Array<any> = []
+  if (state.search) {
+    data = filterPO
+  } else {
+    data = state.POdata
+  }
+
   return (
     <Fragment>
       <Collapse
         defaultActiveKey={['0']}
         // expandIconPosition={expandIconPosition}
       >
-        {state.POdata.map((data: any, index: any) => {
+        {data.map((data: any, index: any) => {
           let schedarray: Array<any> = []
           data.items.map((item: any) => {
             const delv_address =
