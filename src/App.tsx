@@ -26,23 +26,29 @@ const rootStore = RootStore.create(undefined, {
 
 const App = () => {
   // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
-
+  const PO = rootStore.vPurchaseOrders()
   const { setQuery, store, error, data, loading } = useQuery()
   const [state, setState] = useState({
     path: '/',
     currentKey: 'dashboard',
+    selectedSchedID: '',
+    tabkey: 'item',
+    collapseKey: ['0'],
   })
-
-  const updateStatus = (scheduleline: any) => {
-    console.log(error, 'ERROR')
-    setQuery(rootStore.updateStatus(scheduleline))
-  }
-  // rootStore.queryAllPurchaseOrders()
-  console.log(rootStore.vPurchaseOrders(), 'PO')
-  return (
-    <MainScreen
-      DBScreen={
+  const routes = [
+    {
+      path: '/',
+      exact: true,
+      main: () => <LoginScreen state={state} setState={setState}></LoginScreen>,
+    },
+    {
+      path: '/Dashboard',
+      exact: true,
+      main: () => (
         <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
           DBcontent={
             <DashboardContent
               status={statusReport}
@@ -50,23 +56,49 @@ const App = () => {
               statelogout={state}
               setStatelogout={setState}
             />
-          }
+          }></ScreenLayout>
+      ),
+    },
+    {
+      path: '/Orders',
+      exact: true,
+      main: () => (
+        <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
           POcontent={
             <OrderScreen
+              state={state}
+              setState={setState}
               po={rootStore.vPurchaseOrders()}
               updateStatus={updateStatus}
             />
-          }
-          SUPcontent={<SupplierScreen po={rootStore.vPurchaseOrders()} />}
-          HeaderContent={
-            <UserInfo user="Mark Nabablit" date="February 5, 2020" />
           }></ScreenLayout>
-      }
-      loginScreen={
-        <LoginScreen state={state} setState={setState}></LoginScreen>
-      }
-      state={state}
-      setState={setState}></MainScreen>
+      ),
+    },
+
+    {
+      path: '/Suppliers',
+      exact: true,
+      main: () => (
+        <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
+          SUPcontent={
+            <SupplierScreen po={rootStore.vPurchaseOrders()} />
+          }></ScreenLayout>
+      ),
+    },
+  ]
+
+  const updateStatus = (scheduleline: any) => {
+    setQuery(rootStore.updateStatus(scheduleline))
+  }
+
+  return (
+    <MainScreen routes={routes} state={state} setState={setState}></MainScreen>
   )
 }
 
