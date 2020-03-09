@@ -10,6 +10,8 @@ const { Search } = Input
 export interface IOrderScreenProps {
   po?: any
   updateStatus?: any
+  state?: any
+  setState?: any
 }
 const SearchFilterItem = (
   text: any,
@@ -33,10 +35,11 @@ const SearchFilterItem = (
 }
 
 const OrderScreen = (props: IOrderScreenProps) => {
-  const { updateStatus } = props
+  const { updateStatus, po, state: mainState, setState: mainSetState } = props
   const [state, setState] = useState({
     sortby: 'date',
-    POdata: props.po,
+    POdata: po,
+    status: 'Ready to Ship',
     datasource: [],
     search: '',
   })
@@ -79,6 +82,8 @@ const OrderScreen = (props: IOrderScreenProps) => {
       <div className="masterlist">
         <MasterList
           filterPO={state.datasource}
+          tabState={mainState}
+          tabSetState={mainSetState}
           state={state}
           setState={setState}
           updateStatus={updateStatus}></MasterList>
