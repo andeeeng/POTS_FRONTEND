@@ -380,6 +380,7 @@ const MasterList = (props: IMasterList) => {
                       <InfiniteScroll
                         initialLoad={false}
                         pageStart={0}
+                        selected={tabState.selectedSchedID}
                         loadMore={() => console.log('LOAD MORE')}
                         // hasMore={!this.state.loading && this.state.hasMore}
                         useWindow={false}>
