@@ -13,6 +13,26 @@ export interface IOrderScreenProps {
   state?: any
   setState?: any
 }
+const SearchFilterItem = (
+  text: any,
+  source: any,
+  setState: any,
+  state: any,
+) => {
+  const newData = source.filter((x: any) => {
+    const itemData = x.purchaseOrderNo
+      ? x.purchaseOrderNo.toUpperCase()
+      : ''.toUpperCase()
+    const textData = text.toUpperCase()
+    return itemData.indexOf(textData) > -1
+  })
+
+  setState(() => ({
+    ...state,
+    datasource: newData,
+    search: text,
+  }))
+}
 
 const OrderScreen = (props: IOrderScreenProps) => {
   const { updateStatus, po, state: mainState, setState: mainSetState } = props
@@ -20,6 +40,8 @@ const OrderScreen = (props: IOrderScreenProps) => {
     sortby: 'date',
     POdata: po,
     status: 'Ready to Ship',
+    datasource: [],
+    search: '',
   })
 
   const sorts = [
@@ -47,7 +69,9 @@ const OrderScreen = (props: IOrderScreenProps) => {
         <div className="search">
           <Search
             placeholder="input search text"
-            onSearch={value => console.log(value)}
+            onSearch={value => {
+              SearchFilterItem(value, state.POdata, setState, state)
+            }}
             enterButton
           />
         </div>
@@ -57,6 +81,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
       </div>
       <div className="masterlist">
         <MasterList
+          filterPO={state.datasource}
           tabState={mainState}
           tabSetState={mainSetState}
           state={state}
