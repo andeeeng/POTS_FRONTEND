@@ -1,6 +1,10 @@
 import { Instance } from 'mobx-state-tree'
 import { RootStoreBase } from './RootStore.base'
-import { PURCHASEORDER_FRAGMENT, SCHEDULELINE_FRAGMENT } from '../helpers'
+import {
+  PURCHASEORDER_FRAGMENT,
+  SCHEDULELINE_FRAGMENT,
+  USER_FRAGMENT,
+} from '../helpers'
 
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
@@ -14,11 +18,23 @@ export const RootStore = RootStoreBase.views(self => {
       const sl: any = self.schedulelines.values()
       return [...sl]
     },
+    async vGetUser(username: any, pass: any) {
+      const values: any = self.users.values()
+
+      const users = [...values]
+
+      const getUser = users.filter(
+        user => user.userName == username && user.password == pass,
+      )
+      console.log(getUser)
+      return getUser
+    },
   }
 }).actions(self => ({
   afterCreate() {
     self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
     self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
+    self.queryAllUsers({}, USER_FRAGMENT)
   },
   updateStatus(scheduleLine: any) {
     console.log(scheduleLine, 'HERE THERE')
