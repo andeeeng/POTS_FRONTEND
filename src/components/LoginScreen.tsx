@@ -79,8 +79,9 @@ const Login = (props: IProps) => {
                 <Button
                   type="link"
                   style={{ color: 'white' }}
-                  onClick={() =>
-                    checkUser(userinfo.username, userinfo.password)
+                  onClick={
+                    () => console.log()
+                    // checkUser(userinfo.username, userinfo.password)
                   }>
                   <h5 style={{ color: 'white', fontSize: 10 }}>
                     Forgot Password?
@@ -96,7 +97,7 @@ const Login = (props: IProps) => {
                 }}>
                 <Button
                   onClick={() =>
-                    props.setState({ ...props.state, path: '/DashBoard' })
+                    checkUser(userinfo.username, userinfo.password)
                   }>
                   Login
                 </Button>
