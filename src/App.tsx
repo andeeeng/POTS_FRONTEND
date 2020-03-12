@@ -26,33 +26,91 @@ const rootStore = RootStore.create(undefined, {
 
 const App = () => {
   // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
-
+  const users = rootStore.vGetUser('Supp', 'supp')
+  console.log(users, 'APPTSX')
+  const { setQuery, store, error, data, loading } = useQuery()
   const [state, setState] = useState({
     path: '/',
+    currentKey: 'dashboard',
+    selectedSchedID: '',
+    tabkey: 'item',
+    collapseKey: ['0'],
+    log_ined: {
+      username: '',
+      password: '',
+      userlevel: '',
+      userId: '',
+    },
   })
-  rootStore.queryAllPurchaseOrders()
-  console.log(rootStore.vPurchaseOrders(), 'PO')
-  return (
-    <MainScreen
-      DBScreen={
+  const routes = [
+    {
+      path: '/',
+      exact: true,
+      main: () => (
+        <LoginScreen
+          getUser={rootStore.vGetUser}
+          state={state}
+          setState={setState}></LoginScreen>
+      ),
+    },
+    {
+      path: '/Dashboard',
+      exact: true,
+      main: () => (
         <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
           DBcontent={
             <DashboardContent
               status={statusReport}
               list={rootStore.vPurchaseOrders()}
+              statelogout={state}
+              setStatelogout={setState}
             />
-          }
-          POcontent={<OrderScreen po={rootStore.vPurchaseOrders()} />}
-          SUPcontent={<SupplierScreen po={rootStore.vPurchaseOrders()} />}
-          HeaderContent={
-            <UserInfo user="Mark Nabablit" date="February 5, 2020" />
           }></ScreenLayout>
-      }
-      loginScreen={
-        <LoginScreen state={state} setState={setState}></LoginScreen>
-      }
-      state={state}
-      setState={setState}></MainScreen>
+      ),
+    },
+    {
+      path: '/Orders',
+      exact: true,
+      main: () => (
+        <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
+          POcontent={
+            <OrderScreen
+              state={state}
+              setState={setState}
+              po={rootStore.vPurchaseOrders()}
+              updateStatus={updateStatus}
+            />
+          }></ScreenLayout>
+      ),
+    },
+
+    {
+      path: '/Suppliers',
+      exact: true,
+      main: () => (
+        <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
+          SUPcontent={
+            <SupplierScreen po={rootStore.vPurchaseOrders()} />
+          }></ScreenLayout>
+      ),
+    },
+  ]
+
+  const updateStatus = (scheduleline: any) => {
+    setQuery(rootStore.updateStatus(scheduleline))
+  }
+
+  return (
+    <MainScreen routes={routes} state={state} setState={setState}></MainScreen>
   )
 }
 

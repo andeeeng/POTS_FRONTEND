@@ -10,10 +10,33 @@ export interface ISupplierScreenProps {
   po?: any
 }
 
+const SearchFilterItem = (
+  text: any,
+  source: any,
+  setState: any,
+  state: any,
+) => {
+  const newData = source.filter((x: any) => {
+    const itemData = x.supplier.supplierName
+      ? x.supplier.supplierName.toUpperCase()
+      : ''.toUpperCase()
+    const textData = text.toUpperCase()
+    return itemData.indexOf(textData) > -1
+  })
+
+  setState(() => ({
+    ...state,
+    datasource: newData,
+    search: text,
+  }))
+}
+
 const OrderScreen = (props: ISupplierScreenProps) => {
   const [state, setState] = useState({
     sortby: 'name',
     POdata: props.po,
+    datasource: [],
+    search: '',
   })
 
   const sorts = [
@@ -37,8 +60,12 @@ const OrderScreen = (props: ISupplierScreenProps) => {
       <div className="searchandsort">
         <div className="search">
           <Search
+            // value={state.search}
+            // onChange={value => console.log(value., 'SEARCH value')}
             placeholder="input search text"
-            onSearch={value => console.log(value)}
+            onSearch={value =>
+              SearchFilterItem(value, state.POdata, setState, state)
+            }
             enterButton
           />
         </div>
@@ -47,7 +74,10 @@ const OrderScreen = (props: ISupplierScreenProps) => {
         </div>
       </div>
       <div className="masterlist">
-        <SupplierList state={state} setState={setState}></SupplierList>
+        <SupplierList
+          filtredPO={state.datasource}
+          state={state}
+          setState={setState}></SupplierList>
       </div>
     </div>
   )

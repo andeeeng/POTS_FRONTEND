@@ -1,6 +1,10 @@
 import { Instance } from 'mobx-state-tree'
 import { RootStoreBase } from './RootStore.base'
-import { PURCHASEORDER_FRAGMENT, SCHEDULELINE_FRAGMENT } from '../helpers'
+import {
+  PURCHASEORDER_FRAGMENT,
+  SCHEDULELINE_FRAGMENT,
+  USER_FRAGMENT,
+} from '../helpers'
 
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
@@ -14,15 +18,34 @@ export const RootStore = RootStoreBase.views(self => {
       const sl: any = self.schedulelines.values()
       return [...sl]
     },
-    vUser() {
-      const u: any = self.users.values()
+    async vGetUser(username: any, pass: any) {
+      const values: any = self.users.values()
+
+      const users = [...values]
+
+      const getUser = users.filter(
+        user => user.userName == username && user.password == pass,
+      )
+      console.log(getUser)
+      return getUser
     },
   }
 }).actions(self => ({
   afterCreate() {
     self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
     self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
+<<<<<<< HEAD
     self.q
+=======
+    self.queryAllUsers({}, USER_FRAGMENT)
+  },
+  updateStatus(scheduleLine: any) {
+    console.log(scheduleLine, 'HERE THERE')
+    return self.mutateUpdateScheduleLine(
+      { scheduleLine: scheduleLine },
+      SCHEDULELINE_FRAGMENT,
+    )
+>>>>>>> 20138aadf3452ba60e027bb6aecf90ad532c34cc
   },
   requestPurchaseOrders() {
     const poq = self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)

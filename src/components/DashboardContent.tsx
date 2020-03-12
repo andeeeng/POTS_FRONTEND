@@ -15,13 +15,18 @@ import moment from 'moment'
 import InfiniteScroll from 'react-infinite-scroller'
 import StatusItem from './StatusItem'
 import { statusReport, poList } from '../data/mockData'
+import { Segment } from 'semantic-ui-react'
 
 export interface IDashboardContentProps {
   status?: any
   list?: any
+  setStatelogout?: any
+  statelogout?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
+  const { setStatelogout, statelogout } = props
+
   const format = 'YYYY-MM-DD'
   const { status, list } = props
   const [state, setState] = useState({
@@ -111,18 +116,22 @@ const DashboardContent = (props: IDashboardContentProps) => {
             </div>
           </div>
           <div className="banner">
-            <div style={{ marginLeft: 20 }}>
-              <Title
-                level={4}
-                style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
-                Welcome Back, Admin!
-              </Title>
-              <Text>Tour last log-in was:</Text>
-              <br></br>
-              <Text>January 12, 2020 14:33 GST</Text>
-              <br /> <br />
-              <Text>Today is 02/30/2020 0839 +GST</Text>
-            </div>
+            {statelogout.log_ined.map((data: any, index: any) => {
+              return (
+                <div style={{ marginLeft: 20 }}>
+                  <Title
+                    level={4}
+                    style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
+                    Welcome Back, {data.username}!
+                  </Title>
+                  <Text>Your last log-in was:</Text>
+                  <br></br>
+                  <Text>January 12, 2020 14:33 GST</Text>
+                  <br /> <br />
+                  <Text>Today is {moment().format()}</Text>
+                </div>
+              )
+            })}
 
             <Card
               style={{
@@ -170,7 +179,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
                       description={
                         <div>
                           <Text>
-                            Document Date:{' '}
+                            Document Date:
                             {moment(item.documentDate).format('MMMM D, YYYY')}
                           </Text>
                         </div>
@@ -191,6 +200,13 @@ const DashboardContent = (props: IDashboardContentProps) => {
       </div>
       {/* <div className="truck"></div> */}
       <div>
+        <div style={{ marginLeft: 150, marginTop: -20, marginBottom: 50 }}>
+          <Button
+            type="link"
+            onClick={() => setStatelogout({ ...statelogout, path: '/' })}>
+            Logout
+          </Button>
+        </div>
         <div className="content2">
           <h5>To-Do List</h5>
           <Text>
