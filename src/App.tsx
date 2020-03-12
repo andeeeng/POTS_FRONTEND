@@ -26,7 +26,8 @@ const rootStore = RootStore.create(undefined, {
 
 const App = () => {
   // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
-  const PO = rootStore.vPurchaseOrders()
+  const users = rootStore.vGetUser('Supp', 'supp')
+  console.log(users, 'APPTSX')
   const { setQuery, store, error, data, loading } = useQuery()
   const [state, setState] = useState({
     path: '/',
@@ -34,12 +35,23 @@ const App = () => {
     selectedSchedID: '',
     tabkey: 'item',
     collapseKey: ['0'],
+    log_ined: {
+      username: '',
+      password: '',
+      userlevel: '',
+      userId: '',
+    },
   })
   const routes = [
     {
       path: '/',
       exact: true,
-      main: () => <LoginScreen state={state} setState={setState}></LoginScreen>,
+      main: () => (
+        <LoginScreen
+          getUser={rootStore.vGetUser}
+          state={state}
+          setState={setState}></LoginScreen>
+      ),
     },
     {
       path: '/Dashboard',
