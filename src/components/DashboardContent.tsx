@@ -22,10 +22,11 @@ export interface IDashboardContentProps {
   list?: any
   setStatelogout?: any
   statelogout?: any
+  userlevel?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
-  const { setStatelogout, statelogout } = props
+  const { setStatelogout, statelogout, userlevel } = props
 
   const format = 'YYYY-MM-DD'
   const { status, list } = props
@@ -120,7 +121,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
               <Title
                 level={4}
                 style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
-                Welcome Back, Admin!
+                Welcome Back, {userlevel}!
               </Title>
               <Text>Tour last log-in was:</Text>
               <br></br>

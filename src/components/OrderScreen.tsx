@@ -70,6 +70,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
           <Search
             placeholder="input search text"
             onSearch={value => {
+              console.log(value, 'valueeeeee')
               SearchFilterItem(value, state.POdata, setState, state)
             }}
             enterButton

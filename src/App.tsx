@@ -26,7 +26,10 @@ const rootStore = RootStore.create(undefined, {
 
 const App = () => {
   // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
+  console.log(rootStore.vGetUser('andeng', '123'), 'USERNAME')
+  rootStore.vGetUser('andeng', '123').map((x: any) => console.log(x))
   const PO = rootStore.vPurchaseOrders()
+  console.log(PO, 'PO')
   const { setQuery, store, error, data, loading } = useQuery()
   const [state, setState] = useState({
     path: '/',
@@ -35,6 +38,7 @@ const App = () => {
     tabkey: 'item',
     collapseKey: ['0'],
   })
+
   const routes = [
     {
       path: '/',

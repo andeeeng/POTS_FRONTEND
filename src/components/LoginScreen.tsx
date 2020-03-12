@@ -1,7 +1,39 @@
 import React, { useState } from 'react'
-import { Card, Input, Icon, Button } from 'antd'
+import { Card, Button, Input, Icon } from 'antd'
 
-const Login = (props: any) => {
+export interface ILoginScreenProps {
+  state?: any
+  setState?: any
+  po?: any
+  onClick?: any
+}
+
+const Login = (props: ILoginScreenProps) => {
+  const { po, state: mainState, setState: mainSetState, onClick } = props
+  const [state, setState] = useState({ username: '' })
+  const [state1, setState1] = useState({ password: '' })
+
+  const _handleChange = (event: any) => {
+    setState({ username: event.target.value })
+  }
+
+  const _handleChangepw = (event: any) => {
+    setState1({ password: event.target.value })
+  }
+
+  const _handleSubmit = (event: any) => {
+    event.preventDefault()
+    const data = { state, state1 }
+
+    console.log(data)
+  }
+
+  const getUser = () => {
+    if (state.username === 'Andeng' && state1.password === '123') {
+      return props.setState({ ...props.state, path: '/DashBoard' })
+    }
+  }
+
   return (
     <div style={{ backgroundColor: 'white', marginLeft: '600px' }}>
       <div className="logo-login"></div>
@@ -19,22 +51,34 @@ const Login = (props: any) => {
                 position: 'absolute',
               }}>
               <h5 style={{ color: 'white', fontSize: 12 }}>Username/Email</h5>
-              <Input
-                name={'username'}
+              {/* <Input
+                // name={username}
+
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
+                placeholder="username"
+                onChange={text => setState({...state, text})}
+                value={state.text}
+              /> */}
+              <Input
+                placeholder="username"
+                value={state.username}
+                onChange={_handleChange}
               />
-
+              />
               <br />
               <br />
               <div>
                 <h5 style={{ color: 'white', fontSize: 12 }}>Password</h5>
                 <Input.Password
-                  name={'password'}
+                  placeholder="password"
+                  value={state1.password}
+                  onChange={_handleChangepw}
                   prefix={
                     <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                   }
+                  //onChange={text => setState({ text })}
                 />
               </div>
               <div style={{ marginLeft: -10 }}>
@@ -52,9 +96,12 @@ const Login = (props: any) => {
                   marginTop: 70,
                 }}>
                 <Button
-                  onClick={() =>
-                    props.setState({ ...props.state, path: '/DashBoard' })
-                  }>
+                  // onClick={_handleSubmit}
+                  onClick={getUser}
+                  // onClick={() =>
+                  //   props.setState({ ...props.state, path: '/DashBoard' })
+                  // }
+                >
                   Login
                 </Button>
               </div>
