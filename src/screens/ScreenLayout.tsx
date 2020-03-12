@@ -15,33 +15,52 @@ export interface ILayout {
   POcontent?: any
   SUPcontent?: any
   HeaderContent?: any
+  routes?: any
+  state?: any
+  setState?: any
 }
 
 const App = (props: ILayout) => {
-  const { DBcontent, POcontent, SUPcontent, HeaderContent } = props
-  const [state, setState] = useState({
-    currentKey: 'dashboard',
-    path: '/DashBoard',
-  })
-  console.log(state, 'CURRENT KEY')
-  const routes = [
-    {
-      path: '/DashBoard',
-      exact: true,
-      main: () => DBcontent,
-    },
-    {
-      path: '/Orders',
-      exact: true,
-      main: () => POcontent,
-    },
-    {
-      path: '/Suppliers',
-      exact: true,
-      main: () => SUPcontent,
-    },
-  ]
+  const {
+    state,
+    setState,
+    routes,
+    DBcontent,
+    POcontent,
+    SUPcontent,
+    HeaderContent,
+  } = props
+  console.log(state.log_ined, 'USERINFO')
+  const renderSuppMenu = () => {
+    let userlevel = state.log_ined.map((x: any) => {
+      return x.userlevel
+    })
+    if (userlevel == 'Admin') {
+      return (
+        <Menu.Item key="supplier">
+          <Icon type="car" />
+          <span className="nav-text">My Suppliers</span>
+        </Menu.Item>
+      )
+    } else {
+      return null
+    }
+  }
+  const renderContent = (key: any) => {
+    switch (key) {
+      case 'dashboard':
+        return DBcontent
 
+      case 'order':
+        return POcontent
+
+      case 'supplier':
+        return SUPcontent
+
+      default:
+        break
+    }
+  }
   return (
     <Router>
       <Layout>
@@ -62,6 +81,7 @@ const App = (props: ILayout) => {
             selectedKeys={[state.currentKey]}
             // defaultSelectedKeys={['dashboard']}
             onClick={e => handleClick(e.key, state, setState)}>
+            {/* onClick={e => console.log('FUCK')}> */}
             <Menu.Item key="dashboard">
               <Icon type="dashboard" />
               <span className="nav-text">My Dashboard</span>
@@ -70,16 +90,10 @@ const App = (props: ILayout) => {
               <Icon type="shopping-cart" />
               <span className="nav-text">My Orders</span>
             </Menu.Item>
-            <Menu.Item key="supplier">
-              <Icon type="car" />
-              <span className="nav-text">My Suppliers</span>
-            </Menu.Item>
+            {renderSuppMenu()}
           </Menu>
         </Sider>
         <Layout>
-          {/* <Header style={{ background: "#fff", padding: 0, marginBottom: 20 }}>
-          {HeaderContent}
-        </Header> */}
           <Content
             style={{
               display: 'flex',
@@ -89,14 +103,7 @@ const App = (props: ILayout) => {
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
             }}>
-            <Redirect push to={state.path}></Redirect>
-            {routes.map(route => (
-              <Route
-                key={route.path}
-                path={route.path}
-                exact={route.exact}
-                component={route.main}></Route>
-            ))}
+            {renderContent(state.currentKey)}
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             Purchase Order Tracking System ©2020 Created by Fast Track
