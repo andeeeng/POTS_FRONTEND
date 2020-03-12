@@ -14,11 +14,15 @@ export const RootStore = RootStoreBase.views(self => {
       const sl: any = self.schedulelines.values()
       return [...sl]
     },
+    vUser() {
+      const u: any = self.users.values()
+    },
   }
 }).actions(self => ({
   afterCreate() {
     self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
     self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
+    self.q
   },
   requestPurchaseOrders() {
     const poq = self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
