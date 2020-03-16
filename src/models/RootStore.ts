@@ -1,54 +1,65 @@
-import { Instance } from "mobx-state-tree";
-import { RootStoreBase } from "./RootStore.base";
-import { PURCHASEORDER_FRAGMENT } from "../helpers";
+import { Instance } from 'mobx-state-tree'
+import { RootStoreBase } from './RootStore.base'
+import {
+  PURCHASEORDER_FRAGMENT,
+  SCHEDULELINE_FRAGMENT,
+  USER_FRAGMENT,
+  MESSAGE_FRAGMENT,
+} from '../helpers'
 
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
 export const RootStore = RootStoreBase.views(self => {
-  console.log("PURCHASE ORDERS", self.purchaseorders);
-  console.log("SUPPLIERS", self.suppliers);
-  console.log("ADDRESSES", self.addresss);
-  console.log("SUPPLIER STATUSES", self.supplierstatuss);
-  console.log("ITEMS", self.items);
   return {
     vPurchaseOrders() {
-      const po: any = self.purchaseorders.values();
-      return [...po];
+      const po: any = self.purchaseorders.values()
+      return [...po]
     },
-    vSuppliers() {
-      return [self.suppliers.values()];
+    vScheduleLine() {
+      const sl: any = self.schedulelines.values()
+      return [...sl]
     },
-    vAddresses() {
-      return [self.addresss.values()];
+    async vGetUser(username: any, pass: any) {
+      const values: any = self.users.values()
+
+      const users = [...values]
+
+      const getUser = users.filter(
+        user => user.userName == username && user.password == pass,
+      )
+      console.log(getUser)
+      return getUser
     },
-    vSupplierStatuses() {
-      return [self.supplierstatuss.values()];
+    vMessage() {
+      const message: any = self.messages.values()
+      const messages = [...message]
+      return messages[0]
     },
-    vItems() {
-      return [self.items.values()];
-    }
-  };
+  }
 }).actions(self => ({
   afterCreate() {
-    self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT);
-    // self.queryAllSuppliers({});
-    // self.queryAllAddresss({});
-    // self.queryAllSupplierStatus({});
-    // self.queryAllItems({});
+    self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
+    self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
+    self.queryAllUsers({}, USER_FRAGMENT)
+  },
+  updateStatus(scheduleLine: any) {
+    console.log(scheduleLine, 'HERE THERE')
+    return self.mutateUpdateScheduleLine(
+      { scheduleLine: scheduleLine },
+      SCHEDULELINE_FRAGMENT,
+    )
+  },
+  requestLogin(credential: { username: string; password: string }) {
+    return self.queryLogin({ credential: credential }, MESSAGE_FRAGMENT)
   },
   requestPurchaseOrders() {
-    return self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT);
-  }
-  // requestSuppliers() {
-  // 	return self.queryAllSuppliers({});
-  // },
-  // requestAddresses() {
-  // 	return self.queryAllAddresss({});
-  // },
-  // requestSupplierStatuses() {
-  // 	return self.queryAllSupplierStatus({});
-  // },
-  // requestItems() {
-  // 	return self.queryAllItems({});
-  // },
-}));
+    const poq = self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
+
+    return poq
+  },
+  requestScheduleLines() {
+    const sl = self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
+
+    return sl
+  },
+}))

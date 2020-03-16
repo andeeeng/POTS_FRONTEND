@@ -20,6 +20,7 @@
     "@types/wix-style-react": "^6.17.2",
     "antd": "^3.26.11",
     "bootstrap": "^4.4.1",
+    "buffer": "^5.5.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "graphql-request": "^1.8.2",
@@ -30,6 +31,7 @@
     "mst-gql": "^0.7.1",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
+    "react-border-wrapper": "^1.0.3",
     "react-calendar": "^2.19.2",
     "react-dom": "^16.12.0",
     "react-infinite-scroller": "^1.2.4",
@@ -49,7 +51,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "scaffold": "mst-gql --format ts --roots Address,Supplier,SupplierStatus,Item,PurchaseOrder http://localhost:4000/graphql   "
+    "scaffold": "mst-gql --format ts --roots Address,Supplier,SupplierStatus,Item,PurchaseOrder,User,ScheduleLine,Message http://localhost:4000/graphql   "
   },
   "eslintConfig": {
     "extends": "react-app"

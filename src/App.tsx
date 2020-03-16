@@ -1,42 +1,118 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import UserInfo from "./components/UserInfo";
-import ScreenLayout from "./screens/ScreenLayout";
-import OrderScreen from "./components/OrderScreen";
-import SupplierScreen from "./components/SupplierScreen";
-import DashboardContent from "./components/DashboardContent";
-import { statusReport, poList } from "./data/mockData";
+import React, { useState } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import UserInfo from './components/UserInfo'
+import ScreenLayout from './screens/ScreenLayout'
+import MainScreen from './screens/MainScreen'
+import OrderScreen from './components/OrderScreen'
+import SupplierScreen from './components/SupplierScreen'
+import DashboardContent from './components/DashboardContent'
+import LoginScreen from './components/LoginScreen'
+import { statusReport, poList } from './data/mockData'
+import { useQuery } from '../src/models/reactUtils'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 //mst
-import { createHttpClient } from "mst-gql";
-import { RootStore, StoreContext } from "../src/models";
-import { observer } from "mobx-react";
+import { createHttpClient } from 'mst-gql'
+import { RootStore, StoreContext } from '../src/models'
+import { observer } from 'mobx-react'
 const rootStore = RootStore.create(undefined, {
-  gqlHttpClient: createHttpClient("http://localhost:4000/graphql")
-});
+  gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
+})
 
 const App = () => {
-  console.log("TEST PUSH");
-  console.log("PO", rootStore.vPurchaseOrders());
-  return (
-    <div className="main">
-      <StoreContext.Provider value={rootStore}>
+  // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
+  const users = rootStore.vGetUser('Supp', 'supp')
+  console.log(users, 'APPTSX')
+  const { setQuery, store, error, data, loading } = useQuery()
+  const loginQuery = useQuery()
+  const [state, setState] = useState({
+    path: '/',
+    currentKey: 'dashboard',
+    selectedSchedID: '',
+    tabkey: 'item',
+    collapseKey: ['0'],
+    username: '',
+  })
+  console.log('Message', rootStore.vMessage())
+  const routes = [
+    {
+      path: '/',
+      exact: true,
+      main: () => (
+        <LoginScreen
+          loginQuery={rootStore.requestLogin}
+          messageInfo={rootStore.vMessage()}
+          state={state}
+          setState={setState}></LoginScreen>
+      ),
+    },
+    {
+      path: '/Dashboard',
+      exact: true,
+      main: () => (
         <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
+          userInfo={rootStore.vMessage()}
           DBcontent={
             <DashboardContent
               status={statusReport}
               list={rootStore.vPurchaseOrders()}
+              statelogout={state}
+              setStatelogout={setState}
             />
-          }
-          POcontent={<OrderScreen po={rootStore.vPurchaseOrders()} />}
-          SUPcontent={<SupplierScreen />}
-          HeaderContent={
-            <UserInfo user="Mark Nabablit" date="February 5, 2020" />
-          }
-        ></ScreenLayout>
-      </StoreContext.Provider>
-    </div>
-  );
-};
+          }></ScreenLayout>
+      ),
+    },
+    {
+      path: '/Orders',
+      exact: true,
+      main: () => (
+        <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
+          userInfo={rootStore.vMessage()}
+          POcontent={
+            <OrderScreen
+              state={state}
+              setState={setState}
+              po={rootStore.vPurchaseOrders()}
+              updateStatus={updateStatus}
+            />
+          }></ScreenLayout>
+      ),
+    },
 
-export default observer(App);
+    {
+      path: '/Suppliers',
+      exact: true,
+      main: () => (
+        <ScreenLayout
+          routes={routes}
+          state={state}
+          setState={setState}
+          userInfo={rootStore.vMessage()}
+          SUPcontent={
+            <SupplierScreen po={rootStore.vPurchaseOrders()} />
+          }></ScreenLayout>
+      ),
+    },
+  ]
+
+  const updateStatus = (scheduleline: any) => {
+    setQuery(rootStore.updateStatus(scheduleline))
+  }
+
+  return (
+    <MainScreen routes={routes} state={state} setState={setState}></MainScreen>
+  )
+}
+
+export default observer(App)

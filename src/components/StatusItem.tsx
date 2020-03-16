@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Label, Table, Divider, List } from "semantic-ui-react";
 import StatusList from "../components/StatusList";
 
@@ -29,33 +29,23 @@ const StatusItem = (props: IStatusItemProps) => {
     title
   } = props;
   return (
-    <div>
-      <text style={{ marginLeft: 50 }}>Here are updates on our goodies</text>
-      <List>
-        <List.Item>
-          <Label
-            size="big"
-            style={{ marginBottom: 10, marginTop: 20 }}
-            color="blue"
-          >
-            3
-          </Label>
-          <text style={{ marginLeft: 10 }}>Orders Received</text>
-        </List.Item>
-        <List.Item>
-          <Label size="big" style={{ marginBottom: 10 }} color="green">
-            20
-          </Label>
-          <text style={{ marginLeft: 10 }}>Released from Supplier</text>
-        </List.Item>
-        <List.Item>
-          <Label size="big" style={{}} color="brown">
-            10
-          </Label>
-          <text style={{ marginLeft: 10 }}>Cancelled by Supplier</text>
-        </List.Item>
-      </List>
-    </div>
+    <Fragment>
+      {status.map((stat: any) => (
+        <div>
+          {console.log(stat, "VALUE")}
+          <List.Item>
+            <Label
+              size="big"
+              style={{ marginBottom: 10, marginTop: 20 }}
+              color={stat.color}
+            >
+              {stat.number}
+            </Label>
+            <text style={{ marginLeft: 28 }}>{stat.statOption}</text>
+          </List.Item>
+        </div>
+      ))}
+    </Fragment>
   );
 };
 
