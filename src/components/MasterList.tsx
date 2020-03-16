@@ -188,7 +188,10 @@ const MasterList = (props: IMasterList) => {
     },
   }
   const renderUpdateStatus = (key: any) => {
-    if (key == 'sched') {
+    let userlevel = tabState.log_ined.map((x: any) => {
+      return x.userlevel
+    })
+    if (key == 'sched' && userlevel == 'Supplier') {
       return (
         <div className="history2">
           <div style={{ marginTop: '5px', marginRight: '2px' }}>
@@ -396,6 +399,7 @@ const MasterList = (props: IMasterList) => {
                       <InfiniteScroll
                         initialLoad={false}
                         pageStart={0}
+                        selected={tabState.selectedSchedID}
                         loadMore={() => console.log('LOAD MORE')}
                         // hasMore={!this.state.loading && this.state.hasMore}
                         useWindow={false}>

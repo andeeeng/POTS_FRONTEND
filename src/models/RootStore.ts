@@ -18,32 +18,16 @@ export const RootStore = RootStoreBase.views(self => {
       const sl: any = self.schedulelines.values()
       return [...sl]
     },
-    vUsers() {
-      const users: any = self.users.values()
-      return [...users]
-    },
-    vGetUser(user: any, pass: any) {
-      const getID = (username: any, password: any) => {
-        let user: Array<any> = []
-        const users: any = self.users.values()
-        const array = [...users]
-        console.log(array, 'ARRAY OP USER')
-        const filteruser = array.filter(
-          user => user.userName == username && user.password == password,
-        )
-        console.log(filteruser, 'FILTERED')
-        filteruser.map((x: any) => {
-          user.push({
-            id: x.id,
-            username: x.userName,
-            password: x.password,
-            userLevel: x.userLevel,
-          })
-        })
-        return user
-      }
+    async vGetUser(username: any, pass: any) {
+      const values: any = self.users.values()
 
-      return getID(user, pass)
+      const users = [...values]
+
+      const getUser = users.filter(
+        user => user.userName == username && user.password == pass,
+      )
+      console.log(getUser)
+      return getUser
     },
   }
 }).actions(self => ({

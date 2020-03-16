@@ -1,39 +1,37 @@
 import React, { useState } from 'react'
-import { Card, Button, Input, Icon } from 'antd'
+import { Card, Input, Icon, Button, message } from 'antd'
 
-export interface ILoginScreenProps {
+export interface IProps {
+  getUser?: any
   state?: any
   setState?: any
-  po?: any
-  onClick?: any
 }
 
-const Login = (props: ILoginScreenProps) => {
-  const { po, state: mainState, setState: mainSetState, onClick } = props
-  const [state, setState] = useState({ username: '' })
-  const [state1, setState1] = useState({ password: '' })
+const Login = (props: IProps) => {
+  const { state, setState, getUser } = props
+  const [userinfo, setInfo] = useState({
+    username: '',
+    password: '',
+  })
 
-  const _handleChange = (event: any) => {
-    setState({ username: event.target.value })
-  }
+  const checkUser = async (user: any, pass: any) => {
+    const login = await getUser(user, pass)
+    let data: Array<any> = []
 
-  const _handleChangepw = (event: any) => {
-    setState1({ password: event.target.value })
-  }
-
-  const _handleSubmit = (event: any) => {
-    event.preventDefault()
-    const data = { state, state1 }
-
-    console.log(data)
-  }
-
-  const getUser = () => {
-    if (state.username === 'Andeng' && state1.password === '123') {
-      return props.setState({ ...props.state, path: '/DashBoard' })
+    login.map((info: any) => {
+      data.push({
+        username: info.userName,
+        // password: info.password,
+        userlevel: info.userLevel,
+        userId: 'TEST',
+      })
+    })
+    if (login.length == 0) {
+      return message.error('Log-in failed')
+    } else {
+      setState({ ...state, path: '/DashBoard', log_ined: data })
     }
   }
-
   return (
     <div style={{ backgroundColor: 'white', marginLeft: '600px' }}>
       <div className="logo-login"></div>
@@ -51,30 +49,27 @@ const Login = (props: ILoginScreenProps) => {
                 position: 'absolute',
               }}>
               <h5 style={{ color: 'white', fontSize: 12 }}>Username/Email</h5>
-              {/* <Input
-                // name={username}
-
+              <Input
+                name={'username'}
+                value={userinfo.username}
+                onChange={(e: any) =>
+                  setInfo({ ...userinfo, username: e.target.value })
+                }
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 placeholder="username"
-                onChange={text => setState({...state, text})}
-                value={state.text}
-              /> */}
-              <Input
-                placeholder="username"
-                value={state.username}
-                onChange={_handleChange}
-              />
-              />
+              />{' '}
               <br />
               <br />
               <div>
                 <h5 style={{ color: 'white', fontSize: 12 }}>Password</h5>
                 <Input.Password
-                  placeholder="password"
-                  value={state1.password}
-                  onChange={_handleChangepw}
+                  name={'password'}
+                  value={userinfo.password}
+                  onChange={(e: any) =>
+                    setInfo({ ...userinfo, password: e.target.value })
+                  }
                   prefix={
                     <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                   }
@@ -82,7 +77,13 @@ const Login = (props: ILoginScreenProps) => {
                 />
               </div>
               <div style={{ marginLeft: -10 }}>
-                <Button type="link" style={{ color: 'white' }}>
+                <Button
+                  type="link"
+                  style={{ color: 'white' }}
+                  onClick={
+                    () => console.log()
+                    // checkUser(userinfo.username, userinfo.password)
+                  }>
                   <h5 style={{ color: 'white', fontSize: 10 }}>
                     Forgot Password?
                   </h5>
@@ -96,12 +97,9 @@ const Login = (props: ILoginScreenProps) => {
                   marginTop: 70,
                 }}>
                 <Button
-                  // onClick={_handleSubmit}
-                  onClick={getUser}
-                  // onClick={() =>
-                  //   props.setState({ ...props.state, path: '/DashBoard' })
-                  // }
-                >
+                  onClick={() =>
+                    checkUser(userinfo.username, userinfo.password)
+                  }>
                   Login
                 </Button>
               </div>

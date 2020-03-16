@@ -30,7 +30,22 @@ const App = (props: ILayout) => {
     SUPcontent,
     HeaderContent,
   } = props
-
+  console.log(state.log_ined, 'USERINFO')
+  const renderSuppMenu = () => {
+    let userlevel = state.log_ined.map((x: any) => {
+      return x.userlevel
+    })
+    if (userlevel == 'Admin') {
+      return (
+        <Menu.Item key="supplier">
+          <Icon type="car" />
+          <span className="nav-text">My Suppliers</span>
+        </Menu.Item>
+      )
+    } else {
+      return null
+    }
+  }
   const renderContent = (key: any) => {
     switch (key) {
       case 'dashboard':
@@ -41,6 +56,7 @@ const App = (props: ILayout) => {
 
       case 'supplier':
         return SUPcontent
+
       default:
         break
     }
@@ -74,10 +90,7 @@ const App = (props: ILayout) => {
               <Icon type="shopping-cart" />
               <span className="nav-text">My Orders</span>
             </Menu.Item>
-            <Menu.Item key="supplier">
-              <Icon type="car" />
-              <span className="nav-text">My Suppliers</span>
-            </Menu.Item>
+            {renderSuppMenu()}
           </Menu>
         </Sider>
         <Layout>
