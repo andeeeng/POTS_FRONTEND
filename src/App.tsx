@@ -29,26 +29,24 @@ const App = () => {
   const users = rootStore.vGetUser('Supp', 'supp')
   console.log(users, 'APPTSX')
   const { setQuery, store, error, data, loading } = useQuery()
+  const loginQuery = useQuery()
   const [state, setState] = useState({
     path: '/',
     currentKey: 'dashboard',
     selectedSchedID: '',
     tabkey: 'item',
     collapseKey: ['0'],
-    log_ined: {
-      username: '',
-      password: '',
-      userlevel: '',
-      userId: '',
-    },
+    username: '',
   })
+  console.log('Message', rootStore.vMessage())
   const routes = [
     {
       path: '/',
       exact: true,
       main: () => (
         <LoginScreen
-          getUser={rootStore.vGetUser}
+          loginQuery={rootStore.requestLogin}
+          messageInfo={rootStore.vMessage()}
           state={state}
           setState={setState}></LoginScreen>
       ),
@@ -61,6 +59,7 @@ const App = () => {
           routes={routes}
           state={state}
           setState={setState}
+          userInfo={rootStore.vMessage()}
           DBcontent={
             <DashboardContent
               status={statusReport}
@@ -79,6 +78,7 @@ const App = () => {
           routes={routes}
           state={state}
           setState={setState}
+          userInfo={rootStore.vMessage()}
           POcontent={
             <OrderScreen
               state={state}
@@ -98,6 +98,7 @@ const App = () => {
           routes={routes}
           state={state}
           setState={setState}
+          userInfo={rootStore.vMessage()}
           SUPcontent={
             <SupplierScreen po={rootStore.vPurchaseOrders()} />
           }></ScreenLayout>

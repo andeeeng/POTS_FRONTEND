@@ -18,6 +18,7 @@ export interface ILayout {
   routes?: any
   state?: any
   setState?: any
+  userInfo?: any
 }
 
 const App = (props: ILayout) => {
@@ -29,20 +30,24 @@ const App = (props: ILayout) => {
     POcontent,
     SUPcontent,
     HeaderContent,
+    userInfo,
   } = props
   console.log(state.log_ined, 'USERINFO')
   const renderSuppMenu = () => {
-    let userlevel = state.log_ined.map((x: any) => {
-      return x.userlevel
-    })
-    if (userlevel == 'Admin') {
-      return (
-        <Menu.Item key="supplier">
-          <Icon type="car" />
-          <span className="nav-text">My Suppliers</span>
-        </Menu.Item>
-      )
-    } else {
+    // let userlevel = state.log_ined.map((x: any) => {
+    //   return x.userlevel
+    // })
+    if (userInfo) {
+      const { userLevel } = userInfo
+      console.log('Userlevel', userLevel)
+      if (userLevel == 'Admin') {
+        return (
+          <Menu.Item key="supplier">
+            <Icon type="car" />
+            <span className="nav-text">My Suppliers</span>
+          </Menu.Item>
+        )
+      }
       return null
     }
   }
