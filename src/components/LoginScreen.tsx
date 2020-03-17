@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Card, Input, Icon, Button, message } from 'antd'
 import { Buffer } from 'buffer'
 import { observer } from 'mobx-react'
+import MeContext from '../MeContext'
 
 export interface IProps {
   getUser?: any
@@ -9,14 +10,21 @@ export interface IProps {
   setState?: any
   loginQuery?: any
   messageInfo?: any
+  login?: any
 }
 
 const Login = (props: IProps) => {
-  const { state, setState, getUser, loginQuery, messageInfo } = props
+  const context = useContext(MeContext)
+
+  const { login, state, setState, getUser, loginQuery, messageInfo } = props
   const [userinfo, setInfo] = useState({
     username: '',
     password: '',
   })
+
+  if (messageInfo) {
+    context.login(true)
+  }
 
   const checkUser = async (user: any, pass: any) => {
     const login = await getUser(user, pass)
@@ -50,20 +58,23 @@ const Login = (props: IProps) => {
     loginQuery: any,
     userinfo: { username: string; password: string },
   ) => {
-    loginQuery(convertToBase64(userinfo))
-    if (messageInfo) {
-      const { loggedIn } = messageInfo
-
-      if (loggedIn) {
-        setState({
-          ...state,
-          username: userinfo.username,
-          path: '/DashBoard',
-        })
-        return
-      }
-      return message.error('Log-in failed')
-    }
+    login(convertToBase64(userinfo))
+    // console.log(userinfo, 'MESSAGE INFO')
+    // loginQuery(convertToBase64(userinfo))
+    // console.log(messageInfo, 'MESSAGE INFO')
+    // if (messageInfo) {
+    //   const { loggedIn } = messageInfo
+    //   console.log(loggedIn, 'WHAT IS THIS')
+    //   if (loggedIn) {
+    //     setState({
+    //       ...state,
+    //       username: userinfo.username,
+    //       path: '/DashBoard',
+    //     })
+    //     return
+    //   }
+    //   return message.error('Log-in failed')
+    // }
   }
 
   return (
@@ -86,9 +97,10 @@ const Login = (props: IProps) => {
               <Input
                 name={'username'}
                 value={userinfo.username}
-                onChange={(e: any) =>
+                onChange={(e: any) => {
+                  setState({ ...state, username: e.target.value })
                   setInfo({ ...userinfo, username: e.target.value })
-                }
+                }}
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
@@ -192,4 +204,4 @@ const Login = (props: IProps) => {
   )
 }
 
-export default Login
+export default observer(Login)
