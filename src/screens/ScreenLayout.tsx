@@ -32,15 +32,16 @@ const App = (props: ILayout) => {
     HeaderContent,
     userInfo,
   } = props
-  console.log(state.log_ined, 'USERINFO')
   const renderSuppMenu = () => {
     // let userlevel = state.log_ined.map((x: any) => {
     //   return x.userlevel
     // })
+    console.log('Userlevel', userInfo)
     if (userInfo) {
       const { userLevel } = userInfo
       console.log('Userlevel', userLevel)
       if (userLevel == 'Admin') {
+        console.log('HERE PUMASOK')
         return (
           <Menu.Item key="supplier">
             <Icon type="car" />
