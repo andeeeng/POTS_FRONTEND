@@ -78,22 +78,18 @@ const DashboardContent = (props: IDashboardContentProps) => {
             </div>
           </div>
           <div className="banner">
-            {statelogout.log_ined.map((data: any, index: any) => {
-              return (
-                <div style={{ marginLeft: 20 }}>
-                  <Title
-                    level={4}
-                    style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
-                    Welcome Back, {data.username}!
-                  </Title>
-                  <Text>Your last log-in was:</Text>
-                  <br></br>
-                  <Text>January 12, 2020 14:33 GST</Text>
-                  <br /> <br />
-                  <Text>Today is {moment().format()}</Text>
-                </div>
-              )
-            })}
+            <div style={{ marginLeft: 20 }}>
+              <Title
+                level={4}
+                style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
+                Welcome Back, {statelogout.username}!
+              </Title>
+              <Text>Your last log-in was:</Text>
+              <br></br>
+              <Text>January 12, 2020 14:33 GST</Text>
+              <br /> <br />
+              <Text>Today is {moment().format()}</Text>
+            </div>
 
             <Card
               style={{

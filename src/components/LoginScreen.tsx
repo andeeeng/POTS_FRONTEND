@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { Card, Input, Icon, Button, message } from 'antd'
+import { Buffer } from 'buffer'
+import { observer } from 'mobx-react'
 import Logo from '../components/Logo'
 
 export interface IProps {
   getUser?: any
   state?: any
   setState?: any
+  loginQuery?: any
+  messageInfo?: any
 }
 
 const Login = (props: IProps) => {
-  const { state, setState, getUser } = props
+  const { state, setState, getUser, loginQuery, messageInfo } = props
   const [userinfo, setInfo] = useState({
     username: '',
     password: '',
@@ -33,6 +37,36 @@ const Login = (props: IProps) => {
       setState({ ...state, path: '/DashBoard', log_ined: data })
     }
   }
+
+  const convertToBase64 = (credential: any) => {
+    const { username, password } = credential
+    console.log(userinfo)
+    return {
+      username: new Buffer(username).toString('base64'),
+      password: new Buffer(password).toString('base64'),
+    }
+  }
+
+  const onSubmit = (
+    loginQuery: any,
+    userinfo: { username: string; password: string },
+  ) => {
+    loginQuery(convertToBase64(userinfo))
+    if (messageInfo) {
+      const { loggedIn } = messageInfo
+
+      if (loggedIn) {
+        setState({
+          ...state,
+          username: userinfo.username,
+          path: '/DashBoard',
+        })
+        return
+      }
+      return message.error('Log-in failed')
+    }
+  }
+
   return (
     <div style={{ backgroundColor: 'white', marginLeft: '600px' }}>
       <Logo />
@@ -97,10 +131,7 @@ const Login = (props: IProps) => {
                   display: 'flex',
                   marginTop: 70,
                 }}>
-                <Button
-                  onClick={() =>
-                    checkUser(userinfo.username, userinfo.password)
-                  }>
+                <Button onClick={() => onSubmit(loginQuery, userinfo)}>
                   Login
                 </Button>
               </div>
