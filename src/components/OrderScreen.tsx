@@ -12,6 +12,7 @@ export interface IOrderScreenProps {
   setState?: any
   store?: any
   setQuery?: any
+  userInfo?: any
 }
 const SearchFilterItem = (
   text: any,
@@ -41,6 +42,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
     po,
     state: mainState,
     setState: mainSetState,
+    userInfo,
   } = props
   const [state, setState] = useState({
     sortby: 'date',
@@ -87,6 +89,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
       </div>
       <div className="masterlist">
         <MasterList
+          userInfo={userInfo}
           store={store}
           setQuery={setQuery}
           filterPO={state.datasource}

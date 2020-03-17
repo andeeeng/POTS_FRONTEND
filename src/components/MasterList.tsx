@@ -26,6 +26,7 @@ export interface IMasterList {
   filterPO?: any
   store?: any
   setQuery?: any
+  userInfo?: any
 }
 
 const MasterList = (props: IMasterList) => {
@@ -34,6 +35,7 @@ const MasterList = (props: IMasterList) => {
     setQuery,
     state,
     setState,
+    userInfo,
     tabState,
     tabSetState,
     filterPO,
@@ -191,10 +193,12 @@ const MasterList = (props: IMasterList) => {
     },
   }
   const renderUpdateStatus = (key: any) => {
-    let userlevel = tabState.log_ined.map((x: any) => {
-      return x.userlevel
-    })
-    if (key == 'sched' && userlevel == 'Supplier') {
+    // let userlevel = tabState.log_ined.map((x: any) => {
+    //   return x.userlevel
+    // })
+    const { userLevel } = userInfo
+    console.log('Userlevel', userLevel)
+    if (key == 'sched' && userLevel == 'Supplier') {
       return (
         <div className="history2">
           <div style={{ marginTop: '5px', marginRight: '2px' }}>

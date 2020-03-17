@@ -1,6 +1,7 @@
 import { selectFromPurchaseOrder } from '../models/PurchaseOrderModel'
 import { selectFromUser } from '../models/UserModel'
 import { selectFromScheduleLine } from '../models/ScheduleLineModel'
+import { selectFromMessage } from '../models/MessageModel'
 
 export const USER_FRAGMENT = selectFromUser().userName.password.userLevel.toString()
 
@@ -34,3 +35,5 @@ export const PURCHASEORDER_FRAGMENT = selectFromPurchaseOrder()
       ),
   )
   .toString()
+
+export const MESSAGE_FRAGMENT = selectFromMessage().loggedIn.message.userLevel.toString()

@@ -19,18 +19,24 @@ import { ScheduleLineModel, ScheduleLineModelType } from "./ScheduleLineModel"
 import { scheduleLineModelPrimitives, ScheduleLineModelSelector } from "./ScheduleLineModel.base"
 import { PurchaseOrderModel, PurchaseOrderModelType } from "./PurchaseOrderModel"
 import { purchaseOrderModelPrimitives, PurchaseOrderModelSelector } from "./PurchaseOrderModel.base"
+import { MessageModel, MessageModelType } from "./MessageModel"
+import { messageModelPrimitives, MessageModelSelector } from "./MessageModel.base"
 
 
+export type CredentialInput = {
+  username: string
+  password: string
+}
 export type UserInput = {
+  userId: string
   userName: string
   password: string
   userLevel: string
 }
 export type UpdateUserInput = {
   id: string
-  userName: string
-  password: string
-  userLevel: string
+  userName?: string
+  password?: string
 }
 export type SupplierInput = {
   supplierNo: string
@@ -97,7 +103,6 @@ export type UpdateItemInput = {
   totalAmount?: number
   discount?: number
   supplierStatusItem?: string
-  scheduleLine?: ScheduleLineInput[]
   currency?: string
   dateUpdated?: string
   timeUpdated?: string
@@ -141,7 +146,8 @@ type Refs = {
   items: ObservableMap<string, ItemModelType>,
   purchaseorders: ObservableMap<string, PurchaseOrderModelType>,
   users: ObservableMap<string, UserModelType>,
-  schedulelines: ObservableMap<string, ScheduleLineModelType>
+  schedulelines: ObservableMap<string, ScheduleLineModelType>,
+  messages: ObservableMap<string, MessageModelType>
 }
 
 /**
@@ -149,7 +155,7 @@ type Refs = {
 */
 export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
   .named("RootStore")
-  .extend(configureStoreMixin([['User', () => UserModel], ['Address', () => AddressModel], ['Supplier', () => SupplierModel], ['SupplierStatus', () => SupplierStatusModel], ['Item', () => ItemModel], ['ScheduleLine', () => ScheduleLineModel], ['PurchaseOrder', () => PurchaseOrderModel]], ['Address', 'Supplier', 'SupplierStatus', 'Item', 'PurchaseOrder', 'User', 'ScheduleLine']))
+  .extend(configureStoreMixin([['User', () => UserModel], ['Address', () => AddressModel], ['Supplier', () => SupplierModel], ['SupplierStatus', () => SupplierStatusModel], ['Item', () => ItemModel], ['ScheduleLine', () => ScheduleLineModel], ['PurchaseOrder', () => PurchaseOrderModel], ['Message', () => MessageModel]], ['Address', 'Supplier', 'SupplierStatus', 'Item', 'PurchaseOrder', 'User', 'ScheduleLine', 'Message']))
   .props({
     addresss: types.optional(types.map(types.late((): any => AddressModel)), {}),
     suppliers: types.optional(types.map(types.late((): any => SupplierModel)), {}),
@@ -157,7 +163,8 @@ export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
     items: types.optional(types.map(types.late((): any => ItemModel)), {}),
     purchaseorders: types.optional(types.map(types.late((): any => PurchaseOrderModel)), {}),
     users: types.optional(types.map(types.late((): any => UserModel)), {}),
-    schedulelines: types.optional(types.map(types.late((): any => ScheduleLineModel)), {})
+    schedulelines: types.optional(types.map(types.late((): any => ScheduleLineModel)), {}),
+    messages: types.optional(types.map(types.late((): any => MessageModel)), {})
   })
   .actions(self => ({
     queryUser(variables: { id?: string }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), options: QueryOptions = {}) {
@@ -228,6 +235,11 @@ export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
     queryAllScheduleLines(variables?: {  }, resultSelector: string | ((qb: ScheduleLineModelSelector) => ScheduleLineModelSelector) = scheduleLineModelPrimitives.toString(), options: QueryOptions = {}) {
       return self.query<{ allScheduleLines: ScheduleLineModelType[]}>(`query allScheduleLines { allScheduleLines {
         ${typeof resultSelector === "function" ? resultSelector(new ScheduleLineModelSelector()).toString() : resultSelector}
+      } }`, variables, options)
+    },
+    queryLogin(variables: { credential: CredentialInput }, resultSelector: string | ((qb: MessageModelSelector) => MessageModelSelector) = messageModelPrimitives.toString(), options: QueryOptions = {}) {
+      return self.query<{ login: MessageModelType}>(`query login($credential: CredentialInput!) { login(credential: $credential) {
+        ${typeof resultSelector === "function" ? resultSelector(new MessageModelSelector()).toString() : resultSelector}
       } }`, variables, options)
     },
     mutateCreateUser(variables: { user: UserInput }, resultSelector: string | ((qb: UserModelSelector) => UserModelSelector) = userModelPrimitives.toString(), optimisticUpdate?: () => void) {
