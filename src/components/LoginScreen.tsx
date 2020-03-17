@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Input, Icon, Button, message } from 'antd'
+import Logo from '../components/Logo'
 
 export interface IProps {
   getUser?: any
@@ -34,7 +35,7 @@ const Login = (props: IProps) => {
   }
   return (
     <div style={{ backgroundColor: 'white', marginLeft: '600px' }}>
-      <div className="logo-login"></div>
+      <Logo />
       <div
         style={{
           padding: '30px',

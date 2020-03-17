@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react'
 import {
   Calendar,
   List,
-  Avatar,
   Typography,
   Card,
   Divider,
@@ -16,7 +15,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 import StatusItem from './StatusItem'
 import { statusReport, poList } from '../data/mockData'
 import { Segment } from 'semantic-ui-react'
-
+import Avatar from '../components/Avatar'
 export interface IDashboardContentProps {
   status?: any
   list?: any
@@ -35,37 +34,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
     selectedDate: moment().format(format),
   })
   const { Title, Text } = Typography
-  const data = [
-    {
-      title: 'ORDER NUMBER 1',
-      date: '2020-02-23',
-    },
 
-    {
-      title: 'ORDER NUMBER 2',
-      date: '2020-02-20',
-    },
-    {
-      title: 'ORDER NUMBER 3',
-      date: '2020-02-20',
-    },
-    {
-      title: 'ORDER NUMBER 4',
-      date: '2020-02-20',
-    },
-    {
-      title: 'ORDER NUMBER 5',
-      date: '2020-02-19',
-    },
-    {
-      title: 'ORDER NUMBER 6',
-      date: '2020-02-21',
-    },
-    {
-      title: 'ORDER NUMBER 7',
-      date: '2020-02-21',
-    },
-  ]
   console.log(list, 'ARRAYLIST')
   const filterbydate = list.filter(
     (x: any) =>
@@ -104,15 +73,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
           <div className="avatar">
             <div className="rows">
               <div>
-                <Avatar
-                  size={60}
-                  icon="user"
-                  style={{
-                    backgroundColor: '#3182CE',
-                    color: 'white',
-                    marginRight: '10px',
-                  }}
-                />
+                <Avatar />
               </div>
             </div>
           </div>
