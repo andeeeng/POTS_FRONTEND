@@ -25,10 +25,7 @@ const rootStore = RootStore.create(undefined, {
 })
 
 const App = () => {
-  // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
-  const users = rootStore.vGetUser('Supp', 'supp')
-  console.log(users, 'APPTSX')
-  const { setQuery, store, error, data, loading } = useQuery()
+  const { setQuery } = useQuery()
   const [state, setState] = useState({
     path: '/',
     currentKey: 'dashboard',
@@ -83,8 +80,9 @@ const App = () => {
             <OrderScreen
               state={state}
               setState={setState}
+              store={rootStore}
+              setQuery={setQuery}
               po={rootStore.vPurchaseOrders()}
-              updateStatus={updateStatus}
             />
           }></ScreenLayout>
       ),
@@ -104,10 +102,6 @@ const App = () => {
       ),
     },
   ]
-
-  const updateStatus = (scheduleline: any) => {
-    setQuery(rootStore.updateStatus(scheduleline))
-  }
 
   return (
     <MainScreen routes={routes} state={state} setState={setState}></MainScreen>

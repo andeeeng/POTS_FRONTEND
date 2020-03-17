@@ -21,6 +21,14 @@ export const handleClick = (key: any, state: any, setState: any) => {
   })
 }
 
+export const updateStatus = (
+  scheduleline: any,
+  rootStore: any,
+  setQuery: any,
+) => {
+  setQuery(rootStore.updateStatus(scheduleline))
+}
+
 export const showContent = (
   key: any,
   DBcontent: any,

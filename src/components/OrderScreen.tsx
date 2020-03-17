@@ -6,12 +6,12 @@ import { POdata } from '../data/MasterListMock'
 import { Divider, Input } from 'antd'
 import { observer } from 'mobx-react'
 const { Search } = Input
-
 export interface IOrderScreenProps {
   po?: any
-  updateStatus?: any
   state?: any
   setState?: any
+  store?: any
+  setQuery?: any
 }
 const SearchFilterItem = (
   text: any,
@@ -35,7 +35,13 @@ const SearchFilterItem = (
 }
 
 const OrderScreen = (props: IOrderScreenProps) => {
-  const { updateStatus, po, state: mainState, setState: mainSetState } = props
+  const {
+    store,
+    setQuery,
+    po,
+    state: mainState,
+    setState: mainSetState,
+  } = props
   const [state, setState] = useState({
     sortby: 'date',
     POdata: po,
@@ -81,12 +87,13 @@ const OrderScreen = (props: IOrderScreenProps) => {
       </div>
       <div className="masterlist">
         <MasterList
+          store={store}
+          setQuery={setQuery}
           filterPO={state.datasource}
           tabState={mainState}
           tabSetState={mainSetState}
           state={state}
-          setState={setState}
-          updateStatus={updateStatus}></MasterList>
+          setState={setState}></MasterList>
       </div>
     </div>
   )
