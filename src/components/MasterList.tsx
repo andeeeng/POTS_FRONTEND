@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react'
+import { updateStatus } from './helper_functions'
 import InfiniteScroll from 'react-infinite-scroller'
 import {
   Button,
@@ -20,17 +21,21 @@ const { Option } = Select
 export interface IMasterList {
   state: any
   setState: any
-  updateStatus?: any
   tabState?: any
   tabSetState?: any
   filterPO?: any
+  store?: any
+  setQuery?: any
+  userInfo?: any
 }
 
 const MasterList = (props: IMasterList) => {
   const {
+    store,
+    setQuery,
     state,
     setState,
-    updateStatus,
+    userInfo,
     tabState,
     tabSetState,
     filterPO,
@@ -188,10 +193,12 @@ const MasterList = (props: IMasterList) => {
     },
   }
   const renderUpdateStatus = (key: any) => {
-    let userlevel = tabState.log_ined.map((x: any) => {
-      return x.userlevel
-    })
-    if (key == 'sched' && userlevel == 'Supplier') {
+    // let userlevel = tabState.log_ined.map((x: any) => {
+    //   return x.userlevel
+    // })
+    const { userLevel } = userInfo
+    console.log('Userlevel', userLevel)
+    if (key == 'sched' && userLevel == 'Supplier') {
       return (
         <div className="history2">
           <div style={{ marginTop: '5px', marginRight: '2px' }}>
@@ -211,7 +218,7 @@ const MasterList = (props: IMasterList) => {
             <Button
               type="primary"
               onClick={() => {
-                updateStatus(linesched)
+                updateStatus(linesched, store, setQuery)
               }}>
               Update Status
             </Button>

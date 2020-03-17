@@ -1,18 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Card, Input, Icon, Button, message } from 'antd'
+import { Buffer } from 'buffer'
+import { observer } from 'mobx-react'
+import MeContext from '../MeContext'
 
 export interface IProps {
   getUser?: any
   state?: any
   setState?: any
+  loginQuery?: any
+  messageInfo?: any
+  login?: any
 }
 
 const Login = (props: IProps) => {
-  const { state, setState, getUser } = props
+  const context = useContext(MeContext)
+
+  const { login, state, setState, getUser, loginQuery, messageInfo } = props
   const [userinfo, setInfo] = useState({
     username: '',
     password: '',
   })
+
+  if (messageInfo) {
+    context.login(true)
+  }
 
   const checkUser = async (user: any, pass: any) => {
     const login = await getUser(user, pass)
@@ -32,6 +44,39 @@ const Login = (props: IProps) => {
       setState({ ...state, path: '/DashBoard', log_ined: data })
     }
   }
+
+  const convertToBase64 = (credential: any) => {
+    const { username, password } = credential
+    console.log(userinfo)
+    return {
+      username: new Buffer(username).toString('base64'),
+      password: new Buffer(password).toString('base64'),
+    }
+  }
+
+  const onSubmit = (
+    loginQuery: any,
+    userinfo: { username: string; password: string },
+  ) => {
+    login(convertToBase64(userinfo))
+    // console.log(userinfo, 'MESSAGE INFO')
+    // loginQuery(convertToBase64(userinfo))
+    // console.log(messageInfo, 'MESSAGE INFO')
+    // if (messageInfo) {
+    //   const { loggedIn } = messageInfo
+    //   console.log(loggedIn, 'WHAT IS THIS')
+    //   if (loggedIn) {
+    //     setState({
+    //       ...state,
+    //       username: userinfo.username,
+    //       path: '/DashBoard',
+    //     })
+    //     return
+    //   }
+    //   return message.error('Log-in failed')
+    // }
+  }
+
   return (
     <div style={{ backgroundColor: 'white', marginLeft: '600px' }}>
       <div className="logo-login"></div>
@@ -52,9 +97,10 @@ const Login = (props: IProps) => {
               <Input
                 name={'username'}
                 value={userinfo.username}
-                onChange={(e: any) =>
+                onChange={(e: any) => {
+                  setState({ ...state, username: e.target.value })
                   setInfo({ ...userinfo, username: e.target.value })
-                }
+                }}
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
@@ -95,10 +141,7 @@ const Login = (props: IProps) => {
                   display: 'flex',
                   marginTop: 70,
                 }}>
-                <Button
-                  onClick={() =>
-                    checkUser(userinfo.username, userinfo.password)
-                  }>
+                <Button onClick={() => onSubmit(loginQuery, userinfo)}>
                   Login
                 </Button>
               </div>
@@ -161,4 +204,4 @@ const Login = (props: IProps) => {
   )
 }
 
-export default Login
+export default observer(Login)
