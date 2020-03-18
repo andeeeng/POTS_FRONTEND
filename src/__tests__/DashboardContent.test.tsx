@@ -9,14 +9,14 @@ import { shallow } from 'enzyme'
 // // Note: test renderer must be required after react-native.
 // import renderer from "react-test-renderer";
 
-import AdminMenu from '../components/AdminMenu'
+import DashboardContent from '../components/DashboardContent'
 
 const props = {
-  title: 'Admin Menu',
+  title: 'Dashboard Content',
 }
 
-describe('Admin Menu', () => {
+describe('Dashboard Content', () => {
   test('renders correctly', () => {
-    expect(shallow(<AdminMenu {...props} />)).toMatchSnapshot()
+    expect(shallow(<DashboardContent {...props} />)).toMatchSnapshot()
   })
 })

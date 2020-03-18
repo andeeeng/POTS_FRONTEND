@@ -12,6 +12,7 @@ export interface IProps {
   loginQuery?: any
   messageInfo?: any
   login?: any
+  title?: any
 }
 
 const Login = (props: IProps) => {

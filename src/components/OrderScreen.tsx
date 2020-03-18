@@ -13,6 +13,7 @@ export interface IOrderScreenProps {
   store?: any
   setQuery?: any
   userInfo?: any
+  title?: any
 }
 const SearchFilterItem = (
   text: any,
@@ -43,6 +44,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
     state: mainState,
     setState: mainSetState,
     userInfo,
+    title,
   } = props
   const [state, setState] = useState({
     sortby: 'date',

@@ -22,10 +22,11 @@ export interface IDashboardContentProps {
   setStatelogout?: any
   statelogout?: any
   userlevel?: any
+  title?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
-  const { setStatelogout, statelogout, userlevel } = props
+  const { setStatelogout, statelogout, userlevel, title } = props
 
   const format = 'YYYY-MM-DD'
   const { status, list } = props

@@ -19,14 +19,15 @@ const { Text, Title } = Typography
 const { TabPane } = Tabs
 const { Option } = Select
 export interface IMasterList {
-  state: any
-  setState: any
+  state?: any
+  setState?: any
   tabState?: any
   tabSetState?: any
   filterPO?: any
   store?: any
   setQuery?: any
   userInfo?: any
+  title?: any
 }
 
 const MasterList = (props: IMasterList) => {
@@ -39,6 +40,7 @@ const MasterList = (props: IMasterList) => {
     tabState,
     tabSetState,
     filterPO,
+    title,
   } = props
 
   const status = [
