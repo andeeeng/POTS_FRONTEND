@@ -4,6 +4,7 @@ import { Buffer } from 'buffer'
 import { observer } from 'mobx-react'
 import Logo from '../components/Logo'
 import MeContext from '../MeContext'
+import { convertToBase64, onSubmit } from '../components/helper_functions'
 
 export interface IProps {
   getUser?: any
@@ -26,57 +27,6 @@ const Login = (props: IProps) => {
 
   if (messageInfo) {
     context.login(true)
-  }
-
-  const checkUser = async (user: any, pass: any) => {
-    const login = await getUser(user, pass)
-    let data: Array<any> = []
-
-    login.map((info: any) => {
-      data.push({
-        username: info.userName,
-        // password: info.password,
-        userlevel: info.userLevel,
-        userId: 'TEST',
-      })
-    })
-    if (login.length == 0) {
-      return message.error('Log-in failed')
-    } else {
-      setState({ ...state, path: '/DashBoard', log_ined: data })
-    }
-  }
-
-  const convertToBase64 = (credential: any) => {
-    const { username, password } = credential
-    console.log(userinfo)
-    return {
-      username: new Buffer(username).toString('base64'),
-      password: new Buffer(password).toString('base64'),
-    }
-  }
-
-  const onSubmit = (
-    loginQuery: any,
-    userinfo: { username: string; password: string },
-  ) => {
-    login(convertToBase64(userinfo))
-    // console.log(userinfo, 'MESSAGE INFO')
-    // loginQuery(convertToBase64(userinfo))
-    // console.log(messageInfo, 'MESSAGE INFO')
-    // if (messageInfo) {
-    //   const { loggedIn } = messageInfo
-    //   console.log(loggedIn, 'WHAT IS THIS')
-    //   if (loggedIn) {
-    //     setState({
-    //       ...state,
-    //       username: userinfo.username,
-    //       path: '/DashBoard',
-    //     })
-    //     return
-    //   }
-    //   return message.error('Log-in failed')
-    // }
   }
 
   return (
@@ -144,9 +94,7 @@ const Login = (props: IProps) => {
                   display: 'flex',
                   marginTop: 70,
                 }}>
-                <Button onClick={() => onSubmit(loginQuery, userinfo)}>
-                  Login
-                </Button>
+                <Button onClick={() => onSubmit(login, userinfo)}>Login</Button>
               </div>
             </div>
           </div>
