@@ -85,7 +85,7 @@ padding: 10px;
   overflow: auto;
   padding: 8px 24px;
   height: 330px;
-  flex: 0 0 860px;
+  flex: 0 0 900px;
 }
 
 .orderitemtablemax{
@@ -113,7 +113,7 @@ padding: 10px;
   display: flex;
   flex: 1 1 auto;
   flex-flow: column wrap;
-  /* width: 300; */
+  width: 300;
   border: "1px solid #d9d9d9";
   border-radius: 4 ;
   align-items: center;
@@ -299,19 +299,6 @@ margin-top: 20px;
   
 }
 
-.truck {
-  display: flex;
-  flex: 1 1 auto;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 180%;
-  height: 100%;
-  margin-top: -55px;
-  background-image: url("truck.png");
-  margin-left: 450px;
-  position: absolute;
-  
-}
 
 .App-logo {
   height: 40vmin;
@@ -377,4 +364,10 @@ margin-top: 20px;
   to {
     transform: rotate(360deg);
   }
+}
+
+.site-calendar-demo-card {
+  width: 300px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
 }

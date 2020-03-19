@@ -19,14 +19,15 @@ const { Text, Title } = Typography
 const { TabPane } = Tabs
 const { Option } = Select
 export interface IMasterList {
-  state: any
-  setState: any
+  state?: any
+  setState?: any
   tabState?: any
   tabSetState?: any
   filterPO?: any
   store?: any
   setQuery?: any
   userInfo?: any
+  title?: any
 }
 
 const MasterList = (props: IMasterList) => {
@@ -39,6 +40,7 @@ const MasterList = (props: IMasterList) => {
     tabState,
     tabSetState,
     filterPO,
+    title,
   } = props
 
   const status = [
@@ -101,11 +103,6 @@ const MasterList = (props: IMasterList) => {
       title: 'Status',
       key: 'supplierStatusItem',
       dataIndex: 'supplierStatusItem',
-      render: (item: any) => (
-        <span>
-          <Tag color={itemStatusColor(item)}>{item.toUpperCase()}</Tag>
-        </span>
-      ),
     },
   ]
   const itemStatusColor = (status: any) => {
@@ -377,6 +374,7 @@ const MasterList = (props: IMasterList) => {
                           </div>
                         </div>
                       </div>
+                      {console.log(data.items, 'ITEMS DATA')}
                       <InfiniteScroll
                         initialLoad={false}
                         pageStart={0}

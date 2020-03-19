@@ -127,9 +127,8 @@ const App = () => {
     if (!loggedIn) {
       return (
         <LoginScreen
-          setQuery={setQuery}
           rootStore={rootStore}
-          loginQuery={rootStore.requestLogin}
+          setQuery={setQuery}
           messageInfo={rootStore.vMessage()}
           state={state}
           setState={setState}></LoginScreen>
