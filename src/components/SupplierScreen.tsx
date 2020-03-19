@@ -1,27 +1,32 @@
-import React, { Fragment, useState } from "react";
-import InfiniteScroll from "react-infinite-scroller";
-import SortBy from "../components/SortBy";
-import SupplierList from "../components/SupplierList";
-import { POdata } from "../data/MasterListMock";
-import { Divider, Input } from "antd";
-const { Search } = Input;
-const OrderScreen = () => {
+import React, { Fragment, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroller'
+import SortBy from '../components/SortBy'
+import SupplierList from '../components/SupplierList'
+import { POdata } from '../data/MasterListMock'
+import { Divider, Input } from 'antd'
+const { Search } = Input
+
+export interface ISupplierScreenProps {
+  po?: any
+}
+
+const OrderScreen = (props: ISupplierScreenProps) => {
   const [state, setState] = useState({
-    sortby: "name",
-    POdata: POdata
-  });
+    sortby: 'name',
+    POdata: props.po,
+  })
 
   const sorts = [
     {
-      value: "name",
-      desc: "Name"
+      value: 'name',
+      desc: 'Name',
     },
 
     {
-      value: "status",
-      desc: "Status"
-    }
-  ];
+      value: 'status',
+      desc: 'Status',
+    },
+  ]
   return (
     <div className="content1orders">
       <div>
@@ -45,7 +50,7 @@ const OrderScreen = () => {
         <SupplierList state={state} setState={setState}></SupplierList>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OrderScreen;
+export default OrderScreen

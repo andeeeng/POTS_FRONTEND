@@ -1,43 +1,43 @@
 export const handleClick = (key: any, state: any, setState: any) => {
   const path = () => {
     switch (key) {
-      case "dashboard":
-        return "/";
+      case 'dashboard':
+        return '/DashBoard'
 
-      case "order":
-        return "/Orders";
+      case 'order':
+        return '/Orders'
 
-      case "supplier":
-        return "/Suppliers";
+      case 'supplier':
+        return '/Suppliers'
 
       default:
-        break;
+        break
     }
-  };
+  }
   setState({
     ...state,
     currentKey: key,
-    path: path()
-  });
-};
+    path: path(),
+  })
+}
 
 export const showContent = (
   key: any,
   DBcontent: any,
   POcontent: any,
-  SUPcontent: any
+  SUPcontent: any,
 ) => {
   switch (key) {
-    case "dashboard":
-      return DBcontent;
+    case 'dashboard':
+      return DBcontent
 
-    case "order":
-      return POcontent;
+    case 'order':
+      return POcontent
 
-    case "supplier":
-      return SUPcontent;
+    case 'supplier':
+      return SUPcontent
 
     default:
-      break;
+      break
   }
-};
+}

@@ -1,68 +1,66 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import { Layout, Menu, Icon } from "antd";
-import { handleClick, showContent } from "../components/helper_functions";
+import { Layout, Menu, Icon } from 'antd'
+import { handleClick, showContent } from '../components/helper_functions'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
-} from "react-router-dom";
+  Redirect,
+} from 'react-router-dom'
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer, Sider } = Layout
 export interface ILayout {
-  DBcontent?: any;
-  POcontent?: any;
-  SUPcontent?: any;
-  HeaderContent?: any;
+  DBcontent?: any
+  POcontent?: any
+  SUPcontent?: any
+  HeaderContent?: any
 }
 
 const App = (props: ILayout) => {
-  const { DBcontent, POcontent, SUPcontent, HeaderContent } = props;
+  const { DBcontent, POcontent, SUPcontent, HeaderContent } = props
   const [state, setState] = useState({
-    currentKey: "order",
-    path: "/"
-  });
+    currentKey: 'order',
+    path: '/DashBoard',
+  })
 
   const routes = [
     {
-      path: "/",
+      path: '/DashBoard',
       exact: true,
-      main: () => DBcontent
+      main: () => DBcontent,
     },
     {
-      path: "/Orders",
+      path: '/Orders',
       exact: true,
-      main: () => POcontent
+      main: () => POcontent,
     },
     {
-      path: "/Suppliers",
+      path: '/Suppliers',
       exact: true,
-      main: () => SUPcontent
-    }
-  ];
+      main: () => SUPcontent,
+    },
+  ]
 
   return (
     <Router>
       <Layout>
         <Sider
-          style={{ backgroundColor: "white" }}
+          style={{ backgroundColor: 'white' }}
           breakpoint="lg"
           collapsedWidth="0"
           onBreakpoint={broken => {
-            console.log(broken);
+            console.log(broken)
           }}
           onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
-        >
+            console.log(collapsed, type)
+          }}>
           <div className="logo" />
           <Menu
             theme="light"
             mode="inline"
-            defaultSelectedKeys={["dashboard"]}
-            onClick={e => handleClick(e.key, state, setState)}
-          >
+            defaultSelectedKeys={['dashboard']}
+            onClick={e => handleClick(e.key, state, setState)}>
             <Menu.Item key="dashboard">
               <Icon type="dashboard" />
               <span className="nav-text">My Dashboard</span>
@@ -83,31 +81,29 @@ const App = (props: ILayout) => {
         </Header> */}
           <Content
             style={{
-              display: "flex",
-              backgroundColor: "#E2E8F0",
-              padding: "30px",
-              flexFlow: "row wrap",
-              alignItems: "flex-start",
-              justifyContent: "flex-start"
-            }}
-          >
+              display: 'flex',
+              backgroundColor: 'white',
+              padding: '30px',
+              flexFlow: 'row wrap',
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+            }}>
             <Redirect push to={state.path}></Redirect>
             {routes.map(route => (
               <Route
                 key={route.path}
                 path={route.path}
                 exact={route.exact}
-                component={route.main}
-              ></Route>
+                component={route.main}></Route>
             ))}
           </Content>
-          <Footer style={{ textAlign: "center" }}>
+          <Footer style={{ textAlign: 'center' }}>
             Purchase Order Tracking System ©2020 Created by Fast Track
           </Footer>
         </Layout>
       </Layout>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App

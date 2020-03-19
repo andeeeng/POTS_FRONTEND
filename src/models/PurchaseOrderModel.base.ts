@@ -6,18 +6,18 @@ import { IObservableArray } from "mobx"
 import { types } from "mobx-state-tree"
 import { MSTGQLRef, QueryBuilder, withTypedRefs } from "mst-gql"
 import { ModelBase } from "./ModelBase"
+import { AddressModel, AddressModelType } from "./AddressModel"
+import { AddressModelSelector } from "./AddressModel.base"
 import { ItemModel, ItemModelType } from "./ItemModel"
 import { ItemModelSelector } from "./ItemModel.base"
 import { SupplierModel, SupplierModelType } from "./SupplierModel"
 import { SupplierModelSelector } from "./SupplierModel.base"
-import { SupplierStatusModel, SupplierStatusModelType } from "./SupplierStatusModel"
-import { SupplierStatusModelSelector } from "./SupplierStatusModel.base"
 import { RootStoreType } from "./index"
 
 
 /* The TypeScript type that explicits the refs to other models in order to prevent a circular refs issue */
 type Refs = {
-  supplierStatus: IObservableArray<SupplierStatusModelType>;
+  vendorAddress: AddressModelType;
   supplier: SupplierModelType;
   items: IObservableArray<ItemModelType>;
 }
@@ -31,10 +31,14 @@ export const PurchaseOrderModelBase = withTypedRefs<Refs>()(ModelBase
   .props({
     __typename: types.optional(types.literal("PurchaseOrder"), "PurchaseOrder"),
     id: types.identifier,
-    externalID: types.union(types.undefined, types.string),
-    status: types.union(types.undefined, types.string),
-    supplierStatus: types.union(types.undefined, types.null, types.array(types.union(types.null, MSTGQLRef(types.late((): any => SupplierStatusModel))))),
+    purchaseOrderNo: types.union(types.undefined, types.string),
+    shipmentNo: types.union(types.undefined, types.string),
+    adminStatus: types.union(types.undefined, types.null, types.string),
+    supplierStatusHeader: types.union(types.undefined, types.null, types.string),
+    vendorAddress: types.union(types.undefined, MSTGQLRef(types.late((): any => AddressModel))),
     supplier: types.union(types.undefined, MSTGQLRef(types.late((): any => SupplierModel))),
+    documentDate: types.union(types.undefined, types.null, types.string),
+    postingDate: types.union(types.undefined, types.null, types.string),
     items: types.union(types.undefined, types.null, types.array(MSTGQLRef(types.late((): any => ItemModel)))),
   })
   .views(self => ({
@@ -45,9 +49,13 @@ export const PurchaseOrderModelBase = withTypedRefs<Refs>()(ModelBase
 
 export class PurchaseOrderModelSelector extends QueryBuilder {
   get id() { return this.__attr(`id`) }
-  get externalID() { return this.__attr(`externalID`) }
-  get status() { return this.__attr(`status`) }
-  supplierStatus(builder?: string | SupplierStatusModelSelector | ((selector: SupplierStatusModelSelector) => SupplierStatusModelSelector)) { return this.__child(`supplierStatus`, SupplierStatusModelSelector, builder) }
+  get purchaseOrderNo() { return this.__attr(`purchaseOrderNo`) }
+  get shipmentNo() { return this.__attr(`shipmentNo`) }
+  get adminStatus() { return this.__attr(`adminStatus`) }
+  get supplierStatusHeader() { return this.__attr(`supplierStatusHeader`) }
+  get documentDate() { return this.__attr(`documentDate`) }
+  get postingDate() { return this.__attr(`postingDate`) }
+  vendorAddress(builder?: string | AddressModelSelector | ((selector: AddressModelSelector) => AddressModelSelector)) { return this.__child(`vendorAddress`, AddressModelSelector, builder) }
   supplier(builder?: string | SupplierModelSelector | ((selector: SupplierModelSelector) => SupplierModelSelector)) { return this.__child(`supplier`, SupplierModelSelector, builder) }
   items(builder?: string | ItemModelSelector | ((selector: ItemModelSelector) => ItemModelSelector)) { return this.__child(`items`, ItemModelSelector, builder) }
 }
@@ -55,4 +63,4 @@ export function selectFromPurchaseOrder() {
   return new PurchaseOrderModelSelector()
 }
 
-export const purchaseOrderModelPrimitives = selectFromPurchaseOrder().externalID.status
+export const purchaseOrderModelPrimitives = selectFromPurchaseOrder().purchaseOrderNo.shipmentNo.adminStatus.supplierStatusHeader.documentDate.postingDate
