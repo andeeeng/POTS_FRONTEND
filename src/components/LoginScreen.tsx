@@ -3,6 +3,7 @@ import { Card, Input, Icon, Button, message } from 'antd'
 import { Buffer } from 'buffer'
 import { observer } from 'mobx-react'
 import MeContext from '../MeContext'
+import { login } from './helper_functions'
 
 export interface IProps {
   getUser?: any
@@ -10,13 +11,21 @@ export interface IProps {
   setState?: any
   loginQuery?: any
   messageInfo?: any
-  login?: any
+  setQuery?: any
+  rootStore?: any
 }
 
 const Login = (props: IProps) => {
   const context = useContext(MeContext)
 
-  const { login, state, setState, getUser, loginQuery, messageInfo } = props
+  const {
+    setQuery,
+    rootStore,
+    state,
+    setState,
+    loginQuery,
+    messageInfo,
+  } = props
   const [userinfo, setInfo] = useState({
     username: '',
     password: '',
@@ -24,25 +33,6 @@ const Login = (props: IProps) => {
 
   if (messageInfo) {
     context.login(true)
-  }
-
-  const checkUser = async (user: any, pass: any) => {
-    const login = await getUser(user, pass)
-    let data: Array<any> = []
-
-    login.map((info: any) => {
-      data.push({
-        username: info.userName,
-        // password: info.password,
-        userlevel: info.userLevel,
-        userId: 'TEST',
-      })
-    })
-    if (login.length == 0) {
-      return message.error('Log-in failed')
-    } else {
-      setState({ ...state, path: '/DashBoard', log_ined: data })
-    }
   }
 
   const convertToBase64 = (credential: any) => {
@@ -58,7 +48,8 @@ const Login = (props: IProps) => {
     loginQuery: any,
     userinfo: { username: string; password: string },
   ) => {
-    login(convertToBase64(userinfo))
+    console.log()
+    login(convertToBase64(userinfo), setQuery, rootStore)
     // console.log(userinfo, 'MESSAGE INFO')
     // loginQuery(convertToBase64(userinfo))
     // console.log(messageInfo, 'MESSAGE INFO')

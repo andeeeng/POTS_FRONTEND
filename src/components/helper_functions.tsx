@@ -21,6 +21,10 @@ export const handleClick = (key: any, state: any, setState: any) => {
   })
 }
 
+export const login = async (userinfo: any, setQuery: any, rootStore: any) => {
+  setQuery(rootStore.requestLogin(userinfo))
+}
+
 export const updateStatus = (
   scheduleline: any,
   rootStore: any,

@@ -123,14 +123,12 @@ const App = () => {
     },
   ]
 
-  const login = async (userinfo: any) => {
-    setQuery(rootStore.requestLogin(userinfo))
-  }
   const renderFn = ({ loggedIn, setState: renderState }: IProps) => {
     if (!loggedIn) {
       return (
         <LoginScreen
-          login={login}
+          setQuery={setQuery}
+          rootStore={rootStore}
           loginQuery={rootStore.requestLogin}
           messageInfo={rootStore.vMessage()}
           state={state}
@@ -147,82 +145,5 @@ const App = () => {
   }
   return <MeContextComponent>{renderFn}</MeContextComponent>
 }
-
-// console.log('Message', rootStore.vMessage())
-// const routes = [
-//   {
-//     path: '/',
-//     exact: true,
-//     main: () => (
-//       <LoginScreen
-//         login={login}
-//         loginQuery={rootStore.requestLogin}
-//         messageInfo={rootStore.vMessage()}
-//         state={state}
-//         setState={setState}></LoginScreen>
-//     ),
-//   },
-//   {
-//     path: '/Dashboard',
-//     exact: true,
-//     main: () => (
-//       <ScreenLayout
-//         routes={routes}
-//         state={state}
-//         setState={setState}
-//         userInfo={rootStore.vMessage()}
-//         DBcontent={
-//           <DashboardContent
-//             status={statusReport}
-//             list={rootStore.vPurchaseOrders()}
-//             statelogout={state}
-//             setStatelogout={setState}
-//           />
-//         }></ScreenLayout>
-//     ),
-//   },
-//   {
-//     path: '/Orders',
-//     exact: true,
-//     main: () => (
-//       <ScreenLayout
-//         routes={routes}
-//         state={state}
-//         setState={setState}
-//         userInfo={rootStore.vMessage()}
-//         POcontent={
-//           <OrderScreen
-//             userInfo={rootStore.vMessage()}
-//             state={state}
-//             setState={setState}
-//             store={rootStore}
-//             setQuery={setQuery}
-//             po={rootStore.vPurchaseOrders()}
-//           />
-//         }></ScreenLayout>
-//     ),
-//   },
-
-//   {
-//     path: '/Suppliers',
-//     exact: true,
-//     main: () => (
-//       <ScreenLayout
-//         routes={routes}
-//         state={state}
-//         setState={setState}
-//         userInfo={rootStore.vMessage()}
-//         SUPcontent={
-//           <SupplierScreen po={rootStore.vPurchaseOrders()} />
-//         }></ScreenLayout>
-//     ),
-//   },
-// ]
-
-//   return (
-
-// <MainScreen routes={routes} state={state} setState={setState}></MainScreen>
-//   )
-// }
 
 export default observer(App)
