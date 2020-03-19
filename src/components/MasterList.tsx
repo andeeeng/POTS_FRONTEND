@@ -105,7 +105,7 @@ const MasterList = (props: IMasterList) => {
       dataIndex: 'supplierStatusItem',
       render: (item: any) => (
         <span>
-          <Tag color={itemStatusColor(item)}></Tag>
+          <Tag color={itemStatusColor(item)}>{item}</Tag>
         </span>
       ),
     },
