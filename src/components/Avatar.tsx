@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react'
 
-import { Avatar, Icon } from "antd";
+import { Avatar, Icon } from 'antd'
 
 export interface IAvatarProps {}
 
 const AvatarComponent = (props: IAvatarProps) => {
-  const {} = props;
+  const {} = props
   return (
     <div>
-      <Avatar icon="user" />
-      <Avatar icon={<Icon type="user" />} />
-      <Avatar>U</Avatar>
-      <Avatar>USER</Avatar>
-      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      <Avatar style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}>
-        U
-      </Avatar>
-      <Avatar style={{ backgroundColor: "#87d068" }} icon="user" />
+      <Avatar
+        size={60}
+        icon="user"
+        style={{
+          backgroundColor: '#3182CE',
+          color: 'white',
+          marginRight: '10px',
+        }}
+      />
     </div>
-  );
-};
+  )
+}
 
-export default AvatarComponent;
+export default AvatarComponent

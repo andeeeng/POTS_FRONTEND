@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
-import { Row, Col, Card } from "react-bootstrap";
-import OrderDetailsItem from "../components/OrderDetailsItem";
-import CurrentStatusItem from "../components/CurrentStatusItem";
-import { order, status, poList } from "../data/mockData";
-import PoStatus from "./PoStatus";
+import React, { Fragment } from 'react'
+import { Row, Col, Card } from 'react-bootstrap'
+import OrderDetailsItem from '../components/OrderDetailsItem'
+import CurrentStatusItem from '../components/CurrentStatusItem'
+import { order, status, poList } from '../data/mockData'
+import PoStatus from './PoStatus'
+
+export interface IAccordionProps {}
 
 const threeColumnsResponsiveProps = {
   xs: 24,
@@ -11,10 +13,10 @@ const threeColumnsResponsiveProps = {
   md: 12,
   lg: 12,
   xl: 8,
-  style: { marginBottom: 24 }
-};
+  style: { marginBottom: 24 },
+}
 
-const AccordionContent = () => {
+const AccordionContent = (props: IAccordionProps) => {
   return (
     <Fragment>
       <Row {...threeColumnsResponsiveProps}>
@@ -29,7 +31,7 @@ const AccordionContent = () => {
         </Card>
       </Row>
     </Fragment>
-  );
-};
+  )
+}
 
-export default AccordionContent;
+export default AccordionContent
