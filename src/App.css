@@ -85,7 +85,7 @@ padding: 10px;
   overflow: auto;
   padding: 8px 24px;
   height: 330px;
-  flex: 0 0 900px;
+  flex: 0 0 950px;
 }
 
 .orderitemtablemax{
@@ -103,7 +103,7 @@ padding: 10px;
   overflow: auto;
   padding: 8px 24px;
   height: 330px;
-  flex: 0 330px 1200px;
+  flex: 0 330px 1500px;
 }
 
 
