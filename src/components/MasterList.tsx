@@ -103,11 +103,6 @@ const MasterList = (props: IMasterList) => {
       title: 'Status',
       key: 'supplierStatusItem',
       dataIndex: 'supplierStatusItem',
-      render: (item: any) => (
-        <span>
-          <Tag color={itemStatusColor(item)}></Tag>
-        </span>
-      ),
     },
   ]
   const itemStatusColor = (status: any) => {
@@ -379,6 +374,7 @@ const MasterList = (props: IMasterList) => {
                           </div>
                         </div>
                       </div>
+                      {console.log(data.items, 'ITEMS DATA')}
                       <InfiniteScroll
                         initialLoad={false}
                         pageStart={0}

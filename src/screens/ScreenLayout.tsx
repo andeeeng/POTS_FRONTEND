@@ -22,16 +22,7 @@ export interface ILayout {
 }
 
 const App = (props: ILayout) => {
-  const {
-    state,
-    setState,
-    routes,
-    DBcontent,
-    POcontent,
-    SUPcontent,
-    HeaderContent,
-    userInfo,
-  } = props
+  const { state, setState, DBcontent, POcontent, SUPcontent, userInfo } = props
   const renderSuppMenu = () => {
     // let userlevel = state.log_ined.map((x: any) => {
     //   return x.userlevel

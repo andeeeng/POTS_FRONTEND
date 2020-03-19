@@ -21,6 +21,10 @@ export const handleClick = (key: any, state: any, setState: any) => {
   })
 }
 
+export const login = async (userinfo: any, setQuery: any, rootStore: any) => {
+  setQuery(rootStore.requestLogin(userinfo))
+}
+
 export const updateStatus = (
   scheduleline: any,
   rootStore: any,
@@ -128,11 +132,12 @@ export const SearchFilterOrder = (
 }
 
 export const onSubmit = (
-  login: any,
-
+  setQuery: any,
+  rootStore: any,
   userinfo: { username: string; password: string },
 ) => {
-  login(convertToBase64(userinfo))
+  console.log(userinfo, 'ANOTO')
+  login(convertToBase64(userinfo), setQuery, rootStore)
   // console.log(userinfo, 'MESSAGE INFO')
   // loginQuery(convertToBase64(userinfo))
   // console.log(messageInfo, 'MESSAGE INFO')
