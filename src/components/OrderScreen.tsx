@@ -5,6 +5,8 @@ import MasterList from '../components/MasterList'
 import { POdata } from '../data/MasterListMock'
 import { Divider, Input } from 'antd'
 import { observer } from 'mobx-react'
+import { sorts, SearchFilterOrder } from '../components/helper_functions'
+
 const { Search } = Input
 export interface IOrderScreenProps {
   po?: any
@@ -13,26 +15,7 @@ export interface IOrderScreenProps {
   store?: any
   setQuery?: any
   userInfo?: any
-}
-const SearchFilterItem = (
-  text: any,
-  source: any,
-  setState: any,
-  state: any,
-) => {
-  const newData = source.filter((x: any) => {
-    const itemData = x.purchaseOrderNo
-      ? x.purchaseOrderNo.toUpperCase()
-      : ''.toUpperCase()
-    const textData = text.toUpperCase()
-    return itemData.indexOf(textData) > -1
-  })
-
-  setState(() => ({
-    ...state,
-    datasource: newData,
-    search: text,
-  }))
+  title?: any
 }
 
 const OrderScreen = (props: IOrderScreenProps) => {
@@ -43,6 +26,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
     state: mainState,
     setState: mainSetState,
     userInfo,
+    title,
   } = props
   const [state, setState] = useState({
     sortby: 'date',
@@ -52,20 +36,6 @@ const OrderScreen = (props: IOrderScreenProps) => {
     search: '',
   })
 
-  const sorts = [
-    {
-      value: 'date',
-      desc: 'Date',
-    },
-    {
-      value: 'supp',
-      desc: 'Supplier',
-    },
-    {
-      value: 'status',
-      desc: 'Status',
-    },
-  ]
   return (
     <div className="content1orders">
       <div>
@@ -78,7 +48,8 @@ const OrderScreen = (props: IOrderScreenProps) => {
           <Search
             placeholder="input search text"
             onSearch={value => {
-              SearchFilterItem(value, state.POdata, setState, state)
+              console.log(value, 'valueeeeee')
+              SearchFilterOrder(value, state.POdata, setState, state)
             }}
             enterButton
           />
