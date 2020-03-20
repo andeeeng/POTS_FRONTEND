@@ -11,12 +11,19 @@ import { shallow } from 'enzyme'
 
 import MasterList from '../components/MasterList'
 
+const tabState = { selectedSchedID: '1' }
+const state = { status: 'something' }
+
 const props = {
   title: 'MasterList',
+  tabState: tabState,
+  state: state,
 }
 
 describe('MasterList', () => {
   test('renders correctly', () => {
-    expect(shallow(<MasterList {...props} />)).toMatchSnapshot()
+    expect(
+      shallow(<MasterList {...props} tabState={tabState} state={state} />),
+    ).toMatchSnapshot()
   })
 })

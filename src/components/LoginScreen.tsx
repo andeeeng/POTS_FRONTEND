@@ -6,7 +6,7 @@ import Logo from '../components/Logo'
 import MeContext from '../MeContext'
 import { convertToBase64, onSubmit } from '../components/helper_functions'
 
-export interface IProps {
+export interface ILoginScreenProps {
   getUser?: any
   state?: any
   setState?: any
@@ -16,7 +16,7 @@ export interface IProps {
   title?: any
 }
 
-const Login = (props: IProps) => {
+const LoginScreen = (props: ILoginScreenProps) => {
   const context = useContext(MeContext)
 
   const { login, state, setState, getUser, loginQuery, messageInfo } = props
@@ -75,13 +75,7 @@ const Login = (props: IProps) => {
                 />
               </div>
               <div style={{ marginLeft: -10 }}>
-                <Button
-                  type="link"
-                  style={{ color: 'white' }}
-                  onClick={
-                    () => console.log()
-                    // checkUser(userinfo.username, userinfo.password)
-                  }>
+                <Button type="link" style={{ color: 'white' }}>
                   <h5 style={{ color: 'white', fontSize: 10 }}>
                     Forgot Password?
                   </h5>
@@ -155,4 +149,4 @@ const Login = (props: IProps) => {
   )
 }
 
-export default observer(Login)
+export default observer(LoginScreen)
