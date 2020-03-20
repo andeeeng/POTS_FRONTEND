@@ -1,49 +1,48 @@
 @import '~antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 .App {
   text-align: center;
 }
 
-.avatar{
-/* background-color: red; */
-padding: 10px;
+.avatar {
+  /* background-color: red; */
+  padding: 10px;
 }
 
-.statusItem{
- display: flex;
- flex-flow: row wrap;
- justify-content: space-between;
-  }
-
-.rows{
- display: flex;
- flex-flow: row wrap;
-
-}
-
-.statuslist{
-  background-color: #FBD38D;
-  padding: 30px
-}
-
-.parent{
- /* background-color: red; */
- margin: 10px;
- padding: 30px;
- height: 600px;
- display: flex;
- flex-flow: row wrap;
- align-items: flex-start;
- justify-content:  flex-start;
-}
-.tableTitledesc{
-  display:flex;
-  flex-flow: row wrap;
-}
-.panel{
+.statusItem {
   display: flex;
   flex-flow: row wrap;
-  
+  justify-content: space-between;
+}
+
+.rows {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.statuslist {
+  background-color: #fbd38d;
+  padding: 30px;
+}
+
+.parent {
+  /* background-color: red; */
+  margin: 10px;
+  padding: 30px;
+  height: 600px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.tableTitledesc {
+  display: flex;
+  flex-flow: row wrap;
+}
+.panel {
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .card-container > .ant-tabs-card > .ant-tabs-content {
@@ -70,7 +69,7 @@ padding: 10px;
   background: #fff;
 }
 
-.orderitemtable{
+.orderitemtable {
   /* background-color: pink;
   margin: 5px;
   flex: 1 1 300;
@@ -88,100 +87,86 @@ padding: 10px;
   flex: 0 0 860px;
 }
 
-
-.history{
+.history {
   /* background-color: pink; */
   margin: 5px;
   display: flex;
   flex: 1 1 auto;
   flex-flow: column wrap;
   /* width: 300; */
-  border: "1px solid #d9d9d9";
-  border-radius: 4 ;
+  border: '1px solid #d9d9d9';
+  border-radius: 4;
   align-items: center;
 }
-.content1orders{
+.content1orders {
   /* background-color: blue; */
 
   margin: 5px;
   flex: 1 1 auto;
   display: flex;
   flex-flow: column wrap;
- 
- }
-.content1{
- /* background-color: blue; */
- width: 800px;
- margin: 5px;
- flex: 1 1 auto;
- display: flex;
- flex-flow: column wrap;
-
+}
+.content1 {
+  /* background-color: blue; */
+  width: 800px;
+  margin: 5px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column wrap;
 }
 
-.content2{
+.content2 {
   background-color: #e5eae9;
   margin: 5px;
   padding: 10px;
   height: auto;
   flex: 1 1 auto;
-
-  
 }
 
-
-.content3{
+.content3 {
   background-color: #daf3f0;
   margin: 5px;
   padding: 10px;
   height: auto;
   flex: 1 1 auto;
-margin-top: 20px;
-  
+  margin-top: 20px;
 }
 
-
-.content4{
+.content4 {
   background-color: #f4f4f5;
   margin: 5px;
   padding: 5px;
   height: auto;
   flex: 1 1 auto;
-margin-top: 20px;
-  
+  margin-top: 20px;
 }
-
-
 
 .ant-divider-horizontal.ant-divider-with-text-left::before,
-.ant-divider-horizontal.ant-divider-with-text-left::after
-{
-   border-top: 1px solid black;
+.ant-divider-horizontal.ant-divider-with-text-left::after {
+  border-top: 1px solid black;
 }
-.status{
+.status {
   /* background-color: grey; */
- margin: 5px;
- flex: 1 1 auto;
- display: flex;
- flex-flow: column wrap;
+  margin: 5px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column wrap;
 }
 
-.history1{
+.history1 {
   /* background-color: grey; */
- margin: 5px;
- flex: 1 1 auto;
- display: flex;
- flex-flow: column wrap;
+  margin: 5px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column wrap;
 }
 
-
-
-.masterlist{
+.masterlist {
   /* background-color: blue;s */
- margin: 5px;
- flex: 1 1 auto;
- display: flex;
- flex-flow: column wrap;
+  margin: 5px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .demo-infinite-container {
@@ -191,54 +176,51 @@ margin-top: 20px;
   height: 300px;
 }
 
-.searchandsort{
+.searchandsort {
   display: flex;
   flex-flow: row wrap;
 }
-.history2{
+.history2 {
   display: flex;
   flex: 1 1 auto;
   flex-flow: row wrap;
 }
 
-
-.calendar{
+.calendar {
   display: flex;
   flex-flow: row wrap;
 }
-.calendar1{
+.calendar1 {
   /* background-color: pink; */
   margin: 5px;
   flex: 1 1 auto;
   width: 300;
-  border: "1px solid #d9d9d9";
-  border-radius: 4 ;
+  border: '1px solid #d9d9d9';
+  border-radius: 4;
 }
 
-
-
-.search{
+.search {
   /* background-color: pink; */
   margin: 5px;
   flex: 1 1 auto;
   width: 300;
-  border: "1px solid #d9d9d9";
-  border-radius: 4 ;
+  border: '1px solid #d9d9d9';
+  border-radius: 4;
 }
 
-.sort{
+.sort {
   /* background-color: red; */
   margin: 5px;
   display: flex;
   flex: 1 1 auto;
   flex-flow: row wrap;
   width: 300;
-  border: "1px solid #d9d9d9";
-  border-radius: 4 ;
+  border: '1px solid #d9d9d9';
+  border-radius: 4;
   align-items: center;
 }
 
-.list{
+.list {
   /* background-color: pink;
   margin: 5px;
   flex: 1 1 300;
@@ -256,9 +238,6 @@ margin-top: 20px;
   flex: 1 1 auto;
 }
 
-
-
-
 .logo {
   display: flex;
   background-size: contain;
@@ -268,8 +247,6 @@ margin-top: 20px;
   margin: 10px;
   background-image: url(./davies.png);
   margin-bottom: 50px;
-
-  
 }
 
 .truck {
@@ -280,10 +257,9 @@ margin-top: 20px;
   width: 180%;
   height: 100%;
   margin-top: -55px;
-  background-image: url("truck.png");
+  background-image: url('truck.png');
   margin-left: 450px;
   position: absolute;
-  
 }
 
 .App-logo {
@@ -308,12 +284,11 @@ margin-top: 20px;
   color: white;
 }
 
-.banner{
+.banner {
   background-image: url(./davies-main-banner.jpg);
   background-position: right;
   background-size: contain;
   background-repeat: no-repeat;
- 
 }
 
 .App-link {
@@ -321,27 +296,22 @@ margin-top: 20px;
 }
 
 .logo-login {
-
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
   height: 200px;
   margin-left: 50px;
   background-image: url(./davies.png);
-  
 }
 
-.login-form {
-
+/* .login-form {
   background-size: contain;
   background-repeat: no-repeat;
-  
+
   height: 450px;
   margin-left: -50px;
   background-image: url(./login-form.png);
-  
-}
-
+} */
 
 @keyframes App-logo-spin {
   from {
