@@ -4,7 +4,7 @@ import { Buffer } from 'buffer'
 import { observer } from 'mobx-react'
 import Logo from '../components/Logo'
 import MeContext from '../MeContext'
-import { convertToBase64, onSubmit } from '../components/helper_functions'
+import { onSubmit } from '../components/helper_functions'
 
 export interface ILoginScreenProps {
   getUser?: any
@@ -14,12 +14,14 @@ export interface ILoginScreenProps {
   messageInfo?: any
   login?: any
   title?: any
+  setQuery?: any
+  rootStore?: any
 }
 
 const LoginScreen = (props: ILoginScreenProps) => {
   const context = useContext(MeContext)
 
-  const { login, state, setState, getUser, loginQuery, messageInfo } = props
+  const { setQuery, rootStore, login, state, setState, messageInfo } = props
   const [userinfo, setInfo] = useState({
     username: '',
     password: '',
@@ -88,13 +90,15 @@ const LoginScreen = (props: ILoginScreenProps) => {
                   display: 'flex',
                   marginTop: 70,
                 }}>
-                <Button onClick={() => onSubmit(login, userinfo)}>Login</Button>
+                <Button onClick={() => onSubmit(setQuery, rootStore, userinfo)}>
+                  Login
+                </Button>
               </div>
             </div>
           </div>
           {/* <Card
             bordered={false}
-            style={{
+            style={{p
               width: 300,
               backgroundColor: '#3d00bc',
               borderRadius: 20,

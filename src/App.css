@@ -85,7 +85,7 @@ padding: 10px;
   overflow: auto;
   padding: 8px 24px;
   height: 330px;
-  flex: 0 0 860px;
+  flex: 0 0 950px;
 }
 
 .orderitemtablemax{
@@ -103,7 +103,7 @@ padding: 10px;
   overflow: auto;
   padding: 8px 24px;
   height: 330px;
-  flex: 0 330px 1200px;
+  flex: 0 330px 1500px;
 }
 
 
@@ -113,7 +113,7 @@ padding: 10px;
   display: flex;
   flex: 1 1 auto;
   flex-flow: column wrap;
-  /* width: 300; */
+  width: 300;
   border: "1px solid #d9d9d9";
   border-radius: 4 ;
   align-items: center;
