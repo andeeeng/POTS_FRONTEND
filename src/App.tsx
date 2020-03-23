@@ -10,6 +10,7 @@ import DashboardContent from './components/DashboardContent'
 import LoginScreen from './components/LoginScreen'
 import { statusReport, poList } from './data/mockData'
 import { Buffer } from 'buffer'
+import { getUser, setUser, removeUser } from './components/auth'
 import { useQuery } from '../src/models/reactUtils'
 import {
   BrowserRouter as Router,
@@ -34,6 +35,7 @@ interface IProps {
 
 const MeContextComponent = (props: any) => {
   const [state, setState] = useState({ loggedIn: false })
+
   const context: IMeContext = {
     username: '',
     userlevel: '',
@@ -45,7 +47,6 @@ const MeContextComponent = (props: any) => {
     },
     loggedIn: false,
   }
-  console.log(state, 'STATE')
   return (
     <MeContext.Provider value={context}>
       {props.children({ loggedIn: state.loggedIn, setState })}
@@ -67,10 +68,17 @@ const App = () => {
 
   const routes = [
     {
+      path: '/',
+      exact: true,
+      main: () => <App></App>,
+    },
+    {
       path: '/Dashboard',
       exact: true,
       main: () => (
         <ScreenLayout
+          rootStore={rootStore}
+          setQuery={setQuery}
           routes={routes}
           state={state}
           setState={setState}
@@ -90,6 +98,8 @@ const App = () => {
       exact: true,
       main: () => (
         <ScreenLayout
+          rootStore={rootStore}
+          setQuery={setQuery}
           routes={routes}
           state={state}
           setState={setState}
@@ -112,6 +122,8 @@ const App = () => {
       exact: true,
       main: () => (
         <ScreenLayout
+          rootStore={rootStore}
+          setQuery={setQuery}
           routes={routes}
           state={state}
           setState={setState}
@@ -124,7 +136,13 @@ const App = () => {
   ]
 
   const renderFn = ({ loggedIn, setState: renderState }: IProps) => {
-    if (!loggedIn) {
+    const value = getUser()
+
+    const { username, password, loggedin: storeflag } = value
+
+    console.log(username, password, storeflag, 'VALUESSS')
+
+    if (!loggedIn && !storeflag) {
       return (
         <LoginScreen
           rootStore={rootStore}

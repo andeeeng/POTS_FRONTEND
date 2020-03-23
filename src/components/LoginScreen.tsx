@@ -4,6 +4,7 @@ import { Buffer } from 'buffer'
 import { observer } from 'mobx-react'
 import Logo from '../components/Logo'
 import MeContext from '../MeContext'
+import { getUser, setUser, removeUser } from '../components/auth'
 import { onSubmit } from '../components/helper_functions'
 
 export interface IProps {
@@ -28,7 +29,17 @@ const Login = (props: IProps) => {
   })
 
   if (messageInfo) {
-    context.login(true)
+    const { userLevel } = messageInfo
+    console.log('Userlevel', userLevel)
+    if (userLevel == 'Admin' || userLevel == 'Supplier') {
+      let object = {
+        username: userinfo.username,
+        password: userinfo.password,
+        loggedin: true,
+      }
+      setUser(object)
+      context.login(true)
+    }
   }
 
   return (
