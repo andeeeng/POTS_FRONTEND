@@ -159,13 +159,6 @@ const DashboardContent = (props: IDashboardContentProps) => {
       </div>
       {/* <div className="truck"></div> */}
       <div>
-        <div style={{ marginLeft: 150, marginTop: -20, marginBottom: 50 }}>
-          <Button
-            type="link"
-            onClick={() => setStatelogout({ ...statelogout, path: '/' })}>
-            Logout
-          </Button>
-        </div>
         <div className="content2">
           <h5>To-Do List</h5>
           <Text>
