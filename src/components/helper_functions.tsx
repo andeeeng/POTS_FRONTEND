@@ -22,7 +22,7 @@ export const handleClick = (key: any, state: any, setState: any) => {
 }
 
 export const login = async (userinfo: any, setQuery: any, rootStore: any) => {
-  setQuery(rootStore.requestLogin(userinfo))
+  setQuery(rootStore.requestLogin(convertToBase64(userinfo)))
 }
 
 export const updateStatus = (
@@ -137,21 +137,7 @@ export const onSubmit = (
   userinfo: { username: string; password: string },
 ) => {
   console.log(userinfo, 'ANOTO')
-  login(convertToBase64(userinfo), setQuery, rootStore)
-  // console.log(userinfo, 'MESSAGE INFO')
-  // loginQuery(convertToBase64(userinfo))
-  // console.log(messageInfo, 'MESSAGE INFO')
-  // if (messageInfo) {
-  //   const { loggedIn } = messageInfo
-  //   console.log(loggedIn, 'WHAT IS THIS')
-  //   if (loggedIn) {
-  //     setState({
-  //       ...state,
-  //       username: userinfo.username,
-  //       path: '/DashBoard',
-  //     })
-  //     return
-  //   }
-  //   return message.error('Log-in failed')
+  login(userinfo, setQuery, rootStore)
+
   // }
 }
