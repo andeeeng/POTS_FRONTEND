@@ -1,40 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Card, Input, Icon, Button, message } from 'antd'
+import { Buffer } from 'buffer'
+import { observer } from 'mobx-react'
+import Logo from '../components/Logo'
+import MeContext from '../MeContext'
+import { getUser, setUser, removeUser } from '../components/auth'
+import { onSubmit } from '../components/helper_functions'
 
 export interface IProps {
   getUser?: any
   state?: any
   setState?: any
+  loginQuery?: any
+  messageInfo?: any
+  login?: any
+  title?: any
+  setQuery?: any
+  rootStore?: any
 }
 
 const Login = (props: IProps) => {
-  const { state, setState, getUser } = props
+  const context = useContext(MeContext)
+
+  const { setQuery, rootStore, login, state, setState, messageInfo } = props
   const [userinfo, setInfo] = useState({
     username: '',
     password: '',
   })
 
-  const checkUser = async (user: any, pass: any) => {
-    const login = await getUser(user, pass)
-    let data: Array<any> = []
-
-    login.map((info: any) => {
-      data.push({
-        username: info.userName,
-        // password: info.password,
-        userlevel: info.userLevel,
-        userId: 'TEST',
-      })
-    })
-    if (login.length == 0) {
-      return message.error('Log-in failed')
-    } else {
-      setState({ ...state, path: '/DashBoard', log_ined: data })
+  if (messageInfo) {
+    const { userLevel } = messageInfo
+    console.log('Userlevel', userLevel)
+    if (userLevel == 'Admin' || userLevel == 'Supplier') {
+      let object = {
+        username: userinfo.username,
+        password: userinfo.password,
+        loggedin: true,
+      }
+      setUser(object)
+      context.login(true)
     }
   }
+
   return (
     <div style={{ backgroundColor: 'white', marginLeft: '600px' }}>
-      <div className="logo-login"></div>
+      <Logo />
       <div
         style={{
           padding: '30px',
@@ -52,14 +62,15 @@ const Login = (props: IProps) => {
               <Input
                 name={'username'}
                 value={userinfo.username}
-                onChange={(e: any) =>
+                onChange={(e: any) => {
+                  setState({ ...state, username: e.target.value })
                   setInfo({ ...userinfo, username: e.target.value })
-                }
+                }}
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
-              />
-
+                placeholder="username"
+              />{' '}
               <br />
               <br />
               <div>
@@ -73,6 +84,7 @@ const Login = (props: IProps) => {
                   prefix={
                     <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                   }
+                  //onChange={text => setState({ text })}
                 />
               </div>
               <div style={{ marginLeft: -10 }}>
@@ -95,10 +107,7 @@ const Login = (props: IProps) => {
                   display: 'flex',
                   marginTop: 70,
                 }}>
-                <Button
-                  onClick={() =>
-                    checkUser(userinfo.username, userinfo.password)
-                  }>
+                <Button onClick={() => onSubmit(setQuery, rootStore, userinfo)}>
                   Login
                 </Button>
               </div>
@@ -106,7 +115,7 @@ const Login = (props: IProps) => {
           </div>
           {/* <Card
             bordered={false}
-            style={{
+            style={{p
               width: 300,
               backgroundColor: '#3d00bc',
               borderRadius: 20,
@@ -161,4 +170,4 @@ const Login = (props: IProps) => {
   )
 }
 
-export default Login
+export default observer(Login)

@@ -4,6 +4,7 @@ import {
   PURCHASEORDER_FRAGMENT,
   SCHEDULELINE_FRAGMENT,
   USER_FRAGMENT,
+  MESSAGE_FRAGMENT,
 } from '../helpers'
 
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
@@ -29,6 +30,11 @@ export const RootStore = RootStoreBase.views(self => {
       console.log(getUser)
       return getUser
     },
+    vMessage() {
+      const message: any = self.messages.values()
+      const messages = [...message]
+      return messages[0]
+    },
   }
 }).actions(self => ({
   afterCreate() {
@@ -42,6 +48,9 @@ export const RootStore = RootStoreBase.views(self => {
       { scheduleLine: scheduleLine },
       SCHEDULELINE_FRAGMENT,
     )
+  },
+  requestLogin(credential: { username: string; password: string }) {
+    return self.queryLogin({ credential: credential }, MESSAGE_FRAGMENT)
   },
   requestPurchaseOrders() {
     const poq = self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)

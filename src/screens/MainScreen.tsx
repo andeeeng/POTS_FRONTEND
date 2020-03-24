@@ -19,32 +19,11 @@ export interface IProps {
 }
 
 const Main = (props: IProps) => {
-  // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
-  const {
-    routes,
-    state,
-    loginScreen,
-    DBScreen,
-    store,
-    setState,
-    logoutScreen,
-  } = props
-  // const routes = [
-  //   {
-  //     path: '/',
-  //     exact: true,
-  //     main: () => loginScreen,
-  //   },
-  //   {
-  //     path: '/Dashboard',
-  //     exact: true,
-  //     main: () => DBScreen,
-  //   },
-  // ]
+  const { routes, state } = props
+
   return (
     <div>
       <Router>
-        {console.log(state.path, 'PATH')}
         <Redirect push to={state.path}></Redirect>
         {routes.map((route: any) => (
           <Route
