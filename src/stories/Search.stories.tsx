@@ -1,10 +1,15 @@
-import React from "react";
-import { action } from "@storybook/addon-actions";
-import { Button } from "@storybook/react/demo";
-import Search from "../components/Search";
+import React from 'react'
+import { action } from '@storybook/addon-actions'
+import Search from '../components/Search'
 
 export default {
-  title: "Search"
-};
+  title: 'Search',
+}
 
-export const search = () => <Search />;
+export const search = () => <Search onSearch={action('Change')} />
+
+search.story = {
+  parameters: {
+    notes: 'Simple Search Bar',
+  },
+}
