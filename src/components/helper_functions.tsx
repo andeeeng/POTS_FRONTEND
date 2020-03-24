@@ -1,3 +1,5 @@
+import { getUser, removeUser, setUser } from './auth'
+
 export const handleClick = (key: any, state: any, setState: any) => {
   const path = () => {
     switch (key) {
@@ -137,7 +139,19 @@ export const onSubmit = (
   userinfo: { username: string; password: string },
 ) => {
   console.log(userinfo, 'ANOTO')
+  const value = getUser()
+  const { username } = value
+  if (userinfo.username == '') {
+    if (username == 'logout') {
+      removeUser()
+      let object = {
+        username: '',
+        password: '',
+        loggedin: false,
+      }
+      setUser(object)
+    }
+  }
+  // setQuery(rootStore.requestPurchaseOrders())
   login(userinfo, setQuery, rootStore)
-
-  // }
 }
