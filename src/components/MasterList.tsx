@@ -14,6 +14,15 @@ import {
   Empty,
 } from 'antd'
 import { observer } from 'mobx-react'
+import {
+  itemStatusColor,
+  status,
+  sched_columns,
+  handleChange,
+  statusColor,
+  changewidth,
+} from '../components/helper_functions'
+
 const { Panel } = Collapse
 const { Text, Title } = Typography
 const { TabPane } = Tabs
@@ -28,6 +37,7 @@ export interface IMasterList {
   setQuery?: any
   userInfo?: any
   title?: any
+  onClick?: any
 }
 
 const MasterList = (props: IMasterList) => {
@@ -41,22 +51,8 @@ const MasterList = (props: IMasterList) => {
     tabSetState,
     filterPO,
     title,
+    onClick,
   } = props
-
-  const status = [
-    {
-      value: '1',
-      desc: 'Ready to Ship',
-    },
-    {
-      value: '2',
-      desc: 'Delivered',
-    },
-    {
-      value: '3',
-      desc: 'On the Logistics Facility',
-    },
-  ]
 
   const item_columns = [
     {
@@ -110,83 +106,7 @@ const MasterList = (props: IMasterList) => {
       ),
     },
   ]
-  const itemStatusColor = (status: any) => {
-    switch (status) {
-      case 'On-going':
-        return 'orange'
-      case 'Complete':
-        return 'green'
-      case 'Not Started':
-        return 'red'
-      default:
-        break
-    }
-  }
-  const sched_columns = [
-    {
-      title: 'Delivery Schedule',
-      dataIndex: 'deliveryDateAndTime',
-      key: 'deliveryDateAndTime',
-    },
 
-    {
-      title: 'Delivery Address',
-      dataIndex: 'delvAddress',
-      key: 'delvAddress',
-    },
-
-    {
-      title: 'Item No',
-      dataIndex: 'itemNo',
-      key: 'itemNo',
-    },
-
-    {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-    },
-    {
-      title: 'Qty',
-      dataIndex: 'quantity',
-      key: 'quantity',
-    },
-    {
-      title: 'UoM',
-      dataIndex: 'uom',
-      key: 'uom',
-    },
-    {
-      title: 'Unit Price',
-      dataIndex: 'unitPrice',
-      key: 'unitPrice',
-    },
-    {
-      title: 'Total Amout',
-      dataIndex: 'totalAmount',
-      key: 'totalAmount',
-    },
-  ]
-  console.log(state, 'LAMAN NG STATE')
-
-  const handleChange = (value: any, state: any, setState: any) => {
-    const status = (key: any) => {
-      switch (key) {
-        case '1':
-          return 'Ready to Ship'
-        case '3':
-          return 'On the Logistics Facility'
-        case '2':
-          return 'Delivered'
-        default:
-          break
-      }
-    }
-    setState({
-      ...state,
-      status: status(value),
-    })
-  }
   const linesched = {
     id: tabState.selectedSchedID,
     deliveryStatus: {
@@ -217,6 +137,7 @@ const MasterList = (props: IMasterList) => {
           </div>
           <div style={{ marginTop: '5px' }}>
             <Button
+              itemID="IDtest"
               type="primary"
               onClick={() => {
                 updateStatus(linesched, store, setQuery)
@@ -250,7 +171,7 @@ const MasterList = (props: IMasterList) => {
                         return data.delvStatus.map((sched: any) => {
                           return (
                             <Timeline.Item>
-                              {sched.status} {sched.dateCreated}{' '}
+                              {sched.status} {sched.dateCreated}
                               {sched.timeCreated}
                             </Timeline.Item>
                           )
@@ -272,14 +193,6 @@ const MasterList = (props: IMasterList) => {
   }
   const callback = (key: any) => {
     tabSetState({ ...tabState, collapseKey: key })
-  }
-  const statusColor = (status: any) => {
-    if (status == 'Closed') {
-      return '#f50'
-    }
-    if (status == 'Open') {
-      return '#87d068'
-    }
   }
 
   let data: Array<any> = []
@@ -328,15 +241,7 @@ const MasterList = (props: IMasterList) => {
             const schedById = schedarray.filter(
               x => x.id == tabState.selectedSchedID,
             )
-            const changewidth = (key: any) => {
-              switch (key) {
-                case 'item':
-                  return 'orderitemtablemax'
 
-                default:
-                  return 'orderitemtable'
-              }
-            }
             return (
               <Panel
                 header={`PO# ${data.purchaseOrderNo} by  ${data.supplier.supplierName}`}
@@ -367,11 +272,11 @@ const MasterList = (props: IMasterList) => {
                             </div>
                             <div>
                               <Text>
-                                {data.supplier.address.building_name}{' '}
-                                {data.supplier.address.street}{' '}
-                                {data.supplier.address.city}{' '}
-                                {data.supplier.address.state}{' '}
-                                {data.supplier.address.zip_code}{' '}
+                                {data.supplier.address.building_name}
+                                {data.supplier.address.street}
+                                {data.supplier.address.city}
+                                {data.supplier.address.state}
+                                {data.supplier.address.zip_code}
                               </Text>
                               <br></br>
                               {/* <Text>{data.deliverTo}</Text> */}

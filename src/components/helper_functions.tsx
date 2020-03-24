@@ -155,3 +155,115 @@ export const onSubmit = (
   //   return message.error('Log-in failed')
   // }
 }
+
+export const itemStatusColor = (status: any) => {
+  switch (status) {
+    case 'On-going':
+      return 'orange'
+    case 'Complete':
+      return 'green'
+    case 'Not Started':
+      return 'red'
+    default:
+      break
+  }
+}
+
+export const status = [
+  {
+    value: '1',
+    desc: 'Ready to Ship',
+  },
+  {
+    value: '2',
+    desc: 'Delivered',
+  },
+  {
+    value: '3',
+    desc: 'On the Logistics Facility',
+  },
+]
+
+export const sched_columns = [
+  {
+    title: 'Delivery Schedule',
+    dataIndex: 'deliveryDateAndTime',
+    key: 'deliveryDateAndTime',
+  },
+
+  {
+    title: 'Delivery Address',
+    dataIndex: 'delvAddress',
+    key: 'delvAddress',
+  },
+
+  {
+    title: 'Item No',
+    dataIndex: 'itemNo',
+    key: 'itemNo',
+  },
+
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
+  },
+  {
+    title: 'Qty',
+    dataIndex: 'quantity',
+    key: 'quantity',
+  },
+  {
+    title: 'UoM',
+    dataIndex: 'uom',
+    key: 'uom',
+  },
+  {
+    title: 'Unit Price',
+    dataIndex: 'unitPrice',
+    key: 'unitPrice',
+  },
+  {
+    title: 'Total Amout',
+    dataIndex: 'totalAmount',
+    key: 'totalAmount',
+  },
+]
+
+export const handleChange = (value: any, state: any, setState: any) => {
+  const status = (key: any) => {
+    switch (key) {
+      case '1':
+        return 'Ready to Ship'
+      case '3':
+        return 'On the Logistics Facility'
+      case '2':
+        return 'Delivered'
+      default:
+        break
+    }
+  }
+  setState({
+    ...state,
+    status: status(value),
+  })
+}
+
+export const statusColor = (status: any) => {
+  if (status == 'Closed') {
+    return '#f50'
+  }
+  if (status == 'Open') {
+    return '#87d068'
+  }
+}
+
+export const changewidth = (key: any) => {
+  switch (key) {
+    case 'item':
+      return 'orderitemtablemax'
+
+    default:
+      return 'orderitemtable'
+  }
+}

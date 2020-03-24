@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 // import ShallowRenderer from "react-test-renderer/shallow";
 
 // // Note: test renderer must be required after react-native.
@@ -18,6 +18,7 @@ const props = {
   title: 'MasterList',
   tabState: tabState,
   state: state,
+  onClick: () => console.log('Test'),
 }
 
 describe('MasterList', () => {
@@ -25,5 +26,17 @@ describe('MasterList', () => {
     expect(
       shallow(<MasterList {...props} tabState={tabState} state={state} />),
     ).toMatchSnapshot()
+  })
+})
+
+describe('Functional Tests', () => {
+  it('calls the onButtonPress method', () => {
+    const onPressEvent = jest.fn()
+    onPressEvent.mockReturnValue('onClick')
+    const wrapper = shallow(<MasterList onClick={onPressEvent} />)
+    wrapper
+      .findWhere(node => node.prop('itemID') === 'IDtest')
+      .simulate('onclick')
+    expect(onPressEvent.mock.calls.length).toBe(1)
   })
 })
