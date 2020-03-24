@@ -68,11 +68,6 @@ const App = () => {
 
   const routes = [
     {
-      path: '/',
-      exact: true,
-      main: () => <App></App>,
-    },
-    {
       path: '/Dashboard',
       exact: true,
       main: () => (
@@ -137,10 +132,10 @@ const App = () => {
 
   const renderFn = ({ loggedIn, setState: renderState }: IProps) => {
     const value = getUser()
-
     const { username, password, loggedin: storeflag } = value
 
     console.log(username, password, storeflag, 'VALUESSS')
+    console.log(loggedIn, 'LOGGED IN')
 
     if (!loggedIn && !storeflag) {
       return (
