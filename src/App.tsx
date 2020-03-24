@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import UserInfo from './components/UserInfo'
@@ -9,6 +9,8 @@ import SupplierScreen from './components/SupplierScreen'
 import DashboardContent from './components/DashboardContent'
 import LoginScreen from './components/LoginScreen'
 import { statusReport, poList } from './data/mockData'
+import { Buffer } from 'buffer'
+import { getUser, setUser, removeUser } from './components/auth'
 import { useQuery } from '../src/models/reactUtils'
 import {
   BrowserRouter as Router,
@@ -20,47 +22,67 @@ import {
 import { createHttpClient } from 'mst-gql'
 import { RootStore, StoreContext } from '../src/models'
 import { observer } from 'mobx-react'
+
+import MeContext, { IMeContext } from './MeContext'
 const rootStore = RootStore.create(undefined, {
   gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
 })
 
+interface IProps {
+  loggedIn: any
+  setState: any
+}
+
+const MeContextComponent = (props: any) => {
+  const [state, setState] = useState({ loggedIn: false })
+
+  const context: IMeContext = {
+    username: '',
+    userlevel: '',
+    login: (loggedInFlag: any) => {
+      setState({ ...state, loggedIn: loggedInFlag })
+    },
+    logout: () => {
+      setState({ ...state, loggedIn: false })
+    },
+    loggedIn: false,
+  }
+  return (
+    <MeContext.Provider value={context}>
+      {props.children({ loggedIn: state.loggedIn, setState })}
+    </MeContext.Provider>
+  )
+}
+
 const App = () => {
-  // const deliveryQuery = useQuery(store => store.requestPurchaseOrders())
-  const users = rootStore.vGetUser('Supp', 'supp')
-  console.log(users, 'APPTSX')
   const { setQuery, store, error, data, loading } = useQuery()
+  const loginQuery = useQuery()
   const [state, setState] = useState({
-    path: '/',
+    path: '/Dashboard',
     currentKey: 'dashboard',
     selectedSchedID: '',
     tabkey: 'item',
     collapseKey: ['0'],
-    log_ined: {
-      username: '',
-      password: '',
-      userlevel: '',
-      userId: '',
-    },
+    username: '',
   })
+
   const routes = [
     {
       path: '/',
       exact: true,
-      main: () => (
-        <LoginScreen
-          getUser={rootStore.vGetUser}
-          state={state}
-          setState={setState}></LoginScreen>
-      ),
+      main: () => <App></App>,
     },
     {
       path: '/Dashboard',
       exact: true,
       main: () => (
         <ScreenLayout
+          rootStore={rootStore}
+          setQuery={setQuery}
           routes={routes}
           state={state}
           setState={setState}
+          userInfo={rootStore.vMessage()}
           DBcontent={
             <DashboardContent
               status={statusReport}
@@ -76,15 +98,20 @@ const App = () => {
       exact: true,
       main: () => (
         <ScreenLayout
+          rootStore={rootStore}
+          setQuery={setQuery}
           routes={routes}
           state={state}
           setState={setState}
+          userInfo={rootStore.vMessage()}
           POcontent={
             <OrderScreen
+              userInfo={rootStore.vMessage()}
               state={state}
               setState={setState}
+              store={rootStore}
+              setQuery={setQuery}
               po={rootStore.vPurchaseOrders()}
-              updateStatus={updateStatus}
             />
           }></ScreenLayout>
       ),
@@ -95,9 +122,12 @@ const App = () => {
       exact: true,
       main: () => (
         <ScreenLayout
+          rootStore={rootStore}
+          setQuery={setQuery}
           routes={routes}
           state={state}
           setState={setState}
+          userInfo={rootStore.vMessage()}
           SUPcontent={
             <SupplierScreen po={rootStore.vPurchaseOrders()} />
           }></ScreenLayout>
@@ -105,13 +135,32 @@ const App = () => {
     },
   ]
 
-  const updateStatus = (scheduleline: any) => {
-    setQuery(rootStore.updateStatus(scheduleline))
-  }
+  const renderFn = ({ loggedIn, setState: renderState }: IProps) => {
+    const value = getUser()
 
-  return (
-    <MainScreen routes={routes} state={state} setState={setState}></MainScreen>
-  )
+    const { username, password, loggedin: storeflag } = value
+
+    console.log(username, password, storeflag, 'VALUESSS')
+
+    if (!loggedIn && !storeflag) {
+      return (
+        <LoginScreen
+          rootStore={rootStore}
+          setQuery={setQuery}
+          messageInfo={rootStore.vMessage()}
+          state={state}
+          setState={setState}></LoginScreen>
+      )
+    } else {
+      return (
+        <MainScreen
+          routes={routes}
+          state={state}
+          setState={setState}></MainScreen>
+      )
+    }
+  }
+  return <MeContextComponent>{renderFn}</MeContextComponent>
 }
 
 export default observer(App)

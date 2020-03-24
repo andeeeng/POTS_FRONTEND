@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-
-import { Layout, Menu, Icon } from 'antd'
+import React, { useState, useContext } from 'react'
+import MeContext from '../MeContext'
+import { onSubmit } from '../components/helper_functions'
+import { Layout, Menu, Icon, Button } from 'antd'
 import { handleClick, showContent } from '../components/helper_functions'
 import {
   BrowserRouter as Router,
@@ -8,6 +9,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
+import { getUser, setUser, removeUser } from '../components/auth'
 import { observer } from 'mobx-react'
 const { Header, Content, Footer, Sider } = Layout
 export interface ILayout {
@@ -18,31 +20,56 @@ export interface ILayout {
   routes?: any
   state?: any
   setState?: any
+  userInfo?: any
+  setQuery?: any
+  rootStore?: any
 }
 
 const App = (props: ILayout) => {
   const {
+    setQuery,
+    rootStore,
     state,
     setState,
-    routes,
     DBcontent,
     POcontent,
     SUPcontent,
-    HeaderContent,
+    userInfo,
   } = props
-  console.log(state.log_ined, 'USERINFO')
+
+  const context = useContext(MeContext)
+  const logout = () => {
+    const userinfo = {
+      username: '',
+      password: '',
+    }
+    onSubmit(setQuery, rootStore, userinfo)
+    removeUser()
+    let object = {
+      username: '',
+      password: '',
+      loggedin: false,
+    }
+    setUser(object)
+    context.logout()
+  }
   const renderSuppMenu = () => {
-    let userlevel = state.log_ined.map((x: any) => {
-      return x.userlevel
-    })
-    if (userlevel == 'Admin') {
-      return (
-        <Menu.Item key="supplier">
-          <Icon type="car" />
-          <span className="nav-text">My Suppliers</span>
-        </Menu.Item>
-      )
-    } else {
+    // let userlevel = state.log_ined.map((x: any) => {
+    //   return x.userlevel
+    // })
+    console.log('Userlevel', userInfo)
+    if (userInfo) {
+      const { userLevel } = userInfo
+      console.log('Userlevel', userLevel)
+      if (userLevel == 'Admin') {
+        console.log('HERE PUMASOK')
+        return (
+          <Menu.Item key="supplier">
+            <Icon type="car" />
+            <span className="nav-text">My Suppliers</span>
+          </Menu.Item>
+        )
+      }
       return null
     }
   }
@@ -94,6 +121,11 @@ const App = (props: ILayout) => {
           </Menu>
         </Sider>
         <Layout>
+          <Header style={{ backgroundColor: 'white', float: 'right' }}>
+            <Button type="link" onClick={() => logout()}>
+              Logout
+            </Button>
+          </Header>
           <Content
             style={{
               display: 'flex',

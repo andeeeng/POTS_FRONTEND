@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/faker": "^4.1.9",
@@ -20,12 +19,13 @@
     "@types/wix-style-react": "^6.17.2",
     "antd": "^3.26.11",
     "bootstrap": "^4.4.1",
+    "buffer": "^5.5.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "graphql-request": "^1.8.2",
     "lodash": "^4.17.15",
     "mobx": "^5.15.4",
-    "mobx-react": "^6.1.7",
+    "mobx-react": "^6.1.8",
     "mobx-state-tree": "^3.15.0",
     "mst-gql": "^0.7.1",
     "react": "^16.12.0",
@@ -50,7 +50,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "scaffold": "mst-gql --format ts --roots Address,Supplier,SupplierStatus,Item,PurchaseOrder,User,ScheduleLine http://localhost:4000/graphql   "
+    "scaffold": "mst-gql --format ts --roots Address,Supplier,SupplierStatus,Item,PurchaseOrder,User,ScheduleLine,Message http://localhost:4000/graphql   "
   },
   "eslintConfig": {
     "extends": "react-app"

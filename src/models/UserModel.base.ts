@@ -17,6 +17,7 @@ export const UserModelBase = ModelBase
   .props({
     __typename: types.optional(types.literal("User"), "User"),
     id: types.identifier,
+    userId: types.union(types.undefined, types.string),
     userName: types.union(types.undefined, types.string),
     password: types.union(types.undefined, types.string),
     userLevel: types.union(types.undefined, types.string),
@@ -29,6 +30,7 @@ export const UserModelBase = ModelBase
 
 export class UserModelSelector extends QueryBuilder {
   get id() { return this.__attr(`id`) }
+  get userId() { return this.__attr(`userId`) }
   get userName() { return this.__attr(`userName`) }
   get password() { return this.__attr(`password`) }
   get userLevel() { return this.__attr(`userLevel`) }
@@ -37,4 +39,4 @@ export function selectFromUser() {
   return new UserModelSelector()
 }
 
-export const userModelPrimitives = selectFromUser().userName.password.userLevel
+export const userModelPrimitives = selectFromUser().userId.userName.password.userLevel

@@ -1,11 +1,13 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import AdminMenu from "./AdminMenu";
-import UserInfo from "./UserInfo";
-import DashboardContent from "./DashboardContent";
-import { menu, statusReport, poList } from "../data/mockData";
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import AdminMenu from './AdminMenu'
+import UserInfo from './UserInfo'
+import DashboardContent from './DashboardContent'
+import { menu, statusReport, poList } from '../data/mockData'
 
-const DashboardScreen = () => {
+export interface IDashboardScreenProps {}
+
+const DashboardScreen = (props: IDashboardScreenProps) => {
   return (
     <Container>
       <Row>
@@ -22,7 +24,7 @@ const DashboardScreen = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default DashboardScreen;
+export default DashboardScreen
