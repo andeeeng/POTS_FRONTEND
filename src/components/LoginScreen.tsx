@@ -17,12 +17,23 @@ export interface IProps {
   title?: any
   setQuery?: any
   rootStore?: any
+  onClick?: any
+  onChange?: any
 }
 
 const Login = (props: IProps) => {
   const context = useContext(MeContext)
 
-  const { setQuery, rootStore, login, state, setState, messageInfo } = props
+  const {
+    setQuery,
+    rootStore,
+    login,
+    state,
+    setState,
+    messageInfo,
+    onClick,
+    onChange,
+  } = props
   const [userinfo, setInfo] = useState({
     username: '',
     password: '',
