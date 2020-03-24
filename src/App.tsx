@@ -10,6 +10,7 @@ import DashboardContent from './components/DashboardContent'
 import LoginScreen from './components/LoginScreen'
 import { statusReport, poList } from './data/mockData'
 import { Buffer } from 'buffer'
+import { onSubmit } from './components/helper_functions'
 import { getUser, setUser, removeUser } from './components/auth'
 import { useQuery } from '../src/models/reactUtils'
 import {
@@ -24,6 +25,7 @@ import { RootStore, StoreContext } from '../src/models'
 import { observer } from 'mobx-react'
 
 import MeContext, { IMeContext } from './MeContext'
+import { onSubmit } from './components/helper_functions'
 const rootStore = RootStore.create(undefined, {
   gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
 })
@@ -132,6 +134,7 @@ const App = () => {
 
   const renderFn = ({ loggedIn, setState: renderState }: IProps) => {
     const value = getUser()
+    // localStorage.clear()
     const { username, password, loggedin: storeflag } = value
 
     console.log(username, password, storeflag, 'VALUESSS')
@@ -140,15 +143,46 @@ const App = () => {
     if (!loggedIn && !storeflag) {
       return (
         <LoginScreen
+          flag={username}
           rootStore={rootStore}
           setQuery={setQuery}
           messageInfo={rootStore.vMessage()}
           state={state}
           setState={setState}></LoginScreen>
       )
-    } else {
+    }
+
+    if (!loggedIn && storeflag) {
       return (
         <MainScreen
+          flag={loggedIn}
+          setQuery={setQuery}
+          value={value}
+          rootStore={rootStore}
+          routes={routes}
+          state={state}
+          setState={setState}></MainScreen>
+      )
+    }
+    if (loggedIn && storeflag) {
+      return (
+        <MainScreen
+          flag={loggedIn}
+          setQuery={setQuery}
+          value={value}
+          rootStore={rootStore}
+          routes={routes}
+          state={state}
+          setState={setState}></MainScreen>
+      )
+    }
+    if (loggedIn && storeflag) {
+      return (
+        <MainScreen
+          flag={loggedIn}
+          setQuery={setQuery}
+          value={value}
+          rootStore={rootStore}
           routes={routes}
           state={state}
           setState={setState}></MainScreen>
