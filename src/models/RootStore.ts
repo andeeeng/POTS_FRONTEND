@@ -40,9 +40,6 @@ export const RootStore = RootStoreBase.views(self => {
   afterCreate() {
     self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
     self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
-<<<<<<< HEAD
-    self.q
-=======
     self.queryAllUsers({}, USER_FRAGMENT)
   },
   updateStatus(scheduleLine: any) {
@@ -51,7 +48,6 @@ export const RootStore = RootStoreBase.views(self => {
       { scheduleLine: scheduleLine },
       SCHEDULELINE_FRAGMENT,
     )
->>>>>>> 20138aadf3452ba60e027bb6aecf90ad532c34cc
   },
   requestLogin(credential: { username: string; password: string }) {
     return self.queryLogin({ credential: credential }, MESSAGE_FRAGMENT)
