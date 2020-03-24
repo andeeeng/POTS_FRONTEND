@@ -38,20 +38,21 @@ const App = (props: ILayout) => {
   } = props
 
   const context = useContext(MeContext)
+
   const logout = () => {
     const userinfo = {
       username: '',
       password: '',
     }
-    onSubmit(setQuery, rootStore, userinfo)
     removeUser()
     let object = {
-      username: '',
+      username: 'logout',
       password: '',
       loggedin: false,
     }
     setUser(object)
     context.logout()
+    onSubmit(setQuery, rootStore, userinfo)
   }
   const renderSuppMenu = () => {
     // let userlevel = state.log_ined.map((x: any) => {
