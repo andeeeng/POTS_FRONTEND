@@ -25,21 +25,31 @@ export interface IProps {
   title?: any
   setQuery?: any
   rootStore?: any
+  flag?: any
 }
 
 const Login = (props: IProps) => {
   const context = useContext(MeContext)
 
-  const { setQuery, rootStore, login, state, setState, messageInfo } = props
+  const {
+    flag,
+    setQuery,
+    rootStore,
+    login,
+    state,
+    setState,
+    messageInfo,
+  } = props
   const [userinfo, setInfo] = useState({
     username: '',
     password: '',
   })
-
-  if (messageInfo) {
+  console.log(flag, 'FKING FLAG')
+  if (messageInfo && flag !== 'logout') {
     const { userLevel } = messageInfo
     console.log('Userlevel', userLevel)
     if (userLevel == 'Admin' || userLevel == 'Supplier') {
+      console.log('ILANG BESES')
       let object = {
         username: userinfo.username,
         password: userinfo.password,
