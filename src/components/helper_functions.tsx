@@ -1,3 +1,5 @@
+import { getUser, removeUser, setUser } from './auth'
+
 export const handleClick = (key: any, state: any, setState: any) => {
   const path = () => {
     switch (key) {
@@ -22,7 +24,7 @@ export const handleClick = (key: any, state: any, setState: any) => {
 }
 
 export const login = async (userinfo: any, setQuery: any, rootStore: any) => {
-  setQuery(rootStore.requestLogin(userinfo))
+  setQuery(rootStore.requestLogin(convertToBase64(userinfo)))
 }
 
 export const updateStatus = (
@@ -137,23 +139,21 @@ export const onSubmit = (
   userinfo: { username: string; password: string },
 ) => {
   console.log(userinfo, 'ANOTO')
-  login(convertToBase64(userinfo), setQuery, rootStore)
-  // console.log(userinfo, 'MESSAGE INFO')
-  // loginQuery(convertToBase64(userinfo))
-  // console.log(messageInfo, 'MESSAGE INFO')
-  // if (messageInfo) {
-  //   const { loggedIn } = messageInfo
-  //   console.log(loggedIn, 'WHAT IS THIS')
-  //   if (loggedIn) {
-  //     setState({
-  //       ...state,
-  //       username: userinfo.username,
-  //       path: '/DashBoard',
-  //     })
-  //     return
-  //   }
-  //   return message.error('Log-in failed')
-  // }
+  const value = getUser()
+  const { username } = value
+  if (userinfo.username == '') {
+    if (username == 'logout') {
+      removeUser()
+      let object = {
+        username: '',
+        password: '',
+        loggedin: false,
+      }
+      setUser(object)
+    }
+  }
+  // setQuery(rootStore.requestPurchaseOrders())
+  login(userinfo, setQuery, rootStore)
 }
 
 export const itemStatusColor = (status: any) => {
