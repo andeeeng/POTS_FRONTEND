@@ -25,7 +25,6 @@ import { RootStore, StoreContext } from '../src/models'
 import { observer } from 'mobx-react'
 
 import MeContext, { IMeContext } from './MeContext'
-import { onSubmit } from './components/helper_functions'
 const rootStore = RootStore.create(undefined, {
   gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
 })
