@@ -104,65 +104,7 @@ const LoginScreen = (props: ILoginScreenProps) => {
                   setState({ ...state, username: e.target.value })
                   setInfo({ ...userinfo, username: e.target.value })
                 }}
-<<<<<<< HEAD
-                prefix={
-                  <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
-                }
-                placeholder="username"
-              />{' '}
-              <br />
-              <br />
-              <div>
-                <h5 style={{ color: 'white', fontSize: 12 }}>Password</h5>
-                <Input.Password
-                  name={'password'}
-                  value={userinfo.password}
-                  onChange={(e: any) =>
-                    setInfo({ ...userinfo, password: e.target.value })
-                  }
-                  prefix={
-                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  //onChange={text => setState({ text })}
-                />
-              </div>
-              <div style={{ marginLeft: -10 }}>
-                <Button type="link" style={{ color: 'white' }}>
-                  <h5 style={{ color: 'white', fontSize: 10 }}>
-                    Forgot Password?
-                  </h5>
-                </Button>
-              </div>
-              <div
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  display: 'flex',
-                  marginTop: 70,
-                }}>
-                <Button onClick={() => onSubmit(setQuery, rootStore, userinfo)}>
-                  Login
-                </Button>
-              </div>
-            </div>
-          </div>
-          {/* <Card
-            bordered={false}
-            style={{p
-              width: 300,
-              backgroundColor: '#3d00bc',
-              borderRadius: 20,
-            }}>
-            <div>
-              <Input
-                placeholder="input username"
-                name={'username'}
-                prefix={
-                  <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
-                }
-=======
                 required
->>>>>>> 2c168d477de3881d5d94e8a405b933602706aaf8
               />
             </div>
             <div className="input-container">
@@ -198,7 +140,7 @@ const LoginScreen = (props: ILoginScreenProps) => {
   )
 }
 
-export default observer(Login)
+export default observer(LoginScreen)
 
 const FormContainer = styled.div`
   justify-content: center;
@@ -358,7 +300,7 @@ const FormContainer = styled.div`
       margin-top: 40px;
     }
   }
-  .input-empty {
+  /* .input-empty {
     margin: 0 auto;
     color: #fffff;
     background: #00000;
@@ -368,7 +310,7 @@ const FormContainer = styled.div`
     height: 2.5rem;
     width: 60%;
     padding: 0.8rem 1.15rem 0;
-  }
+  } */
 
   @media (max-width: 900px) {
     .input-empty {

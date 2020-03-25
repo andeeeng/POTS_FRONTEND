@@ -138,7 +138,6 @@ export const onSubmit = (
   rootStore: any,
   userinfo: { username: string; password: string },
 ) => {
-  console.log(userinfo, 'ANOTO')
   const value = getUser()
   const { username } = value
   if (userinfo.username == '') {
@@ -156,7 +155,7 @@ export const onSubmit = (
   login(userinfo, setQuery, rootStore)
 }
 
-export const itemStatusColor = (status: any) => {
+export const itemStatusColor = (status: any, state: any, setState: any) => {
   switch (status) {
     case 'On-going':
       return 'orange'
@@ -258,7 +257,7 @@ export const statusColor = (status: any) => {
   }
 }
 
-export const changewidth = (key: any) => {
+export const changewidth = (key: any, setState: any, state: any) => {
   switch (key) {
     case 'item':
       return 'orderitemtablemax'
