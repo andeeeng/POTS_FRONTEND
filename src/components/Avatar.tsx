@@ -2,15 +2,17 @@ import React from 'react'
 
 import { Avatar, Icon } from 'antd'
 
-export interface IAvatarProps {}
+export interface IAvatarProps {
+  size?: any
+}
 
 const AvatarComponent = (props: IAvatarProps) => {
-  const {} = props
+  const { size } = props
   return (
     <div>
       <Avatar
-        size={60}
         icon="user"
+        size={size}
         style={{
           backgroundColor: '#3182CE',
           color: 'white',

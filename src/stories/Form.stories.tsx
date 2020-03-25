@@ -3,9 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import InputText from '../components/InputText'
 import { Container } from 'react-bootstrap'
 import { action } from '@storybook/addon-actions'
+import { withKnobs } from '@storybook/addon-knobs'
 
 export default {
   title: 'Forms',
+  decorators: [withKnobs],
 }
 
 export const SingleLineFormStoriesWithSize = () => (
@@ -15,15 +17,9 @@ export const SingleLineFormStoriesWithSize = () => (
       type="text"
       title="Small"
       onClick={action('Selected')}
-      onChange={action('Input')}
     />
     <br />
-    <InputText
-      type="text"
-      title="Normal"
-      onClick={action('Selected')}
-      onChange={action('Input')}
-    />
+    <InputText type="text" title="Normal" onClick={action('Selected')} />
     <br />
     <InputText
       size="lg"

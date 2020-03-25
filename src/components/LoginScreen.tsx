@@ -25,33 +25,20 @@ export interface IProps {
   title?: any
   setQuery?: any
   rootStore?: any
-<<<<<<< HEAD
-  onClick?: any
-  onChange?: any
-=======
   flag?: any
->>>>>>> 2c168d477de3881d5d94e8a405b933602706aaf8
 }
 
 const Login = (props: IProps) => {
   const context = useContext(MeContext)
 
   const {
-<<<<<<< HEAD
-=======
     flag,
->>>>>>> 2c168d477de3881d5d94e8a405b933602706aaf8
     setQuery,
     rootStore,
     login,
     state,
     setState,
     messageInfo,
-<<<<<<< HEAD
-    onClick,
-    onChange,
-=======
->>>>>>> 2c168d477de3881d5d94e8a405b933602706aaf8
   } = props
   const [userinfo, setInfo] = useState({
     username: '',
