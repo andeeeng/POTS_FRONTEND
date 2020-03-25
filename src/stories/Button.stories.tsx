@@ -1,11 +1,19 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
+import {
+  withKnobs,
+  text,
+  boolean,
+  number,
+  select,
+} from '@storybook/addon-knobs'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ButtonApp from '../components/Button'
 import { ListGroupItem } from 'react-bootstrap'
 
 export default {
   title: 'Button',
+  decorators: [withKnobs],
 }
 
 export const ButtonDefault = () => (
@@ -150,6 +158,55 @@ export const ButtonWithSize = () => (
       size="sm"
       onClick={action('clicked')}
     />
+  </ListGroupItem>
+)
+
+const options = {
+  Primary: 'primary',
+  Secondary: 'secondary',
+  Success: 'success',
+  Warning: 'warning',
+  Danger: 'danger',
+  Info: 'info',
+  Light: 'light',
+  Dark: 'dark',
+  Link: 'link',
+}
+
+export const ButtonWithKnobs = () => (
+  <ListGroupItem>
+    <view style={{ margin: 10 }}>
+      <ButtonApp
+        variant={select('Variant', options, 'primary', '1')}
+        size={select(
+          'Size',
+          { Normal: '', Small: 'sm', Large: 'lg' },
+          'sm',
+          '1',
+        )}
+        buttonTitle={text('Text', 'Small Primary', '1')}
+        onClick={action('clicked')}
+      />
+    </view>
+    <ButtonApp
+      variant={select('Variant', options, 'secondary', '2')}
+      size={select('Size', { Normal: '', Small: 'sm', Large: 'lg' }, '', '2')}
+      buttonTitle={text('Text', 'Normal Secondary', '2')}
+      onClick={action('clicked')}
+    />
+    <view style={{ margin: 10 }}>
+      <ButtonApp
+        variant={select('Variant', options, 'success', '3')}
+        size={select(
+          'Size',
+          { Normal: '', Small: 'sm', Large: 'lg' },
+          'lg',
+          '3',
+        )}
+        buttonTitle={text('Text', 'Large Success', '3')}
+        onClick={action('clicked')}
+      />
+    </view>
   </ListGroupItem>
 )
 
