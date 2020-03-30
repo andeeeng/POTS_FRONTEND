@@ -1,17 +1,15 @@
-import React from 'react'
-import { Form, Row, Col } from 'react-bootstrap'
+import React from "react";
+import { Form, Row, Col } from "react-bootstrap";
 
 export interface IInputTextProps {
-  size?: any
-  type?: any
-  title?: any
-  label?: any
-  onClick?: any
-  onChange?: any
+  size?: any;
+  type?: any;
+  title?: any;
+  label?: any;
 }
 
 const InputText = (props: IInputTextProps) => {
-  const { size, type, title, label, onClick, onChange } = props
+  const { size, type, title, label } = props;
   return (
     <Form>
       <Form.Group as={Row} controlId="formPlaintextEmail">
@@ -19,17 +17,11 @@ const InputText = (props: IInputTextProps) => {
           {label}
         </Form.Label>
         <Col sm="auto">
-          <Form.Control
-            size={size}
-            type={type}
-            placeholder={title}
-            onClick={onClick}
-            onChange={onChange}
-          />
+          <Form.Control size={size} type={type} placeholder={title} />
         </Col>
       </Form.Group>
     </Form>
-  )
-}
+  );
+};
 
-export default InputText
+export default InputText;
