@@ -5,12 +5,13 @@ export interface IButtonAppProps {
   variant?: any
   size?: any
   buttonTitle?: any
+  onClick?: any
 }
 
 const ButtonApp = (props: IButtonAppProps) => {
-  const { variant, size, buttonTitle } = props
+  const { variant, size, buttonTitle, onClick } = props
   return (
-    <Button variant={variant} size={size}>
+    <Button variant={variant} size={size} onClick={onClick}>
       {buttonTitle}
     </Button>
   )

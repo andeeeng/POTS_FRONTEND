@@ -1,17 +1,18 @@
-import React from "react";
-import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
-import ButtonApp from "./Button";
+import React from 'react'
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap'
+import ButtonApp from './Button'
 
 export interface IGenDetailsProps {
-  list?: any;
-  title?: any;
-  buttonTitle?: any;
+  list?: any
+  title?: any
+  buttonTitle?: any
+  onClick?: any
 }
 
 const GenDetails = (props: IGenDetailsProps) => {
-  const { title, buttonTitle } = props;
+  const { title, buttonTitle, onClick } = props
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
       </Card.Body>
@@ -21,10 +22,14 @@ const GenDetails = (props: IGenDetailsProps) => {
         ))}
       </ListGroup>
       <Card.Body>
-        <ButtonApp buttonTitle={buttonTitle} variant="secondary" />
+        <ButtonApp
+          buttonTitle={buttonTitle}
+          variant="secondary"
+          onClick={onClick}
+        />
       </Card.Body>
     </Card>
-  );
-};
+  )
+}
 
-export default GenDetails;
+export default GenDetails
