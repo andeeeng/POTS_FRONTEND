@@ -54,7 +54,7 @@ const App = (props: any) => {
     collapseKey: ['0'],
     username: '',
   }
-  const [state, setState] = useState({ initState })
+  const [state, setState] = useState(initState)
   const { setQuery, store, error, data, loading } = useQuery()
   const PrivateRoute = ({ children, ...rest }: any) => {
     // console.log(children, ...rest, 'REST')

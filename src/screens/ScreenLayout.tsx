@@ -45,6 +45,18 @@ const App = (props: ILayout) => {
 
   const context = useContext(MeContext)
 
+  const initialLoad = () => {
+    console.log(state.currentKey, 'Current key')
+    if (state.currentKey == 'dashboard') {
+      return (
+        <Redirect
+          to={{
+            pathname: '/dashboard',
+          }}
+        />
+      )
+    }
+  }
   const logout = () => {
     removeUser()
     setUser({})
@@ -95,8 +107,7 @@ const App = (props: ILayout) => {
           mode="inline"
           selectedKeys={[state.currentKey]}
           defaultSelectedKeys={['dashboard']}
-          // onClick={e => handleClick(e.key, state, setState)}
-        >
+          onClick={e => handleClick(e.key, state, setState)}>
           {/* onClick={e => console.log('FUCK')}> */}
           <Menu.Item key="dashboard">
             <Icon type="dashboard" />
@@ -126,11 +137,7 @@ const App = (props: ILayout) => {
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
           }}>
-          <Redirect
-            to={{
-              pathname: '/dashboard',
-            }}
-          />
+          {initialLoad()}
           <Switch>
             <Route exact path="/dashboard">
               {DBcontent}
