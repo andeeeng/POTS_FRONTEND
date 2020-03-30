@@ -74,7 +74,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
           <div className="avatar">
             <div className="rows">
               <div>
-                <Avatar size={60} />
+                <Avatar />
               </div>
             </div>
           </div>

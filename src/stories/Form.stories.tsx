@@ -1,40 +1,20 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import InputText from '../components/InputText'
-import { Container } from 'react-bootstrap'
-import { action } from '@storybook/addon-actions'
-import { withKnobs } from '@storybook/addon-knobs'
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import InputText from "../components/InputText";
+import { Container } from "react-bootstrap";
 
 export default {
-  title: 'Forms',
-  decorators: [withKnobs],
-}
+  title: "Forms"
+};
 
 export const SingleLineFormStoriesWithSize = () => (
   <Container>
-    <InputText
-      size="sm"
-      type="text"
-      title="Small"
-      onClick={action('Selected')}
-    />
+    <InputText size="sm" type="text" title="Small" />
     <br />
-    <InputText type="text" title="Normal" onClick={action('Selected')} />
+    <InputText type="text" title="Normal" />
     <br />
-    <InputText
-      size="lg"
-      type="text"
-      title="Large"
-      onClick={action('Selected')}
-      onChange={action('Input')}
-    />
+    <InputText size="lg" type="text" title="Large" />
     <br />
-    <InputText
-      type="text"
-      title="With Label"
-      label="This is Label:"
-      onClick={action('Selected')}
-      onChange={action('Input')}
-    />
+    <InputText type="text" title="With Label" label="This is Label:" />
   </Container>
-)
+);
