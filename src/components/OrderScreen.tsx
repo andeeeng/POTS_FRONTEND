@@ -16,6 +16,7 @@ export interface IOrderScreenProps {
   setQuery?: any
   userInfo?: any
   title?: any
+  userLevel?: any
 }
 
 const OrderScreen = (props: IOrderScreenProps) => {
@@ -27,6 +28,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
     setState: mainSetState,
     userInfo,
     title,
+    userLevel,
   } = props
   const [state, setState] = useState({
     sortby: 'date',
@@ -60,6 +62,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
       </div>
       <div className="masterlist">
         <MasterList
+          userLevel={userLevel}
           userInfo={userInfo}
           store={store}
           setQuery={setQuery}

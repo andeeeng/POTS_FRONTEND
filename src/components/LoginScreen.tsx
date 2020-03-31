@@ -5,139 +5,266 @@ import { observer } from 'mobx-react'
 import Logo from '../components/Logo'
 import MeContext from '../MeContext'
 import { getUser, setUser, removeUser } from '../components/auth'
-import { onSubmit } from '../components/helper_functions'
+import { onSubmit, Auth } from '../components/helper_functions'
 import potsLogo from '../img/pots-hires.png'
 import daviesLogo from '../img/davies-hires.png'
 import ftLogo from '../img/ft-hires.png'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Formik, FormikProps, FormikHelpers } from 'formik'
+import { object as yupObj, string as yupString } from 'yup'
+
 import { url } from 'inspector'
 import logInBackground from '../img/login-graphics.png'
 import { IoIosLogIn } from 'react-icons/io'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation,
+} from 'react-router-dom'
+
 export interface IProps {
-  getUser?: any
-  state?: any
-  setState?: any
-  loginQuery?: any
-  messageInfo?: any
-  login?: any
-  title?: any
   setQuery?: any
   rootStore?: any
-  flag?: any
+}
+
+interface FormikValues {
+  user: string
+  password: string
 }
 
 const Login = (props: IProps) => {
-  const context = useContext(MeContext)
-
-  const {
-    flag,
-    setQuery,
-    rootStore,
-    login,
-    state,
-    setState,
-    messageInfo,
-  } = props
-  const [userinfo, setInfo] = useState({
-    username: '',
-    password: '',
-  })
-  console.log(flag, 'FKING FLAG')
-  if (messageInfo && flag !== 'logout') {
-    const { userLevel } = messageInfo
-    console.log('Userlevel', userLevel)
-    if (userLevel == 'Admin' || userLevel == 'Supplier') {
-      console.log('ILANG BESES')
-      let object = {
-        username: userinfo.username,
-        password: userinfo.password,
-        loggedin: true,
-      }
-      setUser(object)
-      context.login(true)
-    }
+  const { setQuery, rootStore } = props
+  const handleSubmit = (
+    values: FormikValues,
+    formikBag: FormikHelpers<FormikValues>,
+  ) => {
+    formikBag.setSubmitting(true)
+    console.log('NAGSUBMIT')
+    onSubmit(setQuery, rootStore, {
+      username: values.user,
+      password: values.password,
+    })
+    // setQuery(store.login({ username: values.user, password: values.password }))
   }
 
-  return (
-    <FormContainer>
-      <div className="brand-wrapper">
-        <div className="brand-header">
-          {' '}
-          <img src={daviesLogo} alt="company logo" className="company-logo" />
+  const renderForm = ({
+    values,
+    handleSubmit,
+    setFieldValue,
+    touched,
+    errors,
+    setFieldTouched,
+    isSubmitting,
+    isValid,
+  }: FormikProps<FormikValues>) => {
+    // isSubmitting = loading
+    return (
+      <FormContainer>
+        <div className="brand-wrapper">
+          <div className="brand-header">
+            {' '}
+            <img src={daviesLogo} alt="company logo" className="company-logo" />
+          </div>
         </div>
-      </div>
 
-      <div className="log-in-holder">
-        <div className="directives-container">
-          <h1 className="welcome">Welcome to your</h1>
-          <img src={potsLogo} alt="login logo" className="login-logo" />
-          <h2 className="h2-mod">Purchase Order Tracking System</h2>
-          <ul>
-            <li>Manage your orders anywhere.</li>
-            <li>
-              Manage your suppliers and maintain stable logistics anywhere.
-            </li>
-            <li>
-              Keep track of your purchases with real-time updates from your
-              supplier.
-            </li>
-          </ul>
-          <br /> <br />
-        </div>
-        <div
-          className="form-container"
-          style={{
-            backgroundImage: `url(${logInBackground})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundSize: '440px',
-          }}>
-          <form className="login-form">
-            <div className="input-container">
-              <label> Username/Email</label>
-              <input
-                className="input-empty"
-                value={userinfo.username}
-                onChange={(e: any) => {
-                  setState({ ...state, username: e.target.value })
-                  setInfo({ ...userinfo, username: e.target.value })
-                }}
-                required
-              />
-            </div>
-            <div className="input-container">
-              <label>Password</label>
-              <input
-                className="input-empty"
-                type="password"
-                value={userinfo.password}
-                onChange={(e: any) =>
-                  setInfo({ ...userinfo, password: e.target.value })
-                }
-                required
-              />
-              {/* <Link to="/" className="forgot-pass">
+        <div className="log-in-holder">
+          <div className="directives-container">
+            <h1 className="welcome">Welcome to your</h1>
+            <img src={potsLogo} alt="login logo" className="login-logo" />
+            <h2 className="h2-mod">Purchase Order Tracking System</h2>
+            <ul>
+              <li>Manage your orders anywhere.</li>
+              <li>
+                Manage your suppliers and maintain stable logistics anywhere.
+              </li>
+              <li>
+                Keep track of your purchases with real-time updates from your
+                supplier.
+              </li>
+            </ul>
+            <br /> <br />
+          </div>
+          <div
+            className="form-container"
+            style={{
+              backgroundImage: `url(${logInBackground})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundSize: '440px',
+            }}>
+            <form className="login-form">
+              <div className="input-container">
+                <label> Username/Email</label>
+                <input
+                  className="input-empty"
+                  value={values.user}
+                  onChange={(e: any) => setFieldValue('user', e.target.value)}
+                  // onChange={(e: any) => {
+                  //   setInfo({ ...userinfo, username: e.target.value })
+                  // }}
+                  onBlur={() => setFieldTouched('user')}
+                  contentEditable={!isSubmitting}
+                />
+              </div>
+              <div className="input-container">
+                <label>Password</label>
+                <input
+                  className="input-empty"
+                  value={values.password}
+                  onChange={(e: any) =>
+                    setFieldValue('password', e.target.value)
+                  }
+                  onBlur={() => setFieldTouched('password')}
+                  contentEditable={!isSubmitting}
+                />
+                {/* <Link to="/" className="forgot-pass">
                 Trouble logging in?
               </Link> */}
-            </div>
-            <div className="input-container">
-              <button
-                className="login-btn"
-                onClick={() => onSubmit(setQuery, rootStore, userinfo)}>
-                Log In <IoIosLogIn></IoIosLogIn>
-              </button>
-            </div>
-          </form>
+              </div>
+              <div className="input-container">
+                <button
+                  className="login-btn"
+                  // onClick={() => onSubmit(setQuery, rootStore, userinfo)}>
+                  onClick={() => handleSubmit()}>
+                  Log In <IoIosLogIn></IoIosLogIn>
+                </button>
+                {/* {isSubmitting ? (
+                  <button
+                    className="login-btn"
+
+                    // onClick={() => onSubmit(setQuery, rootStore, userinfo)}>
+                  >
+                    Loading <IoIosLogIn></IoIosLogIn>
+                  </button>
+                ) : (
+                  <button
+                    className="login-btn"
+                    // onClick={() => onSubmit(setQuery, rootStore, userinfo)}>
+                    onClick={() => handleSubmit}>
+                    Log In <IoIosLogIn></IoIosLogIn>
+                  </button>
+                )} */}
+              </div>
+            </form>
+          </div>
+          <div className="ft-credit">
+            <span>Powered by: </span>
+            <img src={ftLogo} alt="company logo" className="ft-logo" />
+          </div>
         </div>
-        <div className="ft-credit">
-          <span>Powered by: </span>
-          <img src={ftLogo} alt="company logo" className="ft-logo" />
-        </div>
-      </div>
-    </FormContainer>
+      </FormContainer>
+    )
+  }
+  return (
+    <Formik
+      initialValues={{
+        user: '',
+        password: '',
+      }}
+      onSubmit={handleSubmit}
+      render={(formikBag: FormikProps<FormikValues>) => renderForm(formikBag)}
+      validationSchema={yupObj().shape({
+        user: yupString().required('Username is Required'),
+        password: yupString().required('Password is Required'),
+      })}></Formik>
   )
+  // let history = useHistory()
+  // let location = useLocation()
+  // console.log(history, location)
+  // let { from }: any = location.state || { from: { pathname: '/' } }
+  // const [userinfo, setInfo] = useState({
+  //   username: '',
+  //   password: '',
+  // })
+
+  // return (
+  //   <FormContainer>
+  //     <div className="brand-wrapper">
+  //       <div className="brand-header">
+  //         {' '}
+  //         <img src={daviesLogo} alt="company logo" className="company-logo" />
+  //       </div>
+  //     </div>
+
+  //     <div className="log-in-holder">
+  //       <div className="directives-container">
+  //         <h1 className="welcome">Welcome to your</h1>
+  //         <img src={potsLogo} alt="login logo" className="login-logo" />
+  //         <h2 className="h2-mod">Purchase Order Tracking System</h2>
+  //         <ul>
+  //           <li>Manage your orders anywhere.</li>
+  //           <li>
+  //             Manage your suppliers and maintain stable logistics anywhere.
+  //           </li>
+  //           <li>
+  //             Keep track of your purchases with real-time updates from your
+  //             supplier.
+  //           </li>
+  //         </ul>
+  //         <br /> <br />
+  //       </div>
+  //       <div
+  //         className="form-container"
+  //         style={{
+  //           backgroundImage: `url(${logInBackground})`,
+  //           backgroundRepeat: 'no-repeat',
+  //           backgroundPosition: 'center',
+  //           backgroundSize: '440px',
+  //         }}>
+  //         <form className="login-form">
+  //           <div className="input-container">
+  //             <label> Username/Email</label>
+  //             <input
+  //               className="input-empty"
+  //               value={userinfo.username}
+  //               onChange={(e: any) => {
+  //                 setInfo({ ...userinfo, username: e.target.value })
+  //               }}
+  //               required
+  //             />
+  //           </div>
+  //           <div className="input-container">
+  //             <label>Password</label>
+  //             <input
+  //               className="input-empty"
+  //               type="password"
+  //               value={userinfo.password}
+  //               onChange={(e: any) =>
+  //                 setInfo({ ...userinfo, password: e.target.value })
+  //               }
+  //               required
+  //             />
+  //             {/* <Link to="/" className="forgot-pass">
+  //               Trouble logging in?
+  //             </Link> */}
+  //           </div>
+  //           <div className="input-container">
+  //             <button
+  //               className="login-btn"
+  //               // onClick={() => onSubmit(setQuery, rootStore, userinfo)}>
+  //               onClick={() =>
+  //                 Auth.authenticate(() => {
+  //                   console.log(Auth.isAuthenticated, 'IS AUTH')
+  //                   history.replace('/dashboard')
+  //                 })
+  //               }>
+  //               Log In <IoIosLogIn></IoIosLogIn>
+  //             </button>
+  //           </div>
+  //         </form>
+  //       </div>
+  //       <div className="ft-credit">
+  //         <span>Powered by: </span>
+  //         <img src={ftLogo} alt="company logo" className="ft-logo" />
+  //       </div>
+  //     </div>
+  //   </FormContainer>
+  // )
 }
 
 export default observer(Login)
@@ -371,6 +498,7 @@ const FormContainer = styled.div`
     border: none;
     background-color: transparent;
     width: 60%;
+    margin-top: 70px;
     margin: 50px auto;
   }
   @media (max-width: 900px) {

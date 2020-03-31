@@ -1,4 +1,6 @@
 import { getUser, removeUser, setUser } from './auth'
+import { Route, Redirect } from 'react-router-dom'
+import { message } from 'antd'
 
 export const handleClick = (key: any, state: any, setState: any) => {
   const path = () => {
@@ -133,25 +135,39 @@ export const SearchFilterOrder = (
   }))
 }
 
+export const Auth = {
+  isAuthenticated: false,
+  authenticate(cb: any) {
+    Auth.isAuthenticated = true
+    setTimeout(cb, 100) // fake async
+  },
+  signout(cb: any) {
+    Auth.isAuthenticated = false
+    setTimeout(cb, 100)
+  },
+}
+
 export const onSubmit = (
   setQuery: any,
   rootStore: any,
   userinfo: { username: string; password: string },
+  error?: any,
+  data?: any,
 ) => {
-  console.log(userinfo, 'ANOTO')
-  const value = getUser()
-  const { username } = value
-  if (userinfo.username == '') {
-    if (username == 'logout') {
-      removeUser()
-      let object = {
-        username: '',
-        password: '',
-        loggedin: false,
-      }
-      setUser(object)
-    }
-  }
-  // setQuery(rootStore.requestPurchaseOrders())
+  // console.log(userinfo, 'ANOTO')
+  // const value = getUser()
+  // const { username } = value
+  // if (userinfo.username == '') {
+  //   if (username == 'logout') {
+  //     removeUser()
+  //     let object = {
+  //       username: '',
+  //       password: '',
+  //       loggedin: false,
+  //     }
+  //     setUser(object)
+  //   }
+  // }
+  // // setQuery(rootStore.requestPurchaseOrders())
   login(userinfo, setQuery, rootStore)
 }
