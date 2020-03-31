@@ -17,6 +17,10 @@ import {
   handleChange,
   statusColor,
   updateStatus,
+  SearchFilterSupplier,
+  convertToBase64,
+  login,
+  SearchFilterOrder,
 } from '../components/helper_functions'
 
 const props = {
@@ -134,5 +138,74 @@ describe('statusColor function', () => {
   })
   it('return Open', () => {
     expect(statusColor('Open')).toEqual('#87d068')
+  })
+})
+
+describe('SearchFilterSupplier  function', () => {
+  it('calls function SearchFilterSupplier ', () => {
+    const setState = jest.fn()
+    const state = { dataSource: '', search: '' }
+    const source = [
+      {
+        supplier: { supplierName: 'Something cool' },
+      },
+      {
+        supplier: { supplierName: 'Something hot' },
+      },
+    ]
+    SearchFilterSupplier('cool', source, setState, state)
+    expect(setState).toBeCalled()
+  })
+})
+
+describe('SearchFilterOrder  function', () => {
+  it('calls function SearchFilterSupplier ', () => {
+    const setState = jest.fn()
+    const state = { dataSource: '', search: '' }
+    const source = [
+      {
+        purchaseOrderNo: '',
+      },
+      {
+        purchaseOrderNo: '',
+      },
+    ]
+    SearchFilterOrder('cool', source, setState, state)
+    expect(setState).toBeCalled()
+  })
+})
+
+// describe('convertToBase64   function', () => {
+//   it('return convertToBase64', () => {
+//     expect(convertToBase64('base64')).toEqual('credential')
+//   })
+// })
+
+describe('login    function', () => {
+  const userinfo = jest.fn()
+  const setQuery = jest.fn()
+  const rootStore = jest.fn()
+
+  it('return login ', () => {
+    login(userinfo, setQuery, rootStore)
+    expect(rootStore).not.toBeCalled()
+    expect(setQuery).not.toBeCalled()
+    expect(userinfo).not.toBeCalled()
+  })
+})
+
+describe('updateStatus     function', () => {
+  const scheduleline = jest.fn()
+  const rootStore = {
+    updateStatus: jest.fn(),
+  }
+  const setQuery = jest.fn()
+  it('return updateStatus  ', () => {
+    updateStatus('scheduleline', rootStore, setQuery)
+    // expect(setQuery).toBeCalled()
+
+    expect(rootStore.updateStatus).not.toBeCalled()
+
+    // expect(scheduleline).not.toBeCalled()
   })
 })

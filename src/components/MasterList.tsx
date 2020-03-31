@@ -21,6 +21,7 @@ import {
   handleChange,
   statusColor,
   changewidth,
+  item_columns,
 } from '../components/helper_functions'
 
 const { Panel } = Collapse
@@ -38,6 +39,7 @@ export interface IMasterList {
   userInfo?: any
   title?: any
   onClick?: any
+  data?: any
 }
 
 const MasterList = (props: IMasterList) => {
@@ -54,59 +56,6 @@ const MasterList = (props: IMasterList) => {
     onClick,
   } = props
 
-  const item_columns = [
-    {
-      title: 'Item No',
-      dataIndex: 'itemNo',
-      key: 'itemNo',
-    },
-    {
-      title: 'ProductID',
-      dataIndex: 'productId',
-      key: 'productId',
-    },
-    {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-    },
-    {
-      title: 'Qty',
-      dataIndex: 'quantity',
-      key: 'quantity',
-    },
-    {
-      title: 'UoM',
-      dataIndex: 'uom',
-      key: 'uom',
-    },
-    {
-      title: 'Unit Price',
-      dataIndex: 'unitPrice',
-      key: 'unitPrice',
-    },
-    {
-      title: 'Discount',
-      dataIndex: 'discount',
-      key: 'discount',
-    },
-    {
-      title: 'Total Amout',
-      dataIndex: 'totalAmount',
-      key: 'totalAmount',
-    },
-    {
-      title: 'Status',
-      key: 'supplierStatusItem',
-      dataIndex: 'supplierStatusItem',
-      render: (item: any) => (
-        <span>
-          <Tag color={itemStatusColor(item)}>{item}</Tag>
-        </span>
-      ),
-    },
-  ]
-
   const linesched = {
     id: tabState.selectedSchedID,
     deliveryStatus: {
@@ -114,9 +63,6 @@ const MasterList = (props: IMasterList) => {
     },
   }
   const renderUpdateStatus = (key: any) => {
-    // let userlevel = tabState.log_ined.map((x: any) => {
-    //   return x.userlevel
-    // })
     const { userLevel } = userInfo
 
     if (key == 'sched' && userLevel == 'Supplier') {
@@ -253,7 +199,8 @@ const MasterList = (props: IMasterList) => {
                 }>
                 <div className="panel">
                   {/* {console.log(state.tabkey, 'TABKEYKEY')} */}
-                  <div className={changewidth(tabState.tabkey)}>
+                  <div
+                    className={changewidth(tabState.tabkey, setState, state)}>
                     <Tabs
                       activeKey={tabState.tabkey}
                       defaultActiveKey={tabState.tabkey}

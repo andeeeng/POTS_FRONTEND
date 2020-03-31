@@ -1,4 +1,6 @@
+import React, { Fragment, useState } from 'react'
 import { getUser, removeUser, setUser } from './auth'
+import { Tag } from 'antd'
 
 export const handleClick = (key: any, state: any, setState: any) => {
   const path = () => {
@@ -32,7 +34,7 @@ export const updateStatus = (
   rootStore: any,
   setQuery: any,
 ) => {
-  setQuery(rootStore.updateStatus(scheduleline))
+  setQuery(() => rootStore.updateStatus(scheduleline))
 }
 
 export const showContent = (
@@ -91,6 +93,27 @@ export const sort = [
   },
 ]
 
+// export const SearchFilterSupplier = (
+//   text: any,
+//   source: any,
+//   setState: any,
+//   state: any,
+// ) => {
+//   const newData = source.filter((x: any) => {
+//     const itemData = x.supplier.supplierName
+//       ? x.supplier.supplierName.toUpperCase()
+//       : ''.toUpperCase()
+//     const textData = text.toUpperCase()
+//     return itemData.indexOf(textData) > -1
+//   })
+
+//   setState(() => ({
+//     ...state,
+//     datasource: newData,
+//     search: text,
+//   }))
+// }
+
 export const SearchFilterSupplier = (
   text: any,
   source: any,
@@ -105,11 +128,11 @@ export const SearchFilterSupplier = (
     return itemData.indexOf(textData) > -1
   })
 
-  setState(() => ({
+  setState({
     ...state,
     datasource: newData,
     search: text,
-  }))
+  })
 }
 
 export const SearchFilterOrder = (
@@ -266,3 +289,56 @@ export const changewidth = (key: any, setState: any, state: any) => {
       return 'orderitemtable'
   }
 }
+
+export const item_columns = [
+  {
+    title: 'Item No',
+    dataIndex: 'itemNo',
+    key: 'itemNo',
+  },
+  {
+    title: 'ProductID',
+    dataIndex: 'productId',
+    key: 'productId',
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
+  },
+  {
+    title: 'Qty',
+    dataIndex: 'quantity',
+    key: 'quantity',
+  },
+  {
+    title: 'UoM',
+    dataIndex: 'uom',
+    key: 'uom',
+  },
+  {
+    title: 'Unit Price',
+    dataIndex: 'unitPrice',
+    key: 'unitPrice',
+  },
+  {
+    title: 'Discount',
+    dataIndex: 'discount',
+    key: 'discount',
+  },
+  {
+    title: 'Total Amout',
+    dataIndex: 'totalAmount',
+    key: 'totalAmount',
+  },
+  {
+    title: 'Status',
+    key: 'supplierStatusItem',
+    dataIndex: 'supplierStatusItem',
+    render: (item: any, setState: any, state: any) => (
+      <span>
+        <Tag color={itemStatusColor(item, setState, state)}>{item}</Tag>
+      </span>
+    ),
+  },
+]
