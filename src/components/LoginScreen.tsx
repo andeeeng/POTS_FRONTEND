@@ -30,6 +30,7 @@ import {
 export interface IProps {
   setQuery?: any
   rootStore?: any
+  title?: any
 }
 
 interface FormikValues {
@@ -38,7 +39,7 @@ interface FormikValues {
 }
 
 const Login = (props: IProps) => {
-  const { setQuery, rootStore } = props
+  const { setQuery, rootStore, title } = props
   const handleSubmit = (
     values: FormikValues,
     formikBag: FormikHelpers<FormikValues>,

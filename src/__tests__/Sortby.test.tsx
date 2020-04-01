@@ -21,7 +21,14 @@ const props = {
 describe('SortBy', () => {
   test('renders correctly', () => {
     expect(
-      shallow(<SortBy {...props} state={state} sorts={sorts} />),
+      shallow(
+        <SortBy
+          {...props}
+          state={state}
+          sorts={sorts}
+          setState={{ ...state, sortby: 'value' }}
+        />,
+      ),
     ).toMatchSnapshot()
   })
 })
