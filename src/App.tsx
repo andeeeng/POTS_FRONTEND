@@ -1,32 +1,24 @@
-import React, { useState, useContext } from 'react'
-import logo from './logo.svg'
-import './App.css'
-import UserInfo from './components/UserInfo'
-import ScreenLayout from './screens/ScreenLayout'
-import MainScreen from './screens/MainScreen'
-import OrderScreen from './components/OrderScreen'
-import SupplierScreen from './components/SupplierScreen'
-import DashboardContent from './components/DashboardContent'
-import LoginScreen from './components/LoginScreen'
-import { statusReport, poList } from './data/mockData'
-import { Buffer } from 'buffer'
-import { onSubmit, Auth } from './components/helper_functions'
-import { getUser, setUser, removeUser } from './components/auth'
-import { useQuery } from '../src/models/reactUtils'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  withRouter,
-  useHistory,
-} from 'react-router-dom'
+import { observer } from 'mobx-react'
 //mst
 import { createHttpClient } from 'mst-gql'
-import { RootStore, StoreContext } from '../src/models'
-import { observer, inject } from 'mobx-react'
+import React, { useState } from 'react'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom'
+import { RootStore } from '../src/models'
+import { useQuery } from '../src/models/reactUtils'
+import './App.css'
+import { getUser } from './components/auth'
+import DashboardContent from './components/DashboardContent'
+import LoginScreen from './components/LoginScreen'
+import OrderScreen from './components/OrderScreen'
+import SupplierScreen from './components/SupplierScreen'
+import { statusReport } from './data/mockData'
+import ScreenLayout from './screens/ScreenLayout'
 
-import MeContext, { IMeContext } from './MeContext'
 const rootStore = RootStore.create(undefined, {
   gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
 })
