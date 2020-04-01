@@ -1,18 +1,9 @@
-import React, { useState, useContext } from 'react'
+import { Button, Icon, Layout, Menu } from 'antd'
+import React, { useContext } from 'react'
+import { Link, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
+import { removeUser, setUser } from '../components/auth'
+import { handleClick } from '../components/helper_functions'
 import MeContext from '../MeContext'
-import { onSubmit } from '../components/helper_functions'
-import { Layout, Menu, Icon, Button } from 'antd'
-import { handleClick, showContent } from '../components/helper_functions'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  Link,
-  useRouteMatch,
-} from 'react-router-dom'
-import { getUser, setUser, removeUser } from '../components/auth'
-import { observer } from 'mobx-react'
 const { Header, Content, Footer, Sider } = Layout
 export interface ILayout {
   DBcontent?: any
