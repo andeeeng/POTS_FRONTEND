@@ -121,16 +121,6 @@ const App = (props: any) => {
               SUPcontent={
                 <SupplierScreen po={rootStore.vPurchaseOrders()} />
               }></ScreenLayout>
-            {/* <div>
-              <button
-                onClick={() => {
-                  removeUser()
-                  setUser({})
-                  setState({ initState })
-                }}>
-                LOG OUT
-              </button>
-            </div> */}
           </PrivateRoute>
         </Switch>
       </div>
