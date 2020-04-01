@@ -5,7 +5,9 @@ import CurrentStatusItem from '../components/CurrentStatusItem'
 import { order, status, poList } from '../data/mockData'
 import PoStatus from './PoStatus'
 
-export interface IAccordionProps {}
+export interface IAccordionProps {
+  onClick?: any
+}
 
 const threeColumnsResponsiveProps = {
   xs: 24,
@@ -17,11 +19,12 @@ const threeColumnsResponsiveProps = {
 }
 
 const AccordionContent = (props: IAccordionProps) => {
+  const { onClick } = props
   return (
     <Fragment>
       <Row {...threeColumnsResponsiveProps}>
         <Card>
-          <OrderDetailsItem order={order} />
+          <OrderDetailsItem order={order} onClick={onClick} />
         </Card>
         <Card>
           <CurrentStatusItem status={status} />

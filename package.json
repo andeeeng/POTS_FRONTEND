@@ -9,25 +9,28 @@
     "@types/faker": "^4.1.9",
     "@types/jest": "^24.0.0",
     "@types/lodash": "^4.14.149",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
+    "@types/node": "^13.9.3",
+    "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.0",
     "@types/react-infinite-scroller": "^1.2.1",
     "@types/react-native-vector-icons": "^6.4.5",
     "@types/react-router-dom": "^5.1.3",
     "@types/styled-components": "^4.4.2",
     "@types/wix-style-react": "^6.17.2",
+    "@types/yup": "^0.26.33",
     "antd": "^3.26.11",
     "bootstrap": "^4.4.1",
     "buffer": "^5.5.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "formik": "^2.1.4",
     "graphql-request": "^1.8.2",
     "lodash": "^4.17.15",
     "mobx": "^5.15.4",
     "mobx-react": "^6.1.8",
     "mobx-state-tree": "^3.15.0",
     "mst-gql": "^0.7.1",
+    "mst-react-router": "^2.3.1",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-border-wrapper": "^1.0.3",
@@ -41,7 +44,8 @@
     "semantic-ui-react": "^0.88.2",
     "styled-components": "^5.0.1",
     "typescript": "~3.7.2",
-    "wix-style-react": "^7.39.1"
+    "wix-style-react": "^7.39.1",
+    "yup": "^0.28.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -69,12 +73,16 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.3.10",
+    "@storybook/addon-actions": "^5.3.17",
+    "@storybook/addon-knobs": "^5.3.17",
     "@storybook/addon-links": "^5.3.10",
-    "@storybook/addons": "^5.3.10",
+    "@storybook/addon-notes": "^5.3.17",
+    "@storybook/addons": "^5.3.17",
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.10",
-    "ts-jest": "^25.1.0"
+    "add": "^2.0.6",
+    "ts-jest": "^25.1.0",
+    "yarn": "^1.22.4"
   },
   "jest": {
     "moduleFileExtensions": [

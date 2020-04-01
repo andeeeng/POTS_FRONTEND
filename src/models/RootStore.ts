@@ -7,7 +7,7 @@ import {
   MESSAGE_FRAGMENT,
 } from '../helpers'
 import { getUser, removeUser, setUser } from '../components/auth'
-import { convertToBase64 } from '../components/helper_functions'
+import { convertToBase64, Auth } from '../components/helper_functions'
 
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
@@ -40,10 +40,6 @@ export const RootStore = RootStoreBase.views(self => {
   }
 }).actions(self => ({
   afterCreate() {
-    const value = getUser()
-    const { username, password, loggedin } = value
-    console.log(value, 'FCK THIS')
-
     self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
     self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
     self.queryAllUsers({}, USER_FRAGMENT)
@@ -68,7 +64,15 @@ export const RootStore = RootStoreBase.views(self => {
     )
   },
   requestLogin(credential: { username: string; password: string }) {
-    return self.queryLogin({ credential: credential }, MESSAGE_FRAGMENT)
+    const query = self.queryLogin({ credential: credential }, MESSAGE_FRAGMENT)
+    console.log('query', query)
+    query.then((data: any) => {
+      console.log(data, 'DATA FROM LOGIN')
+      removeUser()
+      setUser(data)
+    })
+
+    return query
   },
   requestPurchaseOrders() {
     const poq = self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)

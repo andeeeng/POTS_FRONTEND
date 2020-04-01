@@ -10,7 +10,7 @@ import DashboardContent from './components/DashboardContent'
 import LoginScreen from './components/LoginScreen'
 import { statusReport, poList } from './data/mockData'
 import { Buffer } from 'buffer'
-import { onSubmit } from './components/helper_functions'
+import { onSubmit, Auth } from './components/helper_functions'
 import { getUser, setUser, removeUser } from './components/auth'
 import { useQuery } from '../src/models/reactUtils'
 import {
@@ -18,177 +18,124 @@ import {
   Switch,
   Route,
   Redirect,
+  withRouter,
+  useHistory,
 } from 'react-router-dom'
 //mst
 import { createHttpClient } from 'mst-gql'
 import { RootStore, StoreContext } from '../src/models'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 
 import MeContext, { IMeContext } from './MeContext'
 const rootStore = RootStore.create(undefined, {
   gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
 })
 
-interface IProps {
-  loggedIn: any
-  setState: any
-}
+const App = (props: any) => {
+  const value = getUser()
+  let login = value.login
 
-const MeContextComponent = (props: any) => {
-  const [state, setState] = useState({ loggedIn: false })
-
-  const context: IMeContext = {
-    username: '',
-    userlevel: '',
-    login: (loggedInFlag: any) => {
-      setState({ ...state, loggedIn: loggedInFlag })
-    },
-    logout: () => {
-      setState({ ...state, loggedIn: false })
-    },
-    loggedIn: false,
+  if (!login) {
+    login = {
+      message: '',
+      userLevel: '',
+      loggedIn: false,
+    }
   }
-  return (
-    <MeContext.Provider value={context}>
-      {props.children({ loggedIn: state.loggedIn, setState })}
-    </MeContext.Provider>
-  )
-}
 
-const App = () => {
-  const { setQuery, store, error, data, loading } = useQuery()
-  const loginQuery = useQuery()
-  const [state, setState] = useState({
+  console.log(login, 'LOGIN')
+  const { message, userLevel, loggedIn } = login
+  let initState = {
+    fakeState: '',
     path: '/Dashboard',
     currentKey: 'dashboard',
     selectedSchedID: '',
     tabkey: 'item',
     collapseKey: ['0'],
     username: '',
-  })
-
-  const routes = [
-    {
-      path: '/Dashboard',
-      exact: true,
-      main: () => (
-        <ScreenLayout
-          rootStore={rootStore}
-          setQuery={setQuery}
-          routes={routes}
-          state={state}
-          setState={setState}
-          userInfo={rootStore.vMessage()}
-          DBcontent={
-            <DashboardContent
-              status={statusReport}
-              list={rootStore.vPurchaseOrders()}
-              statelogout={state}
-              setStatelogout={setState}
+  }
+  const [state, setState] = useState(initState)
+  const { setQuery, store, error, data, loading } = useQuery()
+  const PrivateRoute = ({ children, ...rest }: any) => {
+    // console.log(children, ...rest, 'REST')
+    console.log(children, 'CHILDREN')
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          loggedIn ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/login',
+              }}
             />
-          }></ScreenLayout>
-      ),
-    },
-    {
-      path: '/Orders',
-      exact: true,
-      main: () => (
-        <ScreenLayout
-          rootStore={rootStore}
-          setQuery={setQuery}
-          routes={routes}
-          state={state}
-          setState={setState}
-          userInfo={rootStore.vMessage()}
-          POcontent={
-            <OrderScreen
-              userInfo={rootStore.vMessage()}
+          )
+        }
+      />
+    )
+  }
+  return (
+    <Router>
+      <div>
+        <Redirect
+          to={{
+            pathname: '/',
+          }}
+        />
+        <Switch>
+          <Route path="/login">
+            <LoginScreen setQuery={setQuery} rootStore={rootStore} />
+          </Route>
+          <PrivateRoute path="/">
+            {/* <ProtectedPage />
+             */}
+            <ScreenLayout
+              rootStore={rootStore}
+              setQuery={setQuery}
               state={state}
               setState={setState}
-              store={rootStore}
-              setQuery={setQuery}
-              po={rootStore.vPurchaseOrders()}
-            />
-          }></ScreenLayout>
-      ),
-    },
-
-    {
-      path: '/Suppliers',
-      exact: true,
-      main: () => (
-        <ScreenLayout
-          rootStore={rootStore}
-          setQuery={setQuery}
-          routes={routes}
-          state={state}
-          setState={setState}
-          userInfo={rootStore.vMessage()}
-          SUPcontent={
-            <SupplierScreen po={rootStore.vPurchaseOrders()} />
-          }></ScreenLayout>
-      ),
-    },
-  ]
-
-  const renderFn = ({ loggedIn, setState: renderState }: IProps) => {
-    const value = getUser()
-    // localStorage.clear()
-    const { username, password, loggedin: storeflag } = value
-
-    console.log(username, password, storeflag, 'VALUESSS')
-    console.log(loggedIn, 'LOGGED IN')
-
-    if (!loggedIn && !storeflag) {
-      return (
-        <LoginScreen
-          flag={username}
-          rootStore={rootStore}
-          setQuery={setQuery}
-          messageInfo={rootStore.vMessage()}
-          state={state}
-          setState={setState}></LoginScreen>
-      )
-    }
-
-    if (!loggedIn && storeflag) {
-      return (
-        <MainScreen
-          flag={loggedIn}
-          setQuery={setQuery}
-          value={value}
-          rootStore={rootStore}
-          routes={routes}
-          state={state}
-          setState={setState}></MainScreen>
-      )
-    }
-    if (loggedIn && storeflag) {
-      return (
-        <MainScreen
-          flag={loggedIn}
-          setQuery={setQuery}
-          value={value}
-          rootStore={rootStore}
-          routes={routes}
-          state={state}
-          setState={setState}></MainScreen>
-      )
-    }
-    if (loggedIn && storeflag) {
-      return (
-        <MainScreen
-          flag={loggedIn}
-          setQuery={setQuery}
-          value={value}
-          rootStore={rootStore}
-          routes={routes}
-          state={state}
-          setState={setState}></MainScreen>
-      )
-    }
-  }
-  return <MeContextComponent>{renderFn}</MeContextComponent>
+              userLevel={userLevel}
+              userInfo={rootStore.vMessage()}
+              DBcontent={
+                <DashboardContent
+                  userLevel={userLevel}
+                  status={statusReport}
+                  list={rootStore.vPurchaseOrders()}
+                  statelogout={state}
+                  setStatelogout={setState}
+                />
+              }
+              POcontent={
+                <OrderScreen
+                  userLevel={userLevel}
+                  userInfo={rootStore.vMessage()}
+                  state={state}
+                  setState={setState}
+                  store={rootStore}
+                  setQuery={setQuery}
+                  po={rootStore.vPurchaseOrders()}
+                />
+              }
+              SUPcontent={
+                <SupplierScreen po={rootStore.vPurchaseOrders()} />
+              }></ScreenLayout>
+            {/* <div>
+              <button
+                onClick={() => {
+                  removeUser()
+                  setUser({})
+                  setState({ initState })
+                }}>
+                LOG OUT
+              </button>
+            </div> */}
+          </PrivateRoute>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
 export default observer(App)

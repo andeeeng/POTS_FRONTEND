@@ -8,6 +8,8 @@ import {
   Switch,
   Route,
   Redirect,
+  Link,
+  useRouteMatch,
 } from 'react-router-dom'
 import { getUser, setUser, removeUser } from '../components/auth'
 import { observer } from 'mobx-react'
@@ -23,6 +25,7 @@ export interface ILayout {
   userInfo?: any
   setQuery?: any
   rootStore?: any
+  userLevel?: any
 }
 
 const App = (props: ILayout) => {
@@ -35,43 +38,39 @@ const App = (props: ILayout) => {
     POcontent,
     SUPcontent,
     userInfo,
+    userLevel,
   } = props
+
+  let { path, url } = useRouteMatch()
 
   const context = useContext(MeContext)
 
+  const initialLoad = () => {
+    console.log(state.currentKey, 'Current key')
+    if (state.currentKey == 'dashboard') {
+      return (
+        <Redirect
+          to={{
+            pathname: '/dashboard',
+          }}
+        />
+      )
+    }
+  }
   const logout = () => {
-    const userinfo = {
-      username: '',
-      password: '',
-    }
     removeUser()
-    let object = {
-      username: 'logout',
-      password: '',
-      loggedin: false,
-    }
-    setUser(object)
-    context.logout()
-    onSubmit(setQuery, rootStore, userinfo)
+    setUser({})
+    setState({ ...state, fakeState: '' })
   }
   const renderSuppMenu = () => {
-    // let userlevel = state.log_ined.map((x: any) => {
-    //   return x.userlevel
-    // })
-    console.log('Userlevel', userInfo)
-    if (userInfo) {
-      const { userLevel } = userInfo
-      console.log('Userlevel', userLevel)
-      if (userLevel == 'Admin') {
-        console.log('HERE PUMASOK')
-        return (
-          <Menu.Item key="supplier">
-            <Icon type="car" />
-            <span className="nav-text">My Suppliers</span>
-          </Menu.Item>
-        )
-      }
-      return null
+    if (userLevel == 'Admin') {
+      return (
+        <Menu.Item key="supplier">
+          <Icon type="car" />
+          <span className="nav-text">My Suppliers</span>
+          <Link to={`/suppliers`}></Link>
+        </Menu.Item>
+      )
     }
   }
   const renderContent = (key: any) => {
@@ -90,60 +89,69 @@ const App = (props: ILayout) => {
     }
   }
   return (
-    <Router>
+    <Layout>
+      <Sider
+        style={{ backgroundColor: 'white' }}
+        breakpoint="lg"
+        collapsedWidth="0"
+        onBreakpoint={broken => {
+          console.log(broken)
+        }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type)
+        }}>
+        <div className="logo" />
+        {console.log(state, 'STATE')}
+        <Menu
+          theme="light"
+          mode="inline"
+          selectedKeys={[state.currentKey]}
+          defaultSelectedKeys={['dashboard']}
+          onClick={e => handleClick(e.key, state, setState)}>
+          {/* onClick={e => console.log('FUCK')}> */}
+          <Menu.Item key="dashboard">
+            <Icon type="dashboard" />
+            <span className="nav-text">My Dashboard</span>
+            <Link to={`/dashboard`}></Link>
+          </Menu.Item>
+          <Menu.Item key="order">
+            <Icon type="shopping-cart" />
+            <span className="nav-text">My Orders</span>
+            <Link to={`/orders`}></Link>
+          </Menu.Item>
+          {renderSuppMenu()}
+        </Menu>
+      </Sider>
       <Layout>
-        <Sider
-          style={{ backgroundColor: 'white' }}
-          breakpoint="lg"
-          collapsedWidth="0"
-          onBreakpoint={broken => {
-            console.log(broken)
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type)
+        <Header style={{ backgroundColor: 'white', float: 'right' }}>
+          <Button type="link" onClick={() => logout()}>
+            Logout
+          </Button>
+        </Header>
+        <Content
+          style={{
+            display: 'flex',
+            backgroundColor: 'white',
+            padding: '30px',
+            flexFlow: 'row wrap',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
           }}>
-          <div className="logo" />
-          <Menu
-            theme="light"
-            mode="inline"
-            selectedKeys={[state.currentKey]}
-            // defaultSelectedKeys={['dashboard']}
-            onClick={e => handleClick(e.key, state, setState)}>
-            {/* onClick={e => console.log('FUCK')}> */}
-            <Menu.Item key="dashboard">
-              <Icon type="dashboard" />
-              <span className="nav-text">My Dashboard</span>
-            </Menu.Item>
-            <Menu.Item key="order">
-              <Icon type="shopping-cart" />
-              <span className="nav-text">My Orders</span>
-            </Menu.Item>
-            {renderSuppMenu()}
-          </Menu>
-        </Sider>
-        <Layout>
-          <Header style={{ backgroundColor: 'white', float: 'right' }}>
-            <Button type="link" onClick={() => logout()}>
-              Logout
-            </Button>
-          </Header>
-          <Content
-            style={{
-              display: 'flex',
-              backgroundColor: 'white',
-              padding: '30px',
-              flexFlow: 'row wrap',
-              alignItems: 'flex-start',
-              justifyContent: 'flex-start',
-            }}>
-            {renderContent(state.currentKey)}
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            Purchase Order Tracking System ©2020 Created by Fast Track
-          </Footer>
-        </Layout>
+          {initialLoad()}
+          <Switch>
+            <Route exact path="/dashboard">
+              {DBcontent}
+            </Route>
+            <Route path="/orders">{POcontent}</Route>
+            <Route path="/suppliers">{SUPcontent}</Route>
+          </Switch>
+          {/* {renderContent(state.currentKey)} */}
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Purchase Order Tracking System ©2020 Created by Fast Track
+        </Footer>
       </Layout>
-    </Router>
+    </Layout>
   )
 }
 

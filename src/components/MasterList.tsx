@@ -41,6 +41,7 @@ export interface IMasterList {
   onClick?: any
   data?: any
   onChange?: any
+  userLevel?: any
 }
 
 const MasterList = (props: IMasterList) => {
@@ -56,6 +57,7 @@ const MasterList = (props: IMasterList) => {
     title,
     onClick,
     onChange,
+    userLevel,
   } = props
 
   const linesched = {
@@ -66,7 +68,11 @@ const MasterList = (props: IMasterList) => {
   }
 
   const renderUpdateStatus = (key: any) => {
-    const { userLevel } = userInfo
+    // let userlevel = tabState.log_ined.map((x: any) => {
+    //   return x.userlevel
+    // })
+    // const { userLevel } = userInfo
+    // console.log('Userlevel', userLevel)
 
     if (key == 'sched' && userLevel == 'Supplier') {
       return (
