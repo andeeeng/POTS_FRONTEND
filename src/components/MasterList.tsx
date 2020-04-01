@@ -40,6 +40,7 @@ export interface IMasterList {
   title?: any
   onClick?: any
   data?: any
+  onChange?: any
 }
 
 const MasterList = (props: IMasterList) => {
@@ -54,6 +55,7 @@ const MasterList = (props: IMasterList) => {
     filterPO,
     title,
     onClick,
+    onChange,
   } = props
 
   const linesched = {
@@ -62,6 +64,7 @@ const MasterList = (props: IMasterList) => {
       status: state.status,
     },
   }
+
   const renderUpdateStatus = (key: any) => {
     const { userLevel } = userInfo
 
@@ -240,13 +243,13 @@ const MasterList = (props: IMasterList) => {
                             // bodyStyle={{ margin: '20px' }}
                             onRow={(record: any, rowIndex) => {
                               return {
-                                onClick: event => {}, // click row
-                                onDoubleClick: event => {}, // double click row
-                                onContextMenu: event => {}, // right button click row
-                                onMouseEnter: event => {
-                                  // setRow({ ...row, selectedSchedID: record.id })
-                                }, // mouse enter row
-                                onMouseLeave: event => {}, // mouse leave row
+                                // onClick: event => {}, // click row
+                                // onDoubleClick: event => {}, // double click row
+                                // onContextMenu: event => {}, // right button click row
+                                // onMouseEnter: event => {
+                                //   // setRow({ ...row, selectedSchedID: record.id })
+                                // }, // mouse enter row
+                                // onMouseLeave: event => {}, // mouse leave row
                               }
                             }}
                             columns={item_columns}
@@ -272,10 +275,10 @@ const MasterList = (props: IMasterList) => {
                                     selectedSchedID: record.id,
                                   })
                                 }, // click row
-                                onDoubleClick: event => {}, // double click row
-                                onContextMenu: event => {}, // right button click row
-                                onMouseEnter: event => {}, // mouse enter row
-                                onMouseLeave: event => {}, // mouse leave row
+                                // onDoubleClick: event => {}, // double click row
+                                // onContextMenu: event => {}, // right button click row
+                                // onMouseEnter: event => {}, // mouse enter row
+                                // onMouseLeave: event => {}, // mouse leave row
                               }
                             }}
                             // bodyStyle={{ margin: '20px' }}
