@@ -1,19 +1,20 @@
-import React, { Fragment, useState } from 'react'
-import { updateStatus } from './helper_functions'
-import InfiniteScroll from 'react-infinite-scroller'
 import {
   Button,
-  Table,
-  Collapse,
-  Timeline,
   Card,
-  Tag,
-  Typography,
-  Tabs,
-  Select,
+  Collapse,
   Empty,
+  Select,
+  Table,
+  Tabs,
+  Tag,
+  Timeline,
+  Typography,
 } from 'antd'
 import { observer } from 'mobx-react'
+import React, { Fragment } from 'react'
+import InfiniteScroll from 'react-infinite-scroller'
+import { item_columns, sched_columns, status } from '../table-fields/columns'
+import { updateStatus } from './helper_functions'
 const { Panel } = Collapse
 const { Text, Title } = Typography
 const { TabPane } = Tabs
@@ -37,140 +38,11 @@ const MasterList = (props: IMasterList) => {
     setQuery,
     state,
     setState,
-    userInfo,
     tabState,
     tabSetState,
     filterPO,
-    title,
     userLevel,
   } = props
-
-  const status = [
-    {
-      value: '1',
-      desc: 'Ready to Ship',
-    },
-    {
-      value: '2',
-      desc: 'Delivered',
-    },
-    {
-      value: '3',
-      desc: 'On the Logistics Facility',
-    },
-  ]
-
-  const item_columns = [
-    {
-      title: 'Item No',
-      dataIndex: 'itemNo',
-      key: 'itemNo',
-    },
-    {
-      title: 'ProductID',
-      dataIndex: 'productId',
-      key: 'productId',
-    },
-    {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-    },
-    {
-      title: 'Qty',
-      dataIndex: 'quantity',
-      key: 'quantity',
-    },
-    {
-      title: 'UoM',
-      dataIndex: 'uom',
-      key: 'uom',
-    },
-    {
-      title: 'Unit Price',
-      dataIndex: 'unitPrice',
-      key: 'unitPrice',
-    },
-    {
-      title: 'Discount',
-      dataIndex: 'discount',
-      key: 'discount',
-    },
-    {
-      title: 'Total Amout',
-      dataIndex: 'totalAmount',
-      key: 'totalAmount',
-    },
-    {
-      title: 'Status',
-      key: 'supplierStatusItem',
-      dataIndex: 'supplierStatusItem',
-      render: (item: any) => (
-        <span>
-          <Tag color={itemStatusColor(item)}>{item}</Tag>
-        </span>
-      ),
-    },
-  ]
-  const itemStatusColor = (status: any) => {
-    console.log(status, 'COLOR')
-    switch (status) {
-      case 'On-going':
-        return 'orange'
-      case 'Complete':
-        return 'green'
-      case 'Not Started':
-        return 'red'
-      default:
-        break
-    }
-  }
-  const sched_columns = [
-    {
-      title: 'Delivery Schedule',
-      dataIndex: 'deliveryDateAndTime',
-      key: 'deliveryDateAndTime',
-    },
-
-    {
-      title: 'Delivery Address',
-      dataIndex: 'delvAddress',
-      key: 'delvAddress',
-    },
-
-    {
-      title: 'Item No',
-      dataIndex: 'itemNo',
-      key: 'itemNo',
-    },
-
-    {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-    },
-    {
-      title: 'Qty',
-      dataIndex: 'quantity',
-      key: 'quantity',
-    },
-    {
-      title: 'UoM',
-      dataIndex: 'uom',
-      key: 'uom',
-    },
-    {
-      title: 'Unit Price',
-      dataIndex: 'unitPrice',
-      key: 'unitPrice',
-    },
-    {
-      title: 'Total Amout',
-      dataIndex: 'totalAmount',
-      key: 'totalAmount',
-    },
-  ]
-  console.log(state, 'LAMAN NG STATE')
 
   const handleChange = (value: any, state: any, setState: any) => {
     const status = (key: any) => {
@@ -190,19 +62,16 @@ const MasterList = (props: IMasterList) => {
       status: status(value),
     })
   }
+
   const linesched = {
     id: tabState.selectedSchedID,
     deliveryStatus: {
       status: state.status,
     },
   }
+
   const renderUpdateStatus = (key: any) => {
-    // let userlevel = tabState.log_ined.map((x: any) => {
-    //   return x.userlevel
-    // })
-    // const { userLevel } = userInfo
-    // console.log('Userlevel', userLevel)
-    if (key == 'sched' && userLevel == 'Supplier') {
+    if (key === 'sched' && userLevel === 'Supplier') {
       return (
         <div className="history2">
           <div style={{ marginTop: '5px', marginRight: '2px' }}>
@@ -231,8 +100,9 @@ const MasterList = (props: IMasterList) => {
       )
     }
   }
+
   const renderHistoryPanel = (activekey: any, data: any) => {
-    if (activekey == 'sched') {
+    if (activekey === 'sched') {
       return (
         <div className="history">
           <div className="history1">
@@ -248,7 +118,7 @@ const MasterList = (props: IMasterList) => {
                 useWindow={false}>
                 <Timeline mode="left">
                   {data.map((data: any, index: any) => {
-                    if (data.delvStatus.length != 0) {
+                    if (data.delvStatus.length !== 0) {
                       return data.delvStatus.map((sched: any) => {
                         return (
                           <Timeline.Item>
@@ -258,12 +128,7 @@ const MasterList = (props: IMasterList) => {
                         )
                       })
                     } else {
-                      return (
-                        // <Timeline.Item color="red">
-                        //   NO STATUS UPDATE
-                        // </Timeline.Item>
-                        <Empty></Empty>
-                      )
+                      return <Empty></Empty>
                     }
                   })}
                 </Timeline>
@@ -279,10 +144,10 @@ const MasterList = (props: IMasterList) => {
     tabSetState({ ...tabState, collapseKey: key })
   }
   const statusColor = (status: any) => {
-    if (status == 'Closed') {
+    if (status === 'Closed') {
       return '#f50'
     }
-    if (status == 'Open') {
+    if (status === 'Open') {
       return '#87d068'
     }
   }
@@ -327,11 +192,14 @@ const MasterList = (props: IMasterList) => {
                 deliveryDateAndTime: sched.deliveryDateAndTime,
                 delvStatus: sched.deliveryStatus,
               })
+              return null
             })
+
+            return null
           })
 
           const schedById = schedarray.filter(
-            x => x.id == tabState.selectedSchedID,
+            x => x.id === tabState.selectedSchedID,
           )
           const changewidth = (key: any) => {
             switch (key) {
@@ -342,6 +210,7 @@ const MasterList = (props: IMasterList) => {
                 return 'orderitemtable'
             }
           }
+
           return (
             <Panel
               header={`PO# ${data.purchaseOrderNo} by  ${data.supplier.supplierName}`}
@@ -352,7 +221,6 @@ const MasterList = (props: IMasterList) => {
                 </Tag>
               }>
               <div className="panel">
-                {/* {console.log(state.tabkey, 'TABKEYKEY')} */}
                 <div className={changewidth(tabState.tabkey)}>
                   <Tabs
                     activeKey={tabState.tabkey}
@@ -366,7 +234,6 @@ const MasterList = (props: IMasterList) => {
                           <div>
                             <Text>Address: </Text>
                             <br></br>
-                            {/* <Text>Deliver To: </Text> */}
                           </div>
                           <div>
                             <Text>
@@ -377,7 +244,6 @@ const MasterList = (props: IMasterList) => {
                               {data.supplier.address.zip_code}{' '}
                             </Text>
                             <br></br>
-                            {/* <Text>{data.deliverTo}</Text> */}
                           </div>
                         </div>
                       </div>
@@ -429,6 +295,7 @@ const MasterList = (props: IMasterList) => {
                               onMouseLeave: event => {}, // mouse leave row
                             }
                           }}
+                          rowKey={(record: any) => record.uid}
                           // bodyStyle={{ margin: '20px' }}
                           columns={sched_columns}
                           dataSource={schedarray}

@@ -1,3 +1,4 @@
+import { message as alert } from 'antd'
 import { observer } from 'mobx-react'
 //mst
 import { createHttpClient } from 'mst-gql'
@@ -16,15 +17,13 @@ import DashboardContent from './components/DashboardContent'
 import LoginScreen from './components/LoginScreen'
 import OrderScreen from './components/OrderScreen'
 import SupplierScreen from './components/SupplierScreen'
-import { statusReport } from './data/mockData'
 import ScreenLayout from './screens/ScreenLayout'
-import { message as alert } from 'antd'
 
 const rootStore = RootStore.create(undefined, {
   gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
 })
 
-const App = (props: any) => {
+const App = () => {
   const value = getUser()
   let login = value.login
 
@@ -48,12 +47,12 @@ const App = (props: any) => {
     username: '',
   }
   const [state, setState] = useState(initState)
-  const { setQuery, store, error, data, loading } = useQuery()
+  const { setQuery, loading } = useQuery()
 
   if (!loading) {
     if (loggedIn === false && message === 'Wrong Credentials') {
       alert.error(message)
-    } else if (message) {
+    } else if (message && loggedIn === false) {
       alert.success(message)
     }
   }
@@ -62,7 +61,7 @@ const App = (props: any) => {
     return (
       <Route
         {...rest}
-        render={({ location }) =>
+        render={() =>
           loggedIn ? (
             children
           ) : (
@@ -97,13 +96,7 @@ const App = (props: any) => {
               userLevel={userLevel}
               userInfo={rootStore.vMessage()}
               DBcontent={
-                <DashboardContent
-                  userLevel={userLevel}
-                  status={statusReport}
-                  list={rootStore.vPurchaseOrders()}
-                  statelogout={state}
-                  setStatelogout={setState}
-                />
+                <DashboardContent list={rootStore.vPurchaseOrders()} />
               }
               POcontent={
                 <OrderScreen

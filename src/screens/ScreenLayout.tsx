@@ -1,9 +1,8 @@
 import { Button, Icon, Layout, Menu } from 'antd'
-import React, { useContext } from 'react'
-import { Link, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
+import React from 'react'
+import { Link, Redirect, Route, Switch } from 'react-router-dom'
 import { removeUser, setUser } from '../components/auth'
 import { handleClick } from '../components/helper_functions'
-import MeContext from '../MeContext'
 const { Header, Content, Footer, Sider } = Layout
 
 export interface ILayout {
@@ -24,7 +23,7 @@ const App = (props: ILayout) => {
   const { state, setState, DBcontent, POcontent, SUPcontent, userLevel } = props
 
   const initialLoad = () => {
-    if (state.currentKey == 'dashboard') {
+    if (state.currentKey === 'dashboard') {
       return (
         <Redirect
           to={{
@@ -40,7 +39,7 @@ const App = (props: ILayout) => {
     setState({ ...state, fakeState: '' })
   }
   const renderSuppMenu = () => {
-    if (userLevel == 'Admin') {
+    if (userLevel === 'Admin') {
       return (
         <Menu.Item key="supplier">
           <Icon type="car" />

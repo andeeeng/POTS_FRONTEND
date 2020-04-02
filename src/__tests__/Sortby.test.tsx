@@ -13,10 +13,13 @@ import SortBy from '../components/SortBy'
 
 const props = {
   title: 'SortBy',
+  sortby: {
+    test: 'any',
+  },
 }
-
+const sorts = [{}]
 describe('SortBy', () => {
   test('renders correctly', () => {
-    expect(shallow(<SortBy {...props} />)).toMatchSnapshot()
+    expect(shallow(<SortBy state={props} sorts={sorts} />)).toMatchSnapshot()
   })
 })

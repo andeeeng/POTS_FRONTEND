@@ -2,8 +2,8 @@
  * @format
  */
 
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
 import StatusItem from '../components/StatusItem'
 
 const props = {
@@ -27,8 +27,8 @@ const props = {
 }
 
 describe(' Status Item', () => {
-  test('renders correctly', () => {
-    expect(
+  test('renders correctly', async () => {
+    await expect(
       shallow(<StatusItem {...props} status={props.statuslist} />),
     ).toMatchSnapshot()
   })

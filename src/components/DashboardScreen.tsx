@@ -20,7 +20,6 @@ const DashboardScreen = (props: IDashboardScreenProps) => {
         </Col>
         <Col md={8}>
           <UserInfo user="Mark Nabablit" date="February 5, 2020" />
-          <DashboardContent status={statusReport} list={poList} />
         </Col>
       </Row>
     </Container>

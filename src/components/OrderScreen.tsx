@@ -15,7 +15,6 @@ export interface IOrderScreenProps {
   store?: any
   setQuery?: any
   userInfo?: any
-  title?: any
   userLevel?: any
 }
 
@@ -27,9 +26,9 @@ const OrderScreen = (props: IOrderScreenProps) => {
     state: mainState,
     setState: mainSetState,
     userInfo,
-    title,
     userLevel,
   } = props
+
   const [state, setState] = useState({
     sortby: 'date',
     POdata: po,
@@ -48,7 +47,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
       <div className="searchandsort">
         <div className="search">
           <Search
-            placeholder="input search text"
+            placeholder="Input Purchase Order Number"
             onSearch={value => {
               console.log(value, 'valueeeeee')
               SearchFilterOrder(value, state.POdata, setState, state)

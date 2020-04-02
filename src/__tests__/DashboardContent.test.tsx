@@ -17,6 +17,8 @@ const props = {
 
 describe('Dashboard Content', () => {
   test('renders correctly', () => {
-    expect(shallow(<DashboardContent {...props} />)).toMatchSnapshot()
+    expect(
+      shallow(<DashboardContent list={[{ test: 'test' }]} />),
+    ).toMatchSnapshot()
   })
 })

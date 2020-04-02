@@ -1,28 +1,12 @@
-import React, { Fragment, useState } from 'react'
-import {
-  Calendar,
-  List,
-  Typography,
-  Card,
-  Divider,
-  Button,
-  Drawer,
-  Icon,
-  Input,
-} from 'antd'
+import { Button, Calendar, Card, Divider, Drawer, List, Typography } from 'antd'
 import moment from 'moment'
+import React, { Fragment, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
-import StatusItem from './StatusItem'
-import { statusReport, poList } from '../data/mockData'
-import { Segment } from 'semantic-ui-react'
 import Avatar from '../components/Avatar'
+import { statusReport } from '../data/mockData'
+import StatusItem from './StatusItem'
 export interface IDashboardContentProps {
-  status?: any
   list?: any
-  setStatelogout?: any
-  statelogout?: any
-  userLevel?: any
-  title?: any
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {

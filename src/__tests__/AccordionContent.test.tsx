@@ -17,6 +17,7 @@ const props = {
 
 describe('Accordion Content', () => {
   test('renders correctly', () => {
-    expect(shallow(<AccordionContent {...props} />)).toMatchSnapshot()
+    let onClick = jest.fn()
+    expect(shallow(<AccordionContent onClick={onClick} />)).toMatchSnapshot()
   })
 })

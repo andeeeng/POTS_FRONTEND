@@ -1,13 +1,12 @@
 import { Instance } from 'mobx-state-tree'
-import { RootStoreBase } from './RootStore.base'
+import { removeUser, setUser } from '../components/auth'
 import {
+  MESSAGE_FRAGMENT,
   PURCHASEORDER_FRAGMENT,
   SCHEDULELINE_FRAGMENT,
   USER_FRAGMENT,
-  MESSAGE_FRAGMENT,
 } from '../helpers'
-import { getUser, removeUser, setUser } from '../components/auth'
-import { convertToBase64, Auth } from '../components/helper_functions'
+import { RootStoreBase } from './RootStore.base'
 
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
@@ -43,18 +42,6 @@ export const RootStore = RootStoreBase.views(self => {
     self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
     self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)
     self.queryAllUsers({}, USER_FRAGMENT)
-    // console.log(value, 'ROOTSTORE')
-    // if (loggedin) {
-    //   self.queryLogin(
-    //     {
-    //       credential: convertToBase64({
-    //         username: username,
-    //         password: password,
-    //       }),
-    //     },
-    //     MESSAGE_FRAGMENT,
-    //   )
-    // }
   },
   updateStatus(scheduleLine: any) {
     console.log(scheduleLine, 'HERE THERE')

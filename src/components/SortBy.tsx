@@ -22,7 +22,7 @@ const SortBy = (props: ISortyBy) => {
   return (
     <Fragment>
       <div style={{ marginRight: '10px' }}>
-        <Text>Sort By: </Text>
+        <Text>Filter By: </Text>
       </div>
       <div>
         <Select

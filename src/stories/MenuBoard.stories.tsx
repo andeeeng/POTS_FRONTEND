@@ -133,9 +133,7 @@ PoStatusDefault.story = {
   },
 }
 
-export const DashboardContentDefault = () => (
-  <DashboardContent status={statusReport} list={poList} />
-)
+export const DashboardContentDefault = () => <DashboardContent />
 
 export const DashboardScreenDefault = () => <DashboardScreen />
 
