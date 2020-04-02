@@ -60,6 +60,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
       visible: false,
     })
   }
+
   return (
     <Fragment>
       <div className="content1">
