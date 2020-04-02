@@ -1,0 +1,586 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200401.145224.5748.0.001.json",
+    "dumpEventTime": "2020-04-01T14:52:24Z",
+    "dumpEventTimeStamp": "1585723944316",
+    "processId": 5748,
+    "cwd": "C:\\Users\\Harold\\POTS_FRONTEND",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Harold\\POTS_FRONTEND\\node_modules\\jest-worker\\build\\workers\\processChild.js"
+    ],
+    "nodejsVersion": "v12.16.1",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.16.1",
+      "v8": "7.8.279.23-node.31",
+      "uv": "1.34.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.1/node-v12.16.1-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.1/node-v12.16.1.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.16.1/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.17763",
+    "osVersion": "Windows 10 Home Single Language",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx  ",
+        "speed": 1996,
+        "user": 8066328,
+        "nice": 0,
+        "sys": 13464312,
+        "idle": 89075671,
+        "irq": 631390
+      },
+      {
+        "model": "AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx  ",
+        "speed": 1996,
+        "user": 6751875,
+        "nice": 0,
+        "sys": 11376953,
+        "idle": 92477265,
+        "irq": 247640
+      },
+      {
+        "model": "AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx  ",
+        "speed": 1996,
+        "user": 9437250,
+        "nice": 0,
+        "sys": 11266578,
+        "idle": 89902265,
+        "irq": 80515
+      },
+      {
+        "model": "AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx  ",
+        "speed": 1996,
+        "user": 7420046,
+        "nice": 0,
+        "sys": 11835921,
+        "idle": 91350125,
+        "irq": 51156
+      },
+      {
+        "model": "AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx  ",
+        "speed": 1996,
+        "user": 8388890,
+        "nice": 0,
+        "sys": 9922515,
+        "idle": 92294671,
+        "irq": 68890
+      },
+      {
+        "model": "AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx  ",
+        "speed": 1996,
+        "user": 6936156,
+        "nice": 0,
+        "sys": 11099687,
+        "idle": 92570234,
+        "irq": 53390
+      },
+      {
+        "model": "AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx  ",
+        "speed": 1996,
+        "user": 9863515,
+        "nice": 0,
+        "sys": 11101062,
+        "idle": 89641500,
+        "irq": 81093
+      },
+      {
+        "model": "AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx  ",
+        "speed": 1996,
+        "user": 8661140,
+        "nice": 0,
+        "sys": 13852484,
+        "idle": 88092453,
+        "irq": 133125
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "VirtualBox Host-Only Network",
+        "internal": false,
+        "mac": "0a:00:27:00:00:02",
+        "address": "fe80::806e:83ef:9f90:baad",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 2
+      },
+      {
+        "name": "VirtualBox Host-Only Network",
+        "internal": false,
+        "mac": "0a:00:27:00:00:02",
+        "address": "192.168.56.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VirtualBox Host-Only Network #2",
+        "internal": false,
+        "mac": "0a:00:27:00:00:05",
+        "address": "fe80::2097:b7e2:e570:8aaf",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 5
+      },
+      {
+        "name": "VirtualBox Host-Only Network #2",
+        "internal": false,
+        "mac": "0a:00:27:00:00:05",
+        "address": "192.168.243.2",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VirtualBox Host-Only Network #3",
+        "internal": false,
+        "mac": "0a:00:27:00:00:0e",
+        "address": "fe80::6067:ddc4:bdef:2da0",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 14
+      },
+      {
+        "name": "VirtualBox Host-Only Network #3",
+        "internal": false,
+        "mac": "0a:00:27:00:00:0e",
+        "address": "192.168.31.2",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VirtualBox Host-Only Network #4",
+        "internal": false,
+        "mac": "0a:00:27:00:00:18",
+        "address": "fe80::8caa:7a14:ea5e:8464",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 24
+      },
+      {
+        "name": "VirtualBox Host-Only Network #4",
+        "internal": false,
+        "mac": "0a:00:27:00:00:18",
+        "address": "192.168.137.2",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "70:c9:4e:97:8a:33",
+        "address": "fe80::24a7:7f9:aa4c:d9d3",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 6
+      },
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "70:c9:4e:97:8a:33",
+        "address": "192.168.1.2",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "LAPTOP-N730U3CA"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff70eb019f9",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+10873"
+    },
+    {
+      "pc": "0x00007ff70eb05e1c",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+28316"
+    },
+    {
+      "pc": "0x00007ff70eb04dd8",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24152"
+    },
+    {
+      "pc": "0x00007ff70ec034cb",
+      "symbol": "v8::base::CPU::has_sse+38363"
+    },
+    {
+      "pc": "0x00007ff70f419f4e",
+      "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+    },
+    {
+      "pc": "0x00007ff70f402021",
+      "symbol": "v8::SharedArrayBuffer::Externalize+833"
+    },
+    {
+      "pc": "0x00007ff70f2ce57c",
+      "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+    },
+    {
+      "pc": "0x00007ff70f2aa4d3",
+      "symbol": "v8::internal::MarkCompactCollector::EnsureSweepingCompleted+1763"
+    },
+    {
+      "pc": "0x00007ff70f2a87db",
+      "symbol": "v8::internal::ConcurrentBitmap<1>::IsClean+63659"
+    },
+    {
+      "pc": "0x00007ff70f2d3d5d",
+      "symbol": "v8::internal::Heap::LeftTrimFixedArray+845"
+    },
+    {
+      "pc": "0x00007ff70f2d5a94",
+      "symbol": "v8::internal::Heap::PageFlagsAreConsistent+1060"
+    },
+    {
+      "pc": "0x00007ff70f2cbb13",
+      "symbol": "v8::internal::Heap::CollectGarbage+1283"
+    },
+    {
+      "pc": "0x00007ff70f2ca184",
+      "symbol": "v8::internal::Heap::AddRetainedMap+2452"
+    },
+    {
+      "pc": "0x00007ff70f2eb36d",
+      "symbol": "v8::internal::Factory::NewFillerObject+61"
+    },
+    {
+      "pc": "0x00007ff70f050adf",
+      "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+1295"
+    },
+    {
+      "pc": "0x00007ff70f864ddd",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+546637"
+    },
+    {
+      "pc": "0x000001c6f3c12e7b",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 263905280,
+    "totalCommittedMemory": 263905280,
+    "usedMemory": 216974248,
+    "availableMemory": 1972025768,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33554432,
+        "capacity": 16759296,
+        "used": 563504,
+        "available": 16195792
+      },
+      "old_space": {
+        "memorySize": 193085440,
+        "committedMemory": 193085440,
+        "capacity": 182099704,
+        "used": 181919776,
+        "available": 179928
+      },
+      "code_space": {
+        "memorySize": 3051520,
+        "committedMemory": 3051520,
+        "capacity": 1349728,
+        "used": 1349728,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 2363392,
+        "committedMemory": 2363392,
+        "capacity": 1686160,
+        "used": 1686160,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 31539200,
+        "committedMemory": 31539200,
+        "capacity": 31419488,
+        "used": 31419488,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16759296,
+        "used": 0,
+        "available": 16759296
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 30.343,
+    "kernelCpuSeconds": 6.64,
+    "cpuConsumptionPercent": 123.277,
+    "maxRss": 315392000,
+    "pageFaults": {
+      "IORequired": 175444,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 4267,
+      "writes": 90
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\Harold\\AppData\\Roaming",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "ChocolateyLastPathUpdate": "132296652503476378",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "LAPTOP-N730U3CA",
+    "ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+    "DokanLibrary1": "C:\\Program Files\\Dokan\\Dokan Library-1.1.0\\",
+    "DokanLibrary1_LibraryPath_x64": "C:\\Program Files\\Dokan\\Dokan Library-1.1.0\\lib\\",
+    "DokanLibrary1_LibraryPath_x86": "C:\\Program Files\\Dokan\\Dokan Library-1.1.0\\x86\\lib\\",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "FORCE_COLOR": "1",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Harold",
+    "INIT_CWD": "C:\\Users\\Harold\\POTS_FRONTEND",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk1.8.0_211",
+    "JEST_WORKER_ID": "5",
+    "LOCALAPPDATA": "C:\\Users\\Harold\\AppData\\Local",
+    "LOGONSERVER": "\\\\LAPTOP-N730U3CA",
+    "NODE": "C:\\Program Files\\nodejs\\node.exe",
+    "NODE_ENV": "test",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}",
+    "npm_config_bin_links": "true",
+    "npm_config_ignore_optional": "",
+    "npm_config_ignore_scripts": "",
+    "npm_config_init_license": "MIT",
+    "npm_config_init_version": "1.0.0",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "npm_config_save_prefix": "^",
+    "npm_config_strict_ssl": "true",
+    "npm_config_user_agent": "yarn/1.16.0 npm/? node/v12.16.1 win32 x64",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_version_git_message": "v%s",
+    "npm_config_version_git_sign": "",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_tag_prefix": "v",
+    "npm_execpath": "C:\\Program Files (x86)\\Yarn\\bin\\yarn.js",
+    "npm_lifecycle_event": "test",
+    "npm_lifecycle_script": "jest --verbose --coverage",
+    "npm_node_execpath": "C:\\Program Files\\nodejs\\node.exe",
+    "npm_package_browserslist_development_0": "last 1 chrome version",
+    "npm_package_browserslist_development_1": "last 1 firefox version",
+    "npm_package_browserslist_development_2": "last 1 safari version",
+    "npm_package_browserslist_production_0": ">0.2%",
+    "npm_package_browserslist_production_1": "not dead",
+    "npm_package_browserslist_production_2": "not op_mini all",
+    "npm_package_dependencies_antd": "^3.26.11",
+    "npm_package_dependencies_bootstrap": "^4.4.1",
+    "npm_package_dependencies_buffer": "^5.5.0",
+    "npm_package_dependencies_enzyme": "^3.11.0",
+    "npm_package_dependencies_enzyme_adapter_react_16": "^1.15.2",
+    "npm_package_dependencies_formik": "^2.1.4",
+    "npm_package_dependencies_graphql_request": "^1.8.2",
+    "npm_package_dependencies_lodash": "^4.17.15",
+    "npm_package_dependencies_mobx": "^5.15.4",
+    "npm_package_dependencies_mobx_react": "^6.1.8",
+    "npm_package_dependencies_mobx_state_tree": "^3.15.0",
+    "npm_package_dependencies_mst_gql": "^0.7.1",
+    "npm_package_dependencies_mst_react_router": "^2.3.1",
+    "npm_package_dependencies_react": "^16.12.0",
+    "npm_package_dependencies_react_bootstrap": "^1.0.0-beta.16",
+    "npm_package_dependencies_react_border_wrapper": "^1.0.3",
+    "npm_package_dependencies_react_calendar": "^2.19.2",
+    "npm_package_dependencies_react_dom": "^16.12.0",
+    "npm_package_dependencies_react_icons": "^3.9.0",
+    "npm_package_dependencies_react_infinite_scroller": "^1.2.4",
+    "npm_package_dependencies_react_router_dom": "^5.1.2",
+    "npm_package_dependencies_react_scripts": "3.3.1",
+    "npm_package_dependencies_semantic_ui_css": "^2.4.1",
+    "npm_package_dependencies_semantic_ui_react": "^0.88.2",
+    "npm_package_dependencies_styled_components": "^5.0.1",
+    "npm_package_dependencies_typescript": "~3.7.2",
+    "npm_package_dependencies_wix_style_react": "^7.39.1",
+    "npm_package_dependencies_yup": "^0.28.3",
+    "npm_package_dependencies__testing_library_jest_dom": "^4.2.4",
+    "npm_package_dependencies__testing_library_user_event": "^7.1.2",
+    "npm_package_dependencies__types_enzyme_adapter_react_16": "^1.0.5",
+    "npm_package_dependencies__types_faker": "^4.1.9",
+    "npm_package_dependencies__types_jest": "^24.0.0",
+    "npm_package_dependencies__types_lodash": "^4.14.149",
+    "npm_package_dependencies__types_node": "^13.9.3",
+    "npm_package_dependencies__types_react": "^16.9.25",
+    "npm_package_dependencies__types_react_dom": "^16.9.0",
+    "npm_package_dependencies__types_react_infinite_scroller": "^1.2.1",
+    "npm_package_dependencies__types_react_native_vector_icons": "^6.4.5",
+    "npm_package_dependencies__types_react_router_dom": "^5.1.3",
+    "npm_package_dependencies__types_styled_components": "^4.4.2",
+    "npm_package_dependencies__types_wix_style_react": "^6.17.2",
+    "npm_package_dependencies__types_yup": "^0.26.33",
+    "npm_package_description": "In the project directory, you can run:",
+    "npm_package_devDependencies_add": "^2.0.6",
+    "npm_package_devDependencies_ts_jest": "^25.1.0",
+    "npm_package_devDependencies_yarn": "^1.22.4",
+    "npm_package_devDependencies__storybook_addons": "^5.3.17",
+    "npm_package_devDependencies__storybook_addon_actions": "^5.3.17",
+    "npm_package_devDependencies__storybook_addon_knobs": "^5.3.17",
+    "npm_package_devDependencies__storybook_addon_links": "^5.3.10",
+    "npm_package_devDependencies__storybook_addon_notes": "^5.3.17",
+    "npm_package_devDependencies__storybook_preset_create_react_app": "^1.5.2",
+    "npm_package_devDependencies__storybook_react": "^5.3.10",
+    "npm_package_eslintConfig_extends": "react-app",
+    "npm_package_jest_moduleFileExtensions_0": "ts",
+    "npm_package_jest_moduleFileExtensions_1": "tsx",
+    "npm_package_jest_moduleFileExtensions_2": "js",
+    "npm_package_jest_setupFilesAfterEnv_0": "<rootDir>/src/setupTests.ts",
+    "npm_package_jest_setupFiles_0": "raf/polyfill",
+    "npm_package_jest_testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "npm_package_jest_transform____ts_tsx__": "<rootDir>/node_modules/ts-jest/preprocessor.js",
+    "npm_package_name": "pots-frontend",
+    "npm_package_private": "true",
+    "npm_package_readmeFilename": "README.md",
+    "npm_package_scripts_build": "react-scripts build",
+    "npm_package_scripts_build_storybook": "build-storybook -s public",
+    "npm_package_scripts_eject": "react-scripts eject",
+    "npm_package_scripts_scaffold": "mst-gql --format ts --roots Address,Supplier,SupplierStatus,Item,PurchaseOrder,User,ScheduleLine,Message http://localhost:4000/graphql   ",
+    "npm_package_scripts_start": "react-scripts start",
+    "npm_package_scripts_storybook": "start-storybook -p 9009 -s public",
+    "npm_package_scripts_test": "jest --verbose --coverage",
+    "npm_package_scripts_test_w": "jest --watch",
+    "npm_package_version": "0.1.0",
+    "NUMBER_OF_PROCESSORS": "8",
+    "OneDrive": "C:\\Users\\Harold\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "C:\\Users\\Harold\\AppData\\Local\\Temp\\yarn--1585723804054-0.1915692611670241;C:\\Users\\Harold\\POTS_FRONTEND\\node_modules\\.bin;C:\\Users\\Harold\\AppData\\Local\\Yarn\\Data\\link\\node_modules\\.bin;C:\\Program Files\\libexec\\lib\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Program Files\\lib\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Users\\Harold\\AppData\\Roaming\\npm;C:\\Program Files\\nodejs\\;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\C:\\Program Files\\Java\\jdk1.8.0_201\\bin;C:\\Program Files\\Git\\cmd;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files (x86)\\Yarn\\bin\\;C:\\Program Files\\Java\\jdk1.8.0_211\\bin;C:\\Program Files\\MongoDB\\Server\\4.0\\bin;C:\\Program Files\\nodejs\\;C:\\Users\\Harold\\AppData\\Local\\Programs\\Python\\Python37\\Scripts\\;C:\\Users\\Harold\\AppData\\Local\\Programs\\Python\\Python37\\;C:\\Users\\Harold\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Program Files\\Java\\jdk1.8.0_211\\bin;C:\\Users\\Harold\\AppData\\Local\\Android\\Sdk\\platform-tools;C:\\Users\\Harold\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Harold\\AppData\\Local\\Yarn\\bin;C:\\Program Files\\Genymobile\\Genymotion\\tools;C:\\Users\\Harold\\AppData\\Roaming\\npm",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "AMD64 Family 23 Model 17 Stepping 0, AuthenticAMD",
+    "PROCESSOR_LEVEL": "23",
+    "PROCESSOR_REVISION": "1100",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "SESSIONNAME": "Console",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\WINDOWS",
+    "TEMP": "C:\\Users\\Harold\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\Harold\\AppData\\Local\\Temp",
+    "USERDOMAIN": "LAPTOP-N730U3CA",
+    "USERDOMAIN_ROAMINGPROFILE": "LAPTOP-N730U3CA",
+    "USERNAME": "Harold",
+    "USERPROFILE": "C:\\Users\\Harold",
+    "VBOX_MSI_INSTALL_PATH": "C:\\Program Files\\Oracle\\VirtualBox\\",
+    "windir": "C:\\WINDOWS",
+    "YARN_WRAP_OUTPUT": "false"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\Program Files\\Bitdefender\\Bitdefender Security\\atcuf\\264492014668424220\\atcuf64.dll",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\System32\\MSASN1.dll",
+    "C:\\WINDOWS\\System32\\bcrypt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\System32\\profapi.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMMBASE.dll",
+    "C:\\WINDOWS\\System32\\cfgmgr32.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\System32\\powrprof.dll",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\System32\\bcryptPrimitives.dll",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\System32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\system32\\wshbth.dll"
+  ]
+}

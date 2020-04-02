@@ -10,12 +10,12 @@ export interface IAppTitleProps {
 const AppTitle = (props: IAppTitleProps) => {
   const { title, desc, onClick } = props
   return (
-    <Card style={{ width: '18rem' }} onClick={onClick}>
-      <Card.Body>
-        <Card.Title style={{ fontSize: 80 }}>{title}</Card.Title>
-        <Card.Text>{desc}</Card.Text>
-      </Card.Body>
-    </Card>
+      <Card style={{ width: '18rem' }} onClick={onClick}>
+        <Card.Body>
+          <Card.Title style={{ fontSize: 80 }}>{title}</Card.Title>
+          <Card.Text>{desc}</Card.Text>
+        </Card.Body>
+      </Card>
   )
 }
 
