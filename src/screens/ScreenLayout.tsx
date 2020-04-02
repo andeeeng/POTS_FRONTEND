@@ -5,6 +5,7 @@ import { removeUser, setUser } from '../components/auth'
 import { handleClick } from '../components/helper_functions'
 import MeContext from '../MeContext'
 const { Header, Content, Footer, Sider } = Layout
+
 export interface ILayout {
   DBcontent?: any
   POcontent?: any
@@ -20,24 +21,9 @@ export interface ILayout {
 }
 
 const App = (props: ILayout) => {
-  const {
-    setQuery,
-    rootStore,
-    state,
-    setState,
-    DBcontent,
-    POcontent,
-    SUPcontent,
-    userInfo,
-    userLevel,
-  } = props
-
-  let { path, url } = useRouteMatch()
-
-  const context = useContext(MeContext)
+  const { state, setState, DBcontent, POcontent, SUPcontent, userLevel } = props
 
   const initialLoad = () => {
-    console.log(state.currentKey, 'Current key')
     if (state.currentKey == 'dashboard') {
       return (
         <Redirect
@@ -64,21 +50,7 @@ const App = (props: ILayout) => {
       )
     }
   }
-  const renderContent = (key: any) => {
-    switch (key) {
-      case 'dashboard':
-        return DBcontent
 
-      case 'order':
-        return POcontent
-
-      case 'supplier':
-        return SUPcontent
-
-      default:
-        break
-    }
-  }
   return (
     <Layout>
       <Sider
@@ -99,7 +71,6 @@ const App = (props: ILayout) => {
           selectedKeys={[state.currentKey]}
           defaultSelectedKeys={['dashboard']}
           onClick={e => handleClick(e.key, state, setState)}>
-          {/* onClick={e => console.log('FUCK')}> */}
           <Menu.Item key="dashboard">
             <Icon type="dashboard" />
             <span className="nav-text">My Dashboard</span>
@@ -136,7 +107,6 @@ const App = (props: ILayout) => {
             <Route path="/orders">{POcontent}</Route>
             <Route path="/suppliers">{SUPcontent}</Route>
           </Switch>
-          {/* {renderContent(state.currentKey)} */}
         </Content>
         <Footer style={{ textAlign: 'center' }}>
           Purchase Order Tracking System ©2020 Created by Fast Track

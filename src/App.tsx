@@ -18,6 +18,7 @@ import OrderScreen from './components/OrderScreen'
 import SupplierScreen from './components/SupplierScreen'
 import { statusReport } from './data/mockData'
 import ScreenLayout from './screens/ScreenLayout'
+import { message as alert } from 'antd'
 
 const rootStore = RootStore.create(undefined, {
   gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
@@ -35,8 +36,8 @@ const App = (props: any) => {
     }
   }
 
-  console.log(login, 'LOGIN')
   const { message, userLevel, loggedIn } = login
+
   let initState = {
     fakeState: '',
     path: '/Dashboard',
@@ -48,9 +49,16 @@ const App = (props: any) => {
   }
   const [state, setState] = useState(initState)
   const { setQuery, store, error, data, loading } = useQuery()
+
+  if (!loading) {
+    if (loggedIn === false && message === 'Wrong Credentials') {
+      alert.error(message)
+    } else if (message) {
+      alert.success(message)
+    }
+  }
+
   const PrivateRoute = ({ children, ...rest }: any) => {
-    // console.log(children, ...rest, 'REST')
-    console.log(children, 'CHILDREN')
     return (
       <Route
         {...rest}
@@ -81,8 +89,6 @@ const App = (props: any) => {
             <LoginScreen setQuery={setQuery} rootStore={rootStore} />
           </Route>
           <PrivateRoute path="/">
-            {/* <ProtectedPage />
-             */}
             <ScreenLayout
               rootStore={rootStore}
               setQuery={setQuery}

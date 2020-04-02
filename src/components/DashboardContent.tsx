@@ -26,17 +26,14 @@ export interface IDashboardContentProps {
 }
 
 const DashboardContent = (props: IDashboardContentProps) => {
-  const { setStatelogout, statelogout, userLevel, title } = props
-
-  const format = 'YYYY-MM-DD'
-  const { status, list } = props
+  let format = 'YYYY-MM-DD'
+  const { list } = props
   const [state, setState] = useState({
     visible: false,
     selectedDate: moment().format(format),
   })
   const { Title, Text } = Typography
 
-  console.log(list, 'ARRAYLIST')
   const filterbydate = list.filter(
     (x: any) =>
       moment(x.documentDate).format('MMMM D, YYYY') ==
@@ -63,10 +60,6 @@ const DashboardContent = (props: IDashboardContentProps) => {
       visible: false,
     })
   }
-
-  const load = () => {
-    return console.log('LOAD')
-  }
   return (
     <Fragment>
       <div className="content1">
@@ -83,7 +76,7 @@ const DashboardContent = (props: IDashboardContentProps) => {
               <Title
                 level={4}
                 style={{ margin: 0, paddingTop: '5px', color: '#3182CE' }}>
-                Welcome Back, {statelogout.username}!
+                Welcome Back!
               </Title>
               <Text>Your last log-in was:</Text>
               <br></br>
@@ -115,18 +108,13 @@ const DashboardContent = (props: IDashboardContentProps) => {
 
         <div className="calendar">
           <div className="calendar1">
-            <Calendar
-              fullscreen={false}
-              onChange={onChange}
-              // onPanelChange={value => console.log(value?._i, "VALUE")}
-            />
+            <Calendar fullscreen={false} onChange={onChange} />
           </div>
           <div className="list">
             <InfiniteScroll
               initialLoad={false}
               pageStart={0}
               loadMore={() => console.log('LOAD MORE')}
-              // hasMore={!this.state.loading && this.state.hasMore}
               useWindow={false}>
               <List
                 itemLayout="horizontal"
@@ -157,7 +145,6 @@ const DashboardContent = (props: IDashboardContentProps) => {
           </div>
         </div>
       </div>
-      {/* <div className="truck"></div> */}
       <div>
         <div className="content2">
           <h5>To-Do List</h5>
