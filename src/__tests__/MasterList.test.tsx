@@ -3,15 +3,11 @@
  */
 
 import React from 'react'
-<<<<<<< HEAD
-import { shallow } from 'enzyme'
-=======
 import { shallow, mount } from 'enzyme'
 // import ShallowRenderer from "react-test-renderer/shallow";
 
 // // Note: test renderer must be required after react-native.
 // import renderer from "react-test-renderer";
->>>>>>> origin/next
 
 import MasterList from '../components/MasterList'
 import { toJS } from 'mobx'

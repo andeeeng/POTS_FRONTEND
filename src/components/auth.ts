@@ -6,7 +6,6 @@ const getUser = () => {
     password: '',
     loggedin: false,
   }
-  let data: Array<any> = []
   const value = localStorage.getItem(USER_STOREKEY)
   if (value) {
     return JSON.parse(value)

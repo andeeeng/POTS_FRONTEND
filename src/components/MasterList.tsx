@@ -11,23 +11,10 @@ import {
   Typography,
 } from 'antd'
 import { observer } from 'mobx-react'
-<<<<<<< HEAD
 import React, { Fragment } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import { item_columns, sched_columns, status } from '../table-fields/columns'
 import { updateStatus } from './helper_functions'
-=======
-import {
-  itemStatusColor,
-  status,
-  sched_columns,
-  handleChange,
-  statusColor,
-  changewidth,
-  item_columns,
-} from '../components/helper_functions'
-
->>>>>>> origin/next
 const { Panel } = Collapse
 const { Text, Title } = Typography
 const { TabPane } = Tabs
@@ -42,9 +29,6 @@ export interface IMasterList {
   setQuery?: any
   userInfo?: any
   title?: any
-  onClick?: any
-  data?: any
-  onChange?: any
   userLevel?: any
 }
 
@@ -57,7 +41,6 @@ const MasterList = (props: IMasterList) => {
     tabState,
     tabSetState,
     filterPO,
-<<<<<<< HEAD
     userLevel,
   } = props
 
@@ -80,14 +63,6 @@ const MasterList = (props: IMasterList) => {
     })
   }
 
-=======
-    title,
-    onClick,
-    onChange,
-    userLevel,
-  } = props
-
->>>>>>> origin/next
   const linesched = {
     id: tabState.selectedSchedID,
     deliveryStatus: {
@@ -96,17 +71,7 @@ const MasterList = (props: IMasterList) => {
   }
 
   const renderUpdateStatus = (key: any) => {
-<<<<<<< HEAD
     if (key === 'sched' && userLevel === 'Supplier') {
-=======
-    // let userlevel = tabState.log_ined.map((x: any) => {
-    //   return x.userlevel
-    // })
-    // const { userLevel } = userInfo
-    // console.log('Userlevel', userLevel)
-
-    if (key == 'sched' && userLevel == 'Supplier') {
->>>>>>> origin/next
       return (
         <div className="history2">
           <div style={{ marginTop: '5px', marginRight: '2px' }}>
@@ -123,7 +88,11 @@ const MasterList = (props: IMasterList) => {
             </Select>
           </div>
           <div style={{ marginTop: '5px' }}>
-            <Button itemID="IDtest" type="primary" onClick={onClick}>
+            <Button
+              type="primary"
+              onClick={() => {
+                updateStatus(linesched, store, setQuery)
+              }}>
               Update Status
             </Button>
           </div>
@@ -148,7 +117,6 @@ const MasterList = (props: IMasterList) => {
                 // hasMore={!this.state.loading && this.state.hasMore}
                 useWindow={false}>
                 <Timeline mode="left">
-<<<<<<< HEAD
                   {data.map((data: any, index: any) => {
                     if (data.delvStatus.length !== 0) {
                       return data.delvStatus.map((sched: any) => {
@@ -163,25 +131,6 @@ const MasterList = (props: IMasterList) => {
                       return <Empty></Empty>
                     }
                   })}
-=======
-                  {data ? (
-                    data.map((data: any, index: any) => {
-                      if (data.delvStatus.length != 0) {
-                        return data.delvStatus.map((sched: any) => {
-                          return (
-                            <Timeline.Item>
-                              {sched.status} {sched.dateCreated}
-                              {sched.timeCreated}
-                            </Timeline.Item>
-                          )
-                        })
-                      }
-                      return <Empty></Empty>
-                    })
-                  ) : (
-                    <Empty></Empty>
-                  )}
->>>>>>> origin/next
                 </Timeline>
               </InfiniteScroll>
             </Card>
@@ -194,7 +143,6 @@ const MasterList = (props: IMasterList) => {
   const callback = (key: any) => {
     tabSetState({ ...tabState, collapseKey: key })
   }
-<<<<<<< HEAD
   const statusColor = (status: any) => {
     if (status === 'Closed') {
       return '#f50'
@@ -203,9 +151,8 @@ const MasterList = (props: IMasterList) => {
       return '#87d068'
     }
   }
-=======
->>>>>>> origin/next
 
+  console.log(filterPO, 'FILTERED')
   let data: Array<any> = []
   if (state.search) {
     data = filterPO
@@ -218,38 +165,35 @@ const MasterList = (props: IMasterList) => {
         defaultActiveKey={[tabState.collapseKey]}
         activeKey={tabState.collapseKey}
         onChange={callback}>
-        {data &&
-          data.map((data: any, index: any) => {
-            let schedarray: Array<any> = []
-            data.items.map((item: any) => {
-              const delv_address =
-                item.deliveryAddress.building_name +
-                ' ' +
-                item.deliveryAddress.street +
-                ',' +
-                item.deliveryAddress.city +
-                ' ' +
-                item.deliveryAddress.state +
-                ' ' +
-                item.deliveryAddress.zip_code
+        {data.map((data: any, index: any) => {
+          let schedarray: Array<any> = []
+          data.items.map((item: any) => {
+            const delv_address =
+              item.deliveryAddress.building_name +
+              ' ' +
+              item.deliveryAddress.street +
+              ',' +
+              item.deliveryAddress.city +
+              ' ' +
+              item.deliveryAddress.state +
+              ' ' +
+              item.deliveryAddress.zip_code
 
-              item.scheduleLine.map((sched: any) => {
-                schedarray.push({
-                  itemNo: item.itemNo,
-                  id: sched.id,
-                  delvAddress: delv_address,
-                  description: item.description,
-                  quantity: sched.quantity,
-                  uom: sched.uom,
-                  unitPrice: sched.unitPrice,
-                  totalAmount: sched.totalAmount,
-                  deliveryDateAndTime: sched.deliveryDateAndTime,
-                  delvStatus: sched.deliveryStatus,
-                })
+            item.scheduleLine.map((sched: any) => {
+              schedarray.push({
+                itemNo: item.itemNo,
+                id: sched.id,
+                delvAddress: delv_address,
+                description: item.description,
+                quantity: sched.quantity,
+                uom: sched.uom,
+                unitPrice: sched.unitPrice,
+                totalAmount: sched.totalAmount,
+                deliveryDateAndTime: sched.deliveryDateAndTime,
+                delvStatus: sched.deliveryStatus,
               })
               return null
             })
-<<<<<<< HEAD
 
             return null
           })
@@ -360,118 +304,12 @@ const MasterList = (props: IMasterList) => {
                       </InfiniteScroll>
                     </TabPane>
                   </Tabs>
-=======
-
-            const schedById = schedarray.filter(
-              x => x.id == tabState.selectedSchedID,
-            )
-
-            return (
-              <Panel
-                header={`PO# ${data.purchaseOrderNo} by  ${data.supplier.supplierName}`}
-                key={index}
-                extra={
-                  <Tag color={statusColor(data.adminStatus)}>
-                    {data.adminStatus}
-                  </Tag>
-                }>
-                <div className="panel">
-                  {/* {console.log(state.tabkey, 'TABKEYKEY')} */}
-                  <div
-                    className={changewidth(tabState.tabkey, setState, state)}>
-                    <Tabs
-                      activeKey={tabState.tabkey}
-                      defaultActiveKey={tabState.tabkey}
-                      type="card"
-                      onChange={key =>
-                        tabSetState({ ...tabState, tabkey: key })
-                      }>
-                      <TabPane tab="Item Details" key="item">
-                        <div style={{ marginBottom: '10px' }}>
-                          <Title level={4}> Order Details</Title>
-                          <div className="tableTitledesc">
-                            <div>
-                              <Text>Address: </Text>
-                              <br></br>
-                              {/* <Text>Deliver To: </Text> */}
-                            </div>
-                            <div>
-                              <Text>
-                                {data.supplier.address.building_name}
-                                {data.supplier.address.street}
-                                {data.supplier.address.city}
-                                {data.supplier.address.state}
-                                {data.supplier.address.zip_code}
-                              </Text>
-                              <br></br>
-                              {/* <Text>{data.deliverTo}</Text> */}
-                            </div>
-                          </div>
-                        </div>
-                        <InfiniteScroll
-                          initialLoad={false}
-                          pageStart={0}
-                          loadMore={() => console.log('LOAD MORE')}
-                          // hasMore={!this.state.loading && this.state.hasMore}
-                          useWindow={false}>
-                          <Table
-                            // bodyStyle={{ margin: '20px' }}
-                            onRow={(record: any, rowIndex) => {
-                              return {
-                                // onClick: event => {}, // click row
-                                // onDoubleClick: event => {}, // double click row
-                                // onContextMenu: event => {}, // right button click row
-                                // onMouseEnter: event => {
-                                //   // setRow({ ...row, selectedSchedID: record.id })
-                                // }, // mouse enter row
-                                // onMouseLeave: event => {}, // mouse leave row
-                              }
-                            }}
-                            columns={item_columns}
-                            dataSource={data.items}
-                            pagination={false}
-                          />
-                        </InfiniteScroll>
-                      </TabPane>
-                      <TabPane tab="Delivery Schedule" key="sched">
-                        <InfiniteScroll
-                          itemID="base"
-                          initialLoad={false}
-                          pageStart={0}
-                          selected={tabState.selectedSchedID}
-                          loadMore={() => console.log('LOAD MORE')}
-                          // hasMore={!this.state.loading && this.state.hasMore}
-                          useWindow={false}>
-                          <Table
-                            onRow={(record, rowIndex) => {
-                              return {
-                                onClick: event => {
-                                  tabSetState({
-                                    ...tabState,
-                                    selectedSchedID: record.id,
-                                  })
-                                }, // click row
-                                // onDoubleClick: event => {}, // double click row
-                                // onContextMenu: event => {}, // right button click row
-                                // onMouseEnter: event => {}, // mouse enter row
-                                // onMouseLeave: event => {}, // mouse leave row
-                              }
-                            }}
-                            // bodyStyle={{ margin: '20px' }}
-                            columns={sched_columns}
-                            dataSource={schedarray}
-                            pagination={false}
-                          />
-                        </InfiniteScroll>
-                      </TabPane>
-                    </Tabs>
-                  </div>
-                  {renderHistoryPanel(tabState.tabkey, schedById)}
->>>>>>> origin/next
                 </div>
-              </Panel>
-            )
-          })}
+                {renderHistoryPanel(tabState.tabkey, schedById)}
+              </div>
+            </Panel>
+          )
+        })}
       </Collapse>
     </Fragment>
   )
