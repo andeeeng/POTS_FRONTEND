@@ -1,11 +1,9 @@
-import React, { Fragment, useState } from 'react'
-import InfiniteScroll from 'react-infinite-scroller'
-import SortBy from '../components/SortBy'
-import MasterList from '../components/MasterList'
-import { POdata } from '../data/MasterListMock'
 import { Divider, Input } from 'antd'
 import { observer } from 'mobx-react'
-import { sorts, SearchFilterOrder } from '../components/helper_functions'
+import React, { useState } from 'react'
+import { SearchFilterOrder, sorts } from '../components/helper_functions'
+import MasterList from '../components/MasterList'
+import SortBy from '../components/SortBy'
 
 const { Search } = Input
 export interface IOrderScreenProps {
@@ -48,7 +46,7 @@ const OrderScreen = (props: IOrderScreenProps) => {
         <div className="search">
           <Search
             placeholder="Input Purchase Order Number"
-            onSearch={value => {
+            onSearch={(value) => {
               SearchFilterOrder(value, state.POdata, setState, state)
             }}
             enterButton
