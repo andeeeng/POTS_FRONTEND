@@ -10,7 +10,7 @@ import { RootStoreBase } from './RootStore.base'
 
 export interface RootStoreType extends Instance<typeof RootStore.Type> {}
 
-export const RootStore = RootStoreBase.views(self => {
+export const RootStore = RootStoreBase.views((self) => {
   return {
     vPurchaseOrders() {
       const po: any = self.purchaseorders.values()
@@ -26,7 +26,7 @@ export const RootStore = RootStoreBase.views(self => {
       const users = [...values]
 
       const getUser = users.filter(
-        user => user.userName == username && user.password == pass,
+        (user) => user.userName == username && user.password == pass,
       )
       console.log(getUser)
       return getUser
@@ -37,7 +37,7 @@ export const RootStore = RootStoreBase.views(self => {
       return messages[0]
     },
   }
-}).actions(self => ({
+}).actions((self) => ({
   afterCreate() {
     self.queryAllPurchaseOrders({}, PURCHASEORDER_FRAGMENT)
     self.queryAllScheduleLines({}, SCHEDULELINE_FRAGMENT)

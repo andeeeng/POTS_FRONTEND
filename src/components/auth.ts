@@ -17,7 +17,7 @@ const setUser = async (user: any) => {
   localStorage.setItem(USER_STOREKEY, JSON.stringify(user))
 }
 
-const removeUser = async (any: any) => {
+const removeUser = async () => {
   localStorage.removeItem(USER_STOREKEY)
 }
 
