@@ -228,8 +228,8 @@ export const FormContainer = styled.div`
     border: none;
     background-color: transparent;
     width: 60%;
-    margin-top: 70px;
-    margin: 50px auto;
+    /* margin-top: 70px; */
+    margin: 80px auto;
   }
   @media (max-width: 900px) {
     .login-btn {
